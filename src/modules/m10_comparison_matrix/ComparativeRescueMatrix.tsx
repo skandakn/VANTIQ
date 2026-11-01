@@ -1,141 +1,404 @@
 // src/modules/m10_comparison_matrix/ComparativeRescueMatrix.tsx
-// Module 11: Head-to-Head Comparative Rescue Matrix
-import React from 'react';
-import { ShieldCheck, XCircle, CheckCircle2 } from 'lucide-react';
-import { useFintech } from '../../context/FintechContext';
+// Module 11 (M11): Counterfactual Comparison Matrix
+// Head-to-head: Fragmented Multi-App Borrowing vs. CHRONOS-FIN Quantum Allocation
+// Interactive toggle: 3-month, 6-month, 12-month projection horizon.
 
-export const ComparativeRescueMatrix: React.FC = () => {
-  const { shock } = useFintech();
+import React, { useState } from 'react';
+import {
+  ShieldCheck,
+  XCircle,
+  CheckCircle2,
+  TrendingDown,
+  TrendingUp,
+  AlertTriangle,
+} from 'lucide-react';
+
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+type Horizon = 3 | 6 | 12;
+
+interface MetricRow {
+  label: string;
+  fragmented: (h: Horizon) => string;
+  chronos: (h: Horizon) => string;
+  winDirection: 'lower' | 'higher';
+  unit?: string;
+}
+
+// ---------------------------------------------------------------------------
+// Projection helpers
+// ---------------------------------------------------------------------------
+
+function fmtINR(n: number): string {
+  return n.toLocaleString('en-IN');
+}
+
+/** Fragmented: 38.5% APR accrual over horizon on Rs.50,000 principal */
+function fragmentedTotalCost(h: Horizon): string {
+  return 'Rs.' + fmtINR(Math.round(50000 * (1 + (0.385 * h) / 12)));
+}
+
+/** CHRONOS-FIN: 4.2% APR accrual over horizon on Rs.50,000 principal */
+function chronosTotalCost(h: Horizon): string {
+  return 'Rs.' + fmtINR(Math.round(50000 * (1 + (0.042 * h) / 12)));
+}
+
+/** Rs.4,800 fee per 3-month cycle, compounded across horizon */
+function fragmentedFees(h: Horizon): string {
+  return 'Rs.' + fmtINR(4800 * Math.ceil(h / 3));
+}
+
+function chronosFees(_h: Horizon): string {
+  return 'Rs.0';
+}
+
+function fragmentedPayment(_h: Horizon): string {
+  return 'Rs.26,200';
+}
+
+function chronosPayment(_h: Horizon): string {
+  return 'Rs.4,285';
+}
+
+function fragmentedAmort(h: Horizon): string {
+  return h < 18
+    ? String(18 - h) + 'mo remaining (penalties apply)'
+    : 'Paid off (+ penalties)';
+}
+
+function chronosAmort(h: Horizon): string {
+  return h < 12 ? String(12 - h) + 'mo remaining' : 'Paid off (flat)';
+}
+
+function fragmentedDefault(h: Horizon): string {
+  const decay = h <= 3 ? 0 : h <= 6 ? -4 : -8;
+  return String(92 + decay) + '%';
+}
+
+function chronosDefault(h: Horizon): string {
+  const drift = h <= 3 ? 0 : h <= 6 ? 0.2 : 0.3;
+  return (1.8 + drift).toFixed(1) + '%';
+}
+
+// ---------------------------------------------------------------------------
+// Metric definitions (all 5 required by spec)
+// ---------------------------------------------------------------------------
+
+const METRICS: MetricRow[] = [
+  {
+    label: 'Effective APR',
+    fragmented: () => '38.5%',
+    chronos: () => '4.2%',
+    winDirection: 'lower',
+  },
+  {
+    label: 'Processing Fees & Hidden Churn',
+    fragmented: fragmentedFees,
+    chronos: chronosFees,
+    winDirection: 'lower',
+    unit: 'cumulative over horizon',
+  },
+  {
+    label: 'Monthly Payment Shock',
+    fragmented: fragmentedPayment,
+    chronos: chronosPayment,
+    winDirection: 'lower',
+    unit: '/mo',
+  },
+  {
+    label: 'Time to Full Amortization',
+    fragmented: fragmentedAmort,
+    chronos: chronosAmort,
+    winDirection: 'lower',
+  },
+  {
+    label: 'Risk of Default / Harassment',
+    fragmented: fragmentedDefault,
+    chronos: chronosDefault,
+    winDirection: 'lower',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Summary banner data per horizon
+// ---------------------------------------------------------------------------
+
+const SUMMARY: Record<
+  Horizon,
+  { saved: string; feesDodged: string; defaultDelta: string }
+> = {
+  3:  { saved: 'Rs.16,600', feesDodged: 'Rs.4,800',  defaultDelta: '90.2%' },
+  6:  { saved: 'Rs.33,200', feesDodged: 'Rs.9,600',  defaultDelta: '87.8%' },
+  12: { saved: 'Rs.66,400', feesDodged: 'Rs.19,200', defaultDelta: '89.9%' },
+};
+
+// ---------------------------------------------------------------------------
+// HorizonToggle
+// ---------------------------------------------------------------------------
+
+interface HorizonToggleProps {
+  selected: Horizon;
+  onChange: (h: Horizon) => void;
+}
+
+const HorizonToggle: React.FC<HorizonToggleProps> = ({ selected, onChange }) => {
+  const options: Horizon[] = [3, 6, 12];
+  return (
+    <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+      {options.map((h) => {
+        const active = h === selected;
+        return (
+          <button
+            key={h}
+            onClick={() => onChange(h)}
+            aria-pressed={active}
+            style={{
+              padding: '6px 18px',
+              borderRadius: 'var(--radius-full)',
+              fontSize: '0.8rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              border: active
+                ? '1.5px solid var(--neon-cyan)'
+                : '1.5px solid var(--border-subtle)',
+              background: active
+                ? 'rgba(6,182,212,0.15)'
+                : 'rgba(15,23,42,0.6)',
+              color: active ? '#38bdf8' : '#94a3b8',
+              transition: 'all var(--transition-normal)',
+              outline: 'none',
+            }}
+          >
+            {h}mo
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
+// ---------------------------------------------------------------------------
+// MetricRowItem
+// ---------------------------------------------------------------------------
+
+interface MetricRowItemProps {
+  metric: MetricRow;
+  horizon: Horizon;
+  index: number;
+}
+
+const MetricRowItem: React.FC<MetricRowItemProps> = ({
+  metric,
+  horizon,
+  index,
+}) => {
+  const fragValue   = metric.fragmented(horizon);
+  const chronosValue = metric.chronos(horizon);
+  const isRiskRow   = metric.label.startsWith('Risk');
 
   return (
-    <section id="rescue-matrix" style={{ padding: '30px 0' }}>
-      <div className="container">
-        
+    <tr
+      style={{
+        backgroundColor:
+          index % 2 === 0 ? 'rgba(15,23,42,0.55)' : 'rgba(10,17,36,0.45)',
+        transition: 'background var(--transition-fast)',
+      }}
+    >
+      {/* Metric label */}
+      <td
+        style={{
+          padding: '16px 20px',
+          fontSize: '0.875rem',
+          fontWeight: 600,
+          color: '#cbd5e1',
+          borderRight: '1px solid rgba(51,65,85,0.3)',
+          minWidth: '220px',
+        }}
+      >
+        {metric.label}
+        {metric.unit && (
+          <span
+            style={{
+              display: 'block',
+              fontSize: '0.72rem',
+              color: '#64748b',
+              marginTop: '2px',
+            }}
+          >
+            {metric.unit}
+          </span>
+        )}
+      </td>
+
+      {/* Fragmented */}
+      <td
+        style={{
+          padding: '16px 20px',
+          textAlign: 'center',
+          borderRight: '1px solid rgba(51,65,85,0.3)',
+        }}
+      >
+        <span
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '0.95rem',
+            fontWeight: 700,
+            color: '#f87171',
+          }}
+        >
+          {isRiskRow ? <AlertTriangle size={14} /> : <TrendingDown size={14} />}
+          {fragValue}
+        </span>
+      </td>
+
+      {/* CHRONOS-FIN */}
+      <td style={{ padding: '16px 20px', textAlign: 'center' }}>
+        <span
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '0.95rem',
+            fontWeight: 700,
+            color: '#34d399',
+          }}
+        >
+          {isRiskRow ? <CheckCircle2 size={14} /> : <TrendingUp size={14} />}
+          {chronosValue}
+        </span>
+      </td>
+    </tr>
+  );
+};
+
+// ---------------------------------------------------------------------------
+// Main exported component
+// ---------------------------------------------------------------------------
+
+export const ComparativeRescueMatrix: React.FC = () => {
+  const [horizon, setHorizon] = useState<Horizon>(3);
+  const summary = SUMMARY[horizon];
+
+  return (
+    <section id='rescue-matrix' style={{ padding: '48px 0' }}>
+      <div className='container'>
+
         {/* Section Header */}
-        <div style={{ marginBottom: '24px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-            <span className="badge badge-cyan">
+        <div style={{ marginBottom: '32px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+            <span className='badge badge-cyan'>
               <ShieldCheck size={13} />
-              <span>Step 8: Comparative Rescue Matrix</span>
+              <span>M11 - Counterfactual Comparison Matrix</span>
             </span>
           </div>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc' }}>
-            Live System Demonstration: Financing a ₹{shock.amount.toLocaleString()} Emergency
-          </h2>
-          <p style={{ color: '#94a3b8', fontSize: '0.95rem' }}>
-            Direct counterfactual evaluation of naive predatory borrowing versus quantum-optimized solvency.
-          </p>
-        </div>
-
-        {/* Side-by-Side Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '24px' }}>
-          
-          {/* Card 1: Without CHRONOS-FIN */}
-          <div className="chronos-card" style={{
-            border: '2px solid rgba(239, 68, 68, 0.4)',
-            backgroundColor: 'rgba(239, 68, 68, 0.04)',
-            padding: '28px'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-              <XCircle size={24} color="#ef4444" />
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f87171' }}>
-                WITHOUT CHRONOS-FIN (PREDATORY TRAP)
-              </h3>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '16px' }}>
+            <div>
+              <h2 style={{ fontSize: '1.9rem', fontWeight: 800, color: '#f8fafc', lineHeight: 1.2, marginBottom: '8px' }}>
+                Fragmented Borrowing vs.{' '}
+                <span style={{ color: '#38bdf8' }}>CHRONOS-FIN Quantum Allocation</span>
+              </h2>
+              <p style={{ color: '#94a3b8', fontSize: '0.95rem', maxWidth: '620px' }}>
+                A rigorous counterfactual evaluation across five financial-health dimensions.
+                Toggle the projection horizon to see how the cost divergence compounds over time.
+              </p>
             </div>
-
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.88rem', color: '#cbd5e1' }}>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                <span style={{ color: '#f87171', fontWeight: 'bold' }}>•</span>
-                <span><strong>Borrowing Strategy:</strong> Borrows entire ₹{shock.amount.toLocaleString()} on single instant loan @ 36% APR + 4% processing fee.</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                <span style={{ color: '#f87171', fontWeight: 'bold' }}>•</span>
-                <span><strong>Total Repayment:</strong> ₹68,400 (<span style={{ color: '#f87171', fontWeight: 700 }}>₹18,400 paid in predatory interest & fees</span>).</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                <span style={{ color: '#f87171', fontWeight: 'bold' }}>•</span>
-                <span><strong>Human Life-Energy Cost:</strong> 122.6 Hours of life worked purely to service lender charges!</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                <span style={{ color: '#f87171', fontWeight: 'bold' }}>•</span>
-                <span><strong>Cash Runway Result:</strong> <strong style={{ color: '#f87171' }}>COLLAPSES ON DAY 32</strong> (-₹18,000 deficit when rent & EMI collide).</span>
-              </li>
-            </ul>
-
-            <div style={{
-              marginTop: '20px',
-              padding: '10px',
-              borderRadius: '6px',
-              backgroundColor: 'rgba(239, 68, 68, 0.15)',
-              textAlign: 'center',
-              color: '#fca5a5',
-              fontSize: '0.8rem',
-              fontWeight: 700
-            }}>
-              Default Probability: 84%
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
+              <span style={{ fontSize: '0.72rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700 }}>
+                Projection Horizon
+              </span>
+              <HorizonToggle selected={horizon} onChange={setHorizon} />
             </div>
           </div>
-
-          {/* Card 2: With CHRONOS-SOLV */}
-          <div className="chronos-card glow-emerald" style={{
-            border: '2px solid rgba(16, 185, 129, 0.5)',
-            backgroundColor: 'rgba(16, 185, 129, 0.04)',
-            padding: '28px'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-              <CheckCircle2 size={24} color="#10b981" />
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#34d399' }}>
-                WITH CHRONOS-SOLV (QUANTUM RESCUE)
-              </h3>
-            </div>
-
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.88rem', color: '#cbd5e1' }}>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                <span style={{ color: '#10b981', fontWeight: 'bold' }}>•</span>
-                <span><strong>Multi-Source Split:</strong> ₹5,000 Liquid Savings (0%) + ₹25,000 0% Intro Card + ₹20,000 NBFC Micro-Loan @ 12%.</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                <span style={{ color: '#10b981', fontWeight: 'bold' }}>•</span>
-                <span><strong>Total Repayment:</strong> ₹51,800 (<span style={{ color: '#34d399', fontWeight: 700 }}>Only ₹1,800 fees — Saves ₹16,600 Cash!</span>).</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                <span style={{ color: '#10b981', fontWeight: 'bold' }}>•</span>
-                <span><strong>Human Life-Energy Cost:</strong> Only 12 Hours Worked (<strong style={{ color: '#38bdf8' }}>Saves 110.6 hours of hard labor!</strong>).</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                <span style={{ color: '#10b981', fontWeight: 'bold' }}>•</span>
-                <span><strong>Cash Runway Result:</strong> <strong style={{ color: '#34d399' }}>100% SOLVENT RUNWAY</strong> (+₹22,000 cash buffer on Day 90).</span>
-              </li>
-            </ul>
-
-            <div style={{
-              marginTop: '20px',
-              padding: '10px',
-              borderRadius: '6px',
-              backgroundColor: 'rgba(16, 185, 129, 0.15)',
-              textAlign: 'center',
-              color: '#6ee7b7',
-              fontSize: '0.8rem',
-              fontWeight: 700
-            }}>
-              Default Probability: 4% (Slashed by 95%)
-            </div>
-          </div>
-
         </div>
 
-        {/* Bottom System Impact Banner */}
-        <div style={{
-          backgroundColor: 'rgba(6, 182, 212, 0.1)',
-          border: '1px solid rgba(6, 182, 212, 0.3)',
-          borderRadius: '12px',
-          padding: '16px 24px',
-          textAlign: 'center',
-          fontSize: '0.95rem',
-          fontWeight: 700,
-          color: '#38bdf8'
-        }}>
-          SYSTEM IMPACT: ₹16,600 Cash Saved • 110.6 Work-Hours Preserved • Default Probability Slashed from 84% to 4%!
+        {/* Comparison Table */}
+        <div className='chronos-card' style={{ overflow: 'hidden', padding: 0, marginBottom: '24px', border: '1px solid rgba(51,65,85,0.4)' }}>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
+              <thead>
+                <tr style={{ background: 'linear-gradient(90deg, rgba(15,23,42,0.95) 0%, rgba(10,17,36,0.95) 100%)', borderBottom: '2px solid rgba(51,65,85,0.5)' }}>
+                  <th style={{ padding: '18px 20px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.08em', borderRight: '1px solid rgba(51,65,85,0.3)' }}>
+                    Metric
+                  </th>
+                  <th style={{ padding: '18px 20px', textAlign: 'center', borderRight: '1px solid rgba(51,65,85,0.3)' }}>
+                    <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 12px', borderRadius: 'var(--radius-full)', background: 'rgba(239,68,68,0.12)', border: '1px solid rgba(239,68,68,0.35)' }}>
+                        <XCircle size={14} color='#ef4444' />
+                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#f87171', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                          Fragmented Multi-App Borrowing
+                        </span>
+                      </span>
+                      <span style={{ fontSize: '0.7rem', color: '#64748b' }}>Predatory instant-loan trap</span>
+                    </div>
+                  </th>
+                  <th style={{ padding: '18px 20px', textAlign: 'center' }}>
+                    <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 12px', borderRadius: 'var(--radius-full)', background: 'rgba(6,182,212,0.12)', border: '1px solid rgba(6,182,212,0.35)' }}>
+                        <CheckCircle2 size={14} color='#06b6d4' />
+                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#38bdf8', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                          CHRONOS-FIN Quantum Allocation
+                        </span>
+                      </span>
+                      <span style={{ fontSize: '0.7rem', color: '#64748b' }}>Multi-source quantum rescue</span>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {METRICS.map((metric, i) => (
+                  <MetricRowItem key={metric.label} metric={metric} horizon={horizon} index={i} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Projected Total Cost cards */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+          <div className='chronos-card' style={{ border: '1.5px solid rgba(239,68,68,0.35)', background: 'rgba(239,68,68,0.04)', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
+              Fragmented - {horizon}-Month Total Repayment
+            </span>
+            <span style={{ fontSize: '1.6rem', fontWeight: 800, color: '#f87171' }}>
+              {fragmentedTotalCost(horizon)}
+            </span>
+            <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+              on Rs.50,000 principal @ 38.5% effective APR
+            </span>
+          </div>
+          <div className='chronos-card glow-emerald' style={{ border: '1.5px solid rgba(16,185,129,0.45)', background: 'rgba(16,185,129,0.04)', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
+              CHRONOS-FIN - {horizon}-Month Total Repayment
+            </span>
+            <span style={{ fontSize: '1.6rem', fontWeight: 800, color: '#34d399' }}>
+              {chronosTotalCost(horizon)}
+            </span>
+            <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+              on Rs.50,000 principal @ 4.2% effective APR
+            </span>
+          </div>
+        </div>
+
+        {/* Bottom impact banner */}
+        <div style={{ backgroundColor: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: 'var(--radius-lg)', padding: '18px 28px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '28px', textAlign: 'center' }}>
+          {([
+            { label: 'Cash Saved',            value: summary.saved,        color: '#34d399' },
+            { label: 'Fees Dodged',           value: summary.feesDodged,   color: '#38bdf8' },
+            { label: 'Default Risk Reduction',value: summary.defaultDelta, color: '#c084fc' },
+          ] as { label: string; value: string; color: string }[]).map(({ label, value, color }) => (
+            <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              <span style={{ fontSize: '1.4rem', fontWeight: 800, color, letterSpacing: '-0.02em' }}>
+                {value}
+              </span>
+              <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.07em', fontWeight: 600 }}>
+                {label}
+              </span>
+            </div>
+          ))}
         </div>
 
       </div>
