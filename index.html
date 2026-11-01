@@ -2,9 +2,48 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- Viewport & Mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="VANTIQ" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#06b6d4" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#06b6d4" />
+    <meta name="msapplication-navbutton-color" content="#050914" />
+    <meta name="msapplication-TileColor" content="#050914" />
+
+    <!-- SEO & Open Graph -->
+    <title>VANTIQ – Emergency Finance Optimizer</title>
+    <meta name="description" content="Quantum-Enhanced Counterfactual Digital Twin & Anti-Predatory Emergency Finance Engine for salaried households facing medical and financial shocks." />
+    <meta name="keywords" content="emergency finance, quantum optimization, debt trap, VANTIQ, fintech, RBI sandbox" />
+    <meta name="author" content="Team INNOVATEX" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="VANTIQ – Emergency Finance Optimizer" />
+    <meta property="og:description" content="De-weaponize predatory emergency credit with quantum-hybrid optimization." />
+    <meta property="og:image" content="/icons/icon-512.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="VANTIQ" />
+    <meta name="twitter:description" content="Emergency Credit Without The Debt Trap." />
+
+    <!-- PWA Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>vantiq</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144.png" />
+    <link rel="apple-touch-icon" sizes="128x128" href="/icons/icon-128.png" />
+    <link rel="apple-touch-startup-image" href="/icons/icon-512.png" />
+
+    <!-- Prevent FOUC -->
+    <style>
+      :root { color-scheme: dark; }
+      html, body { background-color: #050914; margin: 0; padding: 0; }
+      #root { min-height: 100dvh; }
+    </style>
   </head>
   <body>
     <div id="root"></div>

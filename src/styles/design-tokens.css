@@ -1,53 +1,63 @@
 /* src/styles/design-tokens.css */
-/* VANTIQ Modern Design Tokens & Theme Engine */
+/* VANTIQ Modern Design Tokens & Theme Engine - Wise Inspired High-Trust Fintech */
 
 :root {
-  /* Core Backgrounds */
-  --bg-deep: #050914;
-  --bg-surface: #0a1124;
-  --bg-card: rgba(15, 23, 42, 0.72);
-  --bg-card-hover: rgba(30, 41, 59, 0.85);
-  --bg-elevated: #111c38;
+  /* Wise Signature Colors */
+  --wise-forest: #163300;
+  --wise-lime: #9fe870;
+  --wise-lime-hover: #8de058;
+  --wise-lime-glow: rgba(159, 232, 112, 0.28);
+  --wise-mint: #e2fbd7;
+  --wise-deep: #0a110a;
+  --wise-surface: #101c12;
+  --wise-card-bg: rgba(18, 30, 20, 0.88);
+  --wise-input-bg: rgba(26, 44, 29, 0.7);
+  --wise-border: rgba(159, 232, 112, 0.25);
+  --wise-border-subtle: rgba(255, 255, 255, 0.1);
+  --wise-text-primary: #ffffff;
+  --wise-text-secondary: #9cb59e;
+  --wise-text-muted: #6b846e;
+
+  /* Classic Theme Variables */
+  --bg-deep: #070d08;
+  --bg-surface: #0e1710;
+  --bg-card: rgba(16, 26, 18, 0.82);
+  --bg-card-hover: rgba(24, 38, 27, 0.95);
+  --bg-elevated: #142217;
   
   /* Borders */
-  --border-subtle: rgba(51, 65, 85, 0.35);
-  --border-medium: rgba(71, 85, 105, 0.55);
-  --border-glow: rgba(56, 189, 248, 0.4);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-medium: rgba(159, 232, 112, 0.3);
+  --border-glow: rgba(159, 232, 112, 0.5);
   
   /* Text & Typography */
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-highlight: #38bdf8;
+  --text-primary: #ffffff;
+  --text-secondary: #a3b8a6;
+  --text-muted: #6b806f;
+  --text-highlight: #9fe870;
   
   /* Brand Accents */
-  --neon-cyan: #06b6d4;
-  --neon-cyan-glow: rgba(6, 182, 212, 0.25);
+  --neon-cyan: #38bdf8;
   --neon-emerald: #10b981;
-  --neon-emerald-glow: rgba(16, 185, 129, 0.25);
-  --quantum-purple: #8b5cf6;
-  --quantum-purple-glow: rgba(139, 92, 246, 0.25);
-  --alert-red: #ef4444;
-  --alert-red-glow: rgba(239, 68, 68, 0.25);
-  --warning-amber: #f59e0b;
-  --warning-amber-glow: rgba(245, 158, 11, 0.25);
+  --quantum-purple: #a78bfa;
+  --alert-red: #f87171;
+  --alert-red-glow: rgba(248, 113, 113, 0.25);
+  --warning-amber: #fbbf24;
   
   /* Layout & Geometry */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
   --radius-full: 9999px;
   
   /* Shadows & Glassmorphism */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
-  --shadow-cyan-glow: 0 0 25px rgba(6, 182, 212, 0.2);
-  --shadow-purple-glow: 0 0 25px rgba(139, 92, 246, 0.2);
-  --shadow-emerald-glow: 0 0 25px rgba(16, 185, 129, 0.2);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-lime-glow: 0 0 35px rgba(159, 232, 112, 0.25);
   
-  --backdrop-blur: blur(16px);
+  --backdrop-blur: blur(20px);
   --transition-fast: 0.15s ease;
   --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -68,15 +78,15 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 85% 25%, rgba(139, 92, 246, 0.08) 0%, transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 10% 10%, rgba(159, 232, 112, 0.07) 0%, transparent 40%),
+    radial-gradient(circle at 90% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(159, 232, 112, 0.04) 0%, transparent 50%);
   background-attachment: fixed;
 }
 
 /* Reusable Utility Classes */
 .container {
-  max-width: 1400px;
+  max-width: 1360px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -98,20 +108,21 @@ body {
 }
 
 .chronos-card.glow-cyan:hover {
-  border-color: var(--neon-cyan);
-  box-shadow: var(--shadow-cyan-glow);
+  border-color: var(--wise-lime);
+  box-shadow: var(--shadow-lime-glow);
 }
 
 .chronos-card.glow-purple:hover {
   border-color: var(--quantum-purple);
-  box-shadow: var(--shadow-purple-glow);
+  box-shadow: 0 0 25px rgba(167, 139, 250, 0.2);
 }
 
 .chronos-card.glow-emerald:hover {
-  border-color: var(--neon-emerald);
-  box-shadow: var(--shadow-emerald-glow);
+  border-color: var(--wise-lime);
+  box-shadow: var(--shadow-lime-glow);
 }
 
+/* Wise-Inspired Badges */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -120,75 +131,84 @@ body {
   border-radius: var(--radius-full);
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 
+.badge-lime {
+  background: rgba(159, 232, 112, 0.15);
+  color: var(--wise-lime);
+  border: 1px solid rgba(159, 232, 112, 0.35);
+}
+
 .badge-cyan {
-  background: rgba(6, 182, 212, 0.12);
+  background: rgba(56, 189, 248, 0.12);
   color: #38bdf8;
-  border: 1px solid rgba(6, 182, 212, 0.35);
+  border: 1px solid rgba(56, 189, 248, 0.35);
 }
 
 .badge-purple {
-  background: rgba(139, 92, 246, 0.12);
+  background: rgba(167, 139, 250, 0.12);
   color: #c084fc;
-  border: 1px solid rgba(139, 92, 246, 0.35);
+  border: 1px solid rgba(167, 139, 250, 0.35);
 }
 
 .badge-emerald {
-  background: rgba(16, 185, 129, 0.12);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.35);
+  background: rgba(159, 232, 112, 0.14);
+  color: #a3e635;
+  border: 1px solid rgba(159, 232, 112, 0.35);
 }
 
 .badge-red {
-  background: rgba(239, 68, 68, 0.12);
+  background: rgba(248, 113, 113, 0.14);
   color: #f87171;
-  border: 1px solid rgba(239, 68, 68, 0.35);
+  border: 1px solid rgba(248, 113, 113, 0.35);
 }
 
 .badge-amber {
-  background: rgba(245, 158, 11, 0.12);
+  background: rgba(251, 191, 36, 0.14);
   color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.35);
+  border: 1px solid rgba(251, 191, 36, 0.35);
 }
 
+/* Wise-Inspired Button Elements */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 20px;
-  border-radius: var(--radius-md);
-  font-size: 0.875rem;
-  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 700;
   cursor: pointer;
   border: none;
   outline: none;
   transition: all var(--transition-normal);
+  text-decoration: none;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #0284c7, #06b6d4);
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(6, 182, 212, 0.35);
+  background: var(--wise-lime);
+  color: var(--wise-forest);
+  box-shadow: 0 4px 16px rgba(159, 232, 112, 0.35);
 }
 
 .btn-primary:hover {
+  background: var(--wise-lime-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
+  box-shadow: 0 6px 24px rgba(159, 232, 112, 0.5);
 }
 
 .btn-quantum {
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
+  background: linear-gradient(135deg, #10b981, #9fe870);
+  color: #0d1a0e;
+  box-shadow: 0 4px 16px rgba(159, 232, 112, 0.3);
 }
 
 .btn-quantum:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+  box-shadow: 0 6px 24px rgba(159, 232, 112, 0.45);
 }
 
 .btn-danger {
@@ -197,20 +217,93 @@ body {
 }
 
 .btn-secondary {
-  background: rgba(30, 41, 59, 0.6);
+  background: rgba(255, 255, 255, 0.06);
   color: var(--text-primary);
   border: 1px solid var(--border-subtle);
 }
 
 .btn-secondary:hover {
-  background: rgba(51, 65, 85, 0.8);
-  border-color: var(--border-medium);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(159, 232, 112, 0.4);
+}
+
+/* Wise-Style Interactive Product Widget Elements */
+.wise-converter-box {
+  background: var(--wise-card-bg);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(159, 232, 112, 0.28);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(159, 232, 112, 0.12);
+}
+
+.wise-input-card {
+  background: var(--wise-input-bg);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color var(--transition-fast);
+}
+
+.wise-input-card:focus-within {
+  border-color: var(--wise-lime);
+  box-shadow: 0 0 0 3px rgba(159, 232, 112, 0.15);
+}
+
+.wise-currency-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+
+/* Stepper Connector Lines */
+.wise-stepper-line {
+  position: relative;
+  padding: 16px 0 16px 36px;
+}
+
+.wise-stepper-line::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(159, 232, 112, 0.4);
+}
+
+.wise-stepper-node {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.wise-stepper-node::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--wise-lime);
+  box-shadow: 0 0 8px var(--wise-lime);
 }
 
 /* Animations */
 @keyframes pulseGlow {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
 }
 
 .animate-pulse-glow {
@@ -235,9 +328,105 @@ body {
   background: var(--bg-deep);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #1b2e1d;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #2b472e;
+}
+
+
+/* =========================================================
+   Mobile UI/UX & PWA Ergonomics
+   ========================================================= */
+
+:root {
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-left: env(safe-area-inset-left, 0px);
+  --safe-area-right: env(safe-area-inset-right, 0px);
+}
+
+/* Touch & Tap Ergonomics */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  padding-bottom: var(--safe-area-bottom);
+  touch-action: pan-y pinch-zoom;
+}
+
+/* Responsive Container & Layout for Mobile Devices */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .chronos-card {
+    padding: 18px 14px !important;
+    border-radius: 16px !important;
+  }
+
+  /* Responsive Button Padding & Touch Targets */
+  .btn {
+    min-height: 44px;
+    padding: 10px 16px;
+    touch-action: manipulation;
+  }
+
+  /* Prevent iOS input auto-zoom */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Fluid Mobile Headings */
+  h1 {
+    font-size: clamp(1.8rem, 6.5vw, 2.6rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  h2 {
+    font-size: clamp(1.35rem, 5vw, 1.85rem) !important;
+    line-height: 1.25 !important;
+  }
+
+  h3 {
+    font-size: clamp(1.05rem, 4vw, 1.35rem) !important;
+  }
+
+  /* Responsive Horizontal Scroll for wide matrices and tables */
+  .table-responsive,
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Bottom spacing for mobile bottom navigation HUD */
+  main {
+    padding-bottom: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .chronos-card {
+    padding: 16px 12px !important;
+  }
+
+  .badge {
+    font-size: 0.68rem !important;
+    padding: 3px 8px !important;
+  }
 }

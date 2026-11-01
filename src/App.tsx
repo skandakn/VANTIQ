@@ -6,6 +6,7 @@ import React from 'react';
 import { FintechProvider } from './context/FintechContext';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
+import { PwaMobileNav } from './components/layout/PwaMobileNav';
 
 import { HeroSection } from './modules/m01_hero/HeroSection';
 import { EmergencyIntake } from './modules/m02_crisis_input/EmergencyIntake';
@@ -46,6 +47,7 @@ export const App: React.FC = () => {
 
         <Footer />
         <NeuroAdaptiveShieldModal />
+        <PwaMobileNav />
       </div>
     </FintechProvider>
   );
