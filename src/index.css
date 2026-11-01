@@ -1,0 +1,10 @@
+@import './styles/design-tokens.css';
+
+/* Additional global overrides */
+html {
+  scroll-behavior: smooth;
+}
+
+code, pre {
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+}
