@@ -1,5 +1,5 @@
 // src/App.tsx
-// CHRONOS-FIN Master Application Shell
+// VANTIQ Master Application Shell
 // Integrates all 15 specialized modules into a seamless, high-performance UI.
 
 import React from 'react';

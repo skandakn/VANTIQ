@@ -26,7 +26,7 @@ export const DualCapacityGauge: React.FC = () => {
             Superficial Credit Limits vs. Real Absorptive Capacity
           </h2>
           <p style={{ color: '#94a3b8', fontSize: '0.95rem' }}>
-            Fintech apps show how much you can borrow today. CHRONOS-FIN reveals how much you can actually survive repaying.
+            Fintech apps show how much you can borrow today. VANTIQ reveals how much you can actually survive repaying.
           </p>
         </div>
 

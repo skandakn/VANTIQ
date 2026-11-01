@@ -30,7 +30,7 @@ export const ComparativeRescueMatrix: React.FC = () => {
         {/* Side-by-Side Cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '24px' }}>
           
-          {/* Card 1: Without CHRONOS-FIN */}
+          {/* Card 1: Without VANTIQ */}
           <div className="chronos-card" style={{
             border: '2px solid rgba(239, 68, 68, 0.4)',
             backgroundColor: 'rgba(239, 68, 68, 0.04)',
@@ -39,7 +39,7 @@ export const ComparativeRescueMatrix: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
               <XCircle size={24} color="#ef4444" />
               <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f87171' }}>
-                WITHOUT CHRONOS-FIN (PREDATORY TRAP)
+                WITHOUT VANTIQ (PREDATORY TRAP)
               </h3>
             </div>
 

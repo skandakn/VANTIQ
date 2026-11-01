@@ -74,7 +74,7 @@ export const NeuroAdaptiveShieldModal: React.FC = () => {
 
         <p style={{ fontSize: '0.95rem', color: '#cbd5e1', lineHeight: 1.6, marginBottom: '24px' }}>
           Under acute medical distress, prefrontal cognitive capacity drops by up to 14 IQ points. 
-          Take 3 deep breaths while CHRONOS-FIN maps safe liquidity.
+          Take 3 deep breaths while VANTIQ maps safe liquidity.
         </p>
 
         {/* Countdown Timer Display */}
@@ -116,7 +116,7 @@ export const NeuroAdaptiveShieldModal: React.FC = () => {
         </div>
 
         <p style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '16px' }}>
-          *CHRONOS-FIN never delays emergency funds. Override is instant and logged for transparency.
+          *VANTIQ never delays emergency funds. Override is instant and logged for transparency.
         </p>
 
       </div>

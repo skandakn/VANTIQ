@@ -54,7 +54,7 @@ export const HeroSection: React.FC = () => {
             lineHeight: 1.6,
             fontWeight: 400
           }}>
-            When a <span style={{ color: '#f8fafc', fontWeight: 600 }}>₹50,000 medical emergency</span> strikes, 4 apps offer you ₹75,000 instantly. But acute panic blinds you to overlapping repayments. CHRONOS-FIN predicts your 90-day cash runway and computes the optimal multi-source funding blend in <strong>&lt;150ms</strong>.
+            When a <span style={{ color: '#f8fafc', fontWeight: 600 }}>₹50,000 medical emergency</span> strikes, 4 apps offer you ₹75,000 instantly. But acute panic blinds you to overlapping repayments. VANTIQ predicts your 90-day cash runway and computes the optimal multi-source funding blend in <strong>&lt;150ms</strong>.
           </p>
         </div>
 

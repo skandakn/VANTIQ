@@ -1,5 +1,5 @@
 // src/types/index.ts
-// PROJECT CHRONOS-FIN: Core Shared Type Contracts
+// PROJECT VANTIQ: Core Shared Type Contracts
 // All 15 modules share these interfaces for seamless real-time interoperability.
 
 export interface FinancialProfile {

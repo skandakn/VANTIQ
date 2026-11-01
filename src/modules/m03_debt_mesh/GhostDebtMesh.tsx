@@ -1,6 +1,6 @@
 // src/modules/m03_debt_mesh/GhostDebtMesh.tsx
 // Module 4: Ghost Debt Stacking Mesh Visualizer
-// Role: Member 04 (CHRONOS-FIN Team)
+// Role: Member 04 (VANTIQ Team)
 import React, { useState } from 'react';
 import {
   Layers,

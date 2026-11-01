@@ -1,5 +1,5 @@
 // src/components/layout/Navbar.tsx
-// CHRONOS-FIN Member 01: Global Shell & Header HUD
+// VANTIQ Member 01: Global Shell & Header HUD
 import React, { useState, useEffect } from 'react';
 import { 
   Shield, 
@@ -176,7 +176,7 @@ export const Navbar: React.FC = () => {
                       WebkitTextFillColor: 'transparent',
                     }}
                   >
-                    CHRONOS-FIN
+                    VANTIQ
                   </span>
                   <span
                     style={{

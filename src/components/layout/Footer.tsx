@@ -1,5 +1,5 @@
 // src/components/layout/Footer.tsx
-// CHRONOS-FIN Member 01: System Status, Regulatory Sandbox Disclaimer & Institutional Shell
+// VANTIQ Member 01: System Status, Regulatory Sandbox Disclaimer & Institutional Shell
 import React from 'react';
 import { 
   Shield, 
@@ -279,7 +279,7 @@ export const Footer: React.FC = () => {
               </div>
 
               <p style={{ fontSize: '0.82rem', color: '#94a3b8', lineHeight: 1.65, marginBottom: '14px' }}>
-                <strong>PROJECT CHRONOS-FIN</strong> is an algorithmic research prototype developed for evaluation under the{' '}
+                <strong>PROJECT VANTIQ</strong> is an algorithmic research prototype developed for evaluation under the{' '}
                 <span style={{ color: '#38bdf8' }}>Reserve Bank of India (RBI) Regulatory Sandbox framework</span> (Cohort on Retail Lending & FinTech Innovation). 
                 The platform operates in strict adherence to the <em>RBI Master Directions & Digital Lending Guidelines (2022/2023)</em>. 
                 All borrower financial inputs, absorptive surplus determinations, and 90-day cashflow digital twin trajectories are computed 
@@ -513,7 +513,7 @@ export const Footer: React.FC = () => {
             <div style={{ fontSize: '0.82rem', color: '#94a3b8', lineHeight: 1.6, marginBottom: '14px' }}>
               <p><strong>Event:</strong> IDEATHON 2026</p>
               <p><strong>Host:</strong> Nagarjuna College of Engineering and Technology</p>
-              <p><strong>Team:</strong> INNOVATEX (CHRONOS-FIN)</p>
+              <p><strong>Team:</strong> INNOVATEX (VANTIQ)</p>
             </div>
 
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -586,7 +586,7 @@ export const Footer: React.FC = () => {
           }}
         >
           <div>
-            © 2026 Team INNOVATEX. Project CHRONOS-FIN. Developed for IDEATHON 2026.
+            © 2026 Team INNOVATEX. Project VANTIQ. Developed for IDEATHON 2026.
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

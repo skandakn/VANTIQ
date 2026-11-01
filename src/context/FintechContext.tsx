@@ -1,5 +1,5 @@
 // src/context/FintechContext.tsx
-// Reactive State Hub for CHRONOS-FIN
+// Reactive State Hub for VANTIQ
 // Allows all 15 modular components to communicate in real-time.
 
 import React, { createContext, useContext, useState, useMemo } from 'react';
