@@ -1,6 +1,6 @@
 // src/modules/m07_rescue_blend/MultiSourceRescueCard.tsx
 // Module 8: Multi-Source Rescue Architecture Display
-// Role: Member 08 (CHRONOS-FIN Team)
+// Role: Member 08 (VANTIQ Team)
 // Branch: feat/m08-rescue-blend
 
 import React, { useState } from 'react';
@@ -874,7 +874,7 @@ export const MultiSourceRescueCard: React.FC = () => {
               </div>
             </div>
 
-            {/* Box 2: CHRONOS-FIN Quantum Rescue */}
+            {/* Box 2: VANTIQ Quantum Rescue */}
             <div style={{
               padding: '24px',
               borderRadius: '14px',
