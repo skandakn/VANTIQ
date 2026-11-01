@@ -1,5 +1,5 @@
 // src/components/layout/Navbar.tsx
-// VANTIQ Member 01: Global Shell & Header HUD
+// VANTIQ: Wise-Inspired Minimalist High-Trust Navigation
 import React, { useState, useEffect } from 'react';
 import { 
   Shield, 
@@ -9,18 +9,19 @@ import {
   Scale, 
   AlertTriangle, 
   Menu, 
-  X 
+  X,
+  Lock
 } from 'lucide-react';
 import { useFintech } from '../../context/FintechContext';
 
 // Primary anchor navigation points requested by specification
 const NAV_LINKS = [
-  { id: 'simulator', label: 'Simulator', icon: Zap, fallbackId: 'crisis-intake' },
-  { id: 'ghost-debt', label: 'Ghost Debt', icon: AlertTriangle, fallbackId: 'debt-mesh' },
+  { id: 'simulator', label: 'Calculator', icon: Zap, fallbackId: 'crisis-intake' },
+  { id: 'ghost-debt', label: 'Debt Traps', icon: AlertTriangle, fallbackId: 'debt-mesh' },
   { id: 'quantum-solver', label: 'Quantum Solver', icon: Cpu, fallbackId: 'quantum-knapsack' },
-  { id: 'digital-twin', label: 'Digital Twin', icon: Activity, fallbackId: 'cashflow-twin' },
-  { id: 'comparison', label: 'Comparison', icon: Scale, fallbackId: 'rescue-matrix' },
-  { id: 'compliance', label: 'Compliance', icon: Shield, fallbackId: 'privacy-compliance' },
+  { id: 'digital-twin', label: 'Cash Runway', icon: Activity, fallbackId: 'cashflow-twin' },
+  { id: 'comparison', label: 'Fee Comparison', icon: Scale, fallbackId: 'rescue-matrix' },
+  { id: 'compliance', label: 'Security & ZK', icon: Shield, fallbackId: 'privacy-compliance' },
 ];
 
 export const Navbar: React.FC = () => {
@@ -60,9 +61,7 @@ export const Navbar: React.FC = () => {
     scrollToSection(targetId);
   };
 
-  // Synchronize anchor IDs on target module elements and track active scroll section
   useEffect(() => {
-    // Inject alias anchors if needed so direct browser URLs (e.g. #simulator) work seamlessly
     NAV_LINKS.forEach((link) => {
       const parent = link.fallbackId ? document.getElementById(link.fallbackId) : null;
       if (parent && !document.getElementById(link.id)) {
@@ -76,7 +75,6 @@ export const Navbar: React.FC = () => {
       }
     });
 
-    // Check if initial URL contains a hash
     if (window.location.hash) {
       const initialId = window.location.hash.replace('#', '');
       const matched = NAV_LINKS.find((l) => l.id === initialId);
@@ -85,7 +83,6 @@ export const Navbar: React.FC = () => {
       }
     }
 
-    // Scroll listener for sticky header styling & active section tracking
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
@@ -114,22 +111,22 @@ export const Navbar: React.FC = () => {
           position: 'sticky',
           top: 0,
           zIndex: 1000,
-          backgroundColor: isScrolled ? 'rgba(5, 9, 20, 0.92)' : 'rgba(5, 9, 20, 0.82)',
+          backgroundColor: isScrolled ? 'rgba(7, 13, 8, 0.95)' : 'rgba(7, 13, 8, 0.85)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: isScrolled ? '1px solid rgba(56, 189, 248, 0.35)' : '1px solid rgba(51, 65, 85, 0.45)',
+          borderBottom: isScrolled ? '1px solid rgba(159, 232, 112, 0.25)' : '1px solid rgba(255, 255, 255, 0.08)',
           boxShadow: isScrolled
-            ? '0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(6, 182, 212, 0.15)'
+            ? '0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(159, 232, 112, 0.1)'
             : '0 4px 20px rgba(0, 0, 0, 0.5)',
           transition: 'all 0.25s ease',
-          padding: '12px 0',
+          padding: '14px 0',
         }}
       >
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
           
-          {/* Brand Logo & Glowing Cyan Gradient Badge */}
+          {/* Wise-Style Bold Minimalist Logo */}
           <div 
-            style={{ display: 'flex', alignItems: 'center', gap: '14px', cursor: 'pointer', textDecoration: 'none' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer', textDecoration: 'none' }}
             onClick={() => scrollToSection('simulator')}
             role="button"
             tabIndex={0}
@@ -137,58 +134,43 @@ export const Navbar: React.FC = () => {
           >
             <div
               style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '12px',
-                background: 'linear-gradient(135deg, #0284c7 0%, #06b6d4 50%, #8b5cf6 100%)',
+                width: '38px',
+                height: '38px',
+                borderRadius: '10px',
+                background: 'var(--wise-lime)',
+                color: 'var(--wise-forest)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 0 20px rgba(6, 182, 212, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.3)',
+                boxShadow: '0 0 16px rgba(159, 232, 112, 0.4)',
+                fontWeight: 900,
+                fontSize: '1.25rem',
                 flexShrink: 0,
               }}
             >
-              <Shield size={22} color="#ffffff" />
+              V
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-                {/* Glowing Cyan Gradient Badge */}
-                <div
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '3px 12px',
-                    borderRadius: '9999px',
-                    background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.22) 0%, rgba(56, 189, 248, 0.08) 100%)',
-                    border: '1px solid rgba(56, 189, 248, 0.55)',
-                    boxShadow: '0 0 16px rgba(6, 182, 212, 0.4), inset 0 0 8px rgba(6, 182, 212, 0.15)',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: '1.15rem',
-                      fontWeight: 900,
-                      letterSpacing: '-0.02em',
-                      background: 'linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #06b6d4 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                    }}
-                  >
-                    VANTIQ
-                  </span>
-                  <span
-                    style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      backgroundColor: '#38bdf8',
-                      boxShadow: '0 0 8px #38bdf8',
-                    }}
-                  />
-                </div>
-              </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span
+                style={{
+                  fontSize: '1.35rem',
+                  fontWeight: 900,
+                  letterSpacing: '-0.03em',
+                  color: '#ffffff',
+                }}
+              >
+                VANTIQ
+              </span>
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--wise-lime)',
+                  boxShadow: '0 0 8px var(--wise-lime)',
+                }}
+              />
             </div>
           </div>
 
@@ -201,15 +183,12 @@ export const Navbar: React.FC = () => {
                 gap: '8px',
                 padding: '6px 14px',
                 borderRadius: '9999px',
-                backgroundColor: 'rgba(16, 185, 129, 0.08)',
-                border: '1px solid rgba(16, 185, 129, 0.35)',
-                boxShadow: '0 0 15px rgba(16, 185, 129, 0.15)',
+                backgroundColor: 'rgba(159, 232, 112, 0.08)',
+                border: '1px solid rgba(159, 232, 112, 0.3)',
                 fontSize: '0.74rem',
-                color: '#34d399',
-                fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                color: 'var(--wise-lime)',
               }}
             >
-              {/* Radar pulse beacon */}
               <span style={{ position: 'relative', display: 'flex', width: '8px', height: '8px' }}>
                 <span
                   style={{
@@ -217,7 +196,7 @@ export const Navbar: React.FC = () => {
                     width: '100%',
                     height: '100%',
                     borderRadius: '50%',
-                    backgroundColor: '#10b981',
+                    backgroundColor: 'var(--wise-lime)',
                     opacity: 0.75,
                     animation: 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                   }}
@@ -228,17 +207,17 @@ export const Navbar: React.FC = () => {
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    backgroundColor: '#10b981',
-                    boxShadow: '0 0 8px #10b981',
+                    backgroundColor: 'var(--wise-lime)',
+                    boxShadow: '0 0 8px var(--wise-lime)',
                   }}
                 />
               </span>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 600 }}>
-                <span style={{ color: '#e2e8f0' }}>Quantum Engine:</span>
-                <span style={{ color: '#34d399', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Online</span>
+                <span style={{ color: '#a3b8a6' }}>Engine:</span>
+                <span style={{ color: 'var(--wise-lime)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Quantum Online</span>
                 <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>|</span>
-                <span style={{ color: '#38bdf8', fontFamily: 'monospace', fontWeight: 700 }}>38ms latency</span>
+                <span style={{ color: '#ffffff', fontFamily: 'monospace', fontWeight: 700 }}>38ms latency</span>
               </div>
             </div>
           </div>
@@ -246,7 +225,6 @@ export const Navbar: React.FC = () => {
           {/* Smooth Anchor Navigation Links (Desktop) */}
           <nav className="desktop-nav-menu" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
             {NAV_LINKS.map((item) => {
-              const Icon = item.icon;
               const isActive = activeSection === item.id;
               return (
                 <a
@@ -257,50 +235,45 @@ export const Navbar: React.FC = () => {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '6px',
-                    padding: '7px 12px',
-                    fontSize: '0.80rem',
+                    padding: '8px 14px',
+                    fontSize: '0.85rem',
                     fontWeight: isActive ? 700 : 500,
-                    borderRadius: '8px',
+                    borderRadius: '9999px',
                     textDecoration: 'none',
                     transition: 'all 0.2s ease',
-                    backgroundColor: isActive ? 'rgba(6, 182, 212, 0.18)' : 'transparent',
-                    border: isActive ? '1px solid rgba(6, 182, 212, 0.45)' : '1px solid transparent',
-                    color: isActive ? '#38bdf8' : '#94a3b8',
-                    boxShadow: isActive ? '0 0 12px rgba(6, 182, 212, 0.2)' : 'none',
+                    backgroundColor: isActive ? 'rgba(159, 232, 112, 0.15)' : 'transparent',
+                    border: isActive ? '1px solid rgba(159, 232, 112, 0.4)' : '1px solid transparent',
+                    color: isActive ? 'var(--wise-lime)' : 'var(--wise-text-secondary)',
                     cursor: 'pointer',
                   }}
                 >
-                  <Icon size={14} color={isActive ? '#38bdf8' : '#64748b'} />
                   <span>{item.label}</span>
                 </a>
               );
             })}
           </nav>
 
-          {/* Action Area: Emergency Simulator CTA & Neuro-Shield */}
+          {/* Action Area: Wise-style Low-Friction CTA & Shield */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             
-            {/* Emergency Simulator CTA button */}
+            {/* Primary Wise Electric Lime CTA Button */}
             <button
               onClick={() => scrollToSection('simulator')}
               className="btn btn-primary emergency-cta-btn"
               style={{
-                fontSize: '0.82rem',
-                fontWeight: 700,
-                padding: '8px 16px',
-                borderRadius: '10px',
-                background: 'linear-gradient(135deg, #0284c7 0%, #06b6d4 100%)',
-                boxShadow: '0 0 18px rgba(6, 182, 212, 0.45)',
-                border: '1px solid rgba(56, 189, 248, 0.5)',
+                fontSize: '0.86rem',
+                fontWeight: 800,
+                padding: '10px 20px',
+                borderRadius: '9999px',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
                 whiteSpace: 'nowrap',
               }}
-              aria-label="Launch Emergency Simulator"
+              aria-label="Launch Free Emergency Simulator"
             >
-              <Zap size={15} style={{ color: '#fef08a', filter: 'drop-shadow(0 0 4px #facc15)' }} />
-              <span>Emergency Simulator</span>
+              <Zap size={14} />
+              <span>Simulate Free</span>
             </button>
 
             {/* Quick Neuro-Shield trigger */}
@@ -308,18 +281,18 @@ export const Navbar: React.FC = () => {
               onClick={triggerNeuroShield}
               className="btn btn-secondary shield-quick-btn"
               style={{
-                padding: '8px 12px',
-                fontSize: '0.78rem',
-                borderColor: 'rgba(139, 92, 246, 0.4)',
-                backgroundColor: 'rgba(139, 92, 246, 0.12)',
-                color: '#c084fc',
+                padding: '10px 14px',
+                fontSize: '0.82rem',
+                borderRadius: '9999px',
+                borderColor: 'rgba(255, 255, 255, 0.15)',
+                color: '#ffffff',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '6px',
               }}
               title="Test 45s Grounding Shield Modal"
             >
-              <Shield size={14} />
+              <Lock size={13} color="var(--wise-lime)" />
               <span className="hide-mobile-badge">45s Shield</span>
             </button>
 
@@ -331,11 +304,11 @@ export const Navbar: React.FC = () => {
                 display: 'none',
                 padding: '8px',
                 borderRadius: '8px',
-                borderColor: 'rgba(51, 65, 85, 0.6)',
+                borderColor: 'rgba(255, 255, 255, 0.15)',
               }}
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X size={20} color="#38bdf8" /> : <Menu size={20} color="#f8fafc" />}
+              {mobileMenuOpen ? <X size={20} color="var(--wise-lime)" /> : <Menu size={20} color="#f8fafc" />}
             </button>
 
           </div>
@@ -347,40 +320,13 @@ export const Navbar: React.FC = () => {
           <div
             style={{
               padding: '16px 24px',
-              backgroundColor: 'rgba(5, 9, 20, 0.98)',
-              borderBottom: '1px solid rgba(56, 189, 248, 0.3)',
+              backgroundColor: 'rgba(7, 13, 8, 0.98)',
+              borderBottom: '1px solid rgba(159, 232, 112, 0.3)',
               display: 'flex',
               flexDirection: 'column',
               gap: '12px',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '6px 14px',
-                  borderRadius: '9999px',
-                  backgroundColor: 'rgba(16, 185, 129, 0.08)',
-                  border: '1px solid rgba(16, 185, 129, 0.35)',
-                  fontSize: '0.74rem',
-                  color: '#34d399',
-                }}
-              >
-                <span
-                  style={{
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    backgroundColor: '#10b981',
-                    boxShadow: '0 0 8px #10b981',
-                  }}
-                />
-                <span>Quantum Engine: <strong>Online (38ms latency)</strong></span>
-              </div>
-            </div>
-
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
               {NAV_LINKS.map((item) => {
                 const Icon = item.icon;
@@ -398,13 +344,13 @@ export const Navbar: React.FC = () => {
                       borderRadius: '8px',
                       fontSize: '0.85rem',
                       fontWeight: isActive ? 700 : 500,
-                      backgroundColor: isActive ? 'rgba(6, 182, 212, 0.2)' : 'rgba(30, 41, 59, 0.5)',
-                      border: isActive ? '1px solid #06b6d4' : '1px solid rgba(51, 65, 85, 0.4)',
-                      color: isActive ? '#38bdf8' : '#e2e8f0',
+                      backgroundColor: isActive ? 'rgba(159, 232, 112, 0.15)' : 'rgba(255, 255, 255, 0.04)',
+                      border: isActive ? '1px solid var(--wise-lime)' : '1px solid rgba(255, 255, 255, 0.08)',
+                      color: isActive ? 'var(--wise-lime)' : '#e2e8f0',
                       textDecoration: 'none',
                     }}
                   >
-                    <Icon size={16} color={isActive ? '#38bdf8' : '#94a3b8'} />
+                    <Icon size={16} color={isActive ? 'var(--wise-lime)' : '#94a3b8'} />
                     <span>{item.label}</span>
                   </a>
                 );
@@ -417,17 +363,17 @@ export const Navbar: React.FC = () => {
               style={{
                 marginTop: '8px',
                 width: '100%',
-                padding: '12px',
-                fontSize: '0.9rem',
-                fontWeight: 700,
+                padding: '14px',
+                fontSize: '0.95rem',
+                fontWeight: 800,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
               }}
             >
-              <Zap size={16} style={{ color: '#fef08a' }} />
-              <span>Launch Emergency Simulator</span>
+              <Zap size={16} />
+              <span>Simulate Emergency Rescue Free</span>
             </button>
           </div>
         )}
@@ -456,7 +402,7 @@ export const Navbar: React.FC = () => {
             display: none !important;
           }
           .emergency-cta-btn span {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
           }
         }
       `}</style>

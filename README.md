@@ -33,12 +33,17 @@ When an individual faces an acute out-of-pocket medical shock (e.g., ₹50,000 f
 
 1. **Dual-Dial Absorptive Capacity Meter**: Contrasts misleading high credit line offers against the borrower's true surplus capacity.
 2. **Ghost Debt Stacking Mesh**: Exposes the compound interest trap of taking micro-loans from multiple uncoordinated lenders simultaneously.
-3. **90-Day Temporal Digital Twin (TFT)**: Simulates day-by-day cashflow runway under standard borrowing vs. CHRONOS-guided optimization.
-4. **QUBO / QAOA Quantum Knapsack Optimizer**: Formulates the debt relief problem as a Quadratic Unconstrained Binary Optimization (QUBO) solved via simulated quantum annealing in $<40\text{ ms}$.
-5. **Tri-Tranche Multi-Source Rescue Architecture**: Synthesizes 0% employer advances, co-op credit unions, and structured repayment schedules.
-6. **45-Second Neuro-Adaptive Grounding Protocol**: A behavioral friction circuit breaker preventing panic-driven one-click borrowing.
-7. **TreeSHAP Explainable AI**: Provides rigorous Shapley-value feature attribution explaining why specific relief tranches were recommended.
-8. **Client-Side Zero-Knowledge Privacy**: Employs client-side WASM ZK-proofs so sensitive bank statements never leave the user's browser.
+3. **Wise-Inspired "Product as the Hero" UI/UX**:
+   - **Above-The-Fold Emergency Converter**: Rather than abstract marketing claims, users can immediately interact with their real crisis numbers (₹50k shock vs. monthly surplus) in context with a live vertical fee stepper.
+   - **Trust-Building Fee Comparison**: Gamified, transparent fee and repayment comparison directly showing predatory loan app penalties vs. transparent VANTIQ rescue.
+   - **Low-Friction Exploratory CTAs**: Zero-signup barriers; users test and experience the math before any commitment.
+   - **High-Trust Aesthetic**: Deep forest green palette with signature electric lime (`#9fe870`) accents, crisp modern typography, and clean cards.
+4. **90-Day Temporal Digital Twin (TFT)**: Simulates day-by-day cashflow runway under standard borrowing vs. CHRONOS-guided optimization.
+5. **QUBO / QAOA Quantum Knapsack Optimizer**: Formulates the debt relief problem as a Quadratic Unconstrained Binary Optimization (QUBO) solved via simulated quantum annealing in $<40\text{ ms}$.
+6. **Tri-Tranche Multi-Source Rescue Architecture**: Synthesizes 0% employer advances, co-op credit unions, and structured repayment schedules.
+7. **45-Second Neuro-Adaptive Grounding Protocol**: A behavioral friction circuit breaker preventing panic-driven one-click borrowing.
+8. **TreeSHAP Explainable AI**: Provides rigorous Shapley-value feature attribution explaining why specific relief tranches were recommended.
+9. **Client-Side Zero-Knowledge Privacy**: Employs client-side WASM ZK-proofs so sensitive bank statements never leave the user's browser.
 
 ---
 
