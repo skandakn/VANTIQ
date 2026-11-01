@@ -26,7 +26,7 @@ export const ZeroKnowledgeCompliance: React.FC = () => {
         </div>
 
         {/* Compliance Checklist Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '20px' }}>
           
           <div className="chronos-card glow-emerald">
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>

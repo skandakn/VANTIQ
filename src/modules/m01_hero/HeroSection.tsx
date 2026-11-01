@@ -1,5 +1,5 @@
 // src/modules/m01_hero/HeroSection.tsx
-// Wise-Inspired Hero: "Product as the Hero, Not Marketing Fluff"
+// Wise-Inspired Hero: "Product as the Hero, Not Marketing Fluff" (Light Theme)
 import React, { useState, useId } from 'react';
 import {
   ShieldCheck,
@@ -69,27 +69,27 @@ export const HeroSection: React.FC = () => {
   };
 
   return (
-    <section id="hero" style={{ padding: '40px 0 60px 0', position: 'relative' }}>
+    <section id="hero" style={{ padding: '50px 0 70px 0', position: 'relative', backgroundColor: 'var(--bg-deep)' }}>
       <div className="container">
         
         {/* Main 2-Column Hero Layout - Just Like Wise */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-          gap: '48px',
+          gap: '56px',
           alignItems: 'center'
         }}>
           
           {/* Left Column: Bold Value Proposition & Social Proof */}
           <div>
             
-            {/* Trust Reviews Badge */}
+            {/* Trust Reviews Badge (Exact Wise social proof style) */}
             <div style={{
               display: 'flex',
               alignItems: 'center',
               gap: '12px',
               flexWrap: 'wrap',
-              marginBottom: '20px'
+              marginBottom: '24px'
             }}>
               <div style={{
                 display: 'inline-flex',
@@ -97,13 +97,14 @@ export const HeroSection: React.FC = () => {
                 gap: '6px',
                 padding: '6px 14px',
                 borderRadius: '9999px',
-                backgroundColor: 'rgba(159, 232, 112, 0.12)',
-                border: '1px solid rgba(159, 232, 112, 0.3)',
-                fontSize: '0.82rem',
-                color: 'var(--wise-lime)',
-                fontWeight: 600
+                backgroundColor: '#ffffff',
+                border: '1px solid #d8e2d4',
+                fontSize: '0.84rem',
+                color: 'var(--wise-forest)',
+                fontWeight: 700,
+                boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
               }}>
-                <div style={{ display: 'flex', color: 'var(--wise-lime)' }}>
+                <div style={{ display: 'flex', color: '#15803d' }}>
                   <Star size={13} fill="currentColor" />
                   <Star size={13} fill="currentColor" />
                   <Star size={13} fill="currentColor" />
@@ -117,47 +118,48 @@ export const HeroSection: React.FC = () => {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '6px',
-                fontSize: '0.82rem',
-                color: '#a3b8a6'
+                fontSize: '0.84rem',
+                color: 'var(--text-secondary)',
+                fontWeight: 600
               }}>
-                <ShieldCheck size={16} color="var(--wise-lime)" />
+                <ShieldCheck size={16} color="#15803d" />
                 <span>Zero-Knowledge Edge Verified</span>
               </div>
             </div>
 
-            {/* Huge High-Impact Headline */}
+            {/* Massive Bold High-Impact Headline (Wise Typography) */}
             <h1 style={{
-              fontSize: 'clamp(2.4rem, 4.5vw, 3.8rem)',
+              fontSize: 'clamp(2.6rem, 5vw, 4.2rem)',
               fontWeight: 900,
-              lineHeight: 1.08,
-              letterSpacing: '-0.03em',
-              marginBottom: '20px',
-              color: '#ffffff'
+              lineHeight: 1.05,
+              letterSpacing: '-0.04em',
+              marginBottom: '22px',
+              color: 'var(--wise-forest)'
             }}>
               BORROW FOR EMERGENCIES{' '}
-              <span style={{ color: 'var(--wise-lime)', display: 'inline-block' }}>
+              <span style={{ color: '#15803d', display: 'inline-block' }}>
                 WITHOUT THE DEBT TRAP.
               </span>
             </h1>
 
             {/* Clear, Honest Subtitle */}
             <p style={{
-              fontSize: 'clamp(1.05rem, 1.8vw, 1.22rem)',
-              color: 'var(--wise-text-secondary)',
-              lineHeight: 1.6,
-              marginBottom: '28px',
+              fontSize: 'clamp(1.05rem, 1.8vw, 1.25rem)',
+              color: 'var(--text-secondary)',
+              lineHeight: 1.65,
+              marginBottom: '32px',
               maxWidth: '560px'
             }}>
               When a ₹50,000 hospital shock strikes, 4 apps offer ₹75,000 instantly. But clustered auto-debits trigger insolvency in 45 days. 
-              <strong> VANTIQ reveals your true absorptive capacity</strong> and synthesizes a safe multi-source rescue.
+              <strong style={{ color: 'var(--wise-forest)' }}> VANTIQ reveals your true absorptive capacity</strong> and synthesizes a safe multi-source rescue before you commit.
             </p>
 
             {/* Low-Friction Exploratory CTAs */}
-            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '36px' }}>
+            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '40px' }}>
               <button
                 onClick={() => scrollToSection('comparison')}
                 className="btn btn-primary"
-                style={{ fontSize: '1rem', padding: '14px 28px' }}
+                style={{ fontSize: '1.02rem', padding: '16px 32px' }}
               >
                 <span>Compare Loan Options Now</span>
                 <ArrowRight size={18} />
@@ -166,7 +168,7 @@ export const HeroSection: React.FC = () => {
               <button
                 onClick={() => scrollToSection('quantum-solver')}
                 className="btn btn-secondary"
-                style={{ fontSize: '1rem', padding: '14px 24px' }}
+                style={{ fontSize: '1.02rem', padding: '16px 28px' }}
               >
                 <span>See Quantum Knapsack</span>
               </button>
@@ -174,25 +176,32 @@ export const HeroSection: React.FC = () => {
 
             {/* Harvard / Princeton Micro-quote */}
             <div style={{
-              padding: '16px 20px',
+              padding: '18px 24px',
               borderRadius: '16px',
-              backgroundColor: 'rgba(255, 255, 255, 0.04)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              maxWidth: '540px'
+              backgroundColor: '#ffffff',
+              border: '1px solid #e5e9e2',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+              maxWidth: '560px'
             }}>
-              <p style={{ fontSize: '0.85rem', color: '#c4d4c6', fontStyle: 'italic', lineHeight: 1.5, marginBottom: '6px' }}>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', fontStyle: 'italic', lineHeight: 1.6, marginBottom: '6px' }}>
                 "Scarcity captures attention, but narrows focus—leading to decisions that solve today's crisis by engineering tomorrow's catastrophe."
               </p>
-              <div style={{ fontSize: '0.75rem', color: 'var(--wise-lime)', fontWeight: 600 }}>
-                — Sendhil Mullainathan & Eldar Shafir (Scarcity)
+              <div style={{ fontSize: '0.78rem', color: 'var(--wise-forest)', fontWeight: 700 }}>
+                — Sendhil Mullainathan & Eldar Shafir (Scarcity: Why Having Too Little Means So Much)
               </div>
             </div>
 
           </div>
 
-          {/* Right Column: The Wise-Style Interactive Emergency Converter */}
+          {/* Right Column: The Pure White Wise-Style Product Hero Converter */}
           <div>
-            <div className="wise-converter-box">
+            <div className="wise-converter-box" style={{
+              backgroundColor: '#ffffff',
+              border: '1px solid #e5e9e2',
+              borderRadius: '24px',
+              padding: '32px',
+              boxShadow: '0 20px 50px rgba(22, 51, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03)'
+            }}>
               
               {/* Top Rate & Buffer Guarantee Pill */}
               <div style={{
@@ -200,16 +209,16 @@ export const HeroSection: React.FC = () => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 paddingBottom: '16px',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-                marginBottom: '20px'
+                borderBottom: '1px solid #edf0ea',
+                marginBottom: '22px'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: 'var(--wise-lime)', fontWeight: 700 }}>
-                  <Lock size={14} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', color: '#15803d', fontWeight: 800 }}>
+                  <Lock size={15} />
                   <span>Safe Absorptive Capacity: ₹{profile.absorptiveSurplus.toLocaleString()}/mo</span>
                 </div>
-                <div style={{ fontSize: '0.75rem', color: '#a3b8a6', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
                   <span>0% Predatory Churn</span>
-                  <Check size={14} color="var(--wise-lime)" />
+                  <Check size={14} color="#15803d" />
                 </div>
               </div>
 
@@ -219,9 +228,9 @@ export const HeroSection: React.FC = () => {
                   display: 'flex',
                   justifyContent: 'space-between',
                   marginBottom: '8px',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  color: '#a3b8a6'
+                  fontSize: '0.88rem',
+                  fontWeight: 700,
+                  color: 'var(--wise-forest)'
                 }}>
                   <label htmlFor={emergencyAmountId} style={{ cursor: 'pointer' }}>You need immediately</label>
                   <div style={{ display: 'flex', gap: '6px' }}>
@@ -230,14 +239,15 @@ export const HeroSection: React.FC = () => {
                         key={amt}
                         onClick={() => setPresetAmount(amt)}
                         style={{
-                          background: neededAmount === amt ? 'var(--wise-lime)' : 'rgba(255, 255, 255, 0.08)',
-                          color: neededAmount === amt ? 'var(--wise-forest)' : '#cbd5e1',
+                          background: neededAmount === amt ? 'var(--wise-forest)' : '#f4f5f1',
+                          color: neededAmount === amt ? 'var(--wise-lime)' : 'var(--text-secondary)',
                           border: 'none',
                           borderRadius: '6px',
-                          padding: '2px 8px',
-                          fontSize: '0.72rem',
+                          padding: '3px 8px',
+                          fontSize: '0.74rem',
                           fontWeight: 700,
-                          cursor: 'pointer'
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
                         }}
                       >
                         ₹{(amt / 1000)}k
@@ -246,9 +256,12 @@ export const HeroSection: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="wise-input-card">
+                <div className="wise-input-card" style={{
+                  backgroundColor: '#f4f5f1',
+                  border: '1.5px solid #d0d7cc'
+                }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flex: 1 }}>
-                    <span style={{ fontSize: '1.4rem', fontWeight: 700, color: '#a3b8a6' }}>₹</span>
+                    <span style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-secondary)' }}>₹</span>
                     <input
                       id={emergencyAmountId}
                       type="text"
@@ -259,11 +272,11 @@ export const HeroSection: React.FC = () => {
                         background: 'transparent',
                         border: 'none',
                         outline: 'none',
-                        color: '#ffffff',
-                        fontSize: '1.8rem',
+                        color: 'var(--wise-forest)',
+                        fontSize: '1.9rem',
                         fontWeight: 900,
                         width: '100%',
-                        letterSpacing: '-0.02em'
+                        letterSpacing: '-0.03em'
                       }}
                     />
                   </div>
@@ -285,12 +298,12 @@ export const HeroSection: React.FC = () => {
                         right: 0,
                         top: '110%',
                         zIndex: 50,
-                        backgroundColor: '#101c12',
-                        border: '1px solid rgba(159, 232, 112, 0.3)',
+                        backgroundColor: '#ffffff',
+                        border: '1px solid #d0d7cc',
                         borderRadius: '12px',
                         padding: '8px 0',
-                        width: '200px',
-                        boxShadow: '0 12px 30px rgba(0,0,0,0.8)'
+                        width: '210px',
+                        boxShadow: '0 12px 30px rgba(0,0,0,0.12)'
                       }}>
                         {categories.map((cat) => (
                           <div
@@ -300,11 +313,12 @@ export const HeroSection: React.FC = () => {
                               setShowCategoryDropdown(false);
                             }}
                             style={{
-                              padding: '8px 16px',
-                              fontSize: '0.85rem',
-                              color: selectedCategory === cat ? 'var(--wise-lime)' : '#ffffff',
+                              padding: '10px 16px',
+                              fontSize: '0.86rem',
+                              color: selectedCategory === cat ? '#15803d' : 'var(--wise-forest)',
+                              fontWeight: selectedCategory === cat ? 800 : 500,
                               cursor: 'pointer',
-                              backgroundColor: selectedCategory === cat ? 'rgba(159, 232, 112, 0.1)' : 'transparent'
+                              backgroundColor: selectedCategory === cat ? '#f4f5f1' : 'transparent'
                             }}
                           >
                             {cat}
@@ -321,54 +335,54 @@ export const HeroSection: React.FC = () => {
                 
                 {/* Node 1: Savings */}
                 <div className="wise-stepper-node">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem' }}>
-                    <span style={{ color: '#a3b8a6' }}>Tranche A: Liquid Savings</span>
-                    <strong style={{ color: 'var(--wise-lime)' }}>- ₹{savingsTranche.toLocaleString()} (0% APR)</strong>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
+                    <span style={{ color: 'var(--text-secondary)' }}>Tranche A: Liquid Savings</span>
+                    <strong style={{ color: '#15803d' }}>- ₹{savingsTranche.toLocaleString()} (0% APR)</strong>
                   </div>
                 </div>
 
                 {/* Node 2: Subsidized Advance */}
                 <div className="wise-stepper-node">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem' }}>
-                    <span style={{ color: '#a3b8a6' }}>Tranche B: Employer / Hospital Advance</span>
-                    <strong style={{ color: 'var(--wise-lime)' }}>- ₹{subsidizedTranche.toLocaleString()} (0% APR)</strong>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
+                    <span style={{ color: 'var(--text-secondary)' }}>Tranche B: Employer / Hospital Advance</span>
+                    <strong style={{ color: '#15803d' }}>- ₹{subsidizedTranche.toLocaleString()} (0% APR)</strong>
                   </div>
                 </div>
 
                 {/* Node 3: Co-op Credit Union */}
                 <div className="wise-stepper-node">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem' }}>
-                    <span style={{ color: '#a3b8a6' }}>Tranche C: Co-op Bridge Credit</span>
-                    <strong style={{ color: '#ffffff' }}>- ₹{coOpTranche.toLocaleString()} (6.5% APR)</strong>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
+                    <span style={{ color: 'var(--text-secondary)' }}>Tranche C: Co-op Bridge Credit</span>
+                    <strong style={{ color: 'var(--wise-forest)' }}>- ₹{coOpTranche.toLocaleString()} (6.5% APR)</strong>
                   </div>
                 </div>
 
                 {/* Node 4: Deferred Micro-credit */}
                 {deferredTranche > 0 && (
                   <div className="wise-stepper-node">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem' }}>
-                      <span style={{ color: '#a3b8a6' }}>Tranche D: Deferred Staggered Credit</span>
-                      <strong style={{ color: '#ffffff' }}>- ₹{deferredTranche.toLocaleString()} (8.0% APR)</strong>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
+                      <span style={{ color: 'var(--text-secondary)' }}>Tranche D: Deferred Staggered Credit</span>
+                      <strong style={{ color: 'var(--wise-forest)' }}>- ₹{deferredTranche.toLocaleString()} (8.0% APR)</strong>
                     </div>
                   </div>
                 )}
 
                 {/* Node 5: Transparent Total Fee */}
                 <div style={{
-                  padding: '8px 12px',
-                  borderRadius: '8px',
-                  backgroundColor: 'rgba(159, 232, 112, 0.08)',
-                  border: '1px solid rgba(159, 232, 112, 0.2)',
-                  marginTop: '10px',
+                  padding: '10px 14px',
+                  borderRadius: '10px',
+                  backgroundColor: '#edf4ea',
+                  border: '1px solid #d4e3cf',
+                  marginTop: '12px',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center'
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: 'var(--wise-lime)' }}>
-                    <Info size={14} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.84rem', color: '#15803d', fontWeight: 600 }}>
+                    <Info size={15} />
                     <span>Total transparent interest & fees:</span>
                   </div>
-                  <strong style={{ fontSize: '0.9rem', color: 'var(--wise-lime)' }}>
+                  <strong style={{ fontSize: '0.94rem', color: '#15803d', fontWeight: 900 }}>
                     ₹{vantiqTotalFee.toLocaleString()} ({((vantiqTotalFee / neededAmount) * 100).toFixed(1)}%)
                   </strong>
                 </div>
@@ -376,31 +390,34 @@ export const HeroSection: React.FC = () => {
               </div>
 
               {/* Box 2: "Safe monthly repayment" */}
-              <div style={{ marginBottom: '20px' }}>
+              <div style={{ marginBottom: '22px' }}>
                 <div style={{
                   display: 'flex',
                   justifyContent: 'space-between',
                   marginBottom: '8px',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  color: '#a3b8a6'
+                  fontSize: '0.88rem',
+                  fontWeight: 700,
+                  color: 'var(--wise-forest)'
                 }}>
                   <span>Safe monthly repayment (Calculated)</span>
-                  <span style={{ color: 'var(--wise-lime)', fontSize: '0.78rem' }}>
-                    Within Surplus Buffer (₹{profile.absorptiveSurplus.toLocaleString()}/mo)
+                  <span style={{ color: '#15803d', fontSize: '0.8rem' }}>
+                    Within Buffer (₹{profile.absorptiveSurplus.toLocaleString()}/mo)
                   </span>
                 </div>
 
-                <div className="wise-input-card" style={{ borderColor: 'rgba(159, 232, 112, 0.4)' }}>
+                <div className="wise-input-card" style={{
+                  backgroundColor: '#f4f5f1',
+                  border: '1.5px solid #d0d7cc'
+                }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flex: 1 }}>
-                    <span style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--wise-lime)' }}>₹</span>
-                    <span style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--wise-lime)', letterSpacing: '-0.02em' }}>
+                    <span style={{ fontSize: '1.5rem', fontWeight: 800, color: '#15803d' }}>₹</span>
+                    <span style={{ fontSize: '1.9rem', fontWeight: 900, color: '#15803d', letterSpacing: '-0.03em' }}>
                       {safeMonthlyEmi.toLocaleString('en-IN')}
                     </span>
-                    <span style={{ fontSize: '0.85rem', color: '#a3b8a6', marginLeft: '4px' }}>/ month</span>
+                    <span style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginLeft: '4px' }}>/ month</span>
                   </div>
 
-                  <div className="wise-currency-pill" style={{ backgroundColor: 'rgba(159, 232, 112, 0.2)', color: 'var(--wise-lime)' }}>
+                  <div className="wise-currency-pill" style={{ backgroundColor: '#dcfce7', color: '#15803d', border: '1px solid #bbf7d0' }}>
                     <span>🛡️ SAFE BUFFER</span>
                   </div>
                 </div>
@@ -413,37 +430,38 @@ export const HeroSection: React.FC = () => {
                 alignItems: 'center',
                 padding: '12px 16px',
                 borderRadius: '12px',
-                backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                backgroundColor: '#f4f5f1',
+                border: '1px solid #e5e9e2',
                 marginBottom: '20px',
-                fontSize: '0.82rem'
+                fontSize: '0.85rem'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span>Allocation Architecture:</span>
-                  <strong style={{ color: '#ffffff' }}>Tri-Tranche Quantum Blend</strong>
+                  <span style={{ color: 'var(--text-secondary)' }}>Allocation Architecture:</span>
+                  <strong style={{ color: 'var(--wise-forest)' }}>Tri-Tranche Quantum Blend</strong>
                 </div>
-                <span style={{ color: 'var(--wise-lime)', fontWeight: 600, cursor: 'pointer' }}>
+                <span style={{ color: '#15803d', fontWeight: 700, cursor: 'pointer' }}>
                   {quantumResult.tranches.length} Sources Optimal &gt;
                 </span>
               </div>
 
               {/* Cost Savings vs. Predatory Apps Callout */}
               <div style={{
-                backgroundColor: 'rgba(239, 68, 68, 0.08)',
-                border: '1px solid rgba(239, 68, 68, 0.25)',
-                borderRadius: '12px',
-                padding: '12px 16px',
+                backgroundColor: '#fef2f2',
+                border: '1px solid #fecaca',
+                borderRadius: '14px',
+                padding: '14px 18px',
                 marginBottom: '24px'
               }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', fontSize: '0.82rem' }}>
-                  <span style={{ color: '#fca5a5' }}>Predatory loan apps repayment:</span>
-                  <strong style={{ color: '#f87171' }}>₹{predatoryMonthlyEmi.toLocaleString()}/mo (Default in 45 days)</strong>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px', fontSize: '0.84rem' }}>
+                  <span style={{ color: '#991b1b' }}>Predatory loan apps repayment:</span>
+                  <strong style={{ color: '#dc2626' }}>₹{predatoryMonthlyEmi.toLocaleString()}/mo (Default in 45 days)</strong>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                  <span style={{ color: 'var(--wise-lime)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <TrendingDown size={14} />
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem' }}>
+                  <span style={{ color: '#15803d', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <TrendingDown size={15} />
                     <span>You save with VANTIQ:</span>
                   </span>
-                  <strong style={{ color: 'var(--wise-lime)', fontSize: '0.95rem' }}>
+                  <strong style={{ color: '#15803d', fontSize: '1rem', fontWeight: 900 }}>
                     ₹{totalSavings.toLocaleString()} in fees & interest
                   </strong>
                 </div>
@@ -456,20 +474,21 @@ export const HeroSection: React.FC = () => {
                 style={{
                   width: '100%',
                   padding: '16px',
-                  fontSize: '1.05rem',
+                  fontSize: '1.08rem',
                   fontWeight: 800,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '8px'
+                  gap: '8px',
+                  boxShadow: '0 4px 16px rgba(159, 232, 112, 0.5)'
                 }}
               >
                 <Sparkles size={18} />
                 <span>Simulate Your Free Rescue Plan</span>
               </button>
 
-              <div style={{ textAlign: 'center', marginTop: '12px', fontSize: '0.74rem', color: '#6b846e' }}>
-                Takes 30 seconds · No credit score inquiry · 100% Client-side Private
+              <div style={{ textAlign: 'center', marginTop: '12px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                Takes 30 seconds · No credit score footprint · 100% Client-side Private
               </div>
 
             </div>

@@ -560,7 +560,7 @@ export const MultiSourceRescueCard: React.FC = () => {
           {/* Cards Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
             gap: '24px'
           }}>
             {tranches
@@ -799,7 +799,7 @@ export const MultiSourceRescueCard: React.FC = () => {
           {/* Comparative Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
             gap: '24px',
             marginBottom: '24px'
           }}>

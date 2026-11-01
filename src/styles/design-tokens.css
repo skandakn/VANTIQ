@@ -1,48 +1,48 @@
 /* src/styles/design-tokens.css */
-/* VANTIQ Modern Design Tokens & Theme Engine - Wise Inspired High-Trust Fintech */
+/* VANTIQ Design Tokens - Authentic Wise (Light High-Trust Modern FinTech) */
 
 :root {
   /* Wise Signature Colors */
   --wise-forest: #163300;
+  --wise-forest-light: #224a04;
   --wise-lime: #9fe870;
   --wise-lime-hover: #8de058;
-  --wise-lime-glow: rgba(159, 232, 112, 0.28);
-  --wise-mint: #e2fbd7;
-  --wise-deep: #0a110a;
-  --wise-surface: #101c12;
-  --wise-card-bg: rgba(18, 30, 20, 0.88);
-  --wise-input-bg: rgba(26, 44, 29, 0.7);
-  --wise-border: rgba(159, 232, 112, 0.25);
-  --wise-border-subtle: rgba(255, 255, 255, 0.1);
-  --wise-text-primary: #ffffff;
-  --wise-text-secondary: #9cb59e;
-  --wise-text-muted: #6b846e;
-
-  /* Classic Theme Variables */
-  --bg-deep: #070d08;
-  --bg-surface: #0e1710;
-  --bg-card: rgba(16, 26, 18, 0.82);
-  --bg-card-hover: rgba(24, 38, 27, 0.95);
-  --bg-elevated: #142217;
+  --wise-lime-glow: rgba(159, 232, 112, 0.4);
   
-  /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --border-medium: rgba(159, 232, 112, 0.3);
-  --border-glow: rgba(159, 232, 112, 0.5);
+  /* Authentic Light Backgrounds */
+  --bg-deep: #f4f5f1;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-subtle: #edf0ea;
   
-  /* Text & Typography */
-  --text-primary: #ffffff;
-  --text-secondary: #a3b8a6;
-  --text-muted: #6b806f;
-  --text-highlight: #9fe870;
+  /* Clean High-Trust Borders */
+  --border-subtle: #e5e9e2;
+  --border-medium: #d0d7cc;
+  --border-dark: #163300;
+  --border-lime: #9fe870;
   
-  /* Brand Accents */
-  --neon-cyan: #38bdf8;
-  --neon-emerald: #10b981;
-  --quantum-purple: #a78bfa;
-  --alert-red: #f87171;
-  --alert-red-glow: rgba(248, 113, 113, 0.25);
-  --warning-amber: #fbbf24;
+  /* Text & Typography (Wise Forest Green & Slates) */
+  --text-primary: #163300;
+  --text-secondary: #425444;
+  --text-muted: #6b7f6e;
+  --text-highlight: #163300;
+  
+  /* Card & Input Colors */
+  --wise-card-bg: #ffffff;
+  --wise-input-bg: #f4f5f1;
+  --wise-input-focus: #ffffff;
+  
+  /* Status Accents */
+  --neon-cyan: #0284c7;
+  --neon-emerald: #15803d;
+  --quantum-purple: #7c3aed;
+  --alert-red: #dc2626;
+  --alert-red-bg: #fef2f2;
+  --alert-red-border: #fecaca;
+  --warning-amber: #b45309;
+  --warning-amber-bg: #fffbeb;
   
   /* Layout & Geometry */
   --radius-sm: 8px;
@@ -51,13 +51,12 @@
   --radius-xl: 28px;
   --radius-full: 9999px;
   
-  /* Shadows & Glassmorphism */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
-  --shadow-lime-glow: 0 0 35px rgba(159, 232, 112, 0.25);
+  /* Soft High-Trust Shadows */
+  --shadow-sm: 0 1px 3px rgba(22, 51, 0, 0.05);
+  --shadow-md: 0 6px 20px rgba(22, 51, 0, 0.06);
+  --shadow-lg: 0 14px 40px rgba(22, 51, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 12px 36px rgba(22, 51, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
   
-  --backdrop-blur: blur(20px);
   --transition-fast: 0.15s ease;
   --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -72,34 +71,28 @@
 body {
   background-color: var(--bg-deep);
   color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', Helvetica, Arial, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   overflow-x: hidden;
-  background-image: 
-    radial-gradient(circle at 10% 10%, rgba(159, 232, 112, 0.07) 0%, transparent 40%),
-    radial-gradient(circle at 90% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(159, 232, 112, 0.04) 0%, transparent 50%);
-  background-attachment: fixed;
 }
 
 /* Reusable Utility Classes */
 .container {
-  max-width: 1360px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
 .chronos-card {
-  background: var(--bg-card);
-  backdrop-filter: var(--backdrop-blur);
-  -webkit-backdrop-filter: var(--backdrop-blur);
+  background: #ffffff;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 24px;
-  box-shadow: var(--shadow-md);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
   transition: all var(--transition-normal);
+  color: var(--text-primary);
 }
 
 .chronos-card:hover {
@@ -108,18 +101,15 @@ body {
 }
 
 .chronos-card.glow-cyan:hover {
-  border-color: var(--wise-lime);
-  box-shadow: var(--shadow-lime-glow);
+  border-color: var(--border-dark);
 }
 
 .chronos-card.glow-purple:hover {
   border-color: var(--quantum-purple);
-  box-shadow: 0 0 25px rgba(167, 139, 250, 0.2);
 }
 
 .chronos-card.glow-emerald:hover {
-  border-color: var(--wise-lime);
-  box-shadow: var(--shadow-lime-glow);
+  border-color: var(--wise-forest);
 }
 
 /* Wise-Inspired Badges */
@@ -136,48 +126,54 @@ body {
 }
 
 .badge-lime {
-  background: rgba(159, 232, 112, 0.15);
-  color: var(--wise-lime);
-  border: 1px solid rgba(159, 232, 112, 0.35);
+  background: var(--wise-lime);
+  color: var(--wise-forest);
+  border: 1px solid transparent;
+}
+
+.badge-forest {
+  background: var(--wise-forest);
+  color: #ffffff;
+  border: 1px solid transparent;
 }
 
 .badge-cyan {
-  background: rgba(56, 189, 248, 0.12);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
 }
 
 .badge-purple {
-  background: rgba(167, 139, 250, 0.12);
-  color: #c084fc;
-  border: 1px solid rgba(167, 139, 250, 0.35);
+  background: #f3e8ff;
+  color: #6b21a8;
+  border: 1px solid #e9d5ff;
 }
 
 .badge-emerald {
-  background: rgba(159, 232, 112, 0.14);
-  color: #a3e635;
-  border: 1px solid rgba(159, 232, 112, 0.35);
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
 }
 
 .badge-red {
-  background: rgba(248, 113, 113, 0.14);
-  color: #f87171;
-  border: 1px solid rgba(248, 113, 113, 0.35);
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
 }
 
 .badge-amber {
-  background: rgba(251, 191, 36, 0.14);
-  color: #fbbf24;
-  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
 }
 
-/* Wise-Inspired Button Elements */
+/* Wise-Inspired Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 24px;
+  padding: 12px 26px;
   border-radius: var(--radius-full);
   font-size: 0.95rem;
   font-weight: 700;
@@ -191,80 +187,96 @@ body {
 .btn-primary {
   background: var(--wise-lime);
   color: var(--wise-forest);
-  box-shadow: 0 4px 16px rgba(159, 232, 112, 0.35);
+  box-shadow: 0 2px 8px rgba(159, 232, 112, 0.4);
 }
 
 .btn-primary:hover {
   background: var(--wise-lime-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(159, 232, 112, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(159, 232, 112, 0.6);
+}
+
+.btn-forest {
+  background: var(--wise-forest);
+  color: #ffffff;
+}
+
+.btn-forest:hover {
+  background: var(--wise-forest-light);
+  transform: translateY(-1px);
 }
 
 .btn-quantum {
-  background: linear-gradient(135deg, #10b981, #9fe870);
-  color: #0d1a0e;
-  box-shadow: 0 4px 16px rgba(159, 232, 112, 0.3);
+  background: var(--wise-forest);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(22, 51, 0, 0.15);
 }
 
 .btn-quantum:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(159, 232, 112, 0.45);
+  background: var(--wise-forest-light);
+  transform: translateY(-1px);
 }
 
 .btn-danger {
-  background: linear-gradient(135deg, #dc2626, #ef4444);
+  background: #dc2626;
   color: #ffffff;
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text-primary);
-  border: 1px solid var(--border-subtle);
+  background: #ffffff;
+  color: var(--wise-forest);
+  border: 1.5px solid var(--border-medium);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(159, 232, 112, 0.4);
+  background: var(--bg-deep);
+  border-color: var(--wise-forest);
 }
 
 /* Wise-Style Interactive Product Widget Elements */
 .wise-converter-box {
-  background: var(--wise-card-bg);
-  backdrop-filter: blur(24px);
-  border: 1px solid rgba(159, 232, 112, 0.28);
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
   border-radius: 24px;
   padding: 28px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(159, 232, 112, 0.12);
+  box-shadow: var(--shadow-card);
 }
 
 .wise-input-card {
   background: var(--wise-input-bg);
-  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border: 1.5px solid var(--border-medium);
   border-radius: 16px;
-  padding: 16px 20px;
+  padding: 14px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: border-color var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .wise-input-card:focus-within {
-  border-color: var(--wise-lime);
-  box-shadow: 0 0 0 3px rgba(159, 232, 112, 0.15);
+  background: #ffffff;
+  border-color: var(--wise-forest);
+  box-shadow: 0 0 0 3px rgba(22, 51, 0, 0.08);
 }
 
 .wise-currency-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: #ffffff;
   padding: 8px 14px;
   border-radius: var(--radius-full);
   font-weight: 700;
   font-size: 0.9rem;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--wise-forest);
+  border: 1px solid var(--border-medium);
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.wise-currency-pill:hover {
+  border-color: var(--wise-forest);
 }
 
 /* Stepper Connector Lines */
@@ -280,7 +292,7 @@ body {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: rgba(159, 232, 112, 0.4);
+  background: #dbe2d8;
 }
 
 .wise-stepper-node {
@@ -296,8 +308,9 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--wise-lime);
-  box-shadow: 0 0 8px var(--wise-lime);
+  background: var(--wise-forest);
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 2px var(--border-medium);
 }
 
 /* Animations */
@@ -310,15 +323,6 @@ body {
   animation: pulseGlow 3s infinite ease-in-out;
 }
 
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.animate-spin-slow {
-  animation: spinSlow 20s linear infinite;
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -328,11 +332,11 @@ body {
   background: var(--bg-deep);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1b2e1d;
+  background: #d0d7cc;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2b472e;
+  background: #b0baab;
 }
 
 
@@ -350,10 +354,19 @@ body {
 /* Touch & Tap Ergonomics */
 * {
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
-html {
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
   -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 body {
@@ -366,11 +379,23 @@ body {
   .container {
     padding-left: 16px !important;
     padding-right: 16px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
   }
 
   .chronos-card {
     padding: 18px 14px !important;
     border-radius: 16px !important;
+  }
+
+  .wise-converter-box {
+    padding: 18px 14px !important;
+    border-radius: 18px !important;
+  }
+
+  .wise-input-card {
+    padding: 10px 14px !important;
   }
 
   /* Responsive Button Padding & Touch Targets */
@@ -411,7 +436,7 @@ body {
 
   /* Bottom spacing for mobile bottom navigation HUD */
   main {
-    padding-bottom: 80px;
+    padding-bottom: 84px !important;
   }
 }
 
@@ -423,6 +448,10 @@ body {
 
   .chronos-card {
     padding: 16px 12px !important;
+  }
+
+  .wise-converter-box {
+    padding: 14px 10px !important;
   }
 
   .badge {

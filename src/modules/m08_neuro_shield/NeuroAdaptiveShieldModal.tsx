@@ -73,20 +73,10 @@ export const NeuroAdaptiveShieldModal: React.FC = () => {
     if (!active) setBypassConfirmed(false);
   }, [active]);
 
-  const startLockout = () => {
-    setBypassConfirmed(false);
-    setShieldActive(true);
-  };
   const finishGrounding = () => setShieldActive(false);
 
   return (
     <>
-      {!active && (
-        <button type="button" data-shield-control onClick={startLockout} className="btn btn-secondary"
-          style={{ position: 'fixed', right: 24, bottom: 24, zIndex: 1000, display: 'inline-flex', alignItems: 'center', gap: 8, boxShadow: '0 8px 28px rgba(6,182,212,.24)' }}>
-          <ShieldAlert size={18} /> Initiate Emergency Lockout
-        </button>
-      )}
 
       {active && (
         <div role="presentation" style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', overflowY: 'auto', padding: 20, background: 'rgba(3, 8, 20, .92)', backdropFilter: 'blur(18px)' }}>

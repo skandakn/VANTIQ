@@ -51,7 +51,7 @@ export const EmergencyIntake: React.FC = () => {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '28px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '24px' }}>
           
           {/* Card 1: Emergency Bill Requirement */}
           <div className="chronos-card" style={{ border: '1px solid rgba(248, 113, 113, 0.3)', padding: '28px' }}>

@@ -470,7 +470,7 @@ export const GhostDebtMesh: React.FC = () => {
         {/* The Core Illusion vs. Reality Breakdown */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
           gap: '24px',
           marginBottom: '32px'
         }}>

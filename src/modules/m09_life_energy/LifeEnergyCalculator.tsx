@@ -304,7 +304,7 @@ export const LifeEnergyCalculator: React.FC = () => {
         {/* 3-Way Labor Hours Comparison Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
           gap: '20px',
           marginBottom: '32px'
         }}>

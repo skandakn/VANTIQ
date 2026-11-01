@@ -1,5 +1,5 @@
 // src/modules/m10_comparison_matrix/ComparativeRescueMatrix.tsx
-// Module 11: Wise-Style Interactive Competitor Comparison Engine
+// Module 11: Wise-Style Interactive Competitor Comparison Engine (Authentic Light Theme)
 import React, { useState } from 'react';
 import {
   Check,
@@ -99,32 +99,34 @@ export const ComparativeRescueMatrix: React.FC = () => {
   const netSavings = Math.max(0, maxPredatoryCost - vantiqCost);
 
   return (
-    <section id="comparison" style={{ padding: '70px 0', borderTop: '1px solid rgba(159, 232, 112, 0.15)' }}>
+    <section id="comparison" style={{ padding: '80px 0', borderTop: '1px solid #e5e9e2', backgroundColor: 'var(--bg-deep)' }}>
       <div className="container">
         
         {/* Section Header - Wise Style */}
-        <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 36px auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 40px auto' }}>
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
             gap: '6px',
             padding: '4px 14px',
             borderRadius: '9999px',
-            backgroundColor: 'rgba(159, 232, 112, 0.14)',
-            color: 'var(--wise-lime)',
-            fontSize: '0.8rem',
+            backgroundColor: '#ffffff',
+            color: 'var(--wise-forest)',
+            border: '1px solid #d8e2d4',
+            fontSize: '0.82rem',
             fontWeight: 700,
-            marginBottom: '14px'
+            marginBottom: '16px',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
           }}>
-            <Sparkles size={14} />
+            <Sparkles size={14} color="#15803d" />
             <span>INTERACTIVE TRUST & FEE COMPARISON</span>
           </div>
 
-          <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '14px' }}>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 3.8vw, 3rem)', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.03em', marginBottom: '14px' }}>
             See how much you save with VANTIQ.
           </h2>
 
-          <p style={{ color: 'var(--wise-text-secondary)', fontSize: '1.05rem', lineHeight: 1.6 }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.6 }}>
             Like traditional banks hide markups in exchange rates, predatory lending apps hide extortion in fragmented auto-debits and processing fees. Here is the unvarnished truth.
           </p>
         </div>
@@ -136,9 +138,9 @@ export const ComparativeRescueMatrix: React.FC = () => {
           alignItems: 'center',
           gap: '10px',
           flexWrap: 'wrap',
-          marginBottom: '32px'
+          marginBottom: '36px'
         }}>
-          <span style={{ fontSize: '0.9rem', color: '#a3b8a6', fontWeight: 600, marginRight: '4px' }}>
+          <span style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', fontWeight: 700, marginRight: '4px' }}>
             Emergency Shock Amount:
           </span>
           {[25000, 50000, 75000, 100000].map((amt) => (
@@ -146,15 +148,16 @@ export const ComparativeRescueMatrix: React.FC = () => {
               key={amt}
               onClick={() => setAmount(amt)}
               style={{
-                padding: '8px 18px',
+                padding: '9px 20px',
                 borderRadius: '9999px',
-                fontSize: '0.9rem',
+                fontSize: '0.92rem',
                 fontWeight: 700,
-                border: neededAmount === amt ? '2px solid var(--wise-lime)' : '1px solid rgba(255, 255, 255, 0.12)',
-                backgroundColor: neededAmount === amt ? 'rgba(159, 232, 112, 0.2)' : 'rgba(255, 255, 255, 0.04)',
-                color: neededAmount === amt ? 'var(--wise-lime)' : '#cbd5e1',
+                border: neededAmount === amt ? '2px solid var(--wise-forest)' : '1px solid #d0d7cc',
+                backgroundColor: neededAmount === amt ? 'var(--wise-forest)' : '#ffffff',
+                color: neededAmount === amt ? 'var(--wise-lime)' : 'var(--wise-forest)',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.15s ease',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
               }}
             >
               ₹{amt.toLocaleString('en-IN')}
@@ -162,24 +165,24 @@ export const ComparativeRescueMatrix: React.FC = () => {
           ))}
         </div>
 
-        {/* Big Savings Callout Banner */}
+        {/* Big Savings Callout Banner - Light High-Trust Card */}
         <div style={{
-          backgroundColor: 'rgba(159, 232, 112, 0.12)',
-          border: '1.5px solid rgba(159, 232, 112, 0.4)',
-          borderRadius: '18px',
-          padding: '20px 28px',
+          backgroundColor: '#edf4ea',
+          border: '1.5px solid #cce0c5',
+          borderRadius: '20px',
+          padding: '24px 32px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
-          gap: '16px',
-          marginBottom: '32px',
-          boxShadow: '0 8px 30px rgba(159, 232, 112, 0.12)'
+          gap: '20px',
+          marginBottom: '36px',
+          boxShadow: '0 8px 24px rgba(22, 51, 0, 0.05)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
             <div style={{
-              width: '48px',
-              height: '48px',
+              width: '52px',
+              height: '52px',
               borderRadius: '50%',
               backgroundColor: 'var(--wise-lime)',
               color: 'var(--wise-forest)',
@@ -187,17 +190,18 @@ export const ComparativeRescueMatrix: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'center',
               fontWeight: 900,
-              fontSize: '1.4rem'
+              fontSize: '1.5rem',
+              boxShadow: '0 2px 8px rgba(159, 232, 112, 0.5)'
             }}>
               ₹
             </div>
             <div>
-              <div style={{ fontSize: '0.85rem', color: '#a3b8a6', fontWeight: 600 }}>
+              <div style={{ fontSize: '0.88rem', color: '#3d5c34', fontWeight: 700 }}>
                 Total Cost Difference on ₹{neededAmount.toLocaleString()} Shock
               </div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#ffffff' }}>
-                You save <span style={{ color: 'var(--wise-lime)' }}>₹{netSavings.toLocaleString()}</span> and{' '}
-                <span style={{ color: 'var(--wise-lime)' }}>{Math.round(netSavings / 250)} hours of labor</span> with VANTIQ
+              <div style={{ fontSize: '1.6rem', fontWeight: 900, color: 'var(--wise-forest)' }}>
+                You save <span style={{ color: '#15803d' }}>₹{netSavings.toLocaleString()}</span> and{' '}
+                <span style={{ color: '#15803d' }}>{Math.round(netSavings / 250)} hours of labor</span> with VANTIQ
               </div>
             </div>
           </div>
@@ -205,7 +209,7 @@ export const ComparativeRescueMatrix: React.FC = () => {
           <a
             href="#quantum-solver"
             className="btn btn-primary"
-            style={{ padding: '12px 24px', fontSize: '0.9rem' }}
+            style={{ padding: '14px 28px', fontSize: '0.95rem' }}
           >
             <span>Lock In Optimal Rescue</span>
             <ArrowRight size={16} />
@@ -223,14 +227,15 @@ export const ComparativeRescueMatrix: React.FC = () => {
               key={tab.id}
               onClick={() => setComparisonTab(tab.id as 'fees' | 'monthly' | 'traps')}
               style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                border: 'none',
-                backgroundColor: comparisonTab === tab.id ? 'var(--wise-lime)' : 'rgba(255, 255, 255, 0.06)',
-                color: comparisonTab === tab.id ? 'var(--wise-forest)' : '#cbd5e1',
-                cursor: 'pointer'
+                padding: '9px 18px',
+                borderRadius: '9999px',
+                fontSize: '0.88rem',
+                fontWeight: 700,
+                border: '1px solid #d0d7cc',
+                backgroundColor: comparisonTab === tab.id ? 'var(--wise-forest)' : '#ffffff',
+                color: comparisonTab === tab.id ? '#ffffff' : 'var(--wise-forest)',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
               }}
             >
               {tab.label}
@@ -238,30 +243,30 @@ export const ComparativeRescueMatrix: React.FC = () => {
           ))}
         </div>
 
-        {/* Wise-Style Interactive Comparison Table */}
+        {/* Wise-Style Interactive Comparison Table (Clean White Table) */}
         <div style={{
           overflowX: 'auto',
-          borderRadius: '20px',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          backgroundColor: 'rgba(15, 25, 17, 0.9)',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6)'
+          borderRadius: '24px',
+          border: '1px solid #e5e9e2',
+          backgroundColor: '#ffffff',
+          boxShadow: '0 16px 44px rgba(22, 51, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03)'
         }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '780px' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                <th style={{ padding: '20px 24px', fontSize: '0.85rem', color: '#a3b8a6', fontWeight: 700, textTransform: 'uppercase' }}>
+              <tr style={{ borderBottom: '1.5px solid #edf0ea', backgroundColor: '#fafbf9' }}>
+                <th style={{ padding: '22px 28px', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                   Lending Provider
                 </th>
-                <th style={{ padding: '20px', fontSize: '0.85rem', color: '#a3b8a6', fontWeight: 700, textTransform: 'uppercase' }}>
+                <th style={{ padding: '22px 20px', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                   Speed & APR
                 </th>
-                <th style={{ padding: '20px', fontSize: '0.85rem', color: '#a3b8a6', fontWeight: 700, textTransform: 'uppercase' }}>
+                <th style={{ padding: '22px 20px', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                   Total Fees & Interest
                 </th>
-                <th style={{ padding: '20px', fontSize: '0.85rem', color: '#a3b8a6', fontWeight: 700, textTransform: 'uppercase' }}>
+                <th style={{ padding: '22px 20px', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                   Monthly Repayment
                 </th>
-                <th style={{ padding: '20px 24px', fontSize: '0.85rem', color: '#a3b8a6', fontWeight: 700, textTransform: 'uppercase' }}>
+                <th style={{ padding: '22px 28px', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                   Default Safety
                 </th>
               </tr>
@@ -271,86 +276,86 @@ export const ComparativeRescueMatrix: React.FC = () => {
                 <tr
                   key={i}
                   style={{
-                    backgroundColor: lender.isHero ? 'rgba(159, 232, 112, 0.1)' : 'transparent',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
-                    borderLeft: lender.isHero ? '4px solid var(--wise-lime)' : 'none',
+                    backgroundColor: lender.isHero ? '#f2f8ee' : '#ffffff',
+                    borderBottom: '1px solid #edf0ea',
+                    borderLeft: lender.isHero ? '4px solid #15803d' : 'none',
                     transition: 'background-color 0.15s ease'
                   }}
                 >
                   {/* Provider Name */}
-                  <td style={{ padding: '20px 24px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <strong style={{ fontSize: '1rem', color: lender.isHero ? 'var(--wise-lime)' : '#ffffff' }}>
+                  <td style={{ padding: '22px 28px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <strong style={{ fontSize: '1.05rem', color: lender.isHero ? '#15803d' : 'var(--wise-forest)' }}>
                         {lender.name}
                       </strong>
                       {lender.isHero ? (
-                        <span className="badge badge-lime" style={{ fontSize: '0.65rem' }}>
-                          <Check size={11} />
+                        <span className="badge badge-emerald" style={{ fontSize: '0.7rem' }}>
+                          <Check size={12} />
                           <span>{lender.badge}</span>
                         </span>
                       ) : (
-                        <span className="badge badge-amber" style={{ fontSize: '0.65rem' }}>
+                        <span className="badge badge-amber" style={{ fontSize: '0.7rem' }}>
                           {lender.badge}
                         </span>
                       )}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: '#6b846e', marginTop: '2px' }}>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '3px' }}>
                       {lender.disbursement}
                     </div>
                   </td>
 
                   {/* Speed & APR */}
-                  <td style={{ padding: '20px' }}>
-                    <div style={{ fontWeight: 700, color: lender.isHero ? 'var(--wise-lime)' : '#ffffff', fontSize: '0.95rem' }}>
+                  <td style={{ padding: '22px 20px' }}>
+                    <div style={{ fontWeight: 800, color: lender.isHero ? '#15803d' : 'var(--wise-forest)', fontSize: '1rem' }}>
                       {lender.effectiveApr}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: '#a3b8a6' }}>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
                       Upfront: ₹{lender.upfrontFee.toLocaleString()}
                     </div>
                   </td>
 
                   {/* Total Fees & Interest */}
-                  <td style={{ padding: '20px' }}>
+                  <td style={{ padding: '22px 20px' }}>
                     <div style={{
-                      fontSize: '1.15rem',
+                      fontSize: '1.25rem',
                       fontWeight: 900,
-                      color: lender.isHero ? 'var(--wise-lime)' : '#f87171'
+                      color: lender.isHero ? '#15803d' : '#dc2626'
                     }}>
                       ₹{lender.totalCost.toLocaleString()}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: '#a3b8a6' }}>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
                       {((lender.totalCost / neededAmount) * 100).toFixed(1)}% total surcharge
                     </div>
                   </td>
 
                   {/* Monthly Repayment */}
-                  <td style={{ padding: '20px' }}>
+                  <td style={{ padding: '22px 20px' }}>
                     <div style={{
-                      fontWeight: 800,
-                      fontSize: '1rem',
-                      color: lender.monthlyPayment > 15000 ? '#f87171' : '#ffffff'
+                      fontWeight: 900,
+                      fontSize: '1.05rem',
+                      color: lender.monthlyPayment > 15000 ? '#dc2626' : 'var(--wise-forest)'
                     }}>
                       ₹{lender.monthlyPayment.toLocaleString()} / mo
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: lender.monthlyPayment > 15000 ? '#fca5a5' : '#34d399' }}>
+                    <div style={{ fontSize: '0.78rem', color: lender.monthlyPayment > 15000 ? '#b91c1c' : '#15803d', fontWeight: 600 }}>
                       {lender.monthlyPayment > 15000 ? '⚠️ Exceeds ₹15k surplus' : '✓ Safe within surplus'}
                     </div>
                   </td>
 
                   {/* Collision Risk */}
-                  <td style={{ padding: '20px 24px' }}>
+                  <td style={{ padding: '22px 28px' }}>
                     <div style={{
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '6px',
-                      fontSize: '0.85rem',
-                      fontWeight: 700,
-                      color: lender.isHero ? 'var(--wise-lime)' : '#f87171'
+                      fontSize: '0.88rem',
+                      fontWeight: 800,
+                      color: lender.isHero ? '#15803d' : '#dc2626'
                     }}>
-                      {lender.isHero ? <Check size={16} /> : <X size={16} />}
+                      {lender.isHero ? <Check size={17} /> : <X size={17} />}
                       <span>{lender.collisionRisk}</span>
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: '#6b846e', marginTop: '2px' }}>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '3px' }}>
                       {lender.hiddenCharges}
                     </div>
                   </td>
@@ -367,12 +372,12 @@ export const ComparativeRescueMatrix: React.FC = () => {
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '12px',
-          marginTop: '20px',
-          fontSize: '0.82rem',
-          color: '#6b846e'
+          marginTop: '22px',
+          fontSize: '0.84rem',
+          color: 'var(--text-muted)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <Info size={14} />
+            <Info size={15} />
             <span>Comparison based on empirical NBFC loan agreements & RBI fair practice disclosures (April 2026).</span>
           </div>
           <div>

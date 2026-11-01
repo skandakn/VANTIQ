@@ -32,7 +32,7 @@ export const PwaMobileNav: React.FC = () => {
     if (typeof window === 'undefined') return false;
     return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
   });
-  const [showInstallBanner, setShowInstallBanner] = useState<boolean>(true);
+  const [showInstallBanner, setShowInstallBanner] = useState<boolean>(false);
   const [showIosGuide, setShowIosGuide] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>('simulator');
 

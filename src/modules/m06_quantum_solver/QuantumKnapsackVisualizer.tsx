@@ -1,4 +1,4 @@
-﻿// src/modules/m06_quantum_solver/QuantumKnapsackVisualizer.tsx
+// src/modules/m06_quantum_solver/QuantumKnapsackVisualizer.tsx
 // Module 6 / Step 5: Quantum Combinatorial Knapsack Optimization Engine (QUBO / QAOA)
 // Role: Member 07 (CHRONOS-FIN Team)
 // Branch: feat/m07-quantum-knapsack
@@ -847,7 +847,7 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
             {/* Probability Amplitude Histogram & Spectral Gap Card */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
               gap: '20px',
               background: '#040711',
               borderRadius: '12px',

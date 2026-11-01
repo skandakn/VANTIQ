@@ -1,5 +1,5 @@
 // src/components/layout/Navbar.tsx
-// VANTIQ: Wise-Inspired Minimalist High-Trust Navigation
+// VANTIQ: Authentic Wise-Inspired Clean Light Navigation
 import React, { useState, useEffect } from 'react';
 import { 
   Shield, 
@@ -14,7 +14,6 @@ import {
 } from 'lucide-react';
 import { useFintech } from '../../context/FintechContext';
 
-// Primary anchor navigation points requested by specification
 const NAV_LINKS = [
   { id: 'simulator', label: 'Calculator', icon: Zap, fallbackId: 'crisis-intake' },
   { id: 'ghost-debt', label: 'Debt Traps', icon: AlertTriangle, fallbackId: 'debt-mesh' },
@@ -30,7 +29,6 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
-  // Smooth scroll handler with robust fallback and browser history synchronization
   const scrollToSection = (targetId: string) => {
     setMobileMenuOpen(false);
 
@@ -84,7 +82,7 @@ export const Navbar: React.FC = () => {
     }
 
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 15);
 
       const scrollPos = window.scrollY + 120;
       for (let i = NAV_LINKS.length - 1; i >= 0; i--) {
@@ -111,20 +109,18 @@ export const Navbar: React.FC = () => {
           position: 'sticky',
           top: 0,
           zIndex: 1000,
-          backgroundColor: isScrolled ? 'rgba(7, 13, 8, 0.95)' : 'rgba(7, 13, 8, 0.85)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: isScrolled ? '1px solid rgba(159, 232, 112, 0.25)' : '1px solid rgba(255, 255, 255, 0.08)',
-          boxShadow: isScrolled
-            ? '0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(159, 232, 112, 0.1)'
-            : '0 4px 20px rgba(0, 0, 0, 0.5)',
-          transition: 'all 0.25s ease',
+          backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.94)' : 'rgba(244, 245, 241, 0.92)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderBottom: '1px solid #e5e9e2',
+          boxShadow: isScrolled ? '0 4px 20px rgba(22, 51, 0, 0.05)' : 'none',
+          transition: 'all 0.2s ease',
           padding: '14px 0',
         }}
       >
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
           
-          {/* Wise-Style Bold Minimalist Logo */}
+          {/* Wise-Style Bold Wordmark Logo */}
           <div 
             style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer', textDecoration: 'none' }}
             onClick={() => scrollToSection('simulator')}
@@ -134,15 +130,14 @@ export const Navbar: React.FC = () => {
           >
             <div
               style={{
-                width: '38px',
-                height: '38px',
-                borderRadius: '10px',
-                background: 'var(--wise-lime)',
-                color: 'var(--wise-forest)',
+                width: '36px',
+                height: '36px',
+                borderRadius: '8px',
+                background: 'var(--wise-forest)',
+                color: 'var(--wise-lime)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 0 16px rgba(159, 232, 112, 0.4)',
                 fontWeight: 900,
                 fontSize: '1.25rem',
                 flexShrink: 0,
@@ -154,13 +149,13 @@ export const Navbar: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <span
                 style={{
-                  fontSize: '1.35rem',
+                  fontSize: '1.4rem',
                   fontWeight: 900,
-                  letterSpacing: '-0.03em',
-                  color: '#ffffff',
+                  letterSpacing: '-0.04em',
+                  color: 'var(--wise-forest)',
                 }}
               >
-                VANTIQ
+                vantiq
               </span>
               <span
                 style={{
@@ -168,13 +163,12 @@ export const Navbar: React.FC = () => {
                   height: '6px',
                   borderRadius: '50%',
                   backgroundColor: 'var(--wise-lime)',
-                  boxShadow: '0 0 8px var(--wise-lime)',
                 }}
               />
             </div>
           </div>
 
-          {/* Status Ticker: Quantum Engine: Online (38ms latency) */}
+          {/* Status Ticker: Quantum Engine: Online (Wise pill) */}
           <div className="status-ticker-hud" style={{ display: 'flex', alignItems: 'center' }}>
             <div
               style={{
@@ -183,10 +177,11 @@ export const Navbar: React.FC = () => {
                 gap: '8px',
                 padding: '6px 14px',
                 borderRadius: '9999px',
-                backgroundColor: 'rgba(159, 232, 112, 0.08)',
-                border: '1px solid rgba(159, 232, 112, 0.3)',
-                fontSize: '0.74rem',
-                color: 'var(--wise-lime)',
+                backgroundColor: '#edf2ea',
+                border: '1px solid #d8e2d4',
+                fontSize: '0.78rem',
+                color: 'var(--wise-forest)',
+                fontWeight: 600,
               }}
             >
               <span style={{ position: 'relative', display: 'flex', width: '8px', height: '8px' }}>
@@ -196,9 +191,9 @@ export const Navbar: React.FC = () => {
                     width: '100%',
                     height: '100%',
                     borderRadius: '50%',
-                    backgroundColor: 'var(--wise-lime)',
+                    backgroundColor: '#15803d',
                     opacity: 0.75,
-                    animation: 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    animation: 'pulseGlow 2s infinite',
                   }}
                 />
                 <span
@@ -207,23 +202,22 @@ export const Navbar: React.FC = () => {
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    backgroundColor: 'var(--wise-lime)',
-                    boxShadow: '0 0 8px var(--wise-lime)',
+                    backgroundColor: '#15803d',
                   }}
                 />
               </span>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 600 }}>
-                <span style={{ color: '#a3b8a6' }}>Engine:</span>
-                <span style={{ color: 'var(--wise-lime)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Quantum Online</span>
-                <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>|</span>
-                <span style={{ color: '#ffffff', fontFamily: 'monospace', fontWeight: 700 }}>38ms latency</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ color: '#596d5a' }}>Quantum Engine:</span>
+                <span style={{ color: 'var(--wise-forest)', fontWeight: 700 }}>Online</span>
+                <span style={{ color: '#c4d0c1' }}>|</span>
+                <span style={{ color: '#15803d', fontWeight: 700 }}>38ms latency</span>
               </div>
             </div>
           </div>
 
           {/* Smooth Anchor Navigation Links (Desktop) */}
-          <nav className="desktop-nav-menu" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <nav className="desktop-nav-menu" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             {NAV_LINKS.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -236,14 +230,13 @@ export const Navbar: React.FC = () => {
                     alignItems: 'center',
                     gap: '6px',
                     padding: '8px 14px',
-                    fontSize: '0.85rem',
-                    fontWeight: isActive ? 700 : 500,
+                    fontSize: '0.88rem',
+                    fontWeight: isActive ? 800 : 600,
                     borderRadius: '9999px',
                     textDecoration: 'none',
-                    transition: 'all 0.2s ease',
-                    backgroundColor: isActive ? 'rgba(159, 232, 112, 0.15)' : 'transparent',
-                    border: isActive ? '1px solid rgba(159, 232, 112, 0.4)' : '1px solid transparent',
-                    color: isActive ? 'var(--wise-lime)' : 'var(--wise-text-secondary)',
+                    transition: 'all 0.15s ease',
+                    backgroundColor: isActive ? '#e5ebd0' : 'transparent',
+                    color: 'var(--wise-forest)',
                     cursor: 'pointer',
                   }}
                 >
@@ -261,9 +254,9 @@ export const Navbar: React.FC = () => {
               onClick={() => scrollToSection('simulator')}
               className="btn btn-primary emergency-cta-btn"
               style={{
-                fontSize: '0.86rem',
+                fontSize: '0.88rem',
                 fontWeight: 800,
-                padding: '10px 20px',
+                padding: '10px 22px',
                 borderRadius: '9999px',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -272,7 +265,7 @@ export const Navbar: React.FC = () => {
               }}
               aria-label="Launch Free Emergency Simulator"
             >
-              <Zap size={14} />
+              <Zap size={15} />
               <span>Simulate Free</span>
             </button>
 
@@ -284,15 +277,15 @@ export const Navbar: React.FC = () => {
                 padding: '10px 14px',
                 fontSize: '0.82rem',
                 borderRadius: '9999px',
-                borderColor: 'rgba(255, 255, 255, 0.15)',
-                color: '#ffffff',
+                borderColor: '#d0d7cc',
+                color: 'var(--wise-forest)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '6px',
               }}
               title="Test 45s Grounding Shield Modal"
             >
-              <Lock size={13} color="var(--wise-lime)" />
+              <Lock size={13} color="var(--wise-forest)" />
               <span className="hide-mobile-badge">45s Shield</span>
             </button>
 
@@ -304,11 +297,11 @@ export const Navbar: React.FC = () => {
                 display: 'none',
                 padding: '8px',
                 borderRadius: '8px',
-                borderColor: 'rgba(255, 255, 255, 0.15)',
+                borderColor: '#d0d7cc',
               }}
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X size={20} color="var(--wise-lime)" /> : <Menu size={20} color="#f8fafc" />}
+              {mobileMenuOpen ? <X size={20} color="var(--wise-forest)" /> : <Menu size={20} color="var(--wise-forest)" />}
             </button>
 
           </div>
@@ -320,11 +313,12 @@ export const Navbar: React.FC = () => {
           <div
             style={{
               padding: '16px 24px',
-              backgroundColor: 'rgba(7, 13, 8, 0.98)',
-              borderBottom: '1px solid rgba(159, 232, 112, 0.3)',
+              backgroundColor: '#ffffff',
+              borderBottom: '1px solid #e5e9e2',
               display: 'flex',
               flexDirection: 'column',
               gap: '12px',
+              boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
             }}
           >
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
@@ -344,13 +338,13 @@ export const Navbar: React.FC = () => {
                       borderRadius: '8px',
                       fontSize: '0.85rem',
                       fontWeight: isActive ? 700 : 500,
-                      backgroundColor: isActive ? 'rgba(159, 232, 112, 0.15)' : 'rgba(255, 255, 255, 0.04)',
-                      border: isActive ? '1px solid var(--wise-lime)' : '1px solid rgba(255, 255, 255, 0.08)',
-                      color: isActive ? 'var(--wise-lime)' : '#e2e8f0',
+                      backgroundColor: isActive ? 'var(--wise-lime)' : '#f4f5f1',
+                      border: '1px solid #e5e9e2',
+                      color: 'var(--wise-forest)',
                       textDecoration: 'none',
                     }}
                   >
-                    <Icon size={16} color={isActive ? 'var(--wise-lime)' : '#94a3b8'} />
+                    <Icon size={16} color="var(--wise-forest)" />
                     <span>{item.label}</span>
                   </a>
                 );
@@ -397,12 +391,18 @@ export const Navbar: React.FC = () => {
             display: none !important;
           }
         }
-        @media (max-width: 520px) {
+        @media (max-width: 640px) {
           .shield-quick-btn {
             display: none !important;
           }
-          .emergency-cta-btn span {
-            font-size: 0.78rem;
+          .emergency-cta-btn {
+            padding: 8px 12px !important;
+            font-size: 0.78rem !important;
+          }
+        }
+        @media (max-width: 400px) {
+          .emergency-cta-btn {
+            display: none !important;
           }
         }
       `}</style>

@@ -74,9 +74,10 @@ export const CashflowRunwayChart: React.FC = () => {
             <span className="badge badge-cyan">Quantiles: q10 | q50 | q90</span>
           </div>
 
-          {/* SVG Interactive Chart */}
-          <div style={{ width: '100%', minWidth: '700px' }}>
-            <svg viewBox={`0 0 ${width} ${height}`} style={{ width: '100%', height: 'auto', overflow: 'visible' }}>
+          {/* SVG Interactive Chart with Mobile Overflow Protection */}
+          <div style={{ width: '100%', overflowX: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: '8px' }}>
+            <div style={{ minWidth: '700px' }}>
+              <svg viewBox={`0 0 ${width} ${height}`} style={{ width: '100%', height: 'auto', overflow: 'visible' }}>
               
               {/* Grid Lines */}
               {[-30000, -15000, 0, 15000, 30000, 45000].map((tick) => (
@@ -170,6 +171,7 @@ export const CashflowRunwayChart: React.FC = () => {
               </g>
 
             </svg>
+            </div>
           </div>
 
           {/* Point Inspector Feedback */}
@@ -181,6 +183,8 @@ export const CashflowRunwayChart: React.FC = () => {
               backgroundColor: 'rgba(15, 23, 42, 0.9)',
               border: '1px solid #334155',
               display: 'flex',
+              flexWrap: 'wrap',
+              gap: '8px',
               justifyContent: 'space-between',
               alignItems: 'center',
               fontSize: '0.85rem'
