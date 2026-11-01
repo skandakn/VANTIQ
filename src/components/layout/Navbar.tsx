@@ -188,15 +188,7 @@ export const Navbar: React.FC = () => {
                     }}
                   />
                 </div>
-
-                {/* Sub-badge for competition context */}
-                <span className="badge badge-cyan hide-mobile-badge" style={{ fontSize: '0.65rem', padding: '2px 8px' }}>
-                  IDEATHON 2026
-                </span>
               </div>
-              <p className="hide-mobile-badge" style={{ fontSize: '0.70rem', color: '#94a3b8', marginTop: '2px' }}>
-                Quantum Counterfactual Twin & Anti-Predatory HUD
-              </p>
             </div>
           </div>
 
