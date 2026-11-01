@@ -197,21 +197,22 @@ export const LifeEnergyCalculator: React.FC = () => {
             </button>
           </div>
 
-          <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 850, color: '#f8fafc', letterSpacing: '-0.02em', marginBottom: '8px' }}>
-            Translating Predatory Debt into <span style={{ color: '#34d399' }}>Hours of Human Life</span>
+          <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', marginBottom: '8px' }}>
+            Translating Predatory Debt into <span style={{ color: '#15803d' }}>Hours of Human Life</span>
           </h2>
-          <p style={{ color: '#94a3b8', fontSize: '1rem', maxWidth: '880px', lineHeight: 1.6 }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '880px', lineHeight: 1.6 }}>
             Nominal APR percentages hide real suffering. By dividing predatory liabilities by your <strong>real hourly wage</strong>, 
-            we quantify exactly how many working days of your physical existence are hijacked by loan apps versus preserved by CHRONOS-FIN.
+            we quantify exactly how many working days of your physical existence are hijacked by loan apps versus preserved by VANTIQ.
           </p>
         </div>
 
         {/* Real Hourly Wage Hero Formula Banner */}
         <div className="chronos-card" style={{
-          padding: '20px 28px',
+          padding: '24px 32px',
           marginBottom: '28px',
-          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(6, 182, 212, 0.08) 50%, rgba(16, 185, 129, 0.08) 100%)',
-          border: '1px solid rgba(56, 189, 248, 0.25)',
+          backgroundColor: '#ffffff',
+          border: '1.5px solid #d0d7cc',
+          boxShadow: 'var(--shadow-card)',
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
@@ -223,29 +224,28 @@ export const LifeEnergyCalculator: React.FC = () => {
               width: '52px',
               height: '52px',
               borderRadius: '14px',
-              backgroundColor: 'rgba(6, 182, 212, 0.15)',
-              border: '1px solid #06b6d4',
+              backgroundColor: '#edf4ea',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#38bdf8'
+              color: 'var(--wise-forest)'
             }}>
               <Briefcase size={26} />
             </div>
             <div>
-              <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: '#38bdf8', fontWeight: 800, letterSpacing: '0.06em' }}>
+              <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: '#15803d', fontWeight: 800, letterSpacing: '0.06em' }}>
                 Net Real Hourly Wage Metric
               </div>
-              <div style={{ fontSize: '1.4rem', fontWeight: 850, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+              <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--wise-forest)', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                 <span>₹{effectiveSalary.toLocaleString()} salary</span>
-                <span style={{ color: '#64748b' }}>÷</span>
+                <span style={{ color: '#94a3b8' }}>÷</span>
                 <span>{monthlyHours} working hrs</span>
-                <span style={{ color: '#34d399' }}>=</span>
-                <span style={{ color: '#34d399', fontSize: '1.6rem', fontWeight: 900, textShadow: '0 0 16px rgba(16, 185, 129, 0.4)' }}>
+                <span style={{ color: '#15803d' }}>=</span>
+                <span style={{ color: '#15803d', fontSize: '1.6rem', fontWeight: 900 }}>
                   ₹{hourlyWage}/hour
                 </span>
               </div>
-              <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '2px' }}>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
                 Every ₹{hourlyWage * hoursPerDay} you earn requires <strong>{hoursPerDay} hours</strong> of your finite physical life-energy.
               </div>
             </div>
@@ -578,7 +578,7 @@ export const LifeEnergyCalculator: React.FC = () => {
 
         {/* TAB 1: INTERACTIVE CALENDAR VISUALIZER */}
         {activeTab === 'calendar' && (
-          <div className="chronos-card glow-emerald" style={{ padding: '28px', marginBottom: '28px' }}>
+          <div className="chronos-card" style={{ padding: '32px', marginBottom: '28px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
             {/* Visualizer Legend */}
             <div style={{
               display: 'flex',
@@ -588,14 +588,14 @@ export const LifeEnergyCalculator: React.FC = () => {
               gap: '14px',
               paddingBottom: '18px',
               marginBottom: '20px',
-              borderBottom: '1px solid rgba(51, 65, 85, 0.4)'
+              borderBottom: '1px solid #e5e9e2'
             }}>
               <div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Calendar size={18} color="#34d399" />
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--wise-forest)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Calendar size={20} color="#15803d" />
                   <span>35-Day Labor Freedom Calendar</span>
                 </h3>
-                <p style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
                   Click any day cell to inspect how your daily shift labor (8 hrs / ₹{hourlyWage * hoursPerDay}) is allocated.
                 </p>
               </div>
@@ -754,10 +754,10 @@ export const LifeEnergyCalculator: React.FC = () => {
 
             {/* Active Day Detail Inspector Banner */}
             <div style={{
-              backgroundColor: activeDayData.isFreedom ? 'rgba(16, 185, 129, 0.08)' : 'rgba(15, 23, 42, 0.9)',
-              border: activeDayData.isFreedom ? '1.5px solid #10b981' : '1px solid rgba(56, 189, 248, 0.3)',
-              borderRadius: '12px',
-              padding: '18px 24px',
+              backgroundColor: activeDayData.isFreedom ? '#edf4ea' : '#f4f5f1',
+              border: activeDayData.isFreedom ? '1.5px solid #bbf7d0' : '1.5px solid #d0d7cc',
+              borderRadius: '16px',
+              padding: '20px 26px',
               display: 'flex',
               flexWrap: 'wrap',
               alignItems: 'center',
@@ -769,42 +769,42 @@ export const LifeEnergyCalculator: React.FC = () => {
                   width: '46px',
                   height: '46px',
                   borderRadius: '12px',
-                  backgroundColor: activeDayData.isFreedom ? 'rgba(16, 185, 129, 0.2)' : 'rgba(6, 182, 212, 0.15)',
-                  border: activeDayData.isFreedom ? '1px solid #10b981' : '1px solid #06b6d4',
+                  backgroundColor: activeDayData.isFreedom ? '#dcfce7' : '#ffffff',
+                  border: activeDayData.isFreedom ? '1px solid #86efac' : '1px solid #d0d7cc',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: activeDayData.isFreedom ? '#34d399' : '#38bdf8'
+                  color: activeDayData.isFreedom ? '#15803d' : 'var(--wise-forest)'
                 }}>
                   {activeDayData.isFreedom ? <Sparkles size={22} /> : <Briefcase size={22} />}
                 </div>
 
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#f8fafc' }}>
+                    <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--wise-forest)' }}>
                       {activeDayData.label}
                     </h4>
-                    <span className={activeDayData.isFreedom ? 'badge badge-emerald' : 'badge badge-cyan'} style={{ fontSize: '0.68rem' }}>
+                    <span className={activeDayData.isFreedom ? 'badge badge-emerald' : 'badge badge-forest'} style={{ fontSize: '0.72rem' }}>
                       {activeDayData.badgeText}
                     </span>
                   </div>
-                  <p style={{ fontSize: '0.82rem', color: '#cbd5e1', marginTop: '2px', maxWidth: '680px' }}>
+                  <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', marginTop: '2px', maxWidth: '680px' }}>
                     {activeDayData.description}
                   </p>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+              <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase' }}>Shift Earnings</div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: activeDayData.isFreedom ? '#34d399' : '#38bdf8' }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>Shift Earnings</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 900, color: activeDayData.isFreedom ? '#15803d' : 'var(--wise-forest)' }}>
                     ₹{activeDayData.dailyWage.toLocaleString()}
                   </div>
                 </div>
 
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase' }}>Shift Duration</div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#f8fafc' }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>Shift Duration</div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--wise-forest)' }}>
                     {activeDayData.hoursOnDay}h (9am-5pm)
                   </div>
                 </div>
@@ -816,14 +816,14 @@ export const LifeEnergyCalculator: React.FC = () => {
 
         {/* TAB 2: CUMULATIVE LABOR HORIZON TIMELINE */}
         {activeTab === 'timeline' && (
-          <div className="chronos-card glow-cyan" style={{ padding: '28px', marginBottom: '28px' }}>
+          <div className="chronos-card" style={{ padding: '32px', marginBottom: '28px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
             <div style={{ marginBottom: '24px' }}>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Hourglass size={18} color="#06b6d4" />
-                <span>Cumulative Labor Hours Trajectory: CHRONOS vs. Predatory Stacking</span>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--wise-forest)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Hourglass size={20} color="#15803d" />
+                <span>Cumulative Labor Hours Trajectory: VANTIQ vs. Predatory Stacking</span>
               </h3>
-              <p style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
-                Notice the "Solvency Gap" starting on Day 26: while CHRONOS borrowers are debt-free, predatory borrowers toil for 9 extra days.
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
+                Notice the "Solvency Gap" starting on Day 26: while VANTIQ borrowers are debt-free, predatory borrowers toil for 9 extra days.
               </p>
             </div>
 

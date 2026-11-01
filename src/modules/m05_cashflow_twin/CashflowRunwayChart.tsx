@@ -304,7 +304,7 @@ export const CashflowRunwayChart: React.FC = () => {
         {/* Section Header */}
         <div style={{ marginBottom: '32px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
-            <span className="badge badge-purple" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+            <span className="badge badge-forest" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <TrendingUp size={13} />
               <span>Step 4: Stochastic Cashflow Twin</span>
             </span>
@@ -320,11 +320,11 @@ export const CashflowRunwayChart: React.FC = () => {
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
             <div>
-              <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em', marginBottom: '8px' }}>
+              <h2 style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', marginBottom: '8px' }}>
                 90-Day Cashflow Digital Twin & TFT Runway Simulation
               </h2>
-              <p style={{ color: '#94a3b8', fontSize: '1.05rem', maxWidth: '850px', lineHeight: 1.6 }}>
-                Using Temporal Fusion Transformer (TFT) quantile forecasting ($q_{10}, q_{50}, q_{90}$), CHRONOS projects dual trajectories over 90 days. Visualizing the fatal <strong style={{ color: '#f87171' }}>Day 32 clustered debit crash</strong> exposes why traditional loans trigger debt traps even when salaries arrive on time.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '850px', lineHeight: 1.6 }}>
+                Using Temporal Fusion Transformer (TFT) quantile forecasting ($q_{10}, q_{50}, q_{90}$), VANTIQ projects dual trajectories over 90 days. Visualizing the fatal <strong style={{ color: '#dc2626' }}>Day 32 clustered debit crash</strong> exposes why traditional loans trigger debt traps even when salaries arrive on time.
               </p>
             </div>
 
@@ -333,20 +333,20 @@ export const CashflowRunwayChart: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '14px',
-              padding: '12px 20px',
-              backgroundColor: 'rgba(15, 23, 42, 0.75)',
-              border: '1px solid var(--border-medium)',
-              borderRadius: '12px',
-              backdropFilter: 'blur(10px)'
+              padding: '14px 22px',
+              backgroundColor: '#ffffff',
+              border: '1.5px solid #d0d7cc',
+              borderRadius: '16px',
+              boxShadow: 'var(--shadow-card)'
             }}>
               <div>
-                <div style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 700 }}>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 800 }}>
                   90-Day Solvency Delta
                 </div>
-                <div style={{ fontSize: '1.4rem', fontWeight: 900, color: '#34d399' }}>
+                <div style={{ fontSize: '1.4rem', fontWeight: 900, color: '#15803d' }}>
                   +₹60,000 Spread
                 </div>
-                <div style={{ fontSize: '0.72rem', color: '#38bdf8' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
                   -₹38k Default vs. +₹22k Solvency
                 </div>
               </div>
@@ -362,14 +362,15 @@ export const CashflowRunwayChart: React.FC = () => {
           flexWrap: 'wrap',
           gap: '12px',
           marginBottom: '24px',
-          padding: '10px 18px',
-          backgroundColor: 'rgba(15, 23, 42, 0.65)',
-          borderRadius: '12px',
-          border: '1px solid var(--border-subtle)'
+          padding: '12px 20px',
+          backgroundColor: '#ffffff',
+          borderRadius: '16px',
+          border: '1.5px solid #d0d7cc',
+          boxShadow: 'var(--shadow-card)'
         }}>
           {/* Curve Filter Toggles */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: '0.82rem', color: '#94a3b8', fontWeight: 600, marginRight: '4px' }}>
+            <span style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', fontWeight: 700, marginRight: '4px' }}>
               Trajectory View:
             </span>
             <button
@@ -378,10 +379,10 @@ export const CashflowRunwayChart: React.FC = () => {
                 padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
-                fontWeight: 600,
-                border: activeCurveFilter === 'both' ? '1px solid #38bdf8' : '1px solid transparent',
-                backgroundColor: activeCurveFilter === 'both' ? 'rgba(6, 182, 212, 0.2)' : 'rgba(30, 41, 59, 0.6)',
-                color: activeCurveFilter === 'both' ? '#38bdf8' : '#cbd5e1',
+                fontWeight: 700,
+                border: activeCurveFilter === 'both' ? '1.5px solid var(--wise-forest)' : '1px solid #d0d7cc',
+                backgroundColor: activeCurveFilter === 'both' ? 'var(--wise-forest)' : '#f4f5f1',
+                color: activeCurveFilter === 'both' ? '#ffffff' : 'var(--text-secondary)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
@@ -394,10 +395,10 @@ export const CashflowRunwayChart: React.FC = () => {
                 padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
-                fontWeight: 600,
-                border: activeCurveFilter === 'naive' ? '1px solid #ef4444' : '1px solid transparent',
-                backgroundColor: activeCurveFilter === 'naive' ? 'rgba(239, 68, 68, 0.2)' : 'rgba(30, 41, 59, 0.6)',
-                color: activeCurveFilter === 'naive' ? '#f87171' : '#cbd5e1',
+                fontWeight: 700,
+                border: activeCurveFilter === 'naive' ? '1.5px solid #dc2626' : '1px solid #d0d7cc',
+                backgroundColor: activeCurveFilter === 'naive' ? '#fee2e2' : '#f4f5f1',
+                color: activeCurveFilter === 'naive' ? '#dc2626' : 'var(--text-secondary)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
@@ -410,26 +411,26 @@ export const CashflowRunwayChart: React.FC = () => {
                 padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
-                fontWeight: 600,
-                border: activeCurveFilter === 'chronos' ? '1px solid #10b981' : '1px solid transparent',
-                backgroundColor: activeCurveFilter === 'chronos' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(30, 41, 59, 0.6)',
-                color: activeCurveFilter === 'chronos' ? '#34d399' : '#cbd5e1',
+                fontWeight: 700,
+                border: activeCurveFilter === 'chronos' ? '1.5px solid #15803d' : '1px solid #d0d7cc',
+                backgroundColor: activeCurveFilter === 'chronos' ? '#edf4ea' : '#f4f5f1',
+                color: activeCurveFilter === 'chronos' ? '#15803d' : 'var(--text-secondary)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
             >
-              CHRONOS Solvent Path Only
+              VANTIQ Solvent Path Only
             </button>
           </div>
 
           {/* TFT Controls */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: '#cbd5e1', cursor: 'pointer' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', color: 'var(--text-secondary)', cursor: 'pointer', fontWeight: 600 }}>
               <input
                 type="checkbox"
                 checked={showQuantiles}
                 onChange={(e) => setShowQuantiles(e.target.checked)}
-                style={{ accentColor: '#10b981', cursor: 'pointer' }}
+                style={{ accentColor: 'var(--wise-forest)', cursor: 'pointer' }}
               />
               <span>TFT Quantile Ribbon ($q_{10}-q_{90}$)</span>
             </label>
@@ -438,36 +439,36 @@ export const CashflowRunwayChart: React.FC = () => {
               onClick={triggerSimulation}
               disabled={isSimulatingRunway}
               className="btn btn-secondary"
-              style={{ padding: '6px 14px', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}
+              style={{ padding: '8px 16px', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: '6px' }}
             >
-              <Zap size={14} className={isSimulatingRunway ? 'animate-spin' : ''} color="#38bdf8" />
+              <Zap size={14} className={isSimulatingRunway ? 'animate-spin' : ''} color="var(--wise-forest)" />
               <span>{isSimulatingRunway ? 'Simulating 90-Day Run...' : 'Play 90-Day Digital Twin'}</span>
             </button>
           </div>
         </div>
 
         {/* REQUIREMENT 2 & 3: MAIN DUAL-CURVE SVG INTERACTIVE CHART */}
-        <div className="chronos-card" style={{ padding: '24px', backgroundColor: '#070d1e', marginBottom: '24px', position: 'relative' }}>
+        <div className="chronos-card" style={{ padding: '28px', backgroundColor: '#ffffff', marginBottom: '28px', position: 'relative', border: '1.5px solid #d0d7cc', boxShadow: 'var(--shadow-card)' }}>
           
           {/* Chart Sub-header Legends */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', flexWrap: 'wrap', gap: '12px' }}>
-            <div style={{ display: 'flex', gap: '24px', fontSize: '0.85rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '24px', fontSize: '0.88rem', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ width: '14px', height: '14px', borderRadius: '4px', backgroundColor: '#ef4444', boxShadow: '0 0 8px rgba(239, 68, 68, 0.6)' }} />
-                <span style={{ color: '#fca5a5', fontWeight: 700 }}>
+                <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#dc2626' }} />
+                <span style={{ color: '#dc2626', fontWeight: 700 }}>
                   Red Curve: Uncoordinated Multi-App Borrowing (Insolvency Crash Day 32)
                 </span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ width: '14px', height: '14px', borderRadius: '4px', backgroundColor: '#10b981', boxShadow: '0 0 8px rgba(16, 185, 129, 0.6)' }} />
-                <span style={{ color: '#6ee7b7', fontWeight: 700 }}>
-                  Emerald Curve: CHRONOS Optimized Multi-Source Path (100% Solvent)
+                <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#15803d' }} />
+                <span style={{ color: '#15803d', fontWeight: 700 }}>
+                  Emerald Curve: VANTIQ Optimized Multi-Source Path (100% Solvent)
                 </span>
               </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span className="badge badge-purple" style={{ fontSize: '0.72rem' }}>
+              <span className="badge badge-emerald" style={{ fontSize: '0.75rem' }}>
                 Confidence: 96.8% (Historical TFT Validation)
               </span>
             </div>

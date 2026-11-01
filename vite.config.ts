@@ -13,8 +13,8 @@ export default defineConfig({
         name: 'VANTIQ – Emergency Finance Optimizer',
         short_name: 'VANTIQ',
         description: 'Quantum-Enhanced Counterfactual Digital Twin & Anti-Predatory Emergency Finance Engine.',
-        theme_color: '#06b6d4',
-        background_color: '#050914',
+        theme_color: '#9fe870',
+        background_color: '#f4f5f1',
         display: 'standalone',
         orientation: 'portrait-primary',
         start_url: '/',
@@ -39,6 +39,9 @@ export default defineConfig({
         ],
       },
       workbox: {
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
         runtimeCaching: [
           {
@@ -51,7 +54,6 @@ export default defineConfig({
           },
         ],
         navigateFallback: 'index.html',
-        cleanupOutdatedCaches: true,
       },
       devOptions: { enabled: false },
     }),

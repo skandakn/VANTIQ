@@ -1,5 +1,5 @@
 // src/modules/m02_crisis_input/EmergencyIntake.tsx
-// Module 3: Emergency Crisis Simulator - Wise-Inspired Clean Form
+// Module 3: Emergency Crisis Simulator - Authentic Wise Light UI
 import React, { useId } from 'react';
 import { IndianRupee, Wallet, ShieldAlert, Sparkles, Sliders } from 'lucide-react';
 import { useFintech } from '../../context/FintechContext';
@@ -30,46 +30,46 @@ export const EmergencyIntake: React.FC = () => {
   const netSurplus = profile.monthlyIncome - (profile.existingEmi + profile.houseRent + profile.livingExpenses);
 
   return (
-    <section id="simulator" style={{ padding: '60px 0', borderTop: '1px solid rgba(159, 232, 112, 0.12)' }}>
+    <section id="simulator" style={{ padding: '70px 0', backgroundColor: 'var(--bg-deep)', borderTop: '1px solid #e5e9e2' }}>
       {/* Anchor alias */}
       <div id="crisis-intake" style={{ position: 'relative', top: '-80px', visibility: 'hidden' }} />
       <div className="container">
         
         {/* Section Header - Wise Style */}
-        <div style={{ marginBottom: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-            <span className="badge badge-lime">
+        <div style={{ marginBottom: '36px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+            <span className="badge badge-forest">
               <Sliders size={13} />
               <span>Step 1: Cashflow Baseline & Shock Parameters</span>
             </span>
           </div>
-          <h2 style={{ fontSize: '2.2rem', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '6px' }}>
+          <h2 style={{ fontSize: '2.4rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', marginBottom: '8px' }}>
             Transparent Emergency Cashflow Calculator
           </h2>
-          <p style={{ color: 'var(--wise-text-secondary)', fontSize: '1rem', maxWidth: '780px' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '780px' }}>
             Adjust your numbers below. VANTIQ dynamically isolates your true monthly uncommitted capacity from your existing expenses.
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: '28px' }}>
           
           {/* Card 1: Emergency Bill Requirement */}
-          <div className="chronos-card" style={{ border: '1px solid rgba(248, 113, 113, 0.3)', padding: '28px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div className="chronos-card" style={{ border: '1px solid #fecaca', padding: '32px', backgroundColor: '#ffffff' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '22px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '10px',
-                  backgroundColor: 'rgba(248, 113, 113, 0.15)',
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '12px',
+                  backgroundColor: '#fee2e2',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#f87171'
+                  color: '#dc2626'
                 }}>
-                  <ShieldAlert size={20} />
+                  <ShieldAlert size={22} />
                 </div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--wise-forest)' }}>
                   Emergency Requirement
                 </h3>
               </div>
@@ -77,13 +77,13 @@ export const EmergencyIntake: React.FC = () => {
             </div>
 
             {/* Shock Amount Field */}
-            <div style={{ marginBottom: '18px' }}>
-              <label htmlFor={shockInputId} style={{ display: 'block', fontSize: '0.82rem', color: '#a3b8a6', fontWeight: 600, marginBottom: '6px' }}>
+            <div style={{ marginBottom: '22px' }}>
+              <label htmlFor={shockInputId} style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
                 Emergency Bill Amount (₹)
               </label>
               <div style={{ position: 'relative' }}>
-                <span style={{ position: 'absolute', left: '16px', top: '14px', color: '#a3b8a6' }}>
-                  <IndianRupee size={18} />
+                <span style={{ position: 'absolute', left: '16px', top: '15px', color: 'var(--text-muted)' }}>
+                  <IndianRupee size={20} />
                 </span>
                 <input
                   id={shockInputId}
@@ -92,12 +92,12 @@ export const EmergencyIntake: React.FC = () => {
                   onChange={(e) => handleShockAmount(parseInt(e.target.value))}
                   style={{
                     width: '100%',
-                    padding: '12px 16px 12px 42px',
+                    padding: '14px 18px 14px 44px',
                     borderRadius: '14px',
-                    border: '1.5px solid rgba(255, 255, 255, 0.12)',
-                    backgroundColor: 'var(--wise-input-bg)',
-                    color: '#ffffff',
-                    fontSize: '1.4rem',
+                    border: '1.5px solid #d0d7cc',
+                    backgroundColor: '#f4f5f1',
+                    color: 'var(--wise-forest)',
+                    fontSize: '1.5rem',
                     fontWeight: 900,
                     outline: 'none',
                     letterSpacing: '-0.02em',
@@ -107,9 +107,9 @@ export const EmergencyIntake: React.FC = () => {
             </div>
 
             {/* Category & Available Liquid Savings */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '24px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: '#a3b8a6', fontWeight: 600, marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
                   Category
                 </label>
                 <select
@@ -117,12 +117,13 @@ export const EmergencyIntake: React.FC = () => {
                   onChange={(e) => setShock((prev) => ({ ...prev, category: e.target.value as 'medical' | 'vehicle' | 'home_repair' | 'job_loss' }))}
                   style={{
                     width: '100%',
-                    padding: '12px',
+                    padding: '12px 14px',
                     borderRadius: '12px',
-                    backgroundColor: 'var(--wise-input-bg)',
-                    color: '#ffffff',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    fontSize: '0.88rem',
+                    backgroundColor: '#f4f5f1',
+                    color: 'var(--wise-forest)',
+                    border: '1.5px solid #d0d7cc',
+                    fontSize: '0.9rem',
+                    fontWeight: 600,
                     outline: 'none'
                   }}
                 >
@@ -134,7 +135,7 @@ export const EmergencyIntake: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor={savingsInputId} style={{ display: 'block', fontSize: '0.8rem', color: '#a3b8a6', fontWeight: 600, marginBottom: '6px' }}>
+                <label htmlFor={savingsInputId} style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
                   Liquid Savings (₹)
                 </label>
                 <input
@@ -144,13 +145,13 @@ export const EmergencyIntake: React.FC = () => {
                   onChange={(e) => handleProfileChange('emergencySavings', parseInt(e.target.value))}
                   style={{
                     width: '100%',
-                    padding: '12px',
+                    padding: '12px 14px',
                     borderRadius: '12px',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    backgroundColor: 'var(--wise-input-bg)',
-                    color: 'var(--wise-lime)',
+                    border: '1.5px solid #d0d7cc',
+                    backgroundColor: '#f4f5f1',
+                    color: '#15803d',
                     fontWeight: 800,
-                    fontSize: '0.95rem',
+                    fontSize: '1rem',
                     outline: 'none'
                   }}
                 />
@@ -159,49 +160,49 @@ export const EmergencyIntake: React.FC = () => {
 
             {/* Unfunded Deficit Pill */}
             <div style={{
-              padding: '14px',
-              borderRadius: '12px',
-              backgroundColor: 'rgba(239, 68, 68, 0.1)',
-              border: '1px solid rgba(239, 68, 68, 0.3)',
+              padding: '16px 20px',
+              borderRadius: '14px',
+              backgroundColor: '#fee2e2',
+              border: '1px solid #fecaca',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
-              <span style={{ fontSize: '0.84rem', color: '#fca5a5' }}>
+              <span style={{ fontSize: '0.88rem', color: '#991b1b', fontWeight: 600 }}>
                 Unfunded Medical Gap:
               </span>
-              <strong style={{ fontSize: '1.1rem', color: '#f87171', fontWeight: 900 }}>
+              <strong style={{ fontSize: '1.2rem', color: '#dc2626', fontWeight: 900 }}>
                 ₹{Math.max(0, shock.amount - profile.emergencySavings).toLocaleString()}
               </strong>
             </div>
           </div>
 
           {/* Card 2: Salaried Monthly Household Cashflow */}
-          <div className="chronos-card" style={{ border: '1px solid rgba(159, 232, 112, 0.3)', padding: '28px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div className="chronos-card" style={{ border: '1px solid #d0d7cc', padding: '32px', backgroundColor: '#ffffff' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '22px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '10px',
-                  backgroundColor: 'rgba(159, 232, 112, 0.15)',
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '12px',
+                  backgroundColor: '#edf4ea',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: 'var(--wise-lime)'
+                  color: 'var(--wise-forest)'
                 }}>
-                  <Wallet size={20} />
+                  <Wallet size={22} />
                 </div>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff' }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--wise-forest)' }}>
                   Monthly Cashflow & Living Costs
                 </h3>
               </div>
-              <span className="badge badge-lime">Salary Baseline</span>
+              <span className="badge badge-forest">Salary Baseline</span>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '18px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '22px' }}>
               <div>
-                <label htmlFor={salaryInputId} style={{ display: 'block', fontSize: '0.8rem', color: '#a3b8a6', fontWeight: 600, marginBottom: '6px' }}>
+                <label htmlFor={salaryInputId} style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
                   Monthly Net Salary (₹)
                 </label>
                 <input
@@ -211,20 +212,20 @@ export const EmergencyIntake: React.FC = () => {
                   onChange={(e) => handleProfileChange('monthlyIncome', parseInt(e.target.value))}
                   style={{
                     width: '100%',
-                    padding: '10px 12px',
-                    borderRadius: '10px',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    backgroundColor: 'var(--wise-input-bg)',
-                    color: 'var(--wise-lime)',
+                    padding: '12px 14px',
+                    borderRadius: '12px',
+                    border: '1.5px solid #d0d7cc',
+                    backgroundColor: '#f4f5f1',
+                    color: 'var(--wise-forest)',
                     fontWeight: 800,
-                    fontSize: '1.05rem',
+                    fontSize: '1.1rem',
                     outline: 'none'
                   }}
                 />
               </div>
 
               <div>
-                <label htmlFor={emiInputId} style={{ display: 'block', fontSize: '0.8rem', color: '#a3b8a6', fontWeight: 600, marginBottom: '6px' }}>
+                <label htmlFor={emiInputId} style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
                   Existing EMI (₹)
                 </label>
                 <input
@@ -234,11 +235,11 @@ export const EmergencyIntake: React.FC = () => {
                   onChange={(e) => handleProfileChange('existingEmi', parseInt(e.target.value))}
                   style={{
                     width: '100%',
-                    padding: '10px 12px',
-                    borderRadius: '10px',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    backgroundColor: 'var(--wise-input-bg)',
-                    color: '#f87171',
+                    padding: '12px 14px',
+                    borderRadius: '12px',
+                    border: '1.5px solid #d0d7cc',
+                    backgroundColor: '#f4f5f1',
+                    color: '#dc2626',
                     fontWeight: 700,
                     outline: 'none'
                   }}
@@ -246,7 +247,7 @@ export const EmergencyIntake: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor={rentInputId} style={{ display: 'block', fontSize: '0.8rem', color: '#a3b8a6', fontWeight: 600, marginBottom: '6px' }}>
+                <label htmlFor={rentInputId} style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
                   House Rent (₹)
                 </label>
                 <input
@@ -256,11 +257,11 @@ export const EmergencyIntake: React.FC = () => {
                   onChange={(e) => handleProfileChange('houseRent', parseInt(e.target.value))}
                   style={{
                     width: '100%',
-                    padding: '10px 12px',
-                    borderRadius: '10px',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    backgroundColor: 'var(--wise-input-bg)',
-                    color: '#f87171',
+                    padding: '12px 14px',
+                    borderRadius: '12px',
+                    border: '1.5px solid #d0d7cc',
+                    backgroundColor: '#f4f5f1',
+                    color: '#dc2626',
                     fontWeight: 700,
                     outline: 'none'
                   }}
@@ -268,7 +269,7 @@ export const EmergencyIntake: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor={foodInputId} style={{ display: 'block', fontSize: '0.8rem', color: '#a3b8a6', fontWeight: 600, marginBottom: '6px' }}>
+                <label htmlFor={foodInputId} style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
                   Living & Food (₹)
                 </label>
                 <input
@@ -278,11 +279,11 @@ export const EmergencyIntake: React.FC = () => {
                   onChange={(e) => handleProfileChange('livingExpenses', parseInt(e.target.value))}
                   style={{
                     width: '100%',
-                    padding: '10px 12px',
-                    borderRadius: '10px',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    backgroundColor: 'var(--wise-input-bg)',
-                    color: '#f87171',
+                    padding: '12px 14px',
+                    borderRadius: '12px',
+                    border: '1.5px solid #d0d7cc',
+                    backgroundColor: '#f4f5f1',
+                    color: '#dc2626',
                     fontWeight: 700,
                     outline: 'none'
                   }}
@@ -292,23 +293,23 @@ export const EmergencyIntake: React.FC = () => {
 
             {/* True Absorptive Repayment Surplus Indicator */}
             <div style={{
-              padding: '14px 18px',
+              padding: '16px 20px',
               borderRadius: '14px',
-              backgroundColor: 'rgba(159, 232, 112, 0.12)',
-              border: '1.5px solid rgba(159, 232, 112, 0.35)',
+              backgroundColor: '#edf4ea',
+              border: '1.5px solid #bbf7d0',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
               <div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--wise-lime)', textTransform: 'uppercase', fontWeight: 800 }}>
+                <div style={{ fontSize: '0.78rem', color: '#15803d', textTransform: 'uppercase', fontWeight: 800 }}>
                   Real Absorptive Capacity (Net Free Surplus)
                 </div>
-                <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--wise-lime)' }}>
+                <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#15803d' }}>
                   ₹{netSurplus.toLocaleString()} / month
                 </div>
               </div>
-              <span className="badge badge-lime">
+              <span className="badge badge-emerald">
                 <Sparkles size={12} />
                 <span>Buffer Safe</span>
               </span>

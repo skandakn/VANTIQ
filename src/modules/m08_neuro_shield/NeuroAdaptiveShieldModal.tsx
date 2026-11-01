@@ -79,52 +79,52 @@ export const NeuroAdaptiveShieldModal: React.FC = () => {
     <>
 
       {active && (
-        <div role="presentation" style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', overflowY: 'auto', padding: 20, background: 'rgba(3, 8, 20, .92)', backdropFilter: 'blur(18px)' }}>
-          <section role="dialog" aria-modal="true" aria-labelledby="shield-title" className="chronos-card glow-cyan"
-            style={{ width: '100%', maxWidth: 560, boxSizing: 'border-box', padding: 32, border: '1px solid rgba(34,211,238,.55)', textAlign: 'center', boxShadow: '0 24px 90px rgba(0,0,0,.5)' }}>
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 10, color: '#67e8f9' }}><ShieldAlert size={22} /></div>
-            <div className="badge badge-cyan" style={{ marginBottom: 12 }}>A pause for a considered decision</div>
-            <h2 id="shield-title" style={{ color: '#f8fafc', fontSize: '1.55rem', margin: '0 0 8px' }}>Emergency Grounding</h2>
-            <p style={{ color: '#cbd5e1', lineHeight: 1.55, margin: '0 auto 22px', maxWidth: 440 }}>Take a moment to steady your breathing and review the commitment before continuing.</p>
+        <div role="presentation" style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', overflowY: 'auto', padding: 20, background: 'rgba(22, 51, 0, 0.45)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}>
+          <section role="dialog" aria-modal="true" aria-labelledby="shield-title" className="chronos-card"
+            style={{ width: '100%', maxWidth: 540, boxSizing: 'border-box', padding: 36, backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc', textAlign: 'center', boxShadow: '0 24px 90px rgba(22, 51, 0, 0.18)', borderRadius: '24px' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 12, color: '#15803d' }}><ShieldAlert size={28} /></div>
+            <div className="badge badge-forest" style={{ marginBottom: 14 }}>A pause for a considered decision</div>
+            <h2 id="shield-title" style={{ color: 'var(--wise-forest)', fontSize: '1.75rem', fontWeight: 900, letterSpacing: '-0.02em', margin: '0 0 8px' }}>Emergency Grounding</h2>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.55, margin: '0 auto 24px', maxWidth: 440, fontSize: '0.95rem' }}>Take a moment to steady your breathing and review the commitment before continuing.</p>
 
-            <div aria-label={`${remaining} seconds remaining`} style={{ width: 150, height: 150, margin: '0 auto 20px', position: 'relative' }}>
-              <svg viewBox="0 0 120 120" width="150" height="150" role="img" aria-hidden="true" style={{ transform: 'rotate(-90deg)' }}>
-                <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(148,163,184,.2)" strokeWidth="7" />
-                <circle cx="60" cy="60" r="52" fill="none" stroke="#22d3ee" strokeWidth="7" strokeLinecap="round"
+            <div aria-label={`${remaining} seconds remaining`} style={{ width: 140, height: 140, margin: '0 auto 20px', position: 'relative' }}>
+              <svg viewBox="0 0 120 120" width="140" height="140" role="img" aria-hidden="true" style={{ transform: 'rotate(-90deg)' }}>
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#e5e9e2" strokeWidth="8" />
+                <circle cx="60" cy="60" r="52" fill="none" stroke="var(--wise-forest)" strokeWidth="8" strokeLinecap="round"
                   strokeDasharray={2 * Math.PI * 52} strokeDashoffset={2 * Math.PI * 52 * (1 - remaining / TOTAL_SECONDS)}
-                  style={{ transition: 'stroke-dashoffset 900ms linear', filter: 'drop-shadow(0 0 5px rgba(34,211,238,.65))' }} />
+                  style={{ transition: 'stroke-dashoffset 900ms linear' }} />
               </svg>
               <div style={{ position: 'absolute', inset: 0, display: 'grid', placeContent: 'center' }}>
-                <strong style={{ color: '#f8fafc', fontSize: '2.3rem', lineHeight: 1 }}>{remaining}</strong>
-                <span style={{ color: '#94a3b8', fontSize: '.72rem', marginTop: 4 }}>SECONDS</span>
+                <strong style={{ color: 'var(--wise-forest)', fontSize: '2.4rem', lineHeight: 1, fontWeight: 900 }}>{remaining}</strong>
+                <span style={{ color: 'var(--text-muted)', fontSize: '.72rem', marginTop: 4, fontWeight: 700 }}>SECONDS</span>
               </div>
             </div>
 
-            <div style={{ borderRadius: 14, background: 'rgba(8,47,73,.42)', border: '1px solid rgba(34,211,238,.2)', padding: '17px 18px', marginBottom: 16 }}>
-              <div style={{ width: 88, height: 88, margin: '0 auto 10px', borderRadius: '50%', border: '2px solid rgba(34,211,238,.65)', display: 'grid', placeItems: 'center', color: '#67e8f9', transform: `scale(${0.82 + phase.progress * 0.36})`, transition: 'transform 900ms ease-in-out', boxShadow: '0 0 24px rgba(34,211,238,.18)' }}><Heart size={30} /></div>
-              <div aria-live="polite" style={{ color: '#f8fafc', fontWeight: 750, fontSize: '1.1rem' }}>{phase.label}</div>
-              <div style={{ color: '#94a3b8', fontSize: '.85rem', marginTop: 3 }}>{phase.instruction} · 4 seconds</div>
-              <div style={{ color: '#64748b', fontSize: '.72rem', marginTop: 8 }}>Inhale 4s · Hold 4s · Exhale 4s</div>
+            <div style={{ borderRadius: 16, background: '#edf4ea', border: '1px solid #cce0c6', padding: '18px 20px', marginBottom: 18 }}>
+              <div style={{ width: 72, height: 72, margin: '0 auto 10px', borderRadius: '50%', border: '2.5px solid var(--wise-forest)', display: 'grid', placeItems: 'center', color: 'var(--wise-forest)', transform: `scale(${0.85 + phase.progress * 0.3})`, transition: 'transform 900ms ease-in-out', backgroundColor: '#ffffff' }}><Heart size={26} /></div>
+              <div aria-live="polite" style={{ color: 'var(--wise-forest)', fontWeight: 800, fontSize: '1.15rem' }}>{phase.label}</div>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '.88rem', marginTop: 3 }}>{phase.instruction} · 4 seconds</div>
+              <div style={{ color: 'var(--text-muted)', fontSize: '.75rem', marginTop: 6, fontWeight: 600 }}>Inhale 4s · Hold 4s · Exhale 4s</div>
             </div>
 
-            <div style={{ borderRadius: 12, border: '1px solid rgba(245,158,11,.32)', background: 'rgba(120,53,15,.14)', padding: '14px 16px', marginBottom: 16, textAlign: 'left' }}>
-              <div style={{ color: '#fbbf24', fontSize: '.72rem', textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: 6 }}>Reflect before you decide</div>
-              <p style={{ color: '#f8fafc', fontWeight: 650, lineHeight: 1.5, margin: 0 }}>{REFLECTION}</p>
+            <div style={{ borderRadius: 14, border: '1px solid #fed7aa', background: '#fffbeb', padding: '16px 18px', marginBottom: 18, textAlign: 'left' }}>
+              <div style={{ color: '#b45309', fontSize: '.75rem', textTransform: 'uppercase', letterSpacing: '.06em', fontWeight: 800, marginBottom: 6 }}>Reflect before you decide</div>
+              <p style={{ color: '#78350f', fontWeight: 700, lineHeight: 1.5, margin: 0, fontSize: '0.92rem' }}>{REFLECTION}</p>
             </div>
 
-            <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, textAlign: 'left', cursor: 'pointer', color: '#cbd5e1', fontSize: '.83rem', lineHeight: 1.45, margin: '0 0 14px' }}>
-              <input type="checkbox" checked={bypassConfirmed} onChange={(event) => setBypassConfirmed(event.target.checked)} style={{ marginTop: 2, accentColor: '#fb7185', width: 16, height: 16, flex: '0 0 auto' }} />
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, textAlign: 'left', cursor: 'pointer', color: 'var(--text-secondary)', fontSize: '.86rem', lineHeight: 1.45, margin: '0 0 16px', fontWeight: 600 }}>
+              <input type="checkbox" checked={bypassConfirmed} onChange={(event) => setBypassConfirmed(event.target.checked)} style={{ marginTop: 2, accentColor: 'var(--wise-forest)', width: 16, height: 16, flex: '0 0 auto' }} />
               <span>{BYPASS_LABEL}</span>
             </label>
 
             <div style={{ display: 'grid', gap: 10 }}>
               <button type="button" data-shield-control onClick={finishGrounding} disabled={remaining > 0} className="btn btn-primary"
-                style={{ width: '100%', justifyContent: 'center', padding: 13, opacity: remaining > 0 ? .55 : 1, cursor: remaining > 0 ? 'not-allowed' : 'pointer' }}>
+                style={{ width: '100%', justifyContent: 'center', padding: 14, fontSize: '0.95rem', opacity: remaining > 0 ? .55 : 1, cursor: remaining > 0 ? 'not-allowed' : 'pointer' }}>
                 <CheckCircle size={18} /> {remaining > 0 ? 'Continue when the grounding pause ends' : 'I acknowledge and wish to continue'}
               </button>
-              {bypassConfirmed && <button type="button" data-shield-control onClick={finishGrounding} className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center', padding: 11, color: '#fda4af', borderColor: 'rgba(251,113,133,.45)' }}>Proceed with the intentional bypass</button>}
+              {bypassConfirmed && <button type="button" data-shield-control onClick={finishGrounding} className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center', padding: 12, color: '#dc2626', borderColor: '#fca5a5' }}>Proceed with the intentional bypass</button>}
             </div>
-            <p style={{ color: '#64748b', fontSize: '.72rem', lineHeight: 1.5, margin: '14px 0 0' }}>The grounding pause is optional; selecting the bypass is an explicit choice.</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '.75rem', lineHeight: 1.5, margin: '14px 0 0' }}>The grounding pause is optional; selecting the bypass is an explicit choice.</p>
           </section>
         </div>
       )}

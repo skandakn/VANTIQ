@@ -225,11 +225,11 @@ export const MultiSourceRescueCard: React.FC = () => {
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
             <div>
-              <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em', marginBottom: '8px' }}>
+              <h2 style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', marginBottom: '8px' }}>
                 Tri-Tranche Multi-Source Solvency Architecture
               </h2>
-              <p style={{ color: '#94a3b8', fontSize: '1.05rem', maxWidth: '850px', lineHeight: 1.6 }}>
-                Predatory instant loan apps push borrowers into a single toxic 36%–48% APR debt trap. CHRONOS breaks the emergency requirement into three scientifically calibrated tranches—maximizing zero-cost liquidity and shielding monthly cashflow.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '850px', lineHeight: 1.6 }}>
+                Predatory instant loan apps push borrowers into a single toxic 36%–48% APR debt trap. VANTIQ breaks the emergency requirement into three scientifically calibrated tranches—maximizing zero-cost liquidity and shielding monthly cashflow.
               </p>
             </div>
 
@@ -238,18 +238,18 @@ export const MultiSourceRescueCard: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '12px',
-              padding: '10px 18px',
-              backgroundColor: 'rgba(15, 23, 42, 0.75)',
-              border: '1px solid var(--border-medium)',
-              borderRadius: '12px',
-              backdropFilter: 'blur(10px)'
+              padding: '12px 20px',
+              backgroundColor: '#ffffff',
+              border: '1.5px solid #d0d7cc',
+              borderRadius: '16px',
+              boxShadow: 'var(--shadow-card)'
             }}>
-              <Coins size={22} color="#10b981" />
+              <Coins size={24} color="#15803d" />
               <div>
-                <div style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 700 }}>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 800 }}>
                   Target Emergency Shock
                 </div>
-                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#34d399' }}>
+                <div style={{ fontSize: '1.35rem', fontWeight: 900, color: 'var(--wise-forest)' }}>
                   ₹{totalRequired.toLocaleString()}
                 </div>
               </div>
@@ -266,9 +266,9 @@ export const MultiSourceRescueCard: React.FC = () => {
           gap: '12px',
           marginBottom: '28px',
           padding: '8px 12px',
-          backgroundColor: 'rgba(15, 23, 42, 0.6)',
-          borderRadius: '12px',
-          border: '1px solid var(--border-subtle)'
+          backgroundColor: '#f4f5f1',
+          borderRadius: '16px',
+          border: '1.5px solid #d0d7cc'
         }}>
           <div style={{ display: 'flex', gap: '8px' }}>
             <button
@@ -535,8 +535,8 @@ export const MultiSourceRescueCard: React.FC = () => {
         {/* REQUIREMENT 2: TRI-TRANCHE DECOMPOSITION UI */}
         <div style={{ marginBottom: '36px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', flexWrap: 'wrap', gap: '8px' }}>
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Layers size={20} color="#06b6d4" />
+            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--wise-forest)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Layers size={20} color="#15803d" />
               <span>Tri-Tranche Decomposition Breakdown</span>
             </h3>
             {selectedTrancheId && (
@@ -544,9 +544,9 @@ export const MultiSourceRescueCard: React.FC = () => {
                 onClick={() => setSelectedTrancheId(null)}
                 style={{
                   fontSize: '0.75rem',
-                  color: '#94a3b8',
+                  color: 'var(--text-secondary)',
                   background: 'none',
-                  border: '1px solid var(--border-subtle)',
+                  border: '1px solid #d0d7cc',
                   borderRadius: '6px',
                   padding: '4px 10px',
                   cursor: 'pointer'
@@ -570,17 +570,16 @@ export const MultiSourceRescueCard: React.FC = () => {
                 return (
                   <div
                     key={tranche.id}
-                    className={`chronos-card ${tranche.glowClass}`}
+                    className="chronos-card"
                     style={{
+                      backgroundColor: '#ffffff',
                       borderTop: `4px solid ${tranche.colorHex}`,
-                      borderLeft: isSelected ? `2px solid ${tranche.colorHex}` : undefined,
-                      borderRight: isSelected ? `2px solid ${tranche.colorHex}` : undefined,
-                      borderBottom: isSelected ? `2px solid ${tranche.colorHex}` : undefined,
+                      border: isSelected ? `2px solid ${tranche.colorHex}` : '1px solid #e5e9e2',
                       padding: '24px',
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between',
-                      backgroundColor: isSelected ? 'rgba(15, 23, 42, 0.95)' : undefined
+                      boxShadow: 'var(--shadow-card)'
                     }}
                   >
                     <div>
@@ -590,13 +589,13 @@ export const MultiSourceRescueCard: React.FC = () => {
                           {tranche.trancheCode} • {tranche.percentage}% of Need
                         </span>
                         <span style={{
-                          fontSize: '1rem',
+                          fontSize: '0.95rem',
                           fontWeight: 800,
                           color: tranche.colorHex,
-                          backgroundColor: 'rgba(15, 23, 42, 0.8)',
+                          backgroundColor: '#f4f5f1',
                           padding: '4px 10px',
                           borderRadius: '6px',
-                          border: `1px solid ${tranche.colorHex}40`
+                          border: `1px solid #d0d7cc`
                         }}>
                           {tranche.apr === 0 ? '0% APR (Free)' : `${tranche.apr}% APR`}
                         </span>
@@ -604,31 +603,31 @@ export const MultiSourceRescueCard: React.FC = () => {
 
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
                         {tranche.icon}
-                        <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc' }}>
+                        <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--wise-forest)' }}>
                           {tranche.title}
                         </h4>
                       </div>
-                      <p style={{ fontSize: '0.82rem', color: '#94a3b8', marginBottom: '16px', lineHeight: 1.5 }}>
+                      <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '16px', lineHeight: 1.5 }}>
                         {tranche.subtitle}
                       </p>
 
                       {/* Principal Amount Display */}
                       <div style={{
                         padding: '16px',
-                        borderRadius: '10px',
-                        backgroundColor: 'rgba(11, 19, 41, 0.75)',
-                        border: '1px solid rgba(51, 65, 85, 0.4)',
+                        borderRadius: '12px',
+                        backgroundColor: '#f4f5f1',
+                        border: '1px solid #d0d7cc',
                         marginBottom: '18px'
                       }}>
-                        <div style={{ fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 700 }}>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>
                           Allocated Principal
                         </div>
-                        <div style={{ fontSize: '2.1rem', fontWeight: 900, color: '#f8fafc', letterSpacing: '-0.02em', margin: '4px 0' }}>
+                        <div style={{ fontSize: '2.1rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', margin: '4px 0' }}>
                           ₹{tranche.allocatedAmount.toLocaleString()}
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: '#cbd5e1' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                           <span>Tenure: <strong>{tranche.tenureDisplay}</strong></span>
-                          <span>Interest Cost: <strong style={{ color: tranche.apr === 0 ? '#34d399' : '#38bdf8' }}>₹{tranche.interestCost.toLocaleString()}</strong></span>
+                          <span>Interest Cost: <strong style={{ color: tranche.apr === 0 ? '#15803d' : 'var(--wise-forest)' }}>₹{tranche.interestCost.toLocaleString()}</strong></span>
                         </div>
                       </div>
 
@@ -768,29 +767,29 @@ export const MultiSourceRescueCard: React.FC = () => {
                   <span>92.3% Interest Reduction</span>
                 </span>
               </div>
-              <h3 style={{ fontSize: '1.7rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.01em' }}>
-                Total Interest Comparison: CHRONOS vs. Fragmented Loan Apps
+              <h3 style={{ fontSize: '1.7rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.01em' }}>
+                Total Interest Comparison: VANTIQ vs. Fragmented Loan Apps
               </h3>
-              <p style={{ color: '#94a3b8', fontSize: '0.92rem' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
                 Direct mathematical comparison for borrowing ₹{totalRequired.toLocaleString()} in an emergency.
               </p>
             </div>
 
             {/* Total Cash Saved Big Banner */}
             <div style={{
-              padding: '12px 20px',
-              borderRadius: '12px',
-              backgroundColor: 'rgba(16, 185, 129, 0.15)',
-              border: '1px solid #10b981',
+              padding: '14px 24px',
+              borderRadius: '16px',
+              backgroundColor: '#edf4ea',
+              border: '1.5px solid #bbf7d0',
               textAlign: 'right'
             }}>
-              <div style={{ fontSize: '0.75rem', color: '#6ee7b7', textTransform: 'uppercase', fontWeight: 700 }}>
+              <div style={{ fontSize: '0.75rem', color: '#15803d', textTransform: 'uppercase', fontWeight: 800 }}>
                 Total Cash Saved
               </div>
-              <div style={{ fontSize: '1.8rem', fontWeight: 900, color: '#34d399' }}>
+              <div style={{ fontSize: '1.9rem', fontWeight: 900, color: '#15803d' }}>
                 ₹{directSavings.toLocaleString()}
               </div>
-              <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
                 {savingsPercent}% of total loan costs avoided
               </div>
             </div>

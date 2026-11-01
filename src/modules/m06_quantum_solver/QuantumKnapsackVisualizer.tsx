@@ -302,22 +302,22 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
             </div>
           </div>
 
-          <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <h2 style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '12px' }}>
             Quantum Solver Cockpit & QUBO Knapsack
           </h2>
-          <p style={{ color: '#94a3b8', fontSize: '1rem', maxWidth: '960px', marginTop: '6px' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '960px', marginTop: '6px' }}>
             Explores 16,777,216 ($2^{24}$) combinatorial multi-tranche paths in sub-50ms using a transverse-field Ising model, mapping instant debt traps into high-energy penalty barriers while isolating the true zero-collision ground state.
           </p>
         </div>
 
         {/* Top Control Bar & Live Status HUD */}
         <div style={{
-          background: 'linear-gradient(135deg, rgba(17, 28, 56, 0.85) 0%, rgba(10, 17, 36, 0.95) 100%)',
-          border: '1px solid rgba(139, 92, 246, 0.35)',
-          borderRadius: '16px',
-          padding: '20px 24px',
-          marginBottom: '24px',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+          backgroundColor: '#ffffff',
+          border: '1.5px solid #d0d7cc',
+          borderRadius: '18px',
+          padding: '24px 28px',
+          marginBottom: '28px',
+          boxShadow: 'var(--shadow-card)',
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
@@ -331,22 +331,21 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
                 width: '12px',
                 height: '12px',
                 borderRadius: '50%',
-                backgroundColor: isSolving ? '#f59e0b' : '#10b981',
-                boxShadow: isSolving ? '0 0 12px #f59e0b' : '0 0 12px #10b981'
+                backgroundColor: isSolving ? '#b45309' : '#15803d',
               }} />
               <div>
-                <div style={{ fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
                   Annealing Engine State
                 </div>
-                <div style={{ fontSize: '0.95rem', fontWeight: 700, color: isSolving ? '#fbbf24' : '#34d399' }}>
+                <div style={{ fontSize: '0.95rem', fontWeight: 800, color: isSolving ? '#b45309' : '#15803d' }}>
                   {isSolving ? `Annealing Trajectory [${annealingProgress}%]` : 'Optimal Ground State Converged'}
                 </div>
               </div>
             </div>
 
             {/* Stepper HUD */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 12px', background: 'rgba(5, 9, 20, 0.6)', borderRadius: '8px', border: '1px solid #1e293b' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: activeStep >= 1 ? '#38bdf8' : '#475569' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 14px', background: '#f4f5f1', borderRadius: '8px', border: '1px solid #d0d7cc' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: activeStep >= 1 ? 'var(--wise-forest)' : 'var(--text-muted)' }}>
                 1. QUBO
               </span>
               <ChevronRight size={12} color="#475569" />
@@ -577,14 +576,14 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
 
         {/* TAB 1: Simulated Quantum Annealing Convergence Animation */}
         {activeTab === 'annealing' && (
-          <div className="chronos-card glow-purple" style={{ padding: '28px', marginBottom: '24px' }}>
+          <div className="chronos-card" style={{ padding: '32px', marginBottom: '28px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '14px', marginBottom: '20px' }}>
               <div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <TrendingDown size={20} color="#c084fc" />
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--wise-forest)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <TrendingDown size={20} color="#15803d" />
                   <span>Transverse Field Annealing Trajectory: H(s) = (1-s)H_D + s H_P</span>
                 </h3>
-                <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '4px' }}>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
                   Visualization of energy landscape traversal. Quantum tunneling penetrates high predatory potential barriers without becoming trapped in classical local minima.
                 </p>
               </div>

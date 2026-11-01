@@ -70,24 +70,25 @@ export const Footer: React.FC = () => {
   return (
     <footer
       style={{
-        borderTop: '1px solid rgba(56, 189, 248, 0.25)',
-        backgroundColor: 'rgba(5, 9, 20, 0.98)',
+        borderTop: '1px solid rgba(159, 232, 112, 0.3)',
+        backgroundColor: '#163300',
+        color: '#ffffff',
         padding: '56px 0 28px 0',
         marginTop: '90px',
         position: 'relative',
-        boxShadow: '0 -10px 40px rgba(0, 0, 0, 0.6)',
+        boxShadow: '0 -10px 40px rgba(22, 51, 0, 0.1)',
       }}
     >
-      {/* Top subtle cyan accent glow line */}
+      {/* Top subtle lime accent glow line */}
       <div
         style={{
           position: 'absolute',
           top: 0,
           left: '10%',
           right: '10%',
-          height: '1px',
-          background: 'linear-gradient(90deg, transparent 0%, #06b6d4 50%, transparent 100%)',
-          opacity: 0.8,
+          height: '2px',
+          background: 'linear-gradient(90deg, transparent 0%, var(--wise-lime) 50%, transparent 100%)',
+          opacity: 0.9,
         }}
       />
 
@@ -101,9 +102,9 @@ export const Footer: React.FC = () => {
           style={{
             marginBottom: '40px',
             padding: '20px 24px',
-            backgroundColor: 'rgba(10, 17, 36, 0.85)',
-            border: '1px solid rgba(16, 185, 129, 0.35)',
-            boxShadow: '0 0 25px rgba(16, 185, 129, 0.12)',
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            border: '1px solid rgba(159, 232, 112, 0.35)',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
             borderRadius: '16px',
             display: 'flex',
             flexWrap: 'wrap',

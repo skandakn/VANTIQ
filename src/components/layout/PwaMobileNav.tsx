@@ -116,60 +116,58 @@ export const PwaMobileNav: React.FC = () => {
             width: 'calc(100% - 32px)',
             maxWidth: '480px',
             zIndex: 1100,
-            backgroundColor: 'rgba(10, 17, 36, 0.95)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid rgba(6, 182, 212, 0.45)',
-            borderRadius: '16px',
-            padding: '12px 16px',
-            boxShadow: '0 12px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(6, 182, 212, 0.25)',
+            backgroundColor: '#ffffff',
+            border: '1.5px solid #d0d7cc',
+            borderRadius: '18px',
+            padding: '14px 18px',
+            boxShadow: '0 16px 40px rgba(22, 51, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '12px',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
             <div
               style={{
                 width: '38px',
                 height: '38px',
                 borderRadius: '10px',
-                background: 'linear-gradient(135deg, #0284c7 0%, #06b6d4 100%)',
+                background: 'var(--wise-forest)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 0 12px rgba(6, 182, 212, 0.4)',
+                color: 'var(--wise-lime)',
                 flexShrink: 0,
               }}
             >
-              <Smartphone size={20} color="#ffffff" />
+              <Smartphone size={20} />
             </div>
             <div style={{ minWidth: 0 }}>
-              <div style={{ fontSize: '0.84rem', fontWeight: 800, color: '#f8fafc', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              <div style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--wise-forest)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 Install VANTIQ App
               </div>
-              <div style={{ fontSize: '0.70rem', color: '#94a3b8', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                Instant offline access & fast quantum calculations
+              <div style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                Instant offline access & fast calculations
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
             <button
               onClick={handleInstallClick}
               className="btn btn-primary"
               style={{
-                padding: '6px 14px',
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                borderRadius: '8px',
+                padding: '8px 16px',
+                fontSize: '0.82rem',
+                fontWeight: 800,
+                borderRadius: '9999px',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '6px',
               }}
             >
-              <Download size={13} />
+              <Download size={14} />
               <span>Install</span>
             </button>
             <button
@@ -177,7 +175,7 @@ export const PwaMobileNav: React.FC = () => {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#64748b',
+                color: 'var(--text-muted)',
                 padding: '6px',
                 cursor: 'pointer',
                 display: 'flex',
@@ -185,7 +183,7 @@ export const PwaMobileNav: React.FC = () => {
               }}
               aria-label="Dismiss banner"
             >
-              <X size={16} />
+              <X size={18} />
             </button>
           </div>
         </aside>
@@ -202,8 +200,8 @@ export const PwaMobileNav: React.FC = () => {
             position: 'fixed',
             inset: 0,
             zIndex: 1200,
-            backgroundColor: 'rgba(0, 0, 0, 0.75)',
-            backdropFilter: 'blur(8px)',
+            backgroundColor: 'rgba(22, 51, 0, 0.45)',
+            backdropFilter: 'blur(12px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -214,20 +212,22 @@ export const PwaMobileNav: React.FC = () => {
           <div
             className="chronos-card"
             style={{
-              maxWidth: '360px',
+              maxWidth: '380px',
               width: '100%',
-              padding: '24px',
-              backgroundColor: '#0a1124',
-              border: '1px solid rgba(56, 189, 248, 0.5)',
+              padding: '28px',
+              backgroundColor: '#ffffff',
+              border: '1.5px solid #d0d7cc',
               textAlign: 'center',
+              borderRadius: '20px',
+              boxShadow: '0 20px 60px rgba(22, 51, 0, 0.15)',
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div style={{ fontSize: '1.8rem', marginBottom: '8px' }}>📲</div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f8fafc', marginBottom: '8px' }}>
+            <div style={{ fontSize: '2rem', marginBottom: '10px' }}>📲</div>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--wise-forest)', marginBottom: '10px' }}>
               Install on iOS / Safari
             </h3>
-            <p style={{ fontSize: '0.84rem', color: '#94a3b8', lineHeight: 1.5, marginBottom: '16px' }}>
+            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '20px' }}>
               1. Tap the <strong>Share</strong> button <span style={{ fontSize: '1.1rem' }}>⎋</span> at the bottom of Safari.<br />
               2. Scroll down and select <strong>"Add to Home Screen"</strong> ⊕.<br />
               3. Tap <strong>Add</strong> to experience VANTIQ in standalone app mode!
@@ -235,7 +235,7 @@ export const PwaMobileNav: React.FC = () => {
             <button
               onClick={() => setShowIosGuide(false)}
               className="btn btn-primary"
-              style={{ width: '100%', padding: '10px' }}
+              style={{ width: '100%', padding: '12px' }}
             >
               Got it
             </button>
@@ -255,15 +255,15 @@ export const PwaMobileNav: React.FC = () => {
           left: 0,
           right: 0,
           zIndex: 999,
-          backgroundColor: 'rgba(5, 9, 20, 0.94)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderTop: '1px solid rgba(56, 189, 248, 0.25)',
+          backgroundColor: 'rgba(255, 255, 255, 0.96)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderTop: '1px solid #e5e9e2',
           paddingBottom: 'calc(8px + env(safe-area-inset-bottom, 0px))',
           paddingTop: '8px',
           paddingLeft: '12px',
           paddingRight: '12px',
-          boxShadow: '0 -4px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(6, 182, 212, 0.1)',
+          boxShadow: '0 -4px 20px rgba(22, 51, 0, 0.05)',
         }}
       >
         <div
