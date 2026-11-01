@@ -25,6 +25,7 @@ interface FintechContextType {
   triggerNeuroShield: () => void;
   bypassNeuroShield: () => void;
   hourlyWage: number;
+  triggerQuantumOptimization: () => void;
 }
 
 const defaultProfile: FinancialProfile = {
@@ -233,6 +234,12 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }));
   };
 
+  const [, setQuantumIteration] = useState(0);
+
+  const triggerQuantumOptimization = () => {
+    setQuantumIteration((p) => p + 1);
+  };
+
   const bypassNeuroShield = () => {
     setNeuroState((prev) => ({
       ...prev,
@@ -256,6 +263,7 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
         triggerNeuroShield,
         bypassNeuroShield,
         hourlyWage,
+        triggerQuantumOptimization,
       }}
     >
       {children}
