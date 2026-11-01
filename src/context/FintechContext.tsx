@@ -19,6 +19,7 @@ interface FintechContextType {
   setShock: React.Dispatch<React.SetStateAction<EmergencyShock>>;
   predatoryOffers: PredatoryOffer[];
   quantumResult: QuantumKnapsackResult;
+  rescuePlan: QuantumKnapsackResult;
   runwayData: CashflowRunwayPoint[];
   neuroState: NeuroShieldState;
   setNeuroState: React.Dispatch<React.SetStateAction<NeuroShieldState>>;
@@ -257,6 +258,7 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
         setShock,
         predatoryOffers,
         quantumResult,
+        rescuePlan: quantumResult,
         runwayData,
         neuroState,
         setNeuroState,
