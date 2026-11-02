@@ -1,94 +1,103 @@
-// src/modules/m14_roadmap_team/RoadmapAndTeam.tsx
-// Module 15: Engineering Roadmap & Team INNOVATEX (Wise Light Theme)
-import React from 'react';
-import { Milestone, Users, Award, ShieldCheck } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronDown, Milestone, Users } from 'lucide-react';
+
+const roadmap = [
+  {
+    quarter: 'Q1', status: 'Completed', title: 'Core quantum knapsack algorithm',
+    detail: 'Build the core quantum knapsack algorithm and a local React simulation to explore funding combinations.',
+    color: '#34d399',
+  },
+  {
+    quarter: 'Q2', status: 'In Progress', title: 'Account Aggregator & hospital pilots',
+    detail: 'Integrate Account Aggregator APIs and run pilots with hospital emergency desks.',
+    color: '#38bdf8',
+  },
+  {
+    quarter: 'Q3', status: 'Planned', title: 'Hardware quantum annealing',
+    detail: 'Integrate hardware quantum annealing through D-Wave Leap and the Amazon Braket QPU.',
+    color: '#c084fc',
+  },
+  {
+    quarter: 'Q4', status: 'Planned', title: 'Pan-India consortium & refinancing',
+    detail: 'Establish a pan-India NBFC co-op consortium and introduce autonomous micro-refinancing.',
+    color: '#fbbf24',
+  },
+];
+
+const credentials = [
+  { title: 'Algorithmic Game Theory', detail: 'Mechanism design for fair, coordinated liquidity allocation.' },
+  { title: 'Behavioral Economics', detail: 'Human-centered decisions during financial stress.' },
+  { title: 'Quantum Computing', detail: 'Optimization methods for complex funding mixes.' },
+  { title: 'Full-Stack FinTech', detail: 'Integrated product engineering across data, APIs, and user experience.' },
+];
+
+const teamMembers = ['Anusha N', 'Harshitha SB', 'Meghan S Gouda', 'Rashmi C', 'Architha P'];
 
 export const RoadmapAndTeam: React.FC = () => {
-  const roadmapSteps = [
-    { phase: 'Phase 1 · Q1 2025', title: 'Algorithmic Simulation & Lab Validation', desc: 'Funding allocation simulations evaluated against synthetic emergency scenarios.' },
-    { phase: 'Phase 2 · Q2 2025', title: 'On-Device Edge Wasm & Account Aggregator API', desc: 'Zero-Knowledge client-side parser integration with Sahamati and Setu Account Aggregator frameworks.' },
-    { phase: 'Phase 3 · Q3 2025', title: 'Hospital & Healthcare Partner Sandbox', desc: 'Direct hospital desk integration: converting urgent ICU admission deposits into buffered tri-tranche loans.' },
-    { phase: 'Phase 4 · Q4 2025', title: 'RBI Regulatory Sandbox Cohort', desc: 'Testing consumer protection safeguards under RBI Fair Practices Code for Digital Lending.' },
-  ];
+  const [openQuarter, setOpenQuarter] = useState<string | null>('Q1');
 
   return (
-    <section id="roadmap" style={{ padding: '60px 0 80px 0', backgroundColor: 'var(--bg-deep)', borderTop: '1px solid #e5e9e2' }}>
+    <section id="roadmap-team" style={{ padding: '30px 0 60px' }}>
       <div className="container">
-        
-        {/* Section Header */}
-        <div style={{ marginBottom: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-            <span className="badge badge-forest">
-              <Milestone size={13} />
-              <span>Step 12: Roadmap & Team INNOVATEX</span>
-            </span>
+        <div style={{ marginBottom: 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+            <span className="badge badge-purple"><Milestone size={13} /><span>Step 12: Roadmap &amp; Team INNOVATEX</span></span>
           </div>
-          <h2 style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', marginBottom: '8px' }}>
-            Engineering Roadmap & Institutional Impact
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc', margin: '0 0 8px' }}>
+            Four-Quarter Engineering Roadmap
           </h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem' }}>
-            From competitive ideation to national RBI regulatory sandbox deployment.
+          <p style={{ color: '#94a3b8', fontSize: '0.95rem', margin: 0 }}>
+            From local optimization simulation to a coordinated, autonomous liquidity network.
           </p>
         </div>
 
-        {/* Roadmap Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginBottom: '40px' }}>
-          {roadmapSteps.map((step, idx) => (
-            <div key={idx} className="vantiq-card" style={{ borderLeft: '4px solid var(--wise-forest)', padding: '24px', backgroundColor: '#ffffff' }}>
-              <div style={{ fontSize: '0.78rem', fontWeight: 800, color: '#15803d', textTransform: 'uppercase', marginBottom: '6px' }}>
-                {step.phase}
-              </div>
-              <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--wise-forest)', marginBottom: '8px' }}>
-                {step.title}
-              </h4>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-                {step.desc}
-              </p>
-            </div>
-          ))}
+        <div className="chronos-card" style={{ padding: 'clamp(16px, 3vw, 28px)', marginBottom: 28 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 255px), 1fr))', gap: 14 }}>
+            {roadmap.map((item) => {
+              const isOpen = openQuarter === item.quarter;
+              return (
+                <article key={item.quarter} style={{ position: 'relative', border: `1px solid ${isOpen ? `${item.color}70` : '#263449'}`, borderRadius: 12, background: isOpen ? `${item.color}0c` : 'rgba(11, 19, 41, 0.45)', transition: 'border-color 180ms ease, background 180ms ease' }}>
+                  <button type="button" aria-expanded={isOpen} aria-controls={`roadmap-${item.quarter}`} onClick={() => setOpenQuarter(isOpen ? null : item.quarter)}
+                    style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 12, textAlign: 'left', padding: 16, color: '#f8fafc', border: 0, borderRadius: 12, background: 'transparent', cursor: 'pointer' }}>
+                    <span aria-hidden="true" style={{ flex: '0 0 42px', height: 42, display: 'grid', placeItems: 'center', borderRadius: 12, background: `${item.color}18`, color: item.color, fontWeight: 900, fontSize: '0.9rem' }}>{item.quarter}</span>
+                    <span style={{ flex: 1, minWidth: 0 }}>
+                      <span style={{ display: 'block', fontSize: '0.88rem', fontWeight: 800, lineHeight: 1.35 }}>{item.title}</span>
+                      <span style={{ display: 'inline-flex', marginTop: 8, padding: '3px 8px', borderRadius: 999, color: item.color, background: `${item.color}18`, fontSize: '0.67rem', fontWeight: 800 }}>{item.status}</span>
+                    </span>
+                    <ChevronDown size={17} color="#64748b" style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 180ms ease' }} />
+                  </button>
+                  {isOpen && <div id={`roadmap-${item.quarter}`} style={{ padding: '0 16px 17px 70px' }}>
+                    <p style={{ margin: 0, color: '#aab7c8', fontSize: '0.8rem', lineHeight: 1.6 }}>{item.detail}</p>
+                    <div style={{ marginTop: 12, height: 2, borderRadius: 2, background: `linear-gradient(90deg, ${item.color}, transparent)` }} />
+                  </div>}
+                </article>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Team INNOVATEX Card */}
-        <div className="vantiq-card" style={{ padding: '36px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '18px' }}>
-            <div style={{
-              width: '44px',
-              height: '44px',
-              borderRadius: '12px',
-              backgroundColor: '#edf4ea',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'var(--wise-forest)'
-            }}>
-              <Users size={24} />
-            </div>
+        <div className="chronos-card glow-cyan" style={{ padding: 'clamp(20px, 4vw, 32px)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
+            <Users size={24} color="#38bdf8" />
             <div>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--wise-forest)' }}>
-                TEAM INNOVATEX
-              </h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                Nagarjuna College Of Engineering and Technology • Domain: Fintech
-              </p>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>TEAM INNOVATEX</h3>
+              <p style={{ fontSize: '0.85rem', color: '#94a3b8', margin: '4px 0 0' }}>Nagarjuna College of Engineering and Technology · FinTech</p>
             </div>
           </div>
 
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, maxWidth: '850px', marginBottom: '24px' }}>
-            Built for the National Fintech Hackathon, VANTIQ combines emergency planning, behavioral safeguards, and privacy-focused design to help households evaluate borrowing choices.
-          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: 12 }}>
+            {credentials.map((item) => (
+              <div key={item.title} style={{ padding: 15, borderRadius: 10, border: '1px solid #1e3a4b', background: 'rgba(11, 19, 41, 0.55)' }}>
+                <div style={{ color: '#67e8f9', fontSize: '0.85rem', fontWeight: 800, marginBottom: 5 }}>{item.title}</div>
+                <p style={{ color: '#94a3b8', fontSize: '0.76rem', lineHeight: 1.5, margin: 0 }}>{item.detail}</p>
+              </div>
+            ))}
+          </div>
 
-          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-            <span className="badge badge-emerald" style={{ padding: '8px 16px', fontSize: '0.82rem' }}>
-              <Award size={14} />
-              <span>Theme: Anti-Predatory Financial Shielding</span>
-            </span>
-            <span className="badge badge-forest" style={{ padding: '8px 16px', fontSize: '0.82rem' }}>
-              <ShieldCheck size={14} />
-              <span>Full Stack: React + TypeScript</span>
-            </span>
+          <div aria-label="Team members" style={{ display: 'flex', flexWrap: 'wrap', gap: 9, marginTop: 18 }}>
+            {teamMembers.map((name) => <span key={name} className="badge badge-cyan" style={{ fontSize: '0.8rem', padding: '7px 14px' }}>{name}</span>)}
           </div>
         </div>
-
       </div>
     </section>
   );
