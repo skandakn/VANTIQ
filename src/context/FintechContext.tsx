@@ -1,6 +1,6 @@
 // src/context/FintechContext.tsx
 // Reactive State Hub for VANTIQ
-// Allows all 15 modular components to communicate in real-time.
+// Allows specialized modular components to communicate in real-time.
 
 import React, { createContext, useContext, useState, useMemo } from 'react';
 import type { 
@@ -8,8 +8,7 @@ import type {
   EmergencyShock, 
   PredatoryOffer, 
   FundingPlanResult,
-  CashflowRunwayPoint, 
-  NeuroShieldState 
+  CashflowRunwayPoint
 } from '../types';
 
 interface FintechContextType {
@@ -20,10 +19,6 @@ interface FintechContextType {
   predatoryOffers: PredatoryOffer[];
   fundingPlan: FundingPlanResult;
   runwayData: CashflowRunwayPoint[];
-  neuroState: NeuroShieldState;
-  setNeuroState: React.Dispatch<React.SetStateAction<NeuroShieldState>>;
-  triggerNeuroShield: () => void;
-  bypassNeuroShield: () => void;
   hourlyWage: number;
 }
 
@@ -97,13 +92,6 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [profile, setProfile] = useState<FinancialProfile>(defaultProfile);
   const [shock, setShock] = useState<EmergencyShock>(defaultShock);
   const [predatoryOffers] = useState<PredatoryOffer[]>(defaultOffers);
-  const [neuroState, setNeuroState] = useState<NeuroShieldState>({
-    isShieldActive: false,
-    panicScore: 78, // High distress detected via typing jitter
-    timerSecondsRemaining: 45,
-    isEmergencyBypassed: false,
-    lifeEnergyHourlyWage: 150, // Rs. 40,000 / 266 working hrs
-  });
 
   // Calculate Absorptive Surplus Dynamically
   const dynamicSurplus = useMemo(() => {
@@ -115,7 +103,7 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return Math.max(50, Math.round(profile.monthlyIncome / 176));
   }, [profile.monthlyIncome]);
 
-  // Estimate a staged funding plan from available savings and the emergency amount.
+  // Estimate the funding plan from available savings and the emergency amount.
   const fundingPlan = useMemo<FundingPlanResult>(() => {
     const shockAmt = shock.amount;
     const savingsAlloc = Math.min(profile.emergencySavings, 5000);
@@ -222,23 +210,6 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     });
   }, [profile, dynamicSurplus]);
 
-  const triggerNeuroShield = () => {
-    setNeuroState((prev) => ({
-      ...prev,
-      isShieldActive: true,
-      timerSecondsRemaining: 45,
-      isEmergencyBypassed: false,
-    }));
-  };
-
-  const bypassNeuroShield = () => {
-    setNeuroState((prev) => ({
-      ...prev,
-      isShieldActive: false,
-      isEmergencyBypassed: true,
-    }));
-  };
-
   return (
     <FintechContext.Provider
       value={{
@@ -249,10 +220,6 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
         predatoryOffers,
         fundingPlan,
         runwayData,
-        neuroState,
-        setNeuroState,
-        triggerNeuroShield,
-        bypassNeuroShield,
         hourlyWage,
       }}
     >

@@ -9,12 +9,12 @@ import {
   AlertTriangle, 
   Menu, 
   X,
-  Lock
+  HeartHandshake
 } from 'lucide-react';
-import { useFintech } from '../../context/FintechContext';
 
 const NAV_LINKS = [
   { id: 'simulator', label: 'Calculator', icon: Zap, fallbackId: 'crisis-intake' },
+  { id: 'health-aid', label: 'Health Aid & Loans', icon: HeartHandshake, fallbackId: 'health-navigator' },
   { id: 'ghost-debt', label: 'Debt Traps', icon: AlertTriangle, fallbackId: 'debt-mesh' },
   { id: 'digital-twin', label: 'Cash Runway', icon: Activity, fallbackId: 'cashflow-twin' },
   { id: 'comparison', label: 'Fee Comparison', icon: Scale, fallbackId: 'rescue-matrix' },
@@ -22,7 +22,6 @@ const NAV_LINKS = [
 ];
 
 export const Navbar: React.FC = () => {
-  const { triggerNeuroShield } = useFintech();
   const [activeSection, setActiveSection] = useState<string>('simulator');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -242,7 +241,7 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Action Area: Wise-style Low-Friction CTA & Shield */}
+          {/* Action Area: Wise-style Low-Friction CTA */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             
             {/* Primary Wise Electric Lime CTA Button */}
@@ -263,26 +262,6 @@ export const Navbar: React.FC = () => {
             >
               <Zap size={15} />
               <span>Simulate Free</span>
-            </button>
-
-            {/* Quick Neuro-Shield trigger */}
-            <button
-              onClick={triggerNeuroShield}
-              className="btn btn-secondary shield-quick-btn"
-              style={{
-                padding: '10px 14px',
-                fontSize: '0.82rem',
-                borderRadius: '9999px',
-                borderColor: '#d0d7cc',
-                color: 'var(--wise-forest)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-              }}
-              title="Test 45s Grounding Shield Modal"
-            >
-              <Lock size={13} color="var(--wise-forest)" />
-              <span className="hide-mobile-badge">45s Shield</span>
             </button>
 
             {/* Mobile Hamburger Toggle */}
@@ -388,9 +367,6 @@ export const Navbar: React.FC = () => {
           }
         }
         @media (max-width: 640px) {
-          .shield-quick-btn {
-            display: none !important;
-          }
           .emergency-cta-btn {
             padding: 8px 12px !important;
             font-size: 0.78rem !important;

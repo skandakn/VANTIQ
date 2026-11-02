@@ -4,13 +4,12 @@ import React, { useState, useEffect } from 'react';
 import { 
   Zap, 
   Activity, 
-  Shield, 
   Download, 
   X, 
   AlertTriangle,
-  Smartphone
+  Smartphone,
+  HeartHandshake
 } from 'lucide-react';
-import { useFintech } from '../../context/FintechContext';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -18,7 +17,6 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export const PwaMobileNav: React.FC = () => {
-  const { triggerNeuroShield } = useFintech();
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isStandalone] = useState<boolean>(() => {
     if (typeof window === 'undefined') return false;
@@ -47,7 +45,7 @@ export const PwaMobileNav: React.FC = () => {
     // Track active section on scroll for mobile nav icons
     const handleScroll = () => {
       const scrollPos = window.scrollY + 200;
-      const sections = ['simulator', 'ghost-debt', 'digital-twin'];
+      const sections = ['simulator', 'health-aid', 'ghost-debt', 'digital-twin'];
       for (let i = sections.length - 1; i >= 0; i--) {
         const id = sections[i];
         const el = document.getElementById(id);
@@ -87,6 +85,7 @@ export const PwaMobileNav: React.FC = () => {
     const directEl = document.getElementById(id);
     const fallbackMap: Record<string, string> = {
       simulator: 'crisis-intake',
+      'health-aid': 'health-navigator',
       'ghost-debt': 'debt-mesh',
       'digital-twin': 'cashflow-twin',
     };
@@ -296,6 +295,29 @@ export const PwaMobileNav: React.FC = () => {
             </span>
           </button>
 
+          {/* Health Aid Tab */}
+          <button
+            onClick={() => scrollTo('health-aid')}
+            style={{
+              background: 'none',
+              border: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '4px',
+              padding: '6px 10px',
+              borderRadius: '8px',
+              color: activeTab === 'health-aid' ? '#15803d' : '#64748b',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <HeartHandshake size={18} color={activeTab === 'health-aid' ? '#15803d' : '#64748b'} />
+            <span style={{ fontSize: '0.68rem', fontWeight: activeTab === 'health-aid' ? 700 : 500 }}>
+              Health Aid
+            </span>
+          </button>
+
           {/* Ghost Debt Tab */}
           <button
             onClick={() => scrollTo('ghost-debt')}
@@ -342,30 +364,6 @@ export const PwaMobileNav: React.FC = () => {
             </span>
           </button>
 
-          {/* 45s Neuro Shield Trigger (Center Highlight Action) */}
-          <button
-            onClick={triggerNeuroShield}
-            style={{
-              background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.25) 0%, rgba(124, 58, 237, 0.15) 100%)',
-              border: '1px solid rgba(139, 92, 246, 0.5)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '4px',
-              padding: '6px 12px',
-              borderRadius: '10px',
-              color: '#c084fc',
-              boxShadow: '0 0 12px rgba(139, 92, 246, 0.25)',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-            }}
-            title="Launch 45s Neuro-Adaptive Grounding Protocol"
-          >
-            <Shield size={18} color="#c084fc" />
-            <span style={{ fontSize: '0.68rem', fontWeight: 800 }}>
-              45s Shield
-            </span>
-          </button>
         </div>
       </nav>
 
