@@ -21,6 +21,15 @@ export const HeroSection: React.FC = () => {
 
   // Local state for interactive currency/emergency converter
   const [showCategoryDropdown, setShowCategoryDropdown] = useState<boolean>(false);
+  const [tenureMonths, setTenureMonths] = useState<number>(shock.tenureMonths || 12);
+
+  const handleTenureChange = (months: number) => {
+    setTenureMonths(months);
+    setShock((prev) => ({
+      ...prev,
+      tenureMonths: months,
+    }));
+  };
 
   const categories = [
     { label: 'Medical Emergency', value: 'medical' },
@@ -330,6 +339,40 @@ export const HeroSection: React.FC = () => {
                     )}
                   </div>
                 </div>
+
+                {/* Repayment Period (For how many periods?) */}
+                <div style={{ marginTop: '14px', marginBottom: '4px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                    <label style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--wise-forest)' }}>
+                      Repayment Period (For how many periods?)
+                    </label>
+                    <span style={{ fontSize: '0.86rem', fontWeight: 900, color: '#15803d' }}>
+                      {tenureMonths} Months ({Math.round((tenureMonths / 12) * 10) / 10} yrs)
+                    </span>
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '6px' }}>
+                    {[6, 12, 24, 36, 60].map((t) => (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => handleTenureChange(t)}
+                        style={{
+                          padding: '7px 2px',
+                          borderRadius: '8px',
+                          border: tenureMonths === t ? '1.5px solid var(--wise-forest)' : '1px solid #d0d7cc',
+                          backgroundColor: tenureMonths === t ? 'var(--wise-forest)' : '#ffffff',
+                          color: tenureMonths === t ? 'var(--wise-lime)' : 'var(--text-secondary)',
+                          fontWeight: tenureMonths === t ? 800 : 600,
+                          fontSize: '0.75rem',
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
+                        }}
+                      >
+                        {t}M
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               {/* Vertical Stepper Connector Line (Wise's Signature Pattern) */}
@@ -471,7 +514,7 @@ export const HeroSection: React.FC = () => {
 
               {/* Big Wise-Style Action Button */}
               <button
-                onClick={() => scrollToSection('rescue-split')}
+                onClick={() => scrollToSection('health-navigator')}
                 className="btn btn-primary"
                 style={{
                   width: '100%',
@@ -486,11 +529,11 @@ export const HeroSection: React.FC = () => {
                 }}
               >
                 <Sparkles size={18} />
-                <span>View Your Detailed Rescue Plan</span>
+                <span>Find & Rank Best Loans (With Scraped Reddit Reviews) →</span>
               </button>
 
               <div style={{ textAlign: 'center', marginTop: '12px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                Takes 30 seconds · No credit score footprint · 100% Client-side Private
+                Suggests verified loans ranked #1 to lowest · Scrapes live patient reviews from r/personalfinance, r/IndiaInvestments
               </div>
 
             </div>

@@ -29,6 +29,7 @@ import { useFintech } from '../../context/FintechContext';
 import { HEALTH_CONDITIONS, HEALTH_RELIEF_PLANS } from './healthPlansData';
 import { HealthEmiCalculator } from './HealthEmiCalculator';
 import { HealthPlanComparisonModal } from './HealthPlanComparisonModal';
+import { RedditReviewsExplorer } from './RedditReviewsExplorer';
 import type { HealthReliefPlan, HealthReliefStrategy } from '../../types';
 
 export const HealthReliefNavigator: React.FC = () => {
@@ -42,7 +43,17 @@ export const HealthReliefNavigator: React.FC = () => {
   const [selectedConditionId, setSelectedConditionId] = useState<string>('cardiac');
   const [regionFilter, setRegionFilter] = useState<'All' | 'India' | 'USA' | 'UK' | 'Global'>('India');
   const [targetAmount, setTargetAmount] = useState<number>(shock.amount || 450000);
-  const [desiredTenureMonths, setDesiredTenureMonths] = useState<number>(24);
+  const [desiredTenureMonths, setDesiredTenureMonths] = useState<number>(shock.tenureMonths || 24);
+
+  // Synchronize with external shock updates (from Hero or Crisis Input)
+  React.useEffect(() => {
+    if (shock.amount && shock.amount > 0 && shock.amount !== targetAmount) {
+      setTargetAmount(shock.amount);
+    }
+    if (shock.tenureMonths && shock.tenureMonths > 0 && shock.tenureMonths !== desiredTenureMonths) {
+      setDesiredTenureMonths(shock.tenureMonths);
+    }
+  }, [shock.amount, shock.tenureMonths, targetAmount, desiredTenureMonths]);
   const [urgency, setUrgency] = useState<'critical' | 'high' | 'moderate'>('critical');
   const [insuranceStatus, setInsuranceStatus] = useState<'uninsured' | 'partial' | 'full'>('partial');
   const [existingInsuranceCover, setExistingInsuranceCover] = useState<number>(150000);
@@ -1053,6 +1064,126 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
               </div>
             </div>
 
+            {/* =========================================================
+                STRICT PROPER ORDER-WISE RANKING LEADERBOARD TABLE
+                (#1 Best Match down to Lowest Ranked Option)
+                ========================================================= */}
+            <div
+              style={{
+                backgroundColor: '#ffffff',
+                border: '1.5px solid #d0d7cc',
+                borderRadius: '20px',
+                padding: '24px',
+                marginBottom: '32px',
+                boxShadow: '0 8px 24px rgba(22, 51, 0, 0.04)',
+                overflowX: 'auto',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
+                <div>
+                  <div style={{ fontSize: '0.74rem', textTransform: 'uppercase', fontWeight: 800, color: '#15803d', letterSpacing: '0.04em' }}>
+                    Ranked Comparison Leaderboard
+                  </div>
+                  <h4 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--wise-forest)', margin: 0 }}>
+                    Best Options in Strict Proper Order (#1 to Lowest)
+                  </h4>
+                </div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                  Evaluated for <strong>{currencyConfig.symbol}{targetAmount.toLocaleString()}</strong> over <strong>{desiredTenureMonths} Months</strong>
+                </div>
+              </div>
+
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem', textAlign: 'left' }}>
+                <thead>
+                  <tr style={{ borderBottom: '2px solid #e5e9e2', color: 'var(--text-secondary)' }}>
+                    <th style={{ padding: '12px 10px', fontWeight: 800 }}>Rank & Tier</th>
+                    <th style={{ padding: '12px 10px', fontWeight: 800 }}>Option / Lender</th>
+                    <th style={{ padding: '12px 10px', fontWeight: 800 }}>Interest (APR)</th>
+                    <th style={{ padding: '12px 10px', fontWeight: 800 }}>Monthly EMI ({desiredTenureMonths}M)</th>
+                    <th style={{ padding: '12px 10px', fontWeight: 800 }}>Reddit Sentiment</th>
+                    <th style={{ padding: '12px 10px', fontWeight: 800 }}>Disbursal</th>
+                    <th style={{ padding: '12px 10px', fontWeight: 800, textAlign: 'right' }}>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rankedPlans.map((plan, idx) => {
+                    const rankNum = idx + 1;
+                    const isChosen = selectedPlanId === plan.id;
+                    const r = plan.interestApr / 1200;
+                    const n = Math.min(plan.tenureMonthsMax, desiredTenureMonths);
+                    const emi = plan.interestApr === 0
+                      ? Math.round(targetAmount / n)
+                      : Math.round((targetAmount * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1));
+
+                    return (
+                      <tr
+                        key={plan.id}
+                        style={{
+                          borderBottom: '1px solid #edf0ea',
+                          backgroundColor: isChosen ? '#f0fdf4' : rankNum === 1 ? '#fffdf7' : 'transparent',
+                          transition: 'background-color 0.15s ease',
+                        }}
+                      >
+                        <td style={{ padding: '14px 10px', fontWeight: 900 }}>
+                          <span
+                            style={{
+                              padding: '4px 10px',
+                              borderRadius: '9999px',
+                              backgroundColor: rankNum === 1 ? '#fef3c7' : rankNum === 2 ? '#e0f2fe' : rankNum === 3 ? '#dcfce7' : '#f4f5f1',
+                              color: rankNum === 1 ? '#b45309' : rankNum === 2 ? '#0369a1' : rankNum === 3 ? '#15803d' : '#4b5563',
+                              fontSize: '0.74rem',
+                              fontWeight: 900,
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                            }}
+                          >
+                            {rankNum === 1 ? '👑 #1 Best' : `#${rankNum}`}
+                          </span>
+                        </td>
+                        <td style={{ padding: '14px 10px' }}>
+                          <div style={{ fontWeight: 800, color: 'var(--wise-forest)' }}>{plan.name}</div>
+                          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{plan.organization} &bull; {plan.categoryLabel}</div>
+                        </td>
+                        <td style={{ padding: '14px 10px', fontWeight: 900, color: plan.interestApr === 0 ? '#15803d' : 'var(--wise-forest)' }}>
+                          {plan.interestApr === 0 ? '✨ 0% APR' : `${plan.interestApr}% APR`}
+                        </td>
+                        <td style={{ padding: '14px 10px', fontWeight: 800, color: 'var(--wise-forest)' }}>
+                          {plan.isRepayable ? `${currencyConfig.symbol}${emi.toLocaleString()}/mo` : '₹0 (Grant/Scheme)'}
+                        </td>
+                        <td style={{ padding: '14px 10px' }}>
+                          <span style={{ fontSize: '0.74rem', fontWeight: 700, backgroundColor: '#fff7ed', color: '#c2410c', padding: '3px 8px', borderRadius: '6px', border: '1px solid #fed7aa' }}>
+                            💬 {plan.redditSentiment || `${plan.redditScore}% on Reddit`}
+                          </span>
+                        </td>
+                        <td style={{ padding: '14px 10px', fontSize: '0.75rem', color: '#15803d', fontWeight: 700 }}>
+                          {plan.disbursementSpeed}
+                        </td>
+                        <td style={{ padding: '14px 10px', textAlign: 'right' }}>
+                          <button
+                            type="button"
+                            onClick={() => handleChoosePlan(plan)}
+                            style={{
+                              padding: '6px 14px',
+                              borderRadius: '9999px',
+                              border: isChosen ? '1.5px solid #16a34a' : '1px solid #d0d7cc',
+                              backgroundColor: isChosen ? '#16a34a' : '#ffffff',
+                              color: isChosen ? '#ffffff' : 'var(--wise-forest)',
+                              fontSize: '0.74rem',
+                              fontWeight: 800,
+                              cursor: 'pointer',
+                            }}
+                          >
+                            {isChosen ? '✓ Selected' : 'Choose Plan'}
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
             {/* Ranked Cards Grid (Strict Order from Best to Lowest) */}
             <div
               id="vetted-options-grid"
@@ -1365,6 +1496,11 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
                 );
               })}
             </div>
+
+            {/* =========================================================
+                SCRAPED REDDIT COMMUNITY REVIEWS & DISCUSSIONS HUB
+                ========================================================= */}
+            <RedditReviewsExplorer />
 
           </div>
         )}

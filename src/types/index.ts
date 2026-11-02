@@ -17,6 +17,7 @@ export interface EmergencyShock {
   description: string;        // e.g., "Urgent Hospital Surgery Deposit"
   urgencyLevel: 'critical' | 'high' | 'moderate';
   daysToDisbursement: number; // e.g., 1 day
+  tenureMonths?: number;      // e.g., 6, 12, 24, 36, 60 months
 }
 
 export interface PredatoryOffer {

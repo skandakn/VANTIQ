@@ -86,6 +86,23 @@ export const EmergencyIntake: React.FC = () => {
           {netSurplus >= 0 ? 'Capacity estimate' : 'Monthly shortfall'}
         </span>
       </div>
+
+      <div style={{ marginTop: '10px', textAlign: 'center' }}>
+        <a
+          href="#health-navigator"
+          style={{
+            fontSize: '0.78rem',
+            color: '#15803d',
+            fontWeight: 800,
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '4px',
+          }}
+        >
+          <span>🏥 Match relief loans for this capacity with Reddit community reviews →</span>
+        </a>
+      </div>
     </div>
   );
 };
