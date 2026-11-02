@@ -267,19 +267,19 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
             </div>
 
             {/* Quick Speed Switcher */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: '#94a3b8' }}>
-              <span>Simulation Mode:</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              <span style={{ fontWeight: 600 }}>Simulation Mode:</span>
               <button
                 onClick={() => setSimulationSpeed('demo')}
                 style={{
-                  background: simulationSpeed === 'demo' ? 'rgba(139, 92, 246, 0.25)' : 'rgba(15, 23, 42, 0.6)',
-                  border: simulationSpeed === 'demo' ? '1px solid #a855f7' : '1px solid #334155',
-                  color: simulationSpeed === 'demo' ? '#c084fc' : '#94a3b8',
+                  background: simulationSpeed === 'demo' ? '#f3e8ff' : '#ffffff',
+                  border: simulationSpeed === 'demo' ? '1.5px solid #7c3aed' : '1px solid #d0d7cc',
+                  color: simulationSpeed === 'demo' ? '#6b21a8' : 'var(--text-secondary)',
                   padding: '4px 10px',
                   borderRadius: '6px',
                   cursor: 'pointer',
                   fontSize: '0.75rem',
-                  fontWeight: 600
+                  fontWeight: 700
                 }}
               >
                 Inspection (1.4s)
@@ -287,14 +287,14 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
               <button
                 onClick={() => setSimulationSpeed('fast')}
                 style={{
-                  background: simulationSpeed === 'fast' ? 'rgba(16, 185, 129, 0.25)' : 'rgba(15, 23, 42, 0.6)',
-                  border: simulationSpeed === 'fast' ? '1px solid #10b981' : '1px solid #334155',
-                  color: simulationSpeed === 'fast' ? '#34d399' : '#94a3b8',
+                  background: simulationSpeed === 'fast' ? '#dcfce7' : '#ffffff',
+                  border: simulationSpeed === 'fast' ? '1.5px solid #15803d' : '1px solid #d0d7cc',
+                  color: simulationSpeed === 'fast' ? '#15803d' : 'var(--text-secondary)',
                   padding: '4px 10px',
                   borderRadius: '6px',
                   cursor: 'pointer',
                   fontSize: '0.75rem',
-                  fontWeight: 600
+                  fontWeight: 700
                 }}
               >
                 Direct (38 ms)
@@ -334,7 +334,7 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
                 backgroundColor: isSolving ? '#b45309' : '#15803d',
               }} />
               <div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--wise-forest)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 800 }}>
                   Annealing Engine State
                 </div>
                 <div style={{ fontSize: '0.95rem', fontWeight: 800, color: isSolving ? '#b45309' : '#15803d' }}>
@@ -344,20 +344,20 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
             </div>
 
             {/* Stepper HUD */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 14px', background: '#f4f5f1', borderRadius: '8px', border: '1px solid #d0d7cc' }}>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: activeStep >= 1 ? 'var(--wise-forest)' : 'var(--text-muted)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 14px', background: '#f0fdf4', borderRadius: '8px', border: '1px solid #bbf7d0' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 800, color: activeStep >= 1 ? 'var(--wise-forest)' : 'var(--text-muted)' }}>
                 1. QUBO
               </span>
-              <ChevronRight size={12} color="#475569" />
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: activeStep >= 2 ? '#c084fc' : '#475569' }}>
+              <ChevronRight size={12} color="#15803d" />
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: activeStep >= 2 ? '#7c3aed' : 'var(--text-muted)' }}>
                 2. Tunneling
               </span>
-              <ChevronRight size={12} color="#475569" />
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: activeStep >= 3 ? '#fbbf24' : '#475569' }}>
+              <ChevronRight size={12} color="#15803d" />
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: activeStep >= 3 ? '#b45309' : 'var(--text-muted)' }}>
                 3. Adiabatic
               </span>
-              <ChevronRight size={12} color="#475569" />
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: activeStep >= 4 ? '#34d399' : '#475569' }}>
+              <ChevronRight size={12} color="#15803d" />
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: activeStep >= 4 ? '#15803d' : 'var(--text-muted)' }}>
                 4. Eigenstate |ψ₀⟩
               </span>
             </div>
@@ -395,104 +395,108 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
           </div>
         </div>
 
-        {/* PRIMARY OUTPUT METRICS: Ground state energy, Annealing Time (38 ms), Constraint Violation Penalty (0.000) */}
+        {/* PRIMARY OUTPUT METRICS: High-Contrast Contrast-Rich Cards */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
           gap: '16px',
           marginBottom: '28px'
         }}>
-          {/* Ground State Energy Metric */}
+          {/* Ground State Energy Metric - Rich Quantum Violet & Wise Forest */}
           <div className="vantiq-card glow-purple" style={{
-            background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%)',
-            border: '1px solid rgba(139, 92, 246, 0.4)',
+            background: 'linear-gradient(135deg, #2e1065 0%, #163300 100%)',
+            border: '1.5px solid #a855f7',
+            boxShadow: '0 8px 24px rgba(168, 85, 247, 0.25)',
             padding: '20px'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-              <span style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600 }}>Ground State Energy</span>
-              <span className="badge badge-purple" style={{ fontSize: '0.7rem' }}>Global Min</span>
+              <span style={{ fontSize: '0.82rem', color: '#e9d5ff', fontWeight: 700, letterSpacing: '0.02em' }}>Ground State Energy</span>
+              <span className="badge badge-purple" style={{ fontSize: '0.7rem', fontWeight: 800 }}>Global Min</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '2.1rem', fontWeight: 800, color: '#c084fc', fontFamily: 'monospace' }}>
+              <span style={{ fontSize: '2.1rem', fontWeight: 900, color: '#ffffff', fontFamily: 'monospace', textShadow: '0 2px 10px rgba(192, 132, 252, 0.5)' }}>
                 {currentEnergy.toFixed(2)}
               </span>
-              <span style={{ fontSize: '1rem', color: '#94a3b8', fontWeight: 600 }}>eV</span>
+              <span style={{ fontSize: '1rem', color: '#c084fc', fontWeight: 700 }}>eV</span>
             </div>
-            <div style={{ fontSize: '0.75rem', color: '#cbd5e1', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <Cpu size={12} color="#c084fc" />
+            <div style={{ fontSize: '0.78rem', color: '#e9d5ff', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Cpu size={14} color="#c084fc" />
               <span>Hamiltonian H(s=1) Minimal Eigenvalue</span>
             </div>
           </div>
 
-          {/* Annealing Time Metric (38 ms) */}
+          {/* Annealing Time Metric (38 ms) - Rich Ocean Cyan & Wise Forest */}
           <div className="vantiq-card glow-cyan" style={{
-            background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%)',
-            border: '1px solid rgba(6, 182, 212, 0.4)',
+            background: 'linear-gradient(135deg, #0c4a6e 0%, #163300 100%)',
+            border: '1.5px solid #06b6d4',
+            boxShadow: '0 8px 24px rgba(6, 182, 212, 0.25)',
             padding: '20px'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-              <span style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600 }}>Annealing Time</span>
-              <span className="badge badge-cyan" style={{ fontSize: '0.7rem' }}>Ultra-Fast</span>
+              <span style={{ fontSize: '0.82rem', color: '#bae6fd', fontWeight: 700, letterSpacing: '0.02em' }}>Annealing Time</span>
+              <span className="badge badge-cyan" style={{ fontSize: '0.7rem', fontWeight: 800 }}>Ultra-Fast</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '2.1rem', fontWeight: 800, color: '#38bdf8', fontFamily: 'monospace' }}>
+              <span style={{ fontSize: '2.1rem', fontWeight: 900, color: '#ffffff', fontFamily: 'monospace', textShadow: '0 2px 10px rgba(56, 189, 248, 0.5)' }}>
                 {annealingTimeMs}
               </span>
-              <span style={{ fontSize: '1rem', color: '#94a3b8', fontWeight: 600 }}>ms</span>
+              <span style={{ fontSize: '1rem', color: '#38bdf8', fontWeight: 700 }}>ms</span>
             </div>
-            <div style={{ fontSize: '0.75rem', color: '#cbd5e1', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <Activity size={12} color="#38bdf8" />
+            <div style={{ fontSize: '0.78rem', color: '#bae6fd', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Activity size={14} color="#38bdf8" />
               <span>Transverse Anneal Protocol Latency</span>
             </div>
           </div>
 
-          {/* Constraint Violation Penalty Metric (0.000) */}
+          {/* Constraint Violation Penalty Metric (0.000) - Rich Emerald & Wise Forest */}
           <div className="vantiq-card glow-emerald" style={{
-            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%)',
-            border: '1px solid rgba(16, 185, 129, 0.4)',
+            background: 'linear-gradient(135deg, #14532d 0%, #163300 100%)',
+            border: '1.5px solid #10b981',
+            boxShadow: '0 8px 24px rgba(16, 185, 129, 0.25)',
             padding: '20px'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-              <span style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600 }}>Constraint Violation Penalty</span>
-              <span className="badge badge-emerald" style={{ fontSize: '0.7rem' }}>Zero Slack</span>
+              <span style={{ fontSize: '0.82rem', color: '#bbf7d0', fontWeight: 700, letterSpacing: '0.02em' }}>Constraint Violation Penalty</span>
+              <span className="badge badge-emerald" style={{ fontSize: '0.7rem', fontWeight: 800 }}>Zero Slack</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '2.1rem', fontWeight: 800, color: '#34d399', fontFamily: 'monospace' }}>
+              <span style={{ fontSize: '2.1rem', fontWeight: 900, color: '#ffffff', fontFamily: 'monospace', textShadow: '0 2px 10px rgba(52, 211, 153, 0.5)' }}>
                 {constraintPenalty.toFixed(3)}
               </span>
-              <span style={{ fontSize: '1rem', color: '#94a3b8', fontWeight: 600 }}>λ</span>
+              <span style={{ fontSize: '1rem', color: '#34d399', fontWeight: 700 }}>λ</span>
             </div>
-            <div style={{ fontSize: '0.75rem', color: '#cbd5e1', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <ShieldCheck size={12} color="#34d399" />
+            <div style={{ fontSize: '0.78rem', color: '#bbf7d0', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <ShieldCheck size={14} color="#34d399" />
               <span>Exact ₹{targetShockAmount.toLocaleString('en-IN')} Liquidity Match</span>
             </div>
           </div>
 
-          {/* Ground State Fidelity Metric */}
+          {/* Ground State Fidelity Metric - Rich Royal Sapphire & Wise Forest */}
           <div className="vantiq-card glow-cyan" style={{
-            background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%)',
-            border: '1px solid rgba(56, 189, 248, 0.4)',
+            background: 'linear-gradient(135deg, #1e3a8a 0%, #163300 100%)',
+            border: '1.5px solid #38bdf8',
+            boxShadow: '0 8px 24px rgba(56, 189, 248, 0.25)',
             padding: '20px'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-              <span style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600 }}>Ground State Fidelity</span>
-              <span className="badge badge-cyan" style={{ fontSize: '0.7rem' }}>p=4 QAOA</span>
+              <span style={{ fontSize: '0.82rem', color: '#bfdbfe', fontWeight: 700, letterSpacing: '0.02em' }}>Ground State Fidelity</span>
+              <span className="badge badge-cyan" style={{ fontSize: '0.7rem', fontWeight: 800 }}>p=4 QAOA</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '2.1rem', fontWeight: 800, color: '#38bdf8', fontFamily: 'monospace' }}>
+              <span style={{ fontSize: '2.1rem', fontWeight: 900, color: '#ffffff', fontFamily: 'monospace', textShadow: '0 2px 10px rgba(56, 189, 248, 0.5)' }}>
                 99.87
               </span>
-              <span style={{ fontSize: '1rem', color: '#94a3b8', fontWeight: 600 }}>%</span>
+              <span style={{ fontSize: '1rem', color: '#38bdf8', fontWeight: 700 }}>%</span>
             </div>
-            <div style={{ fontSize: '0.75rem', color: '#cbd5e1', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <Target size={12} color="#38bdf8" />
+            <div style={{ fontSize: '0.78rem', color: '#bfdbfe', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Target size={14} color="#38bdf8" />
               <span>Adiabatic Spectral Gap Δ_min = 1.42 eV</span>
             </div>
           </div>
         </div>
 
         {/* View Selection Tabs */}
-        <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', borderBottom: '1px solid #1e293b', paddingBottom: '12px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', borderBottom: '1.5px solid #d0d7cc', paddingBottom: '12px', flexWrap: 'wrap' }}>
           <button
             onClick={() => setActiveTab('annealing')}
             style={{
@@ -1148,9 +1152,10 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
 
         {/* Selected Tranches Summary Banner */}
         <div style={{
-          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(15, 23, 42, 0.9) 100%)',
-          border: '1px solid rgba(16, 185, 129, 0.35)',
-          borderRadius: '12px',
+          background: 'linear-gradient(135deg, #163300 0%, #1f4502 100%)',
+          border: '1.5px solid #10b981',
+          boxShadow: '0 8px 24px rgba(22, 51, 0, 0.15)',
+          borderRadius: '14px',
           padding: '18px 24px',
           display: 'flex',
           alignItems: 'center',
@@ -1159,12 +1164,12 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
           gap: '16px'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <CheckCircle2 size={24} color="#34d399" />
+            <CheckCircle2 size={24} color="#9fe870" />
             <div>
-              <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f8fafc' }}>
+              <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#ffffff' }}>
                 Ground State Allocation Confirmed: ₹{currentTotalAllocated.toLocaleString('en-IN')} of ₹{targetShockAmount.toLocaleString('en-IN')}
               </div>
-              <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+              <div style={{ fontSize: '0.82rem', color: '#bbf7d0', marginTop: '2px' }}>
                 Synthesized 3 non-predatory tranches (Savings + 0% Buffer Card + NBFC). Zero calendar collision detected.
               </div>
             </div>
@@ -1172,12 +1177,12 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
 
           <div style={{ display: 'flex', gap: '16px', fontSize: '0.85rem' }}>
             <div>
-              <span style={{ color: '#94a3b8' }}>Saved vs Instant Apps: </span>
-              <strong style={{ color: '#34d399' }}>₹{quantumResult?.directCashSaved?.toLocaleString('en-IN') || '18,400'}</strong>
+              <span style={{ color: '#dcfce7' }}>Saved vs Instant Apps: </span>
+              <strong style={{ color: '#9fe870', fontWeight: 800 }}>₹{quantumResult?.directCashSaved?.toLocaleString('en-IN') || '18,400'}</strong>
             </div>
             <div>
-              <span style={{ color: '#94a3b8' }}>Life Energy Saved: </span>
-              <strong style={{ color: '#38bdf8' }}>{quantumResult?.humanLifeEnergyHoursSaved || 123} Hours</strong>
+              <span style={{ color: '#dcfce7' }}>Life Energy Saved: </span>
+              <strong style={{ color: '#38bdf8', fontWeight: 800 }}>{quantumResult?.humanLifeEnergyHoursSaved || 123} Hours</strong>
             </div>
           </div>
         </div>
