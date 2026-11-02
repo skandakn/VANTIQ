@@ -166,13 +166,6 @@ export const HeroSection: React.FC = () => {
                 <ArrowRight size={18} />
               </button>
 
-              <button
-                onClick={() => scrollToSection('quantum-solver')}
-                className="btn btn-secondary"
-                style={{ fontSize: '1.02rem', padding: '16px 28px' }}
-              >
-                <span>See Quantum Knapsack</span>
-              </button>
             </div>
 
             {/* Harvard / Princeton Micro-quote */}

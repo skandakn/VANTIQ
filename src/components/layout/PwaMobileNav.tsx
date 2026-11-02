@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { 
   Zap, 
   Activity, 
-  Cpu, 
   Shield, 
   Download, 
   X, 
@@ -48,7 +47,7 @@ export const PwaMobileNav: React.FC = () => {
     // Track active section on scroll for mobile nav icons
     const handleScroll = () => {
       const scrollPos = window.scrollY + 200;
-      const sections = ['simulator', 'ghost-debt', 'digital-twin', 'quantum-solver'];
+      const sections = ['simulator', 'ghost-debt', 'digital-twin'];
       for (let i = sections.length - 1; i >= 0; i--) {
         const id = sections[i];
         const el = document.getElementById(id);
@@ -90,7 +89,6 @@ export const PwaMobileNav: React.FC = () => {
       simulator: 'crisis-intake',
       'ghost-debt': 'debt-mesh',
       'digital-twin': 'cashflow-twin',
-      'quantum-solver': 'quantum-knapsack',
     };
     const target = directEl || document.getElementById(fallbackMap[id] || '');
     if (target) {
@@ -341,29 +339,6 @@ export const PwaMobileNav: React.FC = () => {
             <Activity size={18} color={activeTab === 'digital-twin' ? '#34d399' : '#64748b'} />
             <span style={{ fontSize: '0.68rem', fontWeight: activeTab === 'digital-twin' ? 700 : 500 }}>
               Runway
-            </span>
-          </button>
-
-          {/* Quantum Solver Tab */}
-          <button
-            onClick={() => scrollTo('quantum-solver')}
-            style={{
-              background: 'none',
-              border: 'none',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '4px',
-              padding: '6px 10px',
-              borderRadius: '8px',
-              color: activeTab === 'quantum-solver' ? '#c084fc' : '#64748b',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-            }}
-          >
-            <Cpu size={18} color={activeTab === 'quantum-solver' ? '#c084fc' : '#64748b'} />
-            <span style={{ fontSize: '0.68rem', fontWeight: activeTab === 'quantum-solver' ? 700 : 500 }}>
-              Quantum
             </span>
           </button>
 

@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { 
   Shield, 
   Zap, 
-  Cpu, 
   Activity, 
   Scale, 
   AlertTriangle, 
@@ -17,7 +16,6 @@ import { useFintech } from '../../context/FintechContext';
 const NAV_LINKS = [
   { id: 'simulator', label: 'Calculator', icon: Zap, fallbackId: 'crisis-intake' },
   { id: 'ghost-debt', label: 'Debt Traps', icon: AlertTriangle, fallbackId: 'debt-mesh' },
-  { id: 'quantum-solver', label: 'Quantum Solver', icon: Cpu, fallbackId: 'quantum-knapsack' },
   { id: 'digital-twin', label: 'Cash Runway', icon: Activity, fallbackId: 'cashflow-twin' },
   { id: 'comparison', label: 'Fee Comparison', icon: Scale, fallbackId: 'rescue-matrix' },
   { id: 'compliance', label: 'Security & ZK', icon: Shield, fallbackId: 'privacy-compliance' },

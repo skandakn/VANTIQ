@@ -17,7 +17,6 @@ import {
 const FOOTER_FALLBACKS: Record<string, string> = {
   simulator: 'crisis-intake',
   'ghost-debt': 'debt-mesh',
-  'quantum-solver': 'quantum-knapsack',
   'digital-twin': 'cashflow-twin',
   comparison: 'rescue-matrix',
   compliance: 'privacy-compliance',
@@ -171,7 +170,7 @@ export const Footer: React.FC = () => {
                 </span>
               </div>
               <p style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '3px' }}>
-                QUBO / QAOA Annealing Kernel • Dynamic Hamiltonian Optimization • Latency: 38ms
+                Transparent funding estimates • Repayment capacity checks • Emergency planning
               </p>
             </div>
           </div>
@@ -460,7 +459,6 @@ export const Footer: React.FC = () => {
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {[
-                { label: 'Quantum Knapsack Solver (QUBO)', id: 'quantum-solver' },
                 { label: 'Tri-Tranche Rescue Allocation', id: 'rescue-split' },
                 { label: 'Labor Life-Energy Hours', id: 'life-energy' },
                 { label: 'Counterfactual Comparison Matrix', id: 'comparison' },

@@ -53,13 +53,7 @@ interface TrancheDetail {
 }
 
 export const MultiSourceRescueCard: React.FC = () => {
-  // 1. Consume rescuePlan and shock from useFintech()
-  const fintech = useFintech();
-  const { shock } = fintech;
-  // Type-safe consumption supporting both rescuePlan and quantumResult
-  const rescuePlan =
-    (fintech as typeof fintech & { rescuePlan?: typeof fintech.quantumResult }).rescuePlan ??
-    fintech.quantumResult;
+  const { shock } = useFintech();
 
   // Local interactive UI states
   const [selectedTrancheId, setSelectedTrancheId] = useState<string | null>(null);
@@ -219,7 +213,7 @@ export const MultiSourceRescueCard: React.FC = () => {
             </span>
             <span className="badge badge-purple" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <ShieldCheck size={13} />
-              <span>Quantum Knapsack Solved (134ms)</span>
+              <span>Funding plan calculated</span>
             </span>
           </div>
 
@@ -335,14 +329,6 @@ export const MultiSourceRescueCard: React.FC = () => {
             </button>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
-              Optimized via Knapsack:
-            </span>
-            <span className="badge badge-emerald" style={{ fontSize: '0.75rem' }}>
-              {rescuePlan?.quantumSolveTimeMs || 134}ms Latency
-            </span>
-          </div>
         </div>
 
         {/* REQUIREMENT 3: VISUAL TRANCHE PROGRESS BAR */}
@@ -354,7 +340,7 @@ export const MultiSourceRescueCard: React.FC = () => {
                 <span>Proportional Allocation Progress Bar (Total Requirement: ₹{totalRequired.toLocaleString()})</span>
               </div>
               <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '2px' }}>
-                Calculated by QUBO Knapsack Hamiltonian to minimize compounding interest and day-32 debt collision.
+                Allocation balances the amount needed with estimated fees and repayment timing.
               </div>
             </div>
             

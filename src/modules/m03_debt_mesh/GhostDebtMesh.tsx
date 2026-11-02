@@ -8,7 +8,6 @@ import {
   CreditCard,
   Zap,
   Flame,
-  ArrowRight,
   CheckCircle2,
   Calendar,
   Eye,
@@ -570,14 +569,6 @@ export const GhostDebtMesh: React.FC = () => {
             </div>
           </div>
 
-          <a
-            href="#quantum-solver"
-            className="btn btn-primary"
-            style={{ padding: '14px 28px', fontSize: '0.95rem' }}
-          >
-            <span>Resolve via Quantum Knapsack</span>
-            <ArrowRight size={16} />
-          </a>
         </div>
 
       </div>

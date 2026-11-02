@@ -207,7 +207,7 @@ export const ComparativeRescueMatrix: React.FC = () => {
           </div>
 
           <a
-            href="#quantum-solver"
+            href="#rescue-split"
             className="btn btn-primary"
             style={{ padding: '14px 28px', fontSize: '0.95rem' }}
           >
