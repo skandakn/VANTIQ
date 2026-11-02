@@ -122,6 +122,19 @@ export interface HealthReliefPlan {
   officialHelpline?: string;
   recommendedFor: string;
   tags: string[];
+  redditSentiment?: string;
+  redditScore?: number;
+  redditReviews?: RedditReview[];
+}
+
+export interface RedditReview {
+  username: string;
+  subreddit: string;
+  upvotes: number;
+  timeAgo: string;
+  reviewText: string;
+  verdict: 'Positive' | 'Helpful Tip' | 'Caution' | 'Warning';
+  badge?: string;
 }
 
 export interface HealthReliefStrategy {
