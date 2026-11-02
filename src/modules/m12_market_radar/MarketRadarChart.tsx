@@ -13,7 +13,7 @@ export const MarketRadarChart: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
             <span className="badge badge-cyan">
               <Target size={13} />
-              <span>Step 10: Market Opportunity & Positioning</span>
+              <span>Market Opportunity & Positioning</span>
             </span>
           </div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc' }}>

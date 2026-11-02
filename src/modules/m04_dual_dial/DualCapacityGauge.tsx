@@ -19,7 +19,7 @@ export const DualCapacityGauge: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
             <span className="badge badge-cyan">
               <Gauge size={13} />
-              <span>Step 3: Absorptive Capacity Meter</span>
+              <span>Absorptive Capacity Meter</span>
             </span>
           </div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc' }}>

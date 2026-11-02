@@ -14,7 +14,7 @@ export const ZeroKnowledgeCompliance: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
             <span className="badge badge-emerald">
               <Lock size={13} />
-              <span>Step 11: Security & Compliance Guard</span>
+              <span>Security & Compliance Guard</span>
             </span>
           </div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc' }}>

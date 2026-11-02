@@ -16,7 +16,7 @@ export const ComparativeRescueMatrix: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
             <span className="badge badge-cyan">
               <ShieldCheck size={13} />
-              <span>Step 8: Comparative Rescue Matrix</span>
+              <span>Comparative Rescue Matrix</span>
             </span>
           </div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc' }}>

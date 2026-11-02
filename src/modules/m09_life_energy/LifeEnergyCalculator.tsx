@@ -21,7 +21,7 @@ export const LifeEnergyCalculator: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
             <span className="badge badge-emerald">
               <Clock size={13} />
-              <span>Step 7: Life-Energy Labor Metric</span>
+              <span>Life-Energy Labor Metric</span>
             </span>
           </div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc' }}>

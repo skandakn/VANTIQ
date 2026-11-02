@@ -28,7 +28,7 @@ export const RoadmapAndTeam: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
             <span className="badge badge-purple">
               <Milestone size={13} />
-              <span>Step 12: Roadmap & Team INNOVATEX</span>
+              <span>Roadmap & Team INNOVATEX</span>
             </span>
           </div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc' }}>
