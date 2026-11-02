@@ -59,18 +59,18 @@ export const HeroSection: React.FC = () => {
   
   // Tranche dynamic split
   const savingsTranche = Math.min(profile.emergencySavings, Math.round(neededAmount * 0.1));
-  const subsidizedTranche = Math.round(neededAmount * 0.3);
-  const coOpTranche = Math.round(neededAmount * 0.4);
-  const deferredTranche = Math.max(0, neededAmount - (savingsTranche + subsidizedTranche + coOpTranche));
+  const subsidizedTranche = Math.max(0, fundingPlan.tranches[0].allocatedAmount - savingsTranche);
+  const coOpTranche = fundingPlan.tranches[1].allocatedAmount;
+  const deferredTranche = fundingPlan.tranches[2].allocatedAmount;
 
   // Dynamic fee calculation
-  const vantiqTotalFee = Math.round(neededAmount * 0.0284); // 2.84% blended fee (₹1,420 for ₹50k)
+  const vantiqTotalFee = fundingPlan.totalInterestAndFees;
   const vantiqFeePercent = neededAmount > 0 ? (vantiqTotalFee / neededAmount) * 100 : 0;
   const predatoryTotalFee = Math.round(neededAmount * 0.368); // 36.8% predatory fee + interest (₹18,400 for ₹50k)
   const totalSavings = Math.max(0, predatoryTotalFee - vantiqTotalFee);
   
   // Dynamic monthly safe repayment
-  const safeMonthlyEmi = Math.round((neededAmount + vantiqTotalFee - savingsTranche) / 12);
+  const safeMonthlyEmi = fundingPlan.tranches[0].monthlyObligation + fundingPlan.tranches[1].monthlyObligation;
   const predatoryMonthlyEmi = Math.round((neededAmount + predatoryTotalFee) / 3.5); // 3.5 mo average tenure
 
   const scrollToSection = (id: string) => {

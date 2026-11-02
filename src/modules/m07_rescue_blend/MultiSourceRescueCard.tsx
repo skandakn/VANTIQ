@@ -53,7 +53,7 @@ interface TrancheDetail {
 }
 
 export const MultiSourceRescueCard: React.FC = () => {
-  const { shock } = useFintech();
+  const { shock, fundingPlan, profile } = useFintech();
 
   // Local interactive UI states
   const [selectedTrancheId, setSelectedTrancheId] = useState<string | null>(null);
@@ -64,7 +64,7 @@ export const MultiSourceRescueCard: React.FC = () => {
   const [expandedBreakdown, setExpandedBreakdown] = useState<boolean>(false);
 
   // Dynamic calculations relative to the ₹50,000 requirement baseline
-  const totalRequired = shock?.amount || 50000;
+  const totalRequired = Math.max(0, shock?.amount ?? 0);
   const scale = totalRequired / 50000;
 
   // Tri-Tranche Data Model adhering strictly to Member 08 specifications
@@ -74,12 +74,12 @@ export const MultiSourceRescueCard: React.FC = () => {
       trancheCode: 'Tranche A',
       title: 'Zero-Cost Liquidity',
       subtitle: 'Emergency Savings + Subsidized Hospital Direct Advance',
-      allocatedAmount: Math.round(20000 * scale),
+      allocatedAmount: fundingPlan.tranches[0].allocatedAmount,
       percentage: 40,
       apr: 0.0,
       interestCost: 0,
       tenureDisplay: '6-Month Interest-Free Buffer',
-      monthlyObligation: Math.round(2500 * scale),
+      monthlyObligation: fundingPlan.tranches[0].monthlyObligation,
       gracePeriodDays: 0,
       colorHex: '#10b981',
       glowClass: 'glow-emerald',
@@ -88,13 +88,13 @@ export const MultiSourceRescueCard: React.FC = () => {
       subComponents: [
         {
           name: 'Self Liquid Reserve (Emergency Savings)',
-          amount: Math.round(5000 * scale),
+          amount: Math.min(profile.emergencySavings, Math.round(totalRequired * 0.1)),
           apr: 0.0,
           description: 'Immediate zero-cost self-disbursement without touching long-term retirement or FD assets.'
         },
         {
           name: 'Hospital Institutional Advance Buffer',
-          amount: Math.round(15000 * scale),
+          amount: Math.max(0, fundingPlan.tranches[0].allocatedAmount - Math.min(profile.emergencySavings, Math.round(totalRequired * 0.1))),
           apr: 0.0,
           description: 'Direct healthcare provider billing credit @ 0% APR via hospital emergency desk CSR partnership.'
         }
@@ -111,12 +111,12 @@ export const MultiSourceRescueCard: React.FC = () => {
       trancheCode: 'Tranche B',
       title: 'Low-Interest Co-op / Credit Union Bridge',
       subtitle: 'Employer Credit Co-op Subsidized Emergency Window',
-      allocatedAmount: Math.round(20000 * scale),
+      allocatedAmount: fundingPlan.tranches[1].allocatedAmount,
       percentage: 40,
       apr: 6.5,
-      interestCost: Math.round(650 * scale),
+      interestCost: fundingPlan.tranches[1].interestCost,
       tenureDisplay: '12 Months Amortized',
-      monthlyObligation: Math.round(1720 * scale),
+      monthlyObligation: fundingPlan.tranches[1].monthlyObligation,
       gracePeriodDays: 0,
       colorHex: '#06b6d4',
       glowClass: 'glow-cyan',
@@ -134,12 +134,12 @@ export const MultiSourceRescueCard: React.FC = () => {
       trancheCode: 'Tranche C',
       title: 'Deferred Staggered Micro-Repayment',
       subtitle: 'Post-Crisis Recovery Tier with Built-in Breathing Room',
-      allocatedAmount: Math.round(10000 * scale),
+      allocatedAmount: fundingPlan.tranches[2].allocatedAmount,
       percentage: 20,
       apr: 8.0,
-      interestCost: Math.round(770 * scale),
+      interestCost: fundingPlan.tranches[2].interestCost,
       tenureDisplay: '6 Months (Starts Day 61)',
-      monthlyObligation: Math.round(1795 * scale),
+      monthlyObligation: fundingPlan.tranches[2].monthlyObligation,
       gracePeriodDays: 60,
       colorHex: '#8b5cf6',
       glowClass: 'glow-purple',
@@ -155,8 +155,8 @@ export const MultiSourceRescueCard: React.FC = () => {
   ];
 
   // Total Interest Comparison Metrics: VANTIQ ₹1,420 vs Fragmented Loan Apps ₹18,400
-  const vantiqTotalInterest = Math.round(1420 * scale);
-  const vantiqTotalRepayment = totalRequired + vantiqTotalInterest;
+  const vantiqTotalInterest = fundingPlan.totalInterestAndFees;
+  const vantiqTotalRepayment = fundingPlan.totalRepayment;
   const vantiqEffectiveApr = 3.4;
 
   const predatoryTotalInterestAndFees = Math.round(18400 * scale);
@@ -164,10 +164,12 @@ export const MultiSourceRescueCard: React.FC = () => {
   const predatoryEffectiveApr = 38.8;
 
   const directSavings = predatoryTotalRepayment - vantiqTotalRepayment;
-  const savingsPercent = Math.round((directSavings / predatoryTotalRepayment) * 100);
+  const savingsPercent = predatoryTotalRepayment > 0
+    ? Math.round((directSavings / predatoryTotalRepayment) * 100)
+    : 0;
 
   // Monthly obligation during critical Month 1 (where predatory loans demand ₹26,200)
-  const vantiqMonth1Obligation = Math.round((2500 + 1720) * scale); // Tranche A advance + Tranche B
+  const vantiqMonth1Obligation = fundingPlan.tranches[0].monthlyObligation + fundingPlan.tranches[1].monthlyObligation;
   const predatoryMonth1Obligation = Math.round(26200 * scale);
 
   // Multi-step disbursement simulation handler
