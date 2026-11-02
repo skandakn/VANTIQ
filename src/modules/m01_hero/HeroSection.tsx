@@ -13,22 +13,22 @@ import {
   Info
 } from 'lucide-react';
 import { useFintech } from '../../context/FintechContext';
+import { EmergencyIntake } from '../m02_crisis_input/EmergencyIntake';
 
 export const HeroSection: React.FC = () => {
   const { shock, setShock, profile, fundingPlan } = useFintech();
   const emergencyAmountId = useId();
 
   // Local state for interactive currency/emergency converter
-  const [selectedCategory, setSelectedCategory] = useState<string>('Medical Emergency');
   const [showCategoryDropdown, setShowCategoryDropdown] = useState<boolean>(false);
 
   const categories = [
-    'Medical Emergency',
-    'Hospital ICU Deposit',
-    'Emergency Surgery',
-    'Prescription & Labs',
-    'Urgent Vehicle Repair'
-  ];
+    { label: 'Medical Emergency', value: 'medical' },
+    { label: 'Urgent Vehicle Repair', value: 'vehicle' },
+    { label: 'Home Repair', value: 'home_repair' },
+    { label: 'Job Loss', value: 'job_loss' },
+  ] as const;
+  const selectedCategory = categories.find(({ value }) => value === shock.category)?.label ?? categories[0].label;
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = Number(e.target.value.replace(/[^0-9]/g, '')) || 0;
@@ -70,8 +70,9 @@ export const HeroSection: React.FC = () => {
   };
 
   return (
-    <section id="hero" style={{ padding: '50px 0 70px 0', position: 'relative', backgroundColor: 'var(--bg-deep)' }}>
+    <section id="simulator" style={{ padding: '50px 0 70px 0', position: 'relative', backgroundColor: 'var(--bg-deep)' }}>
       <div className="container">
+        <div id="hero" />
         
         {/* Main 2-Column Hero Layout - Just Like Wise */}
         <div style={{
@@ -301,21 +302,21 @@ export const HeroSection: React.FC = () => {
                       }}>
                         {categories.map((cat) => (
                           <div
-                            key={cat}
+                            key={cat.value}
                             onClick={() => {
-                              setSelectedCategory(cat);
+                              setShock((prev) => ({ ...prev, category: cat.value }));
                               setShowCategoryDropdown(false);
                             }}
                             style={{
                               padding: '10px 16px',
                               fontSize: '0.86rem',
-                              color: selectedCategory === cat ? '#15803d' : 'var(--wise-forest)',
-                              fontWeight: selectedCategory === cat ? 800 : 500,
+                              color: shock.category === cat.value ? '#15803d' : 'var(--wise-forest)',
+                              fontWeight: shock.category === cat.value ? 800 : 500,
                               cursor: 'pointer',
-                              backgroundColor: selectedCategory === cat ? '#f4f5f1' : 'transparent'
+                              backgroundColor: shock.category === cat.value ? '#f4f5f1' : 'transparent'
                             }}
                           >
-                            {cat}
+                            {cat.label}
                           </div>
                         ))}
                       </div>
@@ -461,9 +462,11 @@ export const HeroSection: React.FC = () => {
                 </div>
               </div>
 
+              <EmergencyIntake />
+
               {/* Big Wise-Style Action Button */}
               <button
-                onClick={() => scrollToSection('simulator')}
+                onClick={() => scrollToSection('rescue-split')}
                 className="btn btn-primary"
                 style={{
                   width: '100%',
@@ -478,7 +481,7 @@ export const HeroSection: React.FC = () => {
                 }}
               >
                 <Sparkles size={18} />
-                <span>Simulate Your Free Rescue Plan</span>
+                <span>View Your Detailed Rescue Plan</span>
               </button>
 
               <div style={{ textAlign: 'center', marginTop: '12px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
