@@ -202,7 +202,7 @@ export const HeroSection: React.FC = () => {
             alignItems: 'stretch',
             gridAutoRows: '1fr'
           }}>
-            <div className="wise-converter-box" style={{
+            <div className="wise-converter-box hero-rescue-card" style={{
               backgroundColor: '#ffffff',
               border: '1px solid #e5e9e2',
               borderRadius: '24px',
@@ -538,7 +538,7 @@ export const HeroSection: React.FC = () => {
 
             </div>
 
-            <div className="wise-converter-box" style={{
+            <div className="wise-converter-box hero-cashflow-card" style={{
               backgroundColor: '#ffffff',
               border: '1px solid #e5e9e2',
               borderRadius: '24px',
