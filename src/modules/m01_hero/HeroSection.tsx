@@ -21,10 +21,9 @@ export const HeroSection: React.FC = () => {
 
   // Local state for interactive currency/emergency converter
   const [showCategoryDropdown, setShowCategoryDropdown] = useState<boolean>(false);
-  const [tenureMonths, setTenureMonths] = useState<number>(shock.tenureMonths || 12);
+  const tenureMonths = shock.tenureMonths ?? 12;
 
   const handleTenureChange = (months: number) => {
-    setTenureMonths(months);
     setShock((prev) => ({
       ...prev,
       tenureMonths: months,
@@ -70,7 +69,8 @@ export const HeroSection: React.FC = () => {
   const totalSavings = Math.max(0, predatoryTotalFee - vantiqTotalFee);
   
   // Dynamic monthly safe repayment
-  const safeMonthlyEmi = fundingPlan.tranches[0].monthlyObligation + fundingPlan.tranches[1].monthlyObligation;
+  const safeMonthlyEmi = fundingPlan.tranches.reduce((total, tranche) => total + tranche.monthlyObligation, 0);
+  const paymentWithinBuffer = safeMonthlyEmi <= profile.absorptiveSurplus;
   const predatoryMonthlyEmi = Math.round((neededAmount + predatoryTotalFee) / 3.5); // 3.5 mo average tenure
 
   const scrollToSection = (id: string) => {
@@ -444,9 +444,9 @@ export const HeroSection: React.FC = () => {
                   fontWeight: 700,
                   color: 'var(--wise-forest)'
                 }}>
-                  <span>Safe monthly repayment (Calculated)</span>
-                  <span style={{ color: '#15803d', fontSize: '0.8rem' }}>
-                    Within Buffer (₹{profile.absorptiveSurplus.toLocaleString()}/mo)
+                      <span>Safe monthly repayment (after grace period)</span>
+                  <span style={{ color: paymentWithinBuffer ? '#15803d' : '#b91c1c', fontSize: '0.8rem' }}>
+                    {paymentWithinBuffer ? 'Within' : 'Over'} Buffer (₹{profile.absorptiveSurplus.toLocaleString()}/mo)
                   </span>
                 </div>
 
@@ -462,8 +462,8 @@ export const HeroSection: React.FC = () => {
                     <span style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginLeft: '4px' }}>/ month</span>
                   </div>
 
-                  <div className="wise-currency-pill" style={{ backgroundColor: '#dcfce7', color: '#15803d', border: '1px solid #bbf7d0' }}>
-                    <span>🛡️ SAFE BUFFER</span>
+                  <div className="wise-currency-pill" style={{ backgroundColor: paymentWithinBuffer ? '#dcfce7' : '#fef2f2', color: paymentWithinBuffer ? '#15803d' : '#b91c1c', border: `1px solid ${paymentWithinBuffer ? '#bbf7d0' : '#fecaca'}` }}>
+                    <span>{paymentWithinBuffer ? '🛡️ SAFE BUFFER' : '⚠️ OVER BUFFER'}</span>
                   </div>
                 </div>
               </div>

@@ -106,14 +106,15 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
   // Estimate the funding plan from available savings and the emergency amount.
   const fundingPlan = useMemo<FundingPlanResult>(() => {
     const shockAmt = Math.max(0, shock.amount);
+    const repaymentMonths = Math.max(1, shock.tenureMonths ?? 12);
     const savingsAlloc = Math.min(profile.emergencySavings, Math.round(shockAmt * 0.1));
     const trancheAAlloc = Math.round(shockAmt * 0.4);
     const hospitalAdvanceAlloc = Math.max(0, trancheAAlloc - savingsAlloc);
     const coopAlloc = Math.round(shockAmt * 0.4);
     const deferredAlloc = Math.max(0, shockAmt - trancheAAlloc - coopAlloc);
 
-    const coopInterest = Math.round(coopAlloc * 0.0325);
-    const deferredInterest = Math.round(deferredAlloc * 0.077);
+    const coopInterest = Math.round(coopAlloc * 0.065 * (repaymentMonths / 12));
+    const deferredInterest = Math.round(deferredAlloc * 0.08 * (repaymentMonths / 12));
     const totalInterestAndFees = coopInterest + deferredInterest;
     const totalRepayment = shockAmt + totalInterestAndFees;
     const naiveRepayment = shockAmt * 1.368; // Predatory rate ~36.8% all-in
@@ -127,8 +128,8 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
           sourceType: 'emergency_nbfc',
           allocatedAmount: trancheAAlloc,
           interestApr: 0,
-          tenureMonths: 6,
-          monthlyObligation: Math.round(hospitalAdvanceAlloc / 6),
+          tenureMonths: repaymentMonths,
+          monthlyObligation: Math.ceil(hospitalAdvanceAlloc / repaymentMonths),
           interestCost: 0,
           notes: `₹${savingsAlloc.toLocaleString()} savings + ₹${hospitalAdvanceAlloc.toLocaleString()} hospital advance`,
         },
@@ -137,8 +138,8 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
           sourceType: 'micro_loan',
           allocatedAmount: coopAlloc,
           interestApr: 6.5,
-          tenureMonths: 12,
-          monthlyObligation: Math.round((coopAlloc + coopInterest) / 12),
+          tenureMonths: repaymentMonths,
+          monthlyObligation: Math.ceil((coopAlloc + coopInterest) / repaymentMonths),
           interestCost: coopInterest,
           notes: 'Fixed-rate cooperative bridge estimate',
         },
@@ -147,8 +148,8 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
           sourceType: 'emergency_nbfc',
           allocatedAmount: deferredAlloc,
           interestApr: 8,
-          tenureMonths: 6,
-          monthlyObligation: Math.round((deferredAlloc + deferredInterest) / 6),
+          tenureMonths: repaymentMonths,
+          monthlyObligation: Math.ceil((deferredAlloc + deferredInterest) / repaymentMonths),
           interestCost: deferredInterest,
           notes: 'Estimated repayment begins after the 60-day grace period',
         },
@@ -161,7 +162,7 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
       defaultProbabilityBefore: 84,
       defaultProbabilityAfter: 4,
     };
-  }, [shock.amount, profile.emergencySavings, hourlyWage]);
+  }, [shock.amount, shock.tenureMonths, profile.emergencySavings, hourlyWage]);
 
   // Illustrative 90-day cashflow projection using the current profile and plan.
   const runwayData = useMemo<CashflowRunwayPoint[]>(() => {
