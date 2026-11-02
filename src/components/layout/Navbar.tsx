@@ -1,106 +1,29 @@
-// src/components/layout/Navbar.tsx
-// CHRONOS-FIN Member 01: Global Shell & Header HUD
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Shield, 
   Zap, 
-  Cpu, 
-  Activity, 
-  Scale, 
-  AlertTriangle, 
   Menu, 
-  X 
+  X,
+  Lock
 } from 'lucide-react';
 import { useFintech } from '../../context/FintechContext';
 
-// Primary anchor navigation points requested by specification
-const NAV_LINKS = [
-  { id: 'simulator', label: 'Simulator', icon: Zap, fallbackId: 'crisis-intake' },
-  { id: 'ghost-debt', label: 'Ghost Debt', icon: AlertTriangle, fallbackId: 'debt-mesh' },
-  { id: 'quantum-solver', label: 'Quantum Solver', icon: Cpu, fallbackId: 'quantum-knapsack' },
-  { id: 'digital-twin', label: 'Digital Twin', icon: Activity, fallbackId: 'cashflow-twin' },
-  { id: 'comparison', label: 'Comparison', icon: Scale, fallbackId: 'rescue-matrix' },
-  { id: 'compliance', label: 'Compliance', icon: Shield, fallbackId: 'privacy-compliance' },
-];
-
 export const Navbar: React.FC = () => {
-  const { triggerNeuroShield } = useFintech();
-  const [activeSection, setActiveSection] = useState<string>('simulator');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const { 
+    triggerNeuroShield, 
+    neuroState, 
+    isSidebarOpen, 
+    toggleSidebar 
+  } = useFintech();
+
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
-  // Smooth scroll handler with robust fallback and browser history synchronization
-  const scrollToSection = (targetId: string) => {
-    setMobileMenuOpen(false);
-
-    const directEl = document.getElementById(targetId);
-    const linkDef = NAV_LINKS.find((link) => link.id === targetId);
-    const fallbackEl = linkDef?.fallbackId ? document.getElementById(linkDef.fallbackId) : null;
-    const element = directEl || fallbackEl;
-
-    if (element) {
-      const headerOffset = 76;
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = Math.max(0, elementPosition - headerOffset);
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-
-      if (window.history.pushState) {
-        window.history.pushState(null, '', `#${targetId}`);
-      }
-      setActiveSection(targetId);
-    }
-  };
-
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    e.preventDefault();
-    scrollToSection(targetId);
-  };
-
-  // Synchronize anchor IDs on target module elements and track active scroll section
+  // Scroll listener for sticky header shadow and backdrop elevation
   useEffect(() => {
-    // Inject alias anchors if needed so direct browser URLs (e.g. #simulator) work seamlessly
-    NAV_LINKS.forEach((link) => {
-      const parent = link.fallbackId ? document.getElementById(link.fallbackId) : null;
-      if (parent && !document.getElementById(link.id)) {
-        const anchor = document.createElement('div');
-        anchor.id = link.id;
-        anchor.style.position = 'relative';
-        anchor.style.top = '-80px';
-        anchor.style.visibility = 'hidden';
-        anchor.setAttribute('data-chronos-anchor', 'true');
-        parent.prepend(anchor);
-      }
-    });
-
-    // Check if initial URL contains a hash
-    if (window.location.hash) {
-      const initialId = window.location.hash.replace('#', '');
-      const matched = NAV_LINKS.find((l) => l.id === initialId);
-      if (matched) {
-        setTimeout(() => scrollToSection(initialId), 150);
-      }
-    }
-
-    // Scroll listener for sticky header styling & active section tracking
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-
-      const scrollPos = window.scrollY + 120;
-      for (let i = NAV_LINKS.length - 1; i >= 0; i--) {
-        const link = NAV_LINKS[i];
-        const el = document.getElementById(link.id) || (link.fallbackId ? document.getElementById(link.fallbackId) : null);
-        if (el) {
-          const top = el.getBoundingClientRect().top + window.scrollY;
-          if (scrollPos >= top) {
-            setActiveSection(link.id);
-            break;
-          }
-        }
-      }
+      setIsScrolled(window.scrollY > 15);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -110,361 +33,448 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header
-        style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 1000,
-          backgroundColor: isScrolled ? 'rgba(5, 9, 20, 0.92)' : 'rgba(5, 9, 20, 0.82)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: isScrolled ? '1px solid rgba(56, 189, 248, 0.35)' : '1px solid rgba(51, 65, 85, 0.45)',
-          boxShadow: isScrolled
-            ? '0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(6, 182, 212, 0.15)'
-            : '0 4px 20px rgba(0, 0, 0, 0.5)',
-          transition: 'all 0.25s ease',
-          padding: '12px 0',
-        }}
+        className={`vantiq-header ${isScrolled ? 'vantiq-header-scrolled' : ''}`}
+        role="banner"
       >
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
+        <div className="container vantiq-header-container">
           
-          {/* Brand Logo & Glowing Cyan Gradient Badge */}
-          <div 
-            style={{ display: 'flex', alignItems: 'center', gap: '14px', cursor: 'pointer', textDecoration: 'none' }}
-            onClick={() => scrollToSection('simulator')}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => { if (e.key === 'Enter') scrollToSection('simulator'); }}
-          >
-            <div
-              style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '12px',
-                background: 'linear-gradient(135deg, #0284c7 0%, #06b6d4 50%, #8b5cf6 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 0 20px rgba(6, 182, 212, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.3)',
-                flexShrink: 0,
-              }}
+          {/* ========================================================= */}
+          {/* LEFT SECTION: Menu Icon, VANTIQ Logo, Quantum Online, Latency */}
+          {/* ========================================================= */}
+          <div className="vantiq-header-left">
+            
+            {/* Hamburger / Menu Icon Toggle */}
+            <button
+              onClick={toggleSidebar}
+              className={`vantiq-menu-toggle-btn ${isSidebarOpen ? 'open' : ''}`}
+              aria-label={isSidebarOpen ? 'Collapse feature sidebar' : 'Open feature navigation sidebar'}
+              aria-expanded={isSidebarOpen}
+              title={isSidebarOpen ? 'Collapse feature sidebar (Esc)' : 'Open feature sidebar'}
             >
-              <Shield size={22} color="#ffffff" />
-            </div>
+              {isSidebarOpen ? (
+                <X size={20} className="vantiq-toggle-icon" />
+              ) : (
+                <Menu size={20} className="vantiq-toggle-icon" />
+              )}
+            </button>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-                {/* Glowing Cyan Gradient Badge */}
-                <div
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '3px 12px',
-                    borderRadius: '9999px',
-                    background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.22) 0%, rgba(56, 189, 248, 0.08) 100%)',
-                    border: '1px solid rgba(56, 189, 248, 0.55)',
-                    boxShadow: '0 0 16px rgba(6, 182, 212, 0.4), inset 0 0 8px rgba(6, 182, 212, 0.15)',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: '1.15rem',
-                      fontWeight: 900,
-                      letterSpacing: '-0.02em',
-                      background: 'linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #06b6d4 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                    }}
-                  >
+            {/* VANTIQ Brand Logo & Name */}
+            <div 
+              onClick={() => navigate('/')}
+              className="vantiq-brand-link"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter') navigate('/'); }}
+              title="VANTIQ Dashboard"
+            >
+              <div className="vantiq-logo-shield">
+                <Shield size={20} color="#ffffff" />
+              </div>
+
+              <div className="vantiq-brand-meta">
+                <div className="vantiq-brand-row">
+                  <span className="vantiq-brand-text">VANTIQ</span>
+                  <span className="vantiq-brand-pill-dot" />
+                  <span className="badge badge-cyan vantiq-brand-badge hide-mobile-badge">
                     CHRONOS-FIN
                   </span>
-                  <span
-                    style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      backgroundColor: '#38bdf8',
-                      boxShadow: '0 0 8px #38bdf8',
-                    }}
-                  />
                 </div>
+                <p className="vantiq-brand-subtitle hide-mobile-badge">
+                  Quantum Counter-Predatory Engine
+                </p>
+              </div>
+            </div>
 
-                {/* Sub-badge for competition context */}
-                <span className="badge badge-cyan hide-mobile-badge" style={{ fontSize: '0.65rem', padding: '2px 8px' }}>
-                  IDEATHON 2026
+            {/* Divider */}
+            <div className="vantiq-header-vdivider hide-mobile-hud" />
+
+            {/* Engine Status (QUANTUM ONLINE) & Latency Indicator */}
+            <div className="vantiq-engine-hud hide-mobile-hud">
+              <div className="vantiq-engine-chip">
+                {/* Radar pulse beacon */}
+                <span className="vantiq-beacon-dot-wrap">
+                  <span className="vantiq-beacon-wave" />
+                  <span className="vantiq-beacon-center" />
                 </span>
-              </div>
-              <p className="hide-mobile-badge" style={{ fontSize: '0.70rem', color: '#94a3b8', marginTop: '2px' }}>
-                Quantum Counterfactual Twin & Anti-Predatory HUD
-              </p>
-            </div>
-          </div>
 
-          {/* Status Ticker: Quantum Engine: Online (38ms latency) */}
-          <div className="status-ticker-hud" style={{ display: 'flex', alignItems: 'center' }}>
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '6px 14px',
-                borderRadius: '9999px',
-                backgroundColor: 'rgba(16, 185, 129, 0.08)',
-                border: '1px solid rgba(16, 185, 129, 0.35)',
-                boxShadow: '0 0 15px rgba(16, 185, 129, 0.15)',
-                fontSize: '0.74rem',
-                color: '#34d399',
-                fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-              }}
-            >
-              {/* Radar pulse beacon */}
-              <span style={{ position: 'relative', display: 'flex', width: '8px', height: '8px' }}>
-                <span
-                  style={{
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '50%',
-                    backgroundColor: '#10b981',
-                    opacity: 0.75,
-                    animation: 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                  }}
-                />
-                <span
-                  style={{
-                    position: 'relative',
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    backgroundColor: '#10b981',
-                    boxShadow: '0 0 8px #10b981',
-                  }}
-                />
-              </span>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 600 }}>
-                <span style={{ color: '#e2e8f0' }}>Quantum Engine:</span>
-                <span style={{ color: '#34d399', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Online</span>
-                <span style={{ color: 'rgba(255, 255, 255, 0.25)' }}>|</span>
-                <span style={{ color: '#38bdf8', fontFamily: 'monospace', fontWeight: 700 }}>38ms latency</span>
+                <div className="vantiq-engine-telemetry">
+                  <span className="vantiq-engine-online">QUANTUM ONLINE</span>
+                  <span className="vantiq-engine-divider">|</span>
+                  <span className="vantiq-engine-latency">38ms latency</span>
+                </div>
               </div>
             </div>
+
           </div>
 
-          {/* Smooth Anchor Navigation Links (Desktop) */}
-          <nav className="desktop-nav-menu" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            {NAV_LINKS.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeSection === item.id;
-              return (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  onClick={(e) => handleAnchorClick(e, item.id)}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '7px 12px',
-                    fontSize: '0.80rem',
-                    fontWeight: isActive ? 700 : 500,
-                    borderRadius: '8px',
-                    textDecoration: 'none',
-                    transition: 'all 0.2s ease',
-                    backgroundColor: isActive ? 'rgba(6, 182, 212, 0.18)' : 'transparent',
-                    border: isActive ? '1px solid rgba(6, 182, 212, 0.45)' : '1px solid transparent',
-                    color: isActive ? '#38bdf8' : '#94a3b8',
-                    boxShadow: isActive ? '0 0 12px rgba(6, 182, 212, 0.2)' : 'none',
-                    cursor: 'pointer',
-                  }}
-                >
-                  <Icon size={14} color={isActive ? '#38bdf8' : '#64748b'} />
-                  <span>{item.label}</span>
-                </a>
-              );
-            })}
-          </nav>
-
-          {/* Action Area: Emergency Simulator CTA & Neuro-Shield */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* ========================================================= */}
+          {/* RIGHT SECTION: Simulate Free Button & 45s Shield Indicator */}
+          {/* ========================================================= */}
+          <div className="vantiq-header-right">
             
-            {/* Emergency Simulator CTA button */}
+            {/* 45s Shield Status Indicator & Route Navigation */}
             <button
-              onClick={() => scrollToSection('simulator')}
-              className="btn btn-primary emergency-cta-btn"
-              style={{
-                fontSize: '0.82rem',
-                fontWeight: 700,
-                padding: '8px 16px',
-                borderRadius: '10px',
-                background: 'linear-gradient(135deg, #0284c7 0%, #06b6d4 100%)',
-                boxShadow: '0 0 18px rgba(6, 182, 212, 0.45)',
-                border: '1px solid rgba(56, 189, 248, 0.5)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                whiteSpace: 'nowrap',
+              onClick={() => {
+                triggerNeuroShield();
+                navigate('/45s-shield');
               }}
-              aria-label="Launch Emergency Simulator"
+              className={`vantiq-shield-btn ${neuroState.isShieldActive ? 'shield-engaged' : ''}`}
+              title={neuroState.isShieldActive ? `45s Shield Active (${neuroState.timerSecondsRemaining}s)` : 'Open 45s Neuro-Adaptive Shield'}
+              aria-label="45s Neuro-Adaptive Grounding Shield"
+            >
+              <Lock 
+                size={14} 
+                className={`vantiq-shield-icon ${neuroState.isShieldActive ? 'icon-alert' : ''}`} 
+              />
+              <span className="vantiq-shield-btn-label">
+                {neuroState.isShieldActive ? (
+                  <>45s Shield: <strong style={{ color: '#f59e0b', fontFamily: 'monospace' }}>{neuroState.timerSecondsRemaining}s</strong></>
+                ) : (
+                  <>45s Shield</>
+                )}
+              </span>
+              <span className={`vantiq-shield-indicator-dot ${neuroState.isShieldActive ? 'dot-active' : 'dot-idle'}`} />
+            </button>
+
+            {/* Simulate Free CTA Button */}
+            <button
+              onClick={() => navigate('/calculator')}
+              className="btn btn-primary vantiq-simulate-cta"
+              aria-label="Launch Free Emergency Simulator"
             >
               <Zap size={15} style={{ color: '#fef08a', filter: 'drop-shadow(0 0 4px #facc15)' }} />
-              <span>Emergency Simulator</span>
-            </button>
-
-            {/* Quick Neuro-Shield trigger */}
-            <button
-              onClick={triggerNeuroShield}
-              className="btn btn-secondary shield-quick-btn"
-              style={{
-                padding: '8px 12px',
-                fontSize: '0.78rem',
-                borderColor: 'rgba(139, 92, 246, 0.4)',
-                backgroundColor: 'rgba(139, 92, 246, 0.12)',
-                color: '#c084fc',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-              }}
-              title="Test 45s Grounding Shield Modal"
-            >
-              <Shield size={14} />
-              <span className="hide-mobile-badge">45s Shield</span>
-            </button>
-
-            {/* Mobile Hamburger Toggle */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="btn btn-secondary mobile-menu-toggle"
-              style={{
-                display: 'none',
-                padding: '8px',
-                borderRadius: '8px',
-                borderColor: 'rgba(51, 65, 85, 0.6)',
-              }}
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? <X size={20} color="#38bdf8" /> : <Menu size={20} color="#f8fafc" />}
+              <span>Simulate Free</span>
             </button>
 
           </div>
 
         </div>
-
-        {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <div
-            style={{
-              padding: '16px 24px',
-              backgroundColor: 'rgba(5, 9, 20, 0.98)',
-              borderBottom: '1px solid rgba(56, 189, 248, 0.3)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '12px',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '6px 14px',
-                  borderRadius: '9999px',
-                  backgroundColor: 'rgba(16, 185, 129, 0.08)',
-                  border: '1px solid rgba(16, 185, 129, 0.35)',
-                  fontSize: '0.74rem',
-                  color: '#34d399',
-                }}
-              >
-                <span
-                  style={{
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    backgroundColor: '#10b981',
-                    boxShadow: '0 0 8px #10b981',
-                  }}
-                />
-                <span>Quantum Engine: <strong>Online (38ms latency)</strong></span>
-              </div>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-              {NAV_LINKS.map((item) => {
-                const Icon = item.icon;
-                const isActive = activeSection === item.id;
-                return (
-                  <a
-                    key={item.id}
-                    href={`#${item.id}`}
-                    onClick={(e) => handleAnchorClick(e, item.id)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      padding: '10px 14px',
-                      borderRadius: '8px',
-                      fontSize: '0.85rem',
-                      fontWeight: isActive ? 700 : 500,
-                      backgroundColor: isActive ? 'rgba(6, 182, 212, 0.2)' : 'rgba(30, 41, 59, 0.5)',
-                      border: isActive ? '1px solid #06b6d4' : '1px solid rgba(51, 65, 85, 0.4)',
-                      color: isActive ? '#38bdf8' : '#e2e8f0',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    <Icon size={16} color={isActive ? '#38bdf8' : '#94a3b8'} />
-                    <span>{item.label}</span>
-                  </a>
-                );
-              })}
-            </div>
-
-            <button
-              onClick={() => scrollToSection('simulator')}
-              className="btn btn-primary"
-              style={{
-                marginTop: '8px',
-                width: '100%',
-                padding: '12px',
-                fontSize: '0.9rem',
-                fontWeight: 700,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-              }}
-            >
-              <Zap size={16} style={{ color: '#fef08a' }} />
-              <span>Launch Emergency Simulator</span>
-            </button>
-          </div>
-        )}
       </header>
 
-      {/* Embedded Responsive Media Queries */}
+      {/* Embedded High-Performance Header CSS */}
       <style>{`
-        @media (max-width: 1200px) {
-          .status-ticker-hud {
+        /* Sticky Header Base */
+        .vantiq-header {
+          position: sticky;
+          top: 0;
+          z-index: 1030;
+          background: rgba(5, 9, 20, 0.88);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border-bottom: 1px solid rgba(51, 65, 85, 0.45);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+          transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+          padding: 12px 0;
+        }
+
+        .vantiq-header-scrolled {
+          background: rgba(5, 9, 20, 0.96);
+          border-bottom: 1px solid rgba(16, 185, 129, 0.35);
+          box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(16, 185, 129, 0.12);
+        }
+
+        .vantiq-header-container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+        }
+
+        /* LEFT SIDE */
+        .vantiq-header-left {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+        }
+
+        /* Hamburger Toggle Button */
+        .vantiq-menu-toggle-btn {
+          width: 38px;
+          height: 38px;
+          border-radius: 10px;
+          border: 1px solid rgba(56, 189, 248, 0.35);
+          background: rgba(15, 23, 42, 0.75);
+          color: #f8fafc;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 0 12px rgba(6, 182, 212, 0.15);
+          flex-shrink: 0;
+        }
+
+        .vantiq-menu-toggle-btn:hover {
+          background: rgba(16, 185, 129, 0.18);
+          border-color: #10b981;
+          color: #34d399;
+          box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
+          transform: translateY(-1px);
+        }
+
+        .vantiq-menu-toggle-btn.open {
+          background: rgba(16, 185, 129, 0.22);
+          border-color: #10b981;
+          color: #34d399;
+          box-shadow: 0 0 18px rgba(16, 185, 129, 0.45);
+        }
+
+        .vantiq-toggle-icon {
+          transition: transform 0.2s ease;
+        }
+
+        .vantiq-menu-toggle-btn:hover .vantiq-toggle-icon {
+          transform: scale(1.08);
+        }
+
+        /* Brand Logo & Name */
+        .vantiq-brand-link {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          cursor: pointer;
+          text-decoration: none;
+          outline: none;
+        }
+
+        .vantiq-logo-shield {
+          width: 38px;
+          height: 38px;
+          border-radius: 10px;
+          background: linear-gradient(135deg, #059669 0%, #10b981 50%, #06b6d4 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 0 18px rgba(16, 185, 129, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.3);
+          flex-shrink: 0;
+          transition: transform 0.2s ease;
+        }
+
+        .vantiq-brand-link:hover .vantiq-logo-shield {
+          transform: scale(1.05);
+          box-shadow: 0 0 24px rgba(16, 185, 129, 0.7);
+        }
+
+        .vantiq-brand-meta {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .vantiq-brand-row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: nowrap;
+        }
+
+        .vantiq-brand-text {
+          font-size: 1.25rem;
+          font-weight: 900;
+          letter-spacing: -0.02em;
+          background: linear-gradient(135deg, #ffffff 0%, #34d399 50%, #38bdf8 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .vantiq-brand-pill-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: #10b981;
+          box-shadow: 0 0 8px #10b981;
+        }
+
+        .vantiq-brand-badge {
+          font-size: 0.65rem;
+          padding: 2px 8px;
+        }
+
+        .vantiq-brand-subtitle {
+          font-size: 0.70rem;
+          color: #94a3b8;
+          margin-top: 1px;
+        }
+
+        .vantiq-header-vdivider {
+          width: 1px;
+          height: 24px;
+          background: rgba(51, 65, 85, 0.6);
+        }
+
+        /* Engine Status Indicator & Latency */
+        .vantiq-engine-hud {
+          display: flex;
+          align-items: center;
+        }
+
+        .vantiq-engine-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 6px 12px;
+          border-radius: 9999px;
+          background-color: rgba(16, 185, 129, 0.08);
+          border: 1px solid rgba(16, 185, 129, 0.35);
+          box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+          font-size: 0.74rem;
+          color: #34d399;
+        }
+
+        .vantiq-beacon-dot-wrap {
+          position: relative;
+          display: flex;
+          width: 8px;
+          height: 8px;
+        }
+
+        .vantiq-beacon-wave {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background-color: #10b981;
+          opacity: 0.75;
+          animation: pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .vantiq-beacon-center {
+          position: relative;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: #10b981;
+          box-shadow: 0 0 8px #10b981;
+        }
+
+        .vantiq-engine-telemetry {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-weight: 600;
+        }
+
+        .vantiq-engine-online {
+          color: #34d399;
+          font-weight: 800;
+          letter-spacing: 0.04em;
+        }
+
+        .vantiq-engine-divider {
+          color: rgba(255, 255, 255, 0.25);
+        }
+
+        .vantiq-engine-latency {
+          color: #38bdf8;
+          font-family: monospace;
+          font-weight: 700;
+        }
+
+        /* RIGHT SIDE */
+        .vantiq-header-right {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        /* 45s Shield Status Indicator */
+        .vantiq-shield-btn {
+          padding: 8px 12px;
+          font-size: 0.78rem;
+          border-radius: 8px;
+          border: 1px solid rgba(16, 185, 129, 0.35);
+          background-color: rgba(16, 185, 129, 0.08);
+          color: #e2e8f0;
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+        }
+
+        .vantiq-shield-btn:hover {
+          background-color: rgba(16, 185, 129, 0.18);
+          border-color: #10b981;
+          box-shadow: 0 0 14px rgba(16, 185, 129, 0.25);
+          transform: translateY(-1px);
+        }
+
+        .vantiq-shield-btn.shield-engaged {
+          border-color: rgba(245, 158, 11, 0.6);
+          background-color: rgba(245, 158, 11, 0.12);
+          box-shadow: 0 0 18px rgba(245, 158, 11, 0.3);
+        }
+
+        .vantiq-shield-icon {
+          color: #34d399;
+        }
+
+        .vantiq-shield-icon.icon-alert {
+          color: #fbbf24;
+          animation: pulse 1s infinite;
+        }
+
+        .vantiq-shield-indicator-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+        }
+
+        .vantiq-shield-indicator-dot.dot-idle {
+          background-color: #10b981;
+          box-shadow: 0 0 6px #10b981;
+        }
+
+        .vantiq-shield-indicator-dot.dot-active {
+          background-color: #f59e0b;
+          box-shadow: 0 0 8px #f59e0b;
+          animation: pulse 1s infinite;
+        }
+
+        /* Simulate Free CTA Button */
+        .vantiq-simulate-cta {
+          font-size: 0.82rem;
+          font-weight: 750;
+          padding: 8px 16px;
+          border-radius: 10px;
+          background: linear-gradient(135deg, #059669 0%, #10b981 50%, #06b6d4 100%);
+          box-shadow: 0 0 18px rgba(16, 185, 129, 0.45);
+          border: 1px solid rgba(52, 211, 153, 0.5);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          white-space: nowrap;
+          cursor: pointer;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .vantiq-simulate-cta:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 0 24px rgba(16, 185, 129, 0.7);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+          .hide-mobile-hud {
             display: none !important;
           }
         }
-        @media (max-width: 900px) {
-          .desktop-nav-menu {
-            display: none !important;
-          }
-          .mobile-menu-toggle {
-            display: inline-flex !important;
-          }
+
+        @media (max-width: 640px) {
           .hide-mobile-badge {
             display: none !important;
           }
-        }
-        @media (max-width: 520px) {
-          .shield-quick-btn {
-            display: none !important;
+          .vantiq-shield-btn-label {
+            display: none;
           }
-          .emergency-cta-btn span {
-            font-size: 0.75rem;
+          .vantiq-shield-btn {
+            padding: 8px 10px;
+          }
+          .vantiq-simulate-cta span {
+            font-size: 0.76rem;
+          }
+          .vantiq-simulate-cta {
+            padding: 7px 12px;
           }
         }
       `}</style>

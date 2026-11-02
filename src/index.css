@@ -8,3 +8,33 @@ html {
 code, pre {
   font-family: 'Fira Code', 'Courier New', Courier, monospace;
 }
+
+/* Feature Target Selection Pulse Glow */
+@keyframes featureSectionGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(16, 185, 129, 0);
+    outline: 2px solid rgba(16, 185, 129, 0);
+  }
+  30% {
+    box-shadow: 0 0 45px rgba(16, 185, 129, 0.45);
+    outline: 2px solid rgba(16, 185, 129, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(16, 185, 129, 0);
+    outline: 2px solid rgba(16, 185, 129, 0);
+  }
+}
+
+.section-active-highlight {
+  animation: featureSectionGlow 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  border-radius: 16px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Responsive Desktop Content Adjustment */
+@media (min-width: 1024px) {
+  .vantiq-body-content.sidebar-expanded {
+    margin-left: 280px;
+  }
+}

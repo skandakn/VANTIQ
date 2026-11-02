@@ -2,7 +2,7 @@
 // Reactive State Hub for CHRONOS-FIN
 // Allows all 15 modular components to communicate in real-time.
 
-import React, { createContext, useContext, useState, useMemo } from 'react';
+import React, { createContext, useContext, useState, useMemo, useCallback } from 'react';
 import type { 
   FinancialProfile, 
   EmergencyShock, 
@@ -25,6 +25,12 @@ interface FintechContextType {
   triggerNeuroShield: () => void;
   bypassNeuroShield: () => void;
   hourlyWage: number;
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleSidebar: () => void;
+  activeFeature: string;
+  setActiveFeature: React.Dispatch<React.SetStateAction<string>>;
+  navigateToFeature: (featureId: string) => void;
 }
 
 const defaultProfile: FinancialProfile = {
@@ -241,6 +247,38 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }));
   };
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [activeFeature, setActiveFeature] = useState<string>('calculator');
+
+  const toggleSidebar = useCallback(() => {
+    setIsSidebarOpen((prev) => !prev);
+  }, []);
+
+  const navigateToFeature = useCallback((featureId: string) => {
+    setActiveFeature(featureId);
+
+    const routeMap: Record<string, string> = {
+      'calculator': '/calculator',
+      'simulator': '/calculator',
+      'debt-traps': '/debt-traps',
+      'quantum-solver': '/quantum-solver',
+      'cash-runway': '/cash-runway',
+      'fee-comparison': '/fee-comparison',
+      'security-zk': '/security-zk',
+      '45s-shield': '/45s-shield',
+    };
+
+    const targetPath = routeMap[featureId] || `/${featureId}`;
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState(null, '', targetPath);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+
+    if (window.innerWidth < 1024) {
+      setIsSidebarOpen(false);
+    }
+  }, []);
+
   return (
     <FintechContext.Provider
       value={{
@@ -256,6 +294,12 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
         triggerNeuroShield,
         bypassNeuroShield,
         hourlyWage,
+        isSidebarOpen,
+        setIsSidebarOpen,
+        toggleSidebar,
+        activeFeature,
+        setActiveFeature,
+        navigateToFeature,
       }}
     >
       {children}
