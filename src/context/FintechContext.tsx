@@ -105,19 +105,17 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   // Estimate the funding plan from available savings and the emergency amount.
   const fundingPlan = useMemo<FundingPlanResult>(() => {
-    const shockAmt = shock.amount;
-    const savingsAlloc = Math.min(profile.emergencySavings, 5000);
-    const remainingAfterSavings = Math.max(0, shockAmt - savingsAlloc);
-    
-    // Allocate to 0% intro card up to 25k
-    const cardAlloc = Math.min(25000, remainingAfterSavings);
-    // Allocate remainder to low-cost micro-loan @ 12%
-    const microLoanAlloc = Math.max(0, remainingAfterSavings - cardAlloc);
+    const shockAmt = Math.max(0, shock.amount);
+    const savingsAlloc = Math.min(profile.emergencySavings, Math.round(shockAmt * 0.1));
+    const trancheAAlloc = Math.round(shockAmt * 0.4);
+    const hospitalAdvanceAlloc = Math.max(0, trancheAAlloc - savingsAlloc);
+    const coopAlloc = Math.round(shockAmt * 0.4);
+    const deferredAlloc = Math.max(0, shockAmt - trancheAAlloc - coopAlloc);
 
-    const cardInterest = cardAlloc * 0.00; // 0% promo period
-    const microLoanInterest = microLoanAlloc * 0.12 * 0.5; // 6-month repayment at 12% APR
-
-    const totalRepayment = shockAmt + cardInterest + microLoanInterest + 600; // Rs. 600 nominal stamp/processing
+    const coopInterest = Math.round(coopAlloc * 0.0325);
+    const deferredInterest = Math.round(deferredAlloc * 0.077);
+    const totalInterestAndFees = coopInterest + deferredInterest;
+    const totalRepayment = shockAmt + totalInterestAndFees;
     const naiveRepayment = shockAmt * 1.368; // Predatory rate ~36.8% all-in
     const directCashSaved = Math.max(0, naiveRepayment - totalRepayment);
     const lifeHoursSaved = Math.round(directCashSaved / hourlyWage);
@@ -125,39 +123,39 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return {
       tranches: [
         {
-          sourceName: 'Liquid Emergency Savings',
-          sourceType: 'liquid_savings',
-          allocatedAmount: savingsAlloc,
-          interestApr: 0,
-          tenureMonths: 0,
-          monthlyObligation: 0,
-          interestCost: 0,
-          notes: 'Immediate Zero-Cost Self-Disbursement',
-        },
-        {
-          sourceName: 'Zero-APR Medical Buffer Card',
-          sourceType: 'zero_apr_card',
-          allocatedAmount: cardAlloc,
+          sourceName: 'Zero-Cost Liquidity (Savings + Hospital Advance)',
+          sourceType: 'emergency_nbfc',
+          allocatedAmount: trancheAAlloc,
           interestApr: 0,
           tenureMonths: 6,
-          monthlyObligation: Math.round(cardAlloc / 6),
+          monthlyObligation: Math.round(hospitalAdvanceAlloc / 6),
           interestCost: 0,
-          notes: '6-Month Institutional Interest-Free Buffer',
+          notes: `₹${savingsAlloc.toLocaleString()} savings + ₹${hospitalAdvanceAlloc.toLocaleString()} hospital advance`,
         },
         {
-          sourceName: 'Fair-Lend NBFC Micro-Tranche',
+          sourceName: 'Co-op Bridge',
           sourceType: 'micro_loan',
-          allocatedAmount: microLoanAlloc,
-          interestApr: 12,
+          allocatedAmount: coopAlloc,
+          interestApr: 6.5,
+          tenureMonths: 12,
+          monthlyObligation: Math.round((coopAlloc + coopInterest) / 12),
+          interestCost: coopInterest,
+          notes: 'Fixed-rate cooperative bridge estimate',
+        },
+        {
+          sourceName: 'Deferred Micro-Repayment',
+          sourceType: 'emergency_nbfc',
+          allocatedAmount: deferredAlloc,
+          interestApr: 8,
           tenureMonths: 6,
-          monthlyObligation: Math.round((microLoanAlloc + microLoanInterest) / 6),
-          interestCost: microLoanInterest,
-          notes: 'Pre-vetted RBI Regulated Emergency Liquidity',
+          monthlyObligation: Math.round((deferredAlloc + deferredInterest) / 6),
+          interestCost: deferredInterest,
+          notes: 'Estimated repayment begins after the 60-day grace period',
         },
       ],
-      totalAllocated: shockAmt,
+      totalAllocated: trancheAAlloc + coopAlloc + deferredAlloc,
       totalRepayment: Math.round(totalRepayment),
-      totalInterestAndFees: Math.round(cardInterest + microLoanInterest + 600),
+      totalInterestAndFees,
       directCashSaved: Math.round(directCashSaved),
       humanLifeEnergyHoursSaved: lifeHoursSaved,
       defaultProbabilityBefore: 84,
@@ -165,50 +163,61 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     };
   }, [shock.amount, profile.emergencySavings, hourlyWage]);
 
-  // Dynamic 90-Day Cash Runway Simulation
+  // Illustrative 90-day cashflow projection using the current profile and plan.
   const runwayData = useMemo<CashflowRunwayPoint[]>(() => {
     const days = [0, 15, 30, 32, 45, 60, 75, 90];
-    return days.map((day) => {
-      let balanceNaive = 40000;
-      let balanceVantiq = 40000;
+    const shockAmt = Math.max(0, shock.amount);
+    const savingsUsed = Math.min(profile.emergencySavings, Math.round(shockAmt * 0.1));
+    const startingCash = Math.max(0, profile.emergencySavings - savingsUsed);
+    const dailySurplus = dynamicSurplus / 30;
+    const amountScale = shockAmt / 50000;
+    const plan = fundingPlan.tranches.map((tranche) => tranche.monthlyObligation);
+    const scenarioBalances = new Map<number, { withoutVantiq: number; withVantiq: number }>();
+    let balanceWithoutVantiq = startingCash;
+    let balanceWithVantiq = startingCash;
+    scenarioBalances.set(0, { withoutVantiq: balanceWithoutVantiq, withVantiq: balanceWithVantiq });
 
-      if (day === 0) {
-        balanceNaive = 38000;
-        balanceVantiq = 38000;
-      } else if (day === 15) {
-        balanceNaive = 23000;
-        balanceVantiq = 28000;
-      } else if (day === 30) {
-        balanceNaive = -7500; // Rent + multiple BNPL collisions
-        balanceVantiq = 16000;
-      } else if (day === 32) {
-        balanceNaive = -18000; // Total Debt Trap Collision
-        balanceVantiq = 15000;
-      } else if (day === 45) {
-        balanceNaive = -24000;
-        balanceVantiq = 17500;
-      } else if (day === 60) {
-        balanceNaive = -31000;
-        balanceVantiq = 19000;
-      } else if (day === 75) {
-        balanceNaive = -34500;
-        balanceVantiq = 20500;
-      } else {
-        balanceNaive = -38000;
-        balanceVantiq = 22000;
+    for (let day = 1; day <= 90; day += 1) {
+      balanceWithoutVantiq += dailySurplus;
+      balanceWithVantiq += dailySurplus;
+
+      for (const offer of defaultOffers) {
+        const installmentIndex = Math.floor((day - offer.defaultCollisionDay) / 30);
+        if (
+          day >= offer.defaultCollisionDay &&
+          (day - offer.defaultCollisionDay) % 30 === 0 &&
+          installmentIndex < offer.tenureMonths
+        ) {
+          balanceWithoutVantiq -= offer.monthlyEmi * amountScale;
+        }
       }
 
+      if (shockAmt > 0 && day % 30 === 0) {
+        balanceWithVantiq -= plan[0] + plan[1];
+      }
+      if (shockAmt > 0 && day >= 61 && (day - 61) % 30 === 0) {
+        balanceWithVantiq -= plan[2];
+      }
+
+      if (days.includes(day)) {
+        scenarioBalances.set(day, { withoutVantiq: balanceWithoutVantiq, withVantiq: balanceWithVantiq });
+      }
+    }
+
+    return days.map((day) => {
+      const balance = scenarioBalances.get(day) ?? { withoutVantiq: startingCash, withVantiq: startingCash };
+      const uncertainty = Math.round(Math.abs(dynamicSurplus) * (day / 30) * 0.1);
       return {
         day,
         dateLabel: `Day ${day}`,
-        balanceWithoutVantiq: balanceNaive,
-        balanceWithVantiq: balanceVantiq,
-        pessimisticQuantile: balanceVantiq - 3500,
-        expectedQuantile: balanceVantiq,
-        optimisticQuantile: balanceVantiq + 4000,
+        balanceWithoutVantiq: Math.round(balance.withoutVantiq),
+        balanceWithVantiq: Math.round(balance.withVantiq),
+        pessimisticQuantile: Math.round(balance.withVantiq - uncertainty),
+        expectedQuantile: Math.round(balance.withVantiq),
+        optimisticQuantile: Math.round(balance.withVantiq + uncertainty),
       };
     });
-  }, [profile, dynamicSurplus]);
+  }, [profile.emergencySavings, shock.amount, dynamicSurplus, fundingPlan]);
 
   return (
     <FintechContext.Provider

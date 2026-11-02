@@ -52,21 +52,24 @@ export const CashflowRunwayChart: React.FC = () => {
 
   const activeIndex = hoveredIndex !== null ? hoveredIndex : selectedDayIndex;
   const currentPoint = cashflowRunway[activeIndex] || cashflowRunway[0];
+  const pointForDay = (day: number) => cashflowRunway.find((point) => point.day === day) ?? currentPoint;
+  const day30Point = pointForDay(30);
+  const day32Point = pointForDay(32);
+  const day60Point = pointForDay(60);
+  const day90Point = pointForDay(90);
 
   // Detailed Day-by-Day Milestone Data Dictionary (covering Days 15, 30, 32, 45, 60, 90, etc.)
-  const milestoneData: Record<number, MilestoneDetail> = useMemo(() => ({
+  const milestoneData: Record<number, Omit<MilestoneDetail, 'withoutVantiqBalance' | 'withVantiqBalance'>> = useMemo(() => ({
     0: {
       day: 0,
       label: 'Day 0',
       tag: 'Crisis Outset',
       type: 'hazard',
       title: 'Emergency Medical Shock Incurred',
-      withoutVantiqBalance: 38000,
-      withVantiqBalance: 38000,
       upcomingEmiWithout: '₹0 immediate (4 loan contracts signed in panic)',
       upcomingEmiWith: '₹0 (Zero-cost hospital advance deployed)',
-      cashflowEvent: '₹50,000 emergency medical deposit required.',
-      description: 'Without VANTIQ, borrower signs 4 fragmented instant loan apps with staggered due dates. With VANTIQ, Tri-Tranche Zero-Cost advance buffers the initial shock.'
+      cashflowEvent: `₹${Math.max(0, fintech.shock.amount).toLocaleString()} emergency expense entered.`,
+      description: 'The two lines start from the available savings after the emergency expense is funded. Later differences come from the repayment schedules.'
     },
     15: {
       day: 15,
@@ -74,38 +77,32 @@ export const CashflowRunwayChart: React.FC = () => {
       tag: 'First Drawdown',
       type: 'hazard',
       title: 'Payday App Clustered Deduction',
-      withoutVantiqBalance: 23000,
-      withVantiqBalance: 28000,
       upcomingEmiWithout: '₹5,400 (FastSalary 24x7 1st Payday EMI)',
       upcomingEmiWith: '₹0 (Co-op & hospital tranches deferred to month-end)',
-      cashflowEvent: 'Mid-month payday loan deduction triggers early liquidity drain.',
-      description: 'FastSalary 24x7 auto-debits ₹5,400 early, disrupting standard grocery and household operating cashflow.'
+      cashflowEvent: 'The first sample lender repayment is scheduled.',
+      description: 'The sample fragmented plan schedules a mid-month repayment. The coordinated plan follows its own payment dates.'
     },
     30: {
       day: 30,
       label: 'Day 30',
       tag: 'Salary Milestone',
       type: 'deposit',
-      title: 'Salary Deposit (+₹40,000) & Month-End Collisions',
-      withoutVantiqBalance: -7500,
-      withVantiqBalance: 16000,
-      upcomingEmiWithout: '₹7,120 (QuickRupee Instant Pay) + ₹7,000 Rent + ₹8,000 EMI',
-      upcomingEmiWith: '₹4,220 (Tranche A ₹2,500 + Tranche B ₹1,720)',
-      cashflowEvent: '+₹40,000 Salary deposited; massive multi-app debits collide with rent.',
-      description: 'Despite ₹40,000 salary arriving, naive borrowing triggers immediate overdraft (-₹7,500) as rent, existing commitments, and app EMI strike simultaneously!'
+      title: 'Salary and regular costs are applied',
+      upcomingEmiWithout: 'Sample lender instalments are applied on their scheduled dates.',
+      upcomingEmiWith: 'Coordinated plan instalments are applied on their scheduled dates.',
+      cashflowEvent: 'Monthly income and scheduled payments affect the projected balance.',
+      description: 'This checkpoint includes one month of income, regular costs, and the repayment due around month-end.'
     },
     32: {
       day: 32,
       label: 'Day 32',
       tag: 'Critical Default Trap',
       type: 'crash',
-      title: 'Clustered Debit Crash (-₹26,200 Total Outflow)',
-      withoutVantiqBalance: -18000,
-      withVantiqBalance: 15000,
-      upcomingEmiWithout: '₹5,240 (SplitNow BNPL) + ₹5,640 (ApexCard) + Bounce Fees',
-      upcomingEmiWith: '₹0 (No clustered debits; safe positive buffer)',
-      cashflowEvent: '-₹26,200 Clustered multi-app debit shock triggers catastrophic insolvency.',
-      description: 'Multiple predatory apps execute pre-authorized NACH auto-debits within 48 hours of salary. Account breaches overdraft limit into deep negative default (-₹18,000)!'
+      title: 'Sample lender payment dates',
+      upcomingEmiWithout: 'This point includes any sample lender instalments due by Day 32.',
+      upcomingEmiWith: 'This point includes the coordinated plan instalments due by Day 32.',
+      cashflowEvent: 'Two sample lender due dates fall close together.',
+      description: 'This checkpoint highlights how close repayment dates can tighten the available cash buffer.'
     },
     45: {
       day: 45,
@@ -113,12 +110,10 @@ export const CashflowRunwayChart: React.FC = () => {
       tag: 'Compounding Spiral',
       type: 'hazard',
       title: 'Secondary Penalties & Rollover Charges',
-      withoutVantiqBalance: -24000,
-      withVantiqBalance: 17500,
       upcomingEmiWithout: '₹3,800 late fee penalties + 42% APR compounding interest',
       upcomingEmiWith: '₹0 (Tranche C 60-day grace period fully shields cashflow)',
-      cashflowEvent: 'Late fees and default penalty ratchets accelerate negative cascade.',
-      description: 'Bounced debits generate ₹1,500 bank charges plus lender late fees. Lenders begin automated recovery calling while account slides to -₹24,000.'
+      cashflowEvent: 'The projection continues through the next scheduled repayments.',
+      description: 'The model continues to apply regular household costs and the sample lender schedule.'
     },
     60: {
       day: 60,
@@ -126,12 +121,10 @@ export const CashflowRunwayChart: React.FC = () => {
       tag: 'Grace Transition',
       type: 'recovery',
       title: 'VANTIQ 60-Day Grace Period Transition',
-      withoutVantiqBalance: -31000,
-      withVantiqBalance: 19000,
-      upcomingEmiWithout: '₹22,400 accumulated delinquent arrears; 84% default probability',
-      upcomingEmiWith: '₹1,795 (Tranche C micro-repayment activates smoothly on Day 61)',
-      cashflowEvent: '60-day recovery grace period successfully completes; liquid reserves restored.',
-      description: 'With VANTIQ, borrower has safely rebuilt disposable liquidity. Tranche C micro-repayment begins on Day 61 without disturbing basic survival needs.'
+      upcomingEmiWithout: 'The sample lender schedule continues.',
+      upcomingEmiWith: 'Deferred plan repayment begins after the 60-day grace period.',
+      cashflowEvent: 'The sample plan begins its deferred repayment phase.',
+      description: 'The planned deferred payment is added after the 60-day breathing period.'
     },
     75: {
       day: 75,
@@ -139,12 +132,10 @@ export const CashflowRunwayChart: React.FC = () => {
       tag: 'Surplus Restoration',
       type: 'recovery',
       title: 'Sustained Positive Trajectory',
-      withoutVantiqBalance: -34500,
-      withVantiqBalance: 20500,
       upcomingEmiWithout: 'Legal recovery notices & bureau credit freeze',
       upcomingEmiWith: '₹4,295 combined manageable monthly repayment',
-      cashflowEvent: 'Solvent runway builds steady positive buffer.',
-      description: 'The VANTIQ-coordinated runway remains firmly above ₹20,000, fully absorbing month-end costs while naive borrowing collapses past -₹34,000.'
+      cashflowEvent: 'Projected balances reflect ongoing costs and repayment schedules.',
+      description: 'Use the plotted balances as a planning estimate; actual bills and lender terms can differ.'
     },
     90: {
       day: 90,
@@ -152,27 +143,28 @@ export const CashflowRunwayChart: React.FC = () => {
       tag: 'Full Horizon Outcome',
       type: 'recovery',
       title: '90-Day Full Horizon Solvency Verdict',
-      withoutVantiqBalance: -38000,
-      withVantiqBalance: 22000,
-      upcomingEmiWithout: 'Total Debt Trap: ₹68,400 owed, ruined credit score',
-      upcomingEmiWith: '100% Solvent: +₹22,000 liquid buffer preserved',
-      cashflowEvent: 'Full recovery accomplished; emergency overcome without debt spiral.',
-      description: 'At 90 days, VANTIQ has completely preserved financial dignity and creditworthiness with +₹22,000 surplus, whereas naive borrowing ended in complete bankruptcy.'
+      upcomingEmiWithout: 'Illustrative balance after 90 days of the sample lender schedule.',
+      upcomingEmiWith: 'Illustrative balance after 90 days of the coordinated schedule.',
+      cashflowEvent: 'The illustrative 90-day projection ends here.',
+      description: 'Compare both projected balances to see how the example repayment schedules affect the remaining cash.'
     }
-  }), []);
+  }), [fintech.shock.amount]);
 
-  const currentMilestone = milestoneData[currentPoint.day] || {
+  const milestoneCopy = milestoneData[currentPoint.day] || {
     day: currentPoint.day,
     label: currentPoint.dateLabel,
     tag: 'Trajectory Point',
     type: currentPoint.balanceWithVantiq > 0 ? 'recovery' : 'hazard',
     title: `Runway State: Day ${currentPoint.day}`,
-    withoutVantiqBalance: currentPoint.balanceWithoutVantiq,
-    withVantiqBalance: currentPoint.balanceWithVantiq,
     upcomingEmiWithout: 'Standard predatory scheduled obligations',
     upcomingEmiWith: 'Coordinated non-colliding obligations',
     cashflowEvent: `Net balance differential: +₹${(currentPoint.balanceWithVantiq - currentPoint.balanceWithoutVantiq).toLocaleString()}`,
-    description: `On Day ${currentPoint.day}, VANTIQ maintains solvency while naive multi-app borrowing risks default.`
+    description: `Projected balances on Day ${currentPoint.day} are based on the current profile and sample repayment schedules.`
+  };
+  const currentMilestone: MilestoneDetail = {
+    ...milestoneCopy,
+    withoutVantiqBalance: currentPoint.balanceWithoutVantiq,
+    withVantiqBalance: currentPoint.balanceWithVantiq,
   };
 
   // SVG Chart Geometry Specs
@@ -180,8 +172,14 @@ export const CashflowRunwayChart: React.FC = () => {
   const height = 400;
   const padding = { top: 50, right: 50, bottom: 60, left: 85 };
 
-  const minVal = -40000;
-  const maxVal = 45000;
+  const chartValues = cashflowRunway.flatMap((point) => [
+    point.balanceWithoutVantiq,
+    point.balanceWithVantiq,
+    point.pessimisticQuantile,
+    point.optimisticQuantile,
+  ]);
+  const minVal = Math.min(-10000, ...chartValues);
+  const maxVal = Math.max(10000, ...chartValues);
 
   const getX = (index: number) => {
     return padding.left + (index / (cashflowRunway.length - 1)) * (width - padding.left - padding.right);
@@ -310,21 +308,21 @@ export const CashflowRunwayChart: React.FC = () => {
             </span>
             <span className="badge badge-emerald" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <Activity size={13} />
-              <span>TFT Multi-Horizon Attention</span>
+              <span>90-Day Cashflow Projection</span>
             </span>
             <span className="badge badge-red" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <AlertOctagon size={13} />
-              <span>Collision Pinpoint: Day 32</span>
+                  <span>Sample payment dates: Days 15–35</span>
             </span>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
             <div>
               <h2 style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', marginBottom: '8px' }}>
-                90-Day Cashflow Digital Twin & TFT Runway Simulation
+                90-Day Cashflow Scenario
               </h2>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '850px', lineHeight: 1.6 }}>
-                Using Temporal Fusion Transformer (TFT) quantile forecasting ($q_{10}, q_{50}, q_{90}$), VANTIQ projects dual trajectories over 90 days. Visualizing the fatal <strong style={{ color: '#dc2626' }}>Day 32 clustered debit crash</strong> exposes why traditional loans trigger debt traps even when salaries arrive on time.
+                An illustrative projection using your entered income, regular costs, emergency amount, and sample repayment schedules. It compares available cash over time; use actual lender terms for a real budget.
               </p>
             </div>
 
@@ -344,10 +342,10 @@ export const CashflowRunwayChart: React.FC = () => {
                   90-Day Solvency Delta
                 </div>
                 <div style={{ fontSize: '1.4rem', fontWeight: 900, color: '#15803d' }}>
-                  +₹60,000 Spread
+                  ₹{(day90Point.balanceWithVantiq - day90Point.balanceWithoutVantiq).toLocaleString()} projected difference
                 </div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
-                  -₹38k Default vs. +₹22k Solvency
+                  Day 90 estimate: ₹{day90Point.balanceWithoutVantiq.toLocaleString()} vs. ₹{day90Point.balanceWithVantiq.toLocaleString()}
                 </div>
               </div>
             </div>
@@ -432,7 +430,7 @@ export const CashflowRunwayChart: React.FC = () => {
                 onChange={(e) => setShowQuantiles(e.target.checked)}
                 style={{ accentColor: 'var(--wise-forest)', cursor: 'pointer' }}
               />
-              <span>TFT Quantile Ribbon ($q_{10}-q_{90}$)</span>
+              <span>Illustrative balance range</span>
             </label>
 
             <button
@@ -456,20 +454,20 @@ export const CashflowRunwayChart: React.FC = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#dc2626' }} />
                 <span style={{ color: '#dc2626', fontWeight: 700 }}>
-                  Red Curve: Uncoordinated Multi-App Borrowing (Insolvency Crash Day 32)
+                  Red Curve: Sample fragmented repayment schedule
                 </span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#15803d' }} />
                 <span style={{ color: '#15803d', fontWeight: 700 }}>
-                  Emerald Curve: VANTIQ Optimized Multi-Source Path (100% Solvent)
+                  Emerald Curve: Coordinated repayment schedule
                 </span>
               </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span className="badge badge-emerald" style={{ fontSize: '0.75rem' }}>
-                Confidence: 96.8% (Historical TFT Validation)
+                Scenario estimate · not a guarantee
               </span>
             </div>
           </div>
@@ -565,7 +563,7 @@ export const CashflowRunwayChart: React.FC = () => {
                 INSOLVENCY &amp; DEFAULT ZONE
               </text>
 
-              {/* TFT Quantile Ribbon (Probabilistic Interval) */}
+              {/* Illustrative range around the coordinated balance estimate */}
               {showQuantiles && activeCurveFilter !== 'naive' && (
                 <path d={quantileRibbonPath} fill="url(#quantileGrad)" />
               )}
@@ -619,7 +617,7 @@ export const CashflowRunwayChart: React.FC = () => {
                       MILESTONE: DAY 30
                     </text>
                     <text x="75" y="27" fill="#ffffff" fontSize="11" textAnchor="middle" fontWeight="900">
-                      +₹40,000 Salary Deposit
+                      +₹{profile.monthlyIncome.toLocaleString()} monthly income
                     </text>
                   </g>
                 </g>
@@ -640,7 +638,7 @@ export const CashflowRunwayChart: React.FC = () => {
                       CRITICAL ALERT: DAY 32 COLLISION
                     </text>
                     <text x="105" y="32" fill="#ffffff" fontSize="12" textAnchor="middle" fontWeight="900">
-                      -₹26,200 Clustered Debit Crash!
+                      ₹{day32Point.balanceWithoutVantiq.toLocaleString()} projected balance
                     </text>
                   </g>
                 </g>
@@ -924,7 +922,7 @@ With VANTIQ Funding Plan
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <ShieldCheck size={16} color="#10b981" />
-              <span><strong>TFT Quantile Projections for {currentPoint.dateLabel}:</strong></span>
+              <span><strong>Illustrative balance range for {currentPoint.dateLabel}:</strong></span>
             </div>
             <div style={{ display: 'flex', gap: '16px' }}>
               <span>Pessimistic ($q_{10}$): <strong style={{ color: '#38bdf8' }}>₹{currentPoint.pessimisticQuantile.toLocaleString()}</strong></span>
@@ -964,13 +962,13 @@ With VANTIQ Funding Plan
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                 <span className="badge badge-emerald" style={{ fontSize: '0.72rem' }}>Day 30 Milestone</span>
-                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#34d399' }}>+₹40,000 Inflow</span>
+                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#15803d' }}>₹{profile.monthlyIncome.toLocaleString()} / month</span>
               </div>
               <h5 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f8fafc', marginBottom: '4px' }}>
                 Salary Deposit Arrives
               </h5>
               <p style={{ fontSize: '0.78rem', color: '#94a3b8', lineHeight: 1.4 }}>
-                Monthly paycheck is credited. With VANTIQ, you preserve +₹16,000 buffer. Without VANTIQ, rent + instant loan EMIs immediately consume it all.
+                The projection applies your monthly income and regular costs. Projected Day 30 balances: ₹{day30Point.balanceWithVantiq.toLocaleString()} coordinated and ₹{day30Point.balanceWithoutVantiq.toLocaleString()} sample schedule.
               </p>
             </div>
 
@@ -989,13 +987,13 @@ With VANTIQ Funding Plan
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                 <span className="badge badge-red" style={{ fontSize: '0.72rem' }}>Day 32 Alert Flag</span>
-                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f87171' }}>-₹26,200 Crash</span>
+                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#b91c1c' }}>₹{day32Point.balanceWithoutVantiq.toLocaleString()}</span>
               </div>
               <h5 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f87171', marginBottom: '4px' }}>
-                Clustered Debit Crash (-₹18,000 Balance)
+                Day 32 sample schedule estimate
               </h5>
               <p style={{ fontSize: '0.78rem', color: '#cbd5e1', lineHeight: 1.4 }}>
-                4 fragmented apps execute uncoordinated auto-debits within 48h. The account crashes into deep insolvency! VANTIQ completely eliminates this collision.
+                This estimate applies the sample payments scheduled around this date. It is an illustration, not a prediction of default or lender behavior.
               </p>
             </div>
 
@@ -1013,13 +1011,13 @@ With VANTIQ Funding Plan
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                 <span className="badge badge-purple" style={{ fontSize: '0.72rem' }}>Day 60 Grace Period</span>
-                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#c084fc' }}>+₹19,000 Buffer</span>
+                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#7c3aed' }}>₹{day60Point.balanceWithVantiq.toLocaleString()}</span>
               </div>
               <h5 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f8fafc', marginBottom: '4px' }}>
                 60-Day Grace Complete
               </h5>
               <p style={{ fontSize: '0.78rem', color: '#94a3b8', lineHeight: 1.4 }}>
-                Emergency fully stabilized. Tranche C micro-repayment begins safely on Day 61 at ₹1,795/mo without disrupting primary living needs.
+                Deferred repayments are scheduled to start after the 60-day grace period. Check the resulting balance against your actual budget.
               </p>
             </div>
 
@@ -1037,13 +1035,13 @@ With VANTIQ Funding Plan
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                 <span className="badge badge-cyan" style={{ fontSize: '0.72rem' }}>Day 90 Full Horizon</span>
-                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#38bdf8' }}>+₹22,000 Surplus</span>
+                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0369a1' }}>₹{day90Point.balanceWithVantiq.toLocaleString()}</span>
               </div>
               <h5 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f8fafc', marginBottom: '4px' }}>
-                100% Solvency Preserved
+                Day 90 illustrative balances
               </h5>
               <p style={{ fontSize: '0.78rem', color: '#94a3b8', lineHeight: 1.4 }}>
-                VANTIQ user enjoys +₹22,000 intact buffer and pristine credit score. Naive borrower remains trapped in -₹38,000 compounding delinquency.
+                At the end of this sample schedule, the projected balances are ₹{day90Point.balanceWithVantiq.toLocaleString()} and ₹{day90Point.balanceWithoutVantiq.toLocaleString()}. Actual results depend on real repayment terms and spending.
               </p>
             </div>
 

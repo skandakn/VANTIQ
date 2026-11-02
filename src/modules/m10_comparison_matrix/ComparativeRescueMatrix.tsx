@@ -14,7 +14,7 @@ export const ComparativeRescueMatrix: React.FC = () => {
   const { shock, setShock } = useFintech();
   const [comparisonTab, setComparisonTab] = useState<'fees' | 'monthly' | 'traps'>('fees');
 
-  const neededAmount = shock.amount || 50000;
+  const neededAmount = Math.max(0, shock.amount);
 
   const setAmount = (amt: number) => {
     setShock((prev) => ({ ...prev, amount: amt }));
@@ -27,7 +27,7 @@ export const ComparativeRescueMatrix: React.FC = () => {
       isHero: true,
       badge: 'CHEAPEST & SAFEST',
       disbursement: 'Instant (15 mins)',
-      upfrontFee: Math.round(neededAmount * 0.0),
+      upfrontFee: 0,
       interestCost: Math.round(neededAmount * 0.0284),
       totalCost: Math.round(neededAmount * 0.0284),
       effectiveApr: '3.8% Blended',
@@ -324,7 +324,7 @@ export const ComparativeRescueMatrix: React.FC = () => {
                       ₹{lender.totalCost.toLocaleString()}
                     </div>
                     <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                      {((lender.totalCost / neededAmount) * 100).toFixed(1)}% total surcharge
+                      {neededAmount > 0 ? `${((lender.totalCost / neededAmount) * 100).toFixed(1)}% total surcharge` : '0.0% total surcharge'}
                     </div>
                   </td>
 
