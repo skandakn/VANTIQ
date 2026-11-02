@@ -35,14 +35,25 @@ function fmtINR(n: number): string {
   return n.toLocaleString('en-IN');
 }
 
-/** Fragmented: 38.5% APR accrual over horizon on Rs.50,000 principal */
-function fragmentedTotalCost(h: Horizon): string {
-  return 'Rs.' + fmtINR(Math.round(50000 * (1 + (0.385 * h) / 12)));
+const PRINCIPAL = 50000;
+const FRAGMENTED_APR = 0.385;
+const VANTIQ_APR = 0.042;
+
+/** Simple-interest projection plus the repeated fee charged each 3-month cycle. */
+function fragmentedTotalCostAmount(h: Horizon): number {
+  const interest = PRINCIPAL * FRAGMENTED_APR * (h / 12);
+  const fees = 4800 * Math.ceil(h / 3);
+  return Math.round(PRINCIPAL + interest + fees);
 }
 
-/** VANTIQ: 4.2% APR accrual over horizon on Rs.50,000 principal */
-function VANTIQTotalCost(h: Horizon): string {
-  return 'Rs.' + fmtINR(Math.round(50000 * (1 + (0.042 * h) / 12)));
+/** Simple-interest projection; the coordinated plan has no processing fees. */
+function VANTIQTotalCostAmount(h: Horizon): number {
+  const interest = PRINCIPAL * VANTIQ_APR * (h / 12);
+  return Math.round(PRINCIPAL + interest);
+}
+
+function fmtTotalCost(amount: number): string {
+  return 'Rs.' + fmtINR(amount);
 }
 
 /** Rs.4,800 fee per 3-month cycle, compounded across horizon */
@@ -125,14 +136,16 @@ const METRICS: MetricRow[] = [
 // Summary banner data per horizon
 // ---------------------------------------------------------------------------
 
-const SUMMARY: Record<
-  Horizon,
-  { saved: string; feesDodged: string; defaultDelta: string }
-> = {
-  3:  { saved: 'Rs.16,600', feesDodged: 'Rs.4,800',  defaultDelta: '90.2%' },
-  6:  { saved: 'Rs.33,200', feesDodged: 'Rs.9,600',  defaultDelta: '87.8%' },
-  12: { saved: 'Rs.66,400', feesDodged: 'Rs.19,200', defaultDelta: '89.9%' },
-};
+function getSummary(horizon: Horizon) {
+  const saved = fragmentedTotalCostAmount(horizon) - VANTIQTotalCostAmount(horizon);
+  const defaultRiskGap = Number(fragmentedDefault(horizon)) - Number(VANTIQDefault(horizon));
+
+  return {
+    saved: 'Rs.' + fmtINR(saved),
+    feesDodged: fragmentedFees(horizon),
+    defaultDelta: `${defaultRiskGap.toFixed(1)} pts`,
+  };
+}
 
 // ---------------------------------------------------------------------------
 // HorizonToggle
@@ -281,7 +294,7 @@ const MetricRowItem: React.FC<MetricRowItemProps> = ({
 
 export const ComparativeRescueMatrix: React.FC = () => {
   const [horizon, setHorizon] = useState<Horizon>(3);
-  const summary = SUMMARY[horizon];
+  const summary = getSummary(horizon);
 
   return (
     <section id="comparison" style={{ padding: '48px 0' }}>
@@ -364,10 +377,10 @@ export const ComparativeRescueMatrix: React.FC = () => {
               Fragmented - {horizon}-Month Total Repayment
             </span>
             <span style={{ fontSize: '1.6rem', fontWeight: 800, color: '#f87171' }}>
-              {fragmentedTotalCost(horizon)}
+              {fmtTotalCost(fragmentedTotalCostAmount(horizon))}
             </span>
             <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
-              on Rs.50,000 principal @ 38.5% effective APR
+              principal, projected interest, and {fragmentedFees(horizon)} in horizon fees
             </span>
           </div>
           <div className='vantiq-card glow-emerald' style={{ border: '1.5px solid rgba(16,185,129,0.45)', background: 'rgba(16,185,129,0.04)', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -375,10 +388,10 @@ export const ComparativeRescueMatrix: React.FC = () => {
               VANTIQ - {horizon}-Month Total Repayment
             </span>
             <span style={{ fontSize: '1.6rem', fontWeight: 800, color: '#34d399' }}>
-              {VANTIQTotalCost(horizon)}
+              {fmtTotalCost(VANTIQTotalCostAmount(horizon))}
             </span>
             <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
-              on Rs.50,000 principal @ 4.2% effective APR
+              principal plus projected interest; no processing fees
             </span>
           </div>
         </div>
