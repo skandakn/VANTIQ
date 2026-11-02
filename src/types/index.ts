@@ -42,15 +42,13 @@ export interface FundingTranche {
   notes: string;
 }
 
-export interface QuantumKnapsackResult {
+export interface FundingPlanResult {
   tranches: FundingTranche[];
   totalAllocated: number;
   totalRepayment: number;
   totalInterestAndFees: number;
   directCashSaved: number;
   humanLifeEnergyHoursSaved: number;
-  quantumSolveTimeMs: number;
-  hamiltonianEnergy: number;
   defaultProbabilityBefore: number; // e.g., 84%
   defaultProbabilityAfter: number;  // e.g., 4%
 }

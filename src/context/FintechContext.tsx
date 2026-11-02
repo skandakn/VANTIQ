@@ -7,7 +7,7 @@ import type {
   FinancialProfile, 
   EmergencyShock, 
   PredatoryOffer, 
-  QuantumKnapsackResult, 
+  FundingPlanResult,
   CashflowRunwayPoint, 
   NeuroShieldState 
 } from '../types';
@@ -18,15 +18,13 @@ interface FintechContextType {
   shock: EmergencyShock;
   setShock: React.Dispatch<React.SetStateAction<EmergencyShock>>;
   predatoryOffers: PredatoryOffer[];
-  quantumResult: QuantumKnapsackResult;
-  rescuePlan: QuantumKnapsackResult;
+  fundingPlan: FundingPlanResult;
   runwayData: CashflowRunwayPoint[];
   neuroState: NeuroShieldState;
   setNeuroState: React.Dispatch<React.SetStateAction<NeuroShieldState>>;
   triggerNeuroShield: () => void;
   bypassNeuroShield: () => void;
   hourlyWage: number;
-  triggerQuantumOptimization: () => void;
 }
 
 const defaultProfile: FinancialProfile = {
@@ -117,8 +115,8 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return Math.max(50, Math.round(profile.monthlyIncome / 176));
   }, [profile.monthlyIncome]);
 
-  // Dynamic Quantum Knapsack Optimization
-  const quantumResult = useMemo<QuantumKnapsackResult>(() => {
+  // Estimate a staged funding plan from available savings and the emergency amount.
+  const fundingPlan = useMemo<FundingPlanResult>(() => {
     const shockAmt = shock.amount;
     const savingsAlloc = Math.min(profile.emergencySavings, 5000);
     const remainingAfterSavings = Math.max(0, shockAmt - savingsAlloc);
@@ -174,8 +172,6 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
       totalInterestAndFees: Math.round(cardInterest + microLoanInterest + 600),
       directCashSaved: Math.round(directCashSaved),
       humanLifeEnergyHoursSaved: lifeHoursSaved,
-      quantumSolveTimeMs: 134,
-      hamiltonianEnergy: -42.85,
       defaultProbabilityBefore: 84,
       defaultProbabilityAfter: 4,
     };
@@ -235,12 +231,6 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }));
   };
 
-  const [, setQuantumIteration] = useState(0);
-
-  const triggerQuantumOptimization = () => {
-    setQuantumIteration((p) => p + 1);
-  };
-
   const bypassNeuroShield = () => {
     setNeuroState((prev) => ({
       ...prev,
@@ -257,15 +247,13 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
         shock,
         setShock,
         predatoryOffers,
-        quantumResult,
-        rescuePlan: quantumResult,
+        fundingPlan,
         runwayData,
         neuroState,
         setNeuroState,
         triggerNeuroShield,
         bypassNeuroShield,
         hourlyWage,
-        triggerQuantumOptimization,
       }}
     >
       {children}

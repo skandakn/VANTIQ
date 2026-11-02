@@ -15,7 +15,7 @@ import {
 import { useFintech } from '../../context/FintechContext';
 
 export const HeroSection: React.FC = () => {
-  const { shock, setShock, profile, quantumResult } = useFintech();
+  const { shock, setShock, profile, fundingPlan } = useFintech();
   const emergencyAmountId = useId();
 
   // Local state for interactive currency/emergency converter
@@ -431,10 +431,10 @@ export const HeroSection: React.FC = () => {
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ color: 'var(--text-secondary)' }}>Allocation Architecture:</span>
-                  <strong style={{ color: 'var(--wise-forest)' }}>Tri-Tranche Quantum Blend</strong>
+                  <strong style={{ color: 'var(--wise-forest)' }}>Tri-Tranche Funding Plan</strong>
                 </div>
                 <span style={{ color: '#15803d', fontWeight: 700, cursor: 'pointer' }}>
-                  {quantumResult.tranches.length} Sources Optimal &gt;
+                  {fundingPlan.tranches.length} Funding Sources &gt;
                 </span>
               </div>
 

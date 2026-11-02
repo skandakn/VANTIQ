@@ -859,7 +859,7 @@ export const MultiSourceRescueCard: React.FC = () => {
               </div>
             </div>
 
-            {/* Box 2: VANTIQ Quantum Rescue */}
+            {/* Box 2: VANTIQ Rescue Plan */}
             <div style={{
               padding: '24px',
               borderRadius: '14px',

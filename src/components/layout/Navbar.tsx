@@ -166,7 +166,7 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Status Ticker: Quantum Engine: Online (Wise pill) */}
+          {/* Status Ticker: Funding plan status */}
           <div className="status-ticker-hud" style={{ display: 'flex', alignItems: 'center' }}>
             <div
               style={{
@@ -206,10 +206,8 @@ export const Navbar: React.FC = () => {
               </span>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ color: '#596d5a' }}>Quantum Engine:</span>
-                <span style={{ color: 'var(--wise-forest)', fontWeight: 700 }}>Online</span>
-                <span style={{ color: '#c4d0c1' }}>|</span>
-                <span style={{ color: '#15803d', fontWeight: 700 }}>38ms latency</span>
+                <span style={{ color: '#596d5a' }}>Funding Plan:</span>
+                <span style={{ color: 'var(--wise-forest)', fontWeight: 700 }}>Available</span>
               </div>
             </div>
           </div>

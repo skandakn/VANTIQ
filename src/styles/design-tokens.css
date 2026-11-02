@@ -37,7 +37,7 @@
   /* Status Accents */
   --neon-cyan: #0284c7;
   --neon-emerald: #15803d;
-  --quantum-purple: #7c3aed;
+  --accent-purple: #7c3aed;
   --alert-red: #dc2626;
   --alert-red-bg: #fef2f2;
   --alert-red-border: #fecaca;
@@ -105,7 +105,7 @@ body {
 }
 
 .chronos-card.glow-purple:hover {
-  border-color: var(--quantum-purple);
+  border-color: var(--accent-purple);
 }
 
 .chronos-card.glow-emerald:hover {
@@ -202,17 +202,6 @@ body {
 }
 
 .btn-forest:hover {
-  background: var(--wise-forest-light);
-  transform: translateY(-1px);
-}
-
-.btn-quantum {
-  background: var(--wise-forest);
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(22, 51, 0, 0.15);
-}
-
-.btn-quantum:hover {
   background: var(--wise-forest-light);
   transform: translateY(-1px);
 }

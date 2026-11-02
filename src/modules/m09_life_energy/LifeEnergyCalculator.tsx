@@ -26,8 +26,7 @@ import {
 import { useFintech } from '../../context/FintechContext';
 
 export const LifeEnergyCalculator: React.FC = () => {
-  // Requirement 1: Consume profile and rescuePlan from useFintech()
-  const { profile, rescuePlan, shock } = useFintech();
+  const { profile, fundingPlan, shock } = useFintech();
 
   // Interactive Configuration Controls
   const [customSalary, setCustomSalary] = useState<number | null>(null);
@@ -59,13 +58,13 @@ export const LifeEnergyCalculator: React.FC = () => {
     return Math.round(base * 1.368); // 36.8% all-in predatory rate
   }, [isDefaultBenchmark, shock]);
 
-  // CHRONOS Repayment: Defaults to ₹51,420, or consumes rescuePlan.totalRepayment
+  // Estimated repayment from the current funding plan.
   const chronosRepayment = useMemo(() => {
     if (isDefaultBenchmark && (!shock || shock.amount === 50000)) {
       return 51420;
     }
-    return rescuePlan?.totalRepayment || 51420;
-  }, [isDefaultBenchmark, shock, rescuePlan]);
+    return fundingPlan?.totalRepayment || 51420;
+  }, [isDefaultBenchmark, shock, fundingPlan]);
 
   // Real Labor Hours calculations
   const predatoryHours = useMemo(() => {
@@ -361,7 +360,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 2: CHRONOS-FIN Quantum Allocation */}
+          {/* Card 2: CHRONOS-FIN Funding Plan */}
           <div className="chronos-card" style={{
             padding: '26px',
             borderRadius: '16px',

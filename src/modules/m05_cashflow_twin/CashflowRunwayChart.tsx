@@ -851,7 +851,7 @@ export const CashflowRunwayChart: React.FC = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <CheckCircle2 size={18} color="#10b981" />
                 <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#34d399', textTransform: 'uppercase' }}>
-                  With CHRONOS (Quantum Solvent)
+                  With VANTIQ Funding Plan
                 </span>
               </div>
 

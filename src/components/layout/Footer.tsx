@@ -166,7 +166,7 @@ export const Footer: React.FC = () => {
 
                 <span style={{ fontSize: '1rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.01em' }}>
                   System Architecture Status:{' '}
-                  <span style={{ color: '#34d399' }}>Quantum Hybrid Optimizer v2.4 (Active)</span>
+                  <span style={{ color: '#34d399' }}>Funding Plan Estimate (Ready)</span>
                 </span>
               </div>
               <p style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '3px' }}>
@@ -357,8 +357,7 @@ export const Footer: React.FC = () => {
             </div>
 
             <p style={{ fontSize: '0.84rem', color: '#94a3b8', lineHeight: 1.6, marginBottom: '16px' }}>
-              A Quantum-Enhanced Counterfactual Digital Twin and Affective Affordability Engine designed to 
-              de-weaponize predatory emergency credit and insulate Indian salaried households from debt trap cascades.
+              An emergency planning and affordability tool designed to help Indian households understand borrowing costs and repayment risks.
             </p>
 
             {/* Official GitHub Link Button */}
@@ -439,7 +438,7 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Quick Jump Links: Decision AI & Quantum */}
+          {/* Quick Jump Links: Planning & Insights */}
           <div>
             <h4
               style={{
@@ -455,7 +454,7 @@ export const Footer: React.FC = () => {
               }}
             >
               <Cpu size={14} />
-              <span>Quantum & Decision AI</span>
+              <span>Planning & Insights</span>
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {[
