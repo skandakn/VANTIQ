@@ -2,11 +2,11 @@
 // Side-by-side comparison matrix for selected medical relief plans
 
 import React from 'react';
-import { 
-  X, 
-  Scale, 
-  Check, 
-  AlertCircle, 
+import {
+  X,
+  Scale,
+  Check,
+  AlertCircle,
   ExternalLink,
   Star,
   Clock

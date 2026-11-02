@@ -23,7 +23,7 @@ export const ComparativeRescueMatrix: React.FC = () => {
   // Dynamic lender computations based on current amount
   const lenders = [
     {
-      name: 'VANTIQ Quantum Rescue',
+      name: 'VANTIQ Rescue Plan',
       isHero: true,
       badge: 'CHEAPEST & SAFEST',
       disbursement: 'Instant (15 mins)',
@@ -207,7 +207,7 @@ export const ComparativeRescueMatrix: React.FC = () => {
           </div>
 
           <a
-            href="#quantum-solver"
+            href="#rescue-split"
             className="btn btn-primary"
             style={{ padding: '14px 28px', fontSize: '0.95rem' }}
           >

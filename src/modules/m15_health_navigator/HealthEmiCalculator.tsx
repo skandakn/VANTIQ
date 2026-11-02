@@ -2,11 +2,11 @@
 // Interactive Medical Loan & EMI Calculator with Predatory Comparison
 
 import React, { useState } from 'react';
-import { 
-  X, 
-  Calculator, 
-  TrendingDown, 
-  ShieldCheck, 
+import {
+  X,
+  Calculator,
+  TrendingDown,
+  ShieldCheck,
   ExternalLink,
   Sparkles
 } from 'lucide-react';
@@ -136,7 +136,7 @@ export const HealthEmiCalculator: React.FC<HealthEmiCalculatorProps> = ({
 
         {/* Inputs */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginBottom: '24px' }}>
-          
+
           {/* Loan Amount Input */}
           <div style={{ backgroundColor: '#f9faf7', padding: '18px', borderRadius: '16px', border: '1px solid #e5e9e2' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
@@ -222,7 +222,7 @@ export const HealthEmiCalculator: React.FC<HealthEmiCalculatorProps> = ({
 
         {/* Calculated Monthly EMI Cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '14px', marginBottom: '24px' }}>
-          
+
           <div style={{ backgroundColor: '#edf2ea', border: '1.5px solid #d8e2d4', padding: '16px', borderRadius: '16px' }}>
             <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#3b543d', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Monthly EMI

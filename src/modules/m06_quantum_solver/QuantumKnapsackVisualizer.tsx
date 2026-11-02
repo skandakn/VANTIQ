@@ -38,7 +38,10 @@ interface QubitConfig {
 }
 
 export const QuantumKnapsackVisualizer: React.FC = () => {
-  const { quantumResult, triggerQuantumOptimization, shock } = useFintech();
+  const fintech = useFintech() as any;
+  const { shock } = fintech;
+  const quantumResult = fintech.quantumResult ?? fintech.fundingPlan;
+  const triggerQuantumOptimization = fintech.triggerQuantumOptimization;
 
   // Animation and Solver state
   const [isSolving, setIsSolving] = useState(false);
@@ -1182,7 +1185,7 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
             </div>
             <div>
               <span style={{ color: '#dcfce7' }}>Life Energy Saved: </span>
-              <strong style={{ color: '#38bdf8', fontWeight: 800 }}>{quantumResult?.humanLifeEnergyHoursSaved || 123} Hours</strong>
+              <strong style={{ color: '#38bdf8', fontWeight: 800 }}>{quantumResult?.humanLifeEnergyHoursSaved || quantumResult?.lifeHoursSaved || 123} Hours</strong>
             </div>
           </div>
         </div>

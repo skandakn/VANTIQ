@@ -5,7 +5,7 @@ import { Milestone, Users, Award, ShieldCheck } from 'lucide-react';
 
 export const RoadmapAndTeam: React.FC = () => {
   const roadmapSteps = [
-    { phase: 'Phase 1 · Q1 2025', title: 'Algorithmic Simulation & Lab Validation', desc: 'Ising model Knapsack QUBO solver benchmarked against 10,000 synthetic shock scenarios with 0% default rate.' },
+    { phase: 'Phase 1 · Q1 2025', title: 'Algorithmic Simulation & Lab Validation', desc: 'Funding allocation simulations evaluated against synthetic emergency scenarios.' },
     { phase: 'Phase 2 · Q2 2025', title: 'On-Device Edge Wasm & Account Aggregator API', desc: 'Zero-Knowledge client-side parser integration with Sahamati and Setu Account Aggregator frameworks.' },
     { phase: 'Phase 3 · Q3 2025', title: 'Hospital & Healthcare Partner Sandbox', desc: 'Direct hospital desk integration: converting urgent ICU admission deposits into buffered tri-tranche loans.' },
     { phase: 'Phase 4 · Q4 2025', title: 'RBI Regulatory Sandbox Cohort', desc: 'Testing consumer protection safeguards under RBI Fair Practices Code for Digital Lending.' },
@@ -74,7 +74,7 @@ export const RoadmapAndTeam: React.FC = () => {
           </div>
 
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, maxWidth: '850px', marginBottom: '24px' }}>
-            Built for the National Fintech Hackathon, VANTIQ bridges quantum combinatorial mechanics, behavioral economics (Scarcity Theory), and Zero-Knowledge edge cryptography to permanently protect vulnerable middle-income households from predatory digital lending spirals.
+            Built for the National Fintech Hackathon, VANTIQ combines emergency planning, behavioral safeguards, and privacy-focused design to help households evaluate borrowing choices.
           </p>
 
           <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
@@ -84,7 +84,7 @@ export const RoadmapAndTeam: React.FC = () => {
             </span>
             <span className="badge badge-forest" style={{ padding: '8px 16px', fontSize: '0.82rem' }}>
               <ShieldCheck size={14} />
-              <span>Full Stack: React + TypeScript + QUBO Annealing</span>
+              <span>Full Stack: React + TypeScript</span>
             </span>
           </div>
         </div>
