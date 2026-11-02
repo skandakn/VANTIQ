@@ -21,6 +21,182 @@ code, pre {
   background-color: #ffffff;
 }
 
+/* Make the two hero planners read as distinct, intentional work areas. */
+.hero-rescue-card,
+.hero-cashflow-card {
+  position: relative;
+  border-width: 1.5px !important;
+  box-shadow: 0 18px 44px rgba(22, 51, 0, 0.09), 0 3px 10px rgba(15, 23, 42, 0.04) !important;
+}
+
+.hero-rescue-card {
+  background: linear-gradient(145deg, #f1fae9 0%, #ffffff 38%) !important;
+  border-color: #b5d99a !important;
+}
+
+.hero-cashflow-card {
+  background: linear-gradient(145deg, #edf8ff 0%, #ffffff 42%) !important;
+  border-color: #a8cce5 !important;
+}
+
+.hero-rescue-card::before,
+.hero-cashflow-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 28px;
+  right: 28px;
+  height: 4px;
+  border-radius: 0 0 6px 6px;
+}
+
+.hero-rescue-card::before {
+  background: linear-gradient(90deg, #166534, #84cc16);
+}
+
+.hero-cashflow-card::before {
+  background: linear-gradient(90deg, #0369a1, #22c55e);
+}
+
+.cashflow-heading-icon {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #dbeafe;
+  color: #075985;
+}
+
+.cashflow-eyebrow {
+  color: #075985;
+  font-size: 0.69rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+}
+
+.cashflow-breakdown {
+  margin: 20px 0 16px;
+  padding: 16px;
+  border: 1px solid #d6e5ef;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(239, 248, 255, 0.95), rgba(248, 252, 255, 0.8));
+}
+
+.cashflow-breakdown-heading,
+.cashflow-breakdown-legend span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cashflow-breakdown-heading {
+  color: #425466;
+  font-size: 0.76rem;
+  margin-bottom: 10px;
+}
+
+.cashflow-breakdown-heading strong {
+  color: #123a59;
+  font-size: 0.82rem;
+}
+
+.cashflow-breakdown-track {
+  display: flex;
+  height: 11px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dce8ef;
+}
+
+.cashflow-breakdown-committed {
+  background: linear-gradient(90deg, #f59e0b, #ea580c);
+  transition: width 180ms ease;
+}
+
+.cashflow-breakdown-free {
+  background: linear-gradient(90deg, #16a34a, #84cc16);
+  transition: width 180ms ease;
+}
+
+.cashflow-breakdown-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 18px;
+  margin-top: 11px;
+}
+
+.cashflow-breakdown-legend span {
+  justify-content: flex-start;
+  color: #526273;
+  font-size: 0.7rem;
+}
+
+.cashflow-breakdown-legend strong {
+  margin-left: auto;
+  color: #17354b;
+  white-space: nowrap;
+}
+
+.cashflow-legend-dot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.cashflow-legend-dot.committed { background: #ea580c; }
+.cashflow-legend-dot.free { background: #16a34a; }
+
+.cashflow-equation {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #d6e5ef;
+  color: #64748b;
+  font-size: 0.68rem;
+}
+
+.cashflow-equation > div {
+  display: grid;
+  gap: 3px;
+}
+
+.cashflow-equation > div + div {
+  padding-left: 10px;
+  border-left: 1px solid #d6e5ef;
+}
+
+.cashflow-equation > div > strong {
+  color: #123a59;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.cashflow-equation-result { color: #075985; font-weight: 800; }
+.cashflow-equation > div > strong.positive { color: #15803d; }
+.cashflow-equation > div > strong.negative { color: #b91c1c; }
+
+@media (max-width: 600px) {
+  .cashflow-breakdown-legend {
+    grid-template-columns: 1fr;
+  }
+
+  .cashflow-equation {
+    grid-template-columns: 1fr;
+  }
+
+  .cashflow-equation > div + div {
+    padding: 8px 0 0;
+    border-top: 1px solid #d6e5ef;
+    border-left: 0;
+  }
+}
+
 /* Keep section headings and card copy readable across modules that still
    contain inline colors from the earlier dark theme. */
 main section h1,
