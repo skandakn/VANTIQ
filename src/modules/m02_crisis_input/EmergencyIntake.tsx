@@ -43,10 +43,10 @@ export const EmergencyIntake: React.FC = () => {
               <span>Step 1: Cashflow Baseline & Shock Parameters</span>
             </span>
           </div>
-          <h2 style={{ fontSize: '2.4rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', marginBottom: '8px' }}>
+          <h2 style={{ fontSize: '2.4rem', fontWeight: 900, color: '#163300', letterSpacing: '-0.02em', marginBottom: '8px' }}>
             Transparent Emergency Cashflow Calculator
           </h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '780px' }}>
+          <p style={{ color: '#34443a', fontSize: '1.05rem', maxWidth: '780px' }}>
             Adjust your numbers below. VANTIQ dynamically isolates your true monthly uncommitted capacity from your existing expenses.
           </p>
         </div>
@@ -78,7 +78,7 @@ export const EmergencyIntake: React.FC = () => {
 
             {/* Shock Amount Field */}
             <div style={{ marginBottom: '22px' }}>
-              <label htmlFor={shockInputId} style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
+              <label htmlFor={shockInputId} style={{ display: 'block', fontSize: '0.85rem', color: '#34443a', fontWeight: 700, marginBottom: '8px' }}>
                 Emergency Bill Amount (₹)
               </label>
               <div style={{ position: 'relative' }}>
@@ -87,6 +87,7 @@ export const EmergencyIntake: React.FC = () => {
                 </span>
                 <input
                   id={shockInputId}
+                  className="cashflow-field"
                   type="number"
                   value={shock.amount}
                   onChange={(e) => handleShockAmount(parseInt(e.target.value))}
@@ -94,12 +95,11 @@ export const EmergencyIntake: React.FC = () => {
                     width: '100%',
                     padding: '14px 18px 14px 44px',
                     borderRadius: '14px',
-                    border: '1.5px solid #d0d7cc',
-                    backgroundColor: '#f4f5f1',
-                    color: 'var(--wise-forest)',
+                    border: '1.5px solid #7d8b7e',
+                    backgroundColor: '#ffffff',
+                    color: '#163300',
                     fontSize: '1.5rem',
                     fontWeight: 900,
-                    outline: 'none',
                     letterSpacing: '-0.02em',
                   }}
                 />
@@ -109,22 +109,22 @@ export const EmergencyIntake: React.FC = () => {
             {/* Category & Available Liquid Savings */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '24px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', color: '#34443a', fontWeight: 700, marginBottom: '8px' }}>
                   Category
                 </label>
                 <select
+                  className="cashflow-field"
                   value={shock.category}
                   onChange={(e) => setShock((prev) => ({ ...prev, category: e.target.value as 'medical' | 'vehicle' | 'home_repair' | 'job_loss' }))}
                   style={{
                     width: '100%',
                     padding: '12px 14px',
                     borderRadius: '12px',
-                    backgroundColor: '#f4f5f1',
-                    color: 'var(--wise-forest)',
-                    border: '1.5px solid #d0d7cc',
+                    backgroundColor: '#ffffff',
+                    color: '#163300',
+                    border: '1.5px solid #7d8b7e',
                     fontSize: '0.9rem',
                     fontWeight: 600,
-                    outline: 'none'
                   }}
                 >
                   <option value="medical">Hospital Emergency</option>
@@ -135,11 +135,12 @@ export const EmergencyIntake: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor={savingsInputId} style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
+                <label htmlFor={savingsInputId} style={{ display: 'block', fontSize: '0.82rem', color: '#34443a', fontWeight: 700, marginBottom: '8px' }}>
                   Liquid Savings (₹)
                 </label>
                 <input
                   id={savingsInputId}
+                  className="cashflow-field"
                   type="number"
                   value={profile.emergencySavings}
                   onChange={(e) => handleProfileChange('emergencySavings', parseInt(e.target.value))}
@@ -147,12 +148,11 @@ export const EmergencyIntake: React.FC = () => {
                     width: '100%',
                     padding: '12px 14px',
                     borderRadius: '12px',
-                    border: '1.5px solid #d0d7cc',
-                    backgroundColor: '#f4f5f1',
-                    color: '#15803d',
+                    border: '1.5px solid #7d8b7e',
+                    backgroundColor: '#ffffff',
+                    color: '#166534',
                     fontWeight: 800,
                     fontSize: '1rem',
-                    outline: 'none'
                   }}
                 />
               </div>
@@ -162,16 +162,16 @@ export const EmergencyIntake: React.FC = () => {
             <div style={{
               padding: '16px 20px',
               borderRadius: '14px',
-              backgroundColor: '#fee2e2',
-              border: '1px solid #fecaca',
+              backgroundColor: '#fff1f2',
+              border: '1px solid #fda4af',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
-              <span style={{ fontSize: '0.88rem', color: '#991b1b', fontWeight: 600 }}>
+              <span style={{ fontSize: '0.88rem', color: '#7f1d1d', fontWeight: 700 }}>
                 Unfunded Medical Gap:
               </span>
-              <strong style={{ fontSize: '1.2rem', color: '#dc2626', fontWeight: 900 }}>
+              <strong style={{ fontSize: '1.2rem', color: '#b91c1c', fontWeight: 900 }}>
                 ₹{Math.max(0, shock.amount - profile.emergencySavings).toLocaleString()}
               </strong>
             </div>
@@ -202,11 +202,12 @@ export const EmergencyIntake: React.FC = () => {
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '22px' }}>
               <div>
-                <label htmlFor={salaryInputId} style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
+                <label htmlFor={salaryInputId} style={{ display: 'block', fontSize: '0.82rem', color: '#34443a', fontWeight: 700, marginBottom: '8px' }}>
                   Monthly Net Salary (₹)
                 </label>
                 <input
                   id={salaryInputId}
+                  className="cashflow-field"
                   type="number"
                   value={profile.monthlyIncome}
                   onChange={(e) => handleProfileChange('monthlyIncome', parseInt(e.target.value))}
@@ -214,22 +215,22 @@ export const EmergencyIntake: React.FC = () => {
                     width: '100%',
                     padding: '12px 14px',
                     borderRadius: '12px',
-                    border: '1.5px solid #d0d7cc',
-                    backgroundColor: '#f4f5f1',
-                    color: 'var(--wise-forest)',
+                    border: '1.5px solid #7d8b7e',
+                    backgroundColor: '#ffffff',
+                    color: '#166534',
                     fontWeight: 800,
                     fontSize: '1.1rem',
-                    outline: 'none'
                   }}
                 />
               </div>
 
               <div>
-                <label htmlFor={emiInputId} style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
+                <label htmlFor={emiInputId} style={{ display: 'block', fontSize: '0.82rem', color: '#34443a', fontWeight: 700, marginBottom: '8px' }}>
                   Existing EMI (₹)
                 </label>
                 <input
                   id={emiInputId}
+                  className="cashflow-field"
                   type="number"
                   value={profile.existingEmi}
                   onChange={(e) => handleProfileChange('existingEmi', parseInt(e.target.value))}
@@ -237,21 +238,21 @@ export const EmergencyIntake: React.FC = () => {
                     width: '100%',
                     padding: '12px 14px',
                     borderRadius: '12px',
-                    border: '1.5px solid #d0d7cc',
-                    backgroundColor: '#f4f5f1',
-                    color: '#dc2626',
+                    border: '1.5px solid #7d8b7e',
+                    backgroundColor: '#ffffff',
+                    color: '#b91c1c',
                     fontWeight: 700,
-                    outline: 'none'
                   }}
                 />
               </div>
 
               <div>
-                <label htmlFor={rentInputId} style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
+                <label htmlFor={rentInputId} style={{ display: 'block', fontSize: '0.82rem', color: '#34443a', fontWeight: 700, marginBottom: '8px' }}>
                   House Rent (₹)
                 </label>
                 <input
                   id={rentInputId}
+                  className="cashflow-field"
                   type="number"
                   value={profile.houseRent}
                   onChange={(e) => handleProfileChange('houseRent', parseInt(e.target.value))}
@@ -259,21 +260,21 @@ export const EmergencyIntake: React.FC = () => {
                     width: '100%',
                     padding: '12px 14px',
                     borderRadius: '12px',
-                    border: '1.5px solid #d0d7cc',
-                    backgroundColor: '#f4f5f1',
-                    color: '#dc2626',
+                    border: '1.5px solid #7d8b7e',
+                    backgroundColor: '#ffffff',
+                    color: '#b91c1c',
                     fontWeight: 700,
-                    outline: 'none'
                   }}
                 />
               </div>
 
               <div>
-                <label htmlFor={foodInputId} style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
+                <label htmlFor={foodInputId} style={{ display: 'block', fontSize: '0.82rem', color: '#34443a', fontWeight: 700, marginBottom: '8px' }}>
                   Living & Food (₹)
                 </label>
                 <input
                   id={foodInputId}
+                  className="cashflow-field"
                   type="number"
                   value={profile.livingExpenses}
                   onChange={(e) => handleProfileChange('livingExpenses', parseInt(e.target.value))}
@@ -281,11 +282,10 @@ export const EmergencyIntake: React.FC = () => {
                     width: '100%',
                     padding: '12px 14px',
                     borderRadius: '12px',
-                    border: '1.5px solid #d0d7cc',
-                    backgroundColor: '#f4f5f1',
-                    color: '#dc2626',
+                    border: '1.5px solid #7d8b7e',
+                    backgroundColor: '#ffffff',
+                    color: '#b91c1c',
                     fontWeight: 700,
-                    outline: 'none'
                   }}
                 />
               </div>
@@ -295,17 +295,17 @@ export const EmergencyIntake: React.FC = () => {
             <div style={{
               padding: '16px 20px',
               borderRadius: '14px',
-              backgroundColor: '#edf4ea',
-              border: '1.5px solid #bbf7d0',
+              backgroundColor: '#f0fdf4',
+              border: '1.5px solid #86efac',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
               <div>
-                <div style={{ fontSize: '0.78rem', color: '#15803d', textTransform: 'uppercase', fontWeight: 800 }}>
+                <div style={{ fontSize: '0.78rem', color: '#166534', textTransform: 'uppercase', fontWeight: 800 }}>
                   Real Absorptive Capacity (Net Free Surplus)
                 </div>
-                <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#15803d' }}>
+                <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#14532d' }}>
                   ₹{netSurplus.toLocaleString()} / month
                 </div>
               </div>

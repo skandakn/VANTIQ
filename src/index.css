@@ -8,3 +8,15 @@ html {
 code, pre {
   font-family: 'Fira Code', 'Courier New', Courier, monospace;
 }
+
+/* High-contrast fields for the emergency cashflow calculator. */
+.cashflow-field:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.12);
+}
+
+.cashflow-field option {
+  color: #163300;
+  background-color: #ffffff;
+}

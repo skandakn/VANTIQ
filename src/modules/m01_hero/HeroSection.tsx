@@ -46,7 +46,7 @@ export const HeroSection: React.FC = () => {
   };
 
   // Dynamic calculations based on current shock amount
-  const neededAmount = shock.amount || 50000;
+  const neededAmount = Math.max(0, shock.amount);
   
   // Tranche dynamic split
   const savingsTranche = Math.min(profile.emergencySavings, Math.round(neededAmount * 0.1));
@@ -56,6 +56,7 @@ export const HeroSection: React.FC = () => {
 
   // Dynamic fee calculation
   const vantiqTotalFee = Math.round(neededAmount * 0.0284); // 2.84% blended fee (₹1,420 for ₹50k)
+  const vantiqFeePercent = neededAmount > 0 ? (vantiqTotalFee / neededAmount) * 100 : 0;
   const predatoryTotalFee = Math.round(neededAmount * 0.368); // 36.8% predatory fee + interest (₹18,400 for ₹50k)
   const totalSavings = Math.max(0, predatoryTotalFee - vantiqTotalFee);
   
@@ -383,7 +384,7 @@ export const HeroSection: React.FC = () => {
                     <span>Total transparent interest & fees:</span>
                   </div>
                   <strong style={{ fontSize: '0.94rem', color: '#15803d', fontWeight: 900 }}>
-                    ₹{vantiqTotalFee.toLocaleString()} ({((vantiqTotalFee / neededAmount) * 100).toFixed(1)}%)
+                    ₹{vantiqTotalFee.toLocaleString()} ({vantiqFeePercent.toFixed(1)}%)
                   </strong>
                 </div>
 
