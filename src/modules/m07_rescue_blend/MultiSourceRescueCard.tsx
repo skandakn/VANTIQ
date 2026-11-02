@@ -199,7 +199,7 @@ export const MultiSourceRescueCard: React.FC = () => {
   };
 
   return (
-    <section id="rescue-split" style={{ padding: '60px 0', borderTop: '1px solid rgba(6, 182, 212, 0.15)' }}>
+    <section id="quantum-solver" style={{ padding: '60px 0', borderTop: '1px solid rgba(6, 182, 212, 0.15)' }}>
       <div className="container">
         
         {/* Section Header */}

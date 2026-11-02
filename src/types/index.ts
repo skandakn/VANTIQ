@@ -17,6 +17,7 @@ export interface EmergencyShock {
   description: string;        // e.g., "Urgent Hospital Surgery Deposit"
   urgencyLevel: 'critical' | 'high' | 'moderate';
   daysToDisbursement: number; // e.g., 1 day
+  tenureMonths?: number;      // e.g., 6, 12, 24, 36, 60 months
 }
 
 export interface PredatoryOffer {
@@ -122,6 +123,19 @@ export interface HealthReliefPlan {
   officialHelpline?: string;
   recommendedFor: string;
   tags: string[];
+  redditSentiment?: string;
+  redditScore?: number;
+  redditReviews?: RedditReview[];
+}
+
+export interface RedditReview {
+  username: string;
+  subreddit: string;
+  upvotes: number;
+  timeAgo: string;
+  reviewText: string;
+  verdict: 'Positive' | 'Helpful Tip' | 'Caution' | 'Warning';
+  badge?: string;
 }
 
 export interface HealthReliefStrategy {

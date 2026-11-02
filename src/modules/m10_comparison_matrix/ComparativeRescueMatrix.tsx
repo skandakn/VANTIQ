@@ -1,388 +1,404 @@
 // src/modules/m10_comparison_matrix/ComparativeRescueMatrix.tsx
-// Module 11: Wise-Style Interactive Competitor Comparison Engine (Authentic Light Theme)
+// Module 11 (M11): Counterfactual Comparison Matrix
+// Head-to-head: Fragmented Multi-App Borrowing vs. VANTIQ Quantum Allocation
+// Interactive toggle: 3-month, 6-month, 12-month projection horizon.
+
 import React, { useState } from 'react';
 import {
-  Check,
-  X,
-  Info,
-  ArrowRight,
-  Sparkles
+  ShieldCheck,
+  XCircle,
+  CheckCircle2,
+  TrendingDown,
+  TrendingUp,
+  AlertTriangle,
 } from 'lucide-react';
-import { useFintech } from '../../context/FintechContext';
 
-export const ComparativeRescueMatrix: React.FC = () => {
-  const { shock, setShock } = useFintech();
-  const [comparisonTab, setComparisonTab] = useState<'fees' | 'monthly' | 'traps'>('fees');
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
 
-  const neededAmount = Math.max(0, shock.amount);
+type Horizon = 3 | 6 | 12;
 
-  const setAmount = (amt: number) => {
-    setShock((prev) => ({ ...prev, amount: amt }));
-  };
+interface MetricRow {
+  label: string;
+  fragmented: (h: Horizon) => string;
+  VANTIQ: (h: Horizon) => string;
+  winDirection: 'lower' | 'higher';
+  unit?: string;
+}
 
-  // Dynamic lender computations based on current amount
-  const lenders = [
-    {
-      name: 'VANTIQ Rescue Plan',
-      isHero: true,
-      badge: 'CHEAPEST & SAFEST',
-      disbursement: 'Instant (15 mins)',
-      upfrontFee: 0,
-      interestCost: Math.round(neededAmount * 0.0284),
-      totalCost: Math.round(neededAmount * 0.0284),
-      effectiveApr: '3.8% Blended',
-      monthlyPayment: Math.round(neededAmount / 11.6),
-      hiddenCharges: '₹0 (Zero)',
-      collisionRisk: 'Zero (Buffer Guaranteed)',
-      laborHoursCost: Math.round((neededAmount * 0.0284) / 250),
-    },
-    {
-      name: 'QuickRupee Instant Pay',
-      isHero: false,
-      badge: 'Predatory NBFC',
-      disbursement: 'Instant (3 mins)',
-      upfrontFee: Math.round(neededAmount * 0.045),
-      interestCost: Math.round(neededAmount * 0.165),
-      totalCost: Math.round(neededAmount * 0.21),
-      effectiveApr: '36.0% APR',
-      monthlyPayment: Math.round((neededAmount * 1.21) / 3),
-      hiddenCharges: '₹900 direct deducted',
-      collisionRisk: 'Collides on Day 30',
-      laborHoursCost: Math.round((neededAmount * 0.21) / 250),
-    },
-    {
-      name: 'SplitNow 3-Pay BNPL',
-      isHero: false,
-      badge: 'BNPL Platform',
-      disbursement: 'Instant (2 mins)',
-      upfrontFee: Math.round(neededAmount * 0.03),
-      interestCost: Math.round(neededAmount * 0.13),
-      totalCost: Math.round(neededAmount * 0.16),
-      effectiveApr: '28.0% APR',
-      monthlyPayment: Math.round((neededAmount * 1.16) / 3),
-      hiddenCharges: '₹450 late fee per bounce',
-      collisionRisk: 'Collides on Day 32',
-      laborHoursCost: Math.round((neededAmount * 0.16) / 250),
-    },
-    {
-      name: 'ApexCard Cash Advance',
-      isHero: false,
-      badge: 'Credit Card',
-      disbursement: 'Instant ATM',
-      upfrontFee: Math.round(neededAmount * 0.05),
-      interestCost: Math.round(neededAmount * 0.22),
-      totalCost: Math.round(neededAmount * 0.27),
-      effectiveApr: '42.0% APR',
-      monthlyPayment: Math.round((neededAmount * 1.27) / 6),
-      hiddenCharges: '3.5% transaction surcharge',
-      collisionRisk: 'Collides on Day 35',
-      laborHoursCost: Math.round((neededAmount * 0.27) / 250),
-    },
-    {
-      name: '4-App Panic Stacking (Trap)',
-      isHero: false,
-      badge: 'Uncoordinated Stack',
-      disbursement: 'Fragmented',
-      upfrontFee: Math.round(neededAmount * 0.06),
-      interestCost: Math.round(neededAmount * 0.308),
-      totalCost: Math.round(neededAmount * 0.368),
-      effectiveApr: '38.5% Blended',
-      monthlyPayment: Math.round((neededAmount * 1.368) / 3.2),
-      hiddenCharges: '₹4,800 bounce fees',
-      collisionRisk: 'Day 45 Default Trap!',
-      laborHoursCost: Math.round((neededAmount * 0.368) / 250),
-    },
-  ];
+// ---------------------------------------------------------------------------
+// Projection helpers
+// ---------------------------------------------------------------------------
 
-  const maxPredatoryCost = lenders[4].totalCost;
-  const vantiqCost = lenders[0].totalCost;
-  const netSavings = Math.max(0, maxPredatoryCost - vantiqCost);
+function fmtINR(n: number): string {
+  return n.toLocaleString('en-IN');
+}
+
+/** Fragmented: 38.5% APR accrual over horizon on Rs.50,000 principal */
+function fragmentedTotalCost(h: Horizon): string {
+  return 'Rs.' + fmtINR(Math.round(50000 * (1 + (0.385 * h) / 12)));
+}
+
+/** VANTIQ: 4.2% APR accrual over horizon on Rs.50,000 principal */
+function VANTIQTotalCost(h: Horizon): string {
+  return 'Rs.' + fmtINR(Math.round(50000 * (1 + (0.042 * h) / 12)));
+}
+
+/** Rs.4,800 fee per 3-month cycle, compounded across horizon */
+function fragmentedFees(h: Horizon): string {
+  return 'Rs.' + fmtINR(4800 * Math.ceil(h / 3));
+}
+
+function VANTIQFees(_h: Horizon): string {
+  return 'Rs.0';
+}
+
+function fragmentedPayment(_h: Horizon): string {
+  return 'Rs.26,200';
+}
+
+function VANTIQPayment(_h: Horizon): string {
+  return 'Rs.4,285';
+}
+
+function fragmentedAmort(h: Horizon): string {
+  return h < 18
+    ? String(18 - h) + 'mo remaining (penalties apply)'
+    : 'Paid off (+ penalties)';
+}
+
+function VANTIQAmort(h: Horizon): string {
+  return h < 12 ? String(12 - h) + 'mo remaining' : 'Paid off (flat)';
+}
+
+function fragmentedDefault(h: Horizon): string {
+  const decay = h <= 3 ? 0 : h <= 6 ? -4 : -8;
+  return String(92 + decay) + '%';
+}
+
+function VANTIQDefault(h: Horizon): string {
+  const drift = h <= 3 ? 0 : h <= 6 ? 0.2 : 0.3;
+  return (1.8 + drift).toFixed(1) + '%';
+}
+
+// ---------------------------------------------------------------------------
+// Metric definitions (all 5 required by spec)
+// ---------------------------------------------------------------------------
+
+const METRICS: MetricRow[] = [
+  {
+    label: 'Effective APR',
+    fragmented: () => '38.5%',
+    VANTIQ: () => '4.2%',
+    winDirection: 'lower',
+  },
+  {
+    label: 'Processing Fees & Hidden Churn',
+    fragmented: fragmentedFees,
+    VANTIQ: VANTIQFees,
+    winDirection: 'lower',
+    unit: 'cumulative over horizon',
+  },
+  {
+    label: 'Monthly Payment Shock',
+    fragmented: fragmentedPayment,
+    VANTIQ: VANTIQPayment,
+    winDirection: 'lower',
+    unit: '/mo',
+  },
+  {
+    label: 'Time to Full Amortization',
+    fragmented: fragmentedAmort,
+    VANTIQ: VANTIQAmort,
+    winDirection: 'lower',
+  },
+  {
+    label: 'Risk of Default / Harassment',
+    fragmented: fragmentedDefault,
+    VANTIQ: VANTIQDefault,
+    winDirection: 'lower',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Summary banner data per horizon
+// ---------------------------------------------------------------------------
+
+const SUMMARY: Record<
+  Horizon,
+  { saved: string; feesDodged: string; defaultDelta: string }
+> = {
+  3:  { saved: 'Rs.16,600', feesDodged: 'Rs.4,800',  defaultDelta: '90.2%' },
+  6:  { saved: 'Rs.33,200', feesDodged: 'Rs.9,600',  defaultDelta: '87.8%' },
+  12: { saved: 'Rs.66,400', feesDodged: 'Rs.19,200', defaultDelta: '89.9%' },
+};
+
+// ---------------------------------------------------------------------------
+// HorizonToggle
+// ---------------------------------------------------------------------------
+
+interface HorizonToggleProps {
+  selected: Horizon;
+  onChange: (h: Horizon) => void;
+}
+
+const HorizonToggle: React.FC<HorizonToggleProps> = ({ selected, onChange }) => {
+  const options: Horizon[] = [3, 6, 12];
+  return (
+    <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+      {options.map((h) => {
+        const active = h === selected;
+        return (
+          <button
+            key={h}
+            onClick={() => onChange(h)}
+            aria-pressed={active}
+            style={{
+              padding: '6px 18px',
+              borderRadius: 'var(--radius-full)',
+              fontSize: '0.8rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              border: active
+                ? '1.5px solid var(--neon-cyan)'
+                : '1.5px solid var(--border-subtle)',
+              background: active
+                ? 'rgba(6,182,212,0.15)'
+                : 'rgba(15,23,42,0.6)',
+              color: active ? '#38bdf8' : '#94a3b8',
+              transition: 'all var(--transition-normal)',
+              outline: 'none',
+            }}
+          >
+            {h}mo
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
+// ---------------------------------------------------------------------------
+// MetricRowItem
+// ---------------------------------------------------------------------------
+
+interface MetricRowItemProps {
+  metric: MetricRow;
+  horizon: Horizon;
+  index: number;
+}
+
+const MetricRowItem: React.FC<MetricRowItemProps> = ({
+  metric,
+  horizon,
+  index,
+}) => {
+  const fragValue   = metric.fragmented(horizon);
+  const VANTIQValue = metric.VANTIQ(horizon);
+  const isRiskRow   = metric.label.startsWith('Risk');
 
   return (
-    <section id="comparison" style={{ padding: '80px 0', borderTop: '1px solid #e5e9e2', backgroundColor: 'var(--bg-deep)' }}>
-      <div className="container">
-        
-        {/* Section Header - Wise Style */}
-        <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 40px auto' }}>
-          <div style={{
+    <tr
+      style={{
+        backgroundColor:
+          index % 2 === 0 ? 'rgba(15,23,42,0.55)' : 'rgba(10,17,36,0.45)',
+        transition: 'background var(--transition-fast)',
+      }}
+    >
+      {/* Metric label */}
+      <td
+        style={{
+          padding: '16px 20px',
+          fontSize: '0.875rem',
+          fontWeight: 600,
+          color: '#cbd5e1',
+          borderRight: '1px solid rgba(51,65,85,0.3)',
+          minWidth: '220px',
+        }}
+      >
+        {metric.label}
+        {metric.unit && (
+          <span
+            style={{
+              display: 'block',
+              fontSize: '0.72rem',
+              color: '#64748b',
+              marginTop: '2px',
+            }}
+          >
+            {metric.unit}
+          </span>
+        )}
+      </td>
+
+      {/* Fragmented */}
+      <td
+        style={{
+          padding: '16px 20px',
+          textAlign: 'center',
+          borderRight: '1px solid rgba(51,65,85,0.3)',
+        }}
+      >
+        <span
+          style={{
             display: 'inline-flex',
             alignItems: 'center',
             gap: '6px',
-            padding: '4px 14px',
-            borderRadius: '9999px',
-            backgroundColor: '#ffffff',
-            color: 'var(--wise-forest)',
-            border: '1px solid #d8e2d4',
-            fontSize: '0.82rem',
+            fontSize: '0.95rem',
             fontWeight: 700,
-            marginBottom: '16px',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
-          }}>
-            <Sparkles size={14} color="#15803d" />
-            <span>INTERACTIVE TRUST & FEE COMPARISON</span>
+            color: '#f87171',
+          }}
+        >
+          {isRiskRow ? <AlertTriangle size={14} /> : <TrendingDown size={14} />}
+          {fragValue}
+        </span>
+      </td>
+
+      {/* VANTIQ */}
+      <td style={{ padding: '16px 20px', textAlign: 'center' }}>
+        <span
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '0.95rem',
+            fontWeight: 700,
+            color: '#34d399',
+          }}
+        >
+          {isRiskRow ? <CheckCircle2 size={14} /> : <TrendingUp size={14} />}
+          {VANTIQValue}
+        </span>
+      </td>
+    </tr>
+  );
+};
+
+// ---------------------------------------------------------------------------
+// Main exported component
+// ---------------------------------------------------------------------------
+
+export const ComparativeRescueMatrix: React.FC = () => {
+  const [horizon, setHorizon] = useState<Horizon>(3);
+  const summary = SUMMARY[horizon];
+
+  return (
+    <section id="comparison" style={{ padding: '48px 0' }}>
+      <div className='container'>
+
+        {/* Section Header */}
+        <div style={{ marginBottom: '32px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+            <span className='badge badge-cyan'>
+              <ShieldCheck size={13} />
+              <span>M11 - Counterfactual Comparison Matrix</span>
+            </span>
           </div>
-
-          <h2 style={{ fontSize: 'clamp(2.2rem, 3.8vw, 3rem)', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.03em', marginBottom: '14px' }}>
-            See how much you save with VANTIQ.
-          </h2>
-
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.6 }}>
-            Like traditional banks hide markups in exchange rates, predatory lending apps hide extortion in fragmented auto-debits and processing fees. Here is the unvarnished truth.
-          </p>
-        </div>
-
-        {/* Interactive Amount Selector Pills (Wise Pattern) */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '10px',
-          flexWrap: 'wrap',
-          marginBottom: '36px'
-        }}>
-          <span style={{ fontSize: '0.92rem', color: 'var(--text-secondary)', fontWeight: 700, marginRight: '4px' }}>
-            Emergency Shock Amount:
-          </span>
-          {[25000, 50000, 75000, 100000].map((amt) => (
-            <button
-              key={amt}
-              onClick={() => setAmount(amt)}
-              style={{
-                padding: '9px 20px',
-                borderRadius: '9999px',
-                fontSize: '0.92rem',
-                fontWeight: 700,
-                border: neededAmount === amt ? '2px solid var(--wise-forest)' : '1px solid #d0d7cc',
-                backgroundColor: neededAmount === amt ? 'var(--wise-forest)' : '#ffffff',
-                color: neededAmount === amt ? 'var(--wise-lime)' : 'var(--wise-forest)',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
-              }}
-            >
-              ₹{amt.toLocaleString('en-IN')}
-            </button>
-          ))}
-        </div>
-
-        {/* Big Savings Callout Banner - Light High-Trust Card */}
-        <div style={{
-          backgroundColor: '#edf4ea',
-          border: '1.5px solid #cce0c5',
-          borderRadius: '20px',
-          padding: '24px 32px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '20px',
-          marginBottom: '36px',
-          boxShadow: '0 8px 24px rgba(22, 51, 0, 0.05)'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
-            <div style={{
-              width: '52px',
-              height: '52px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--wise-lime)',
-              color: 'var(--wise-forest)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 900,
-              fontSize: '1.5rem',
-              boxShadow: '0 2px 8px rgba(159, 232, 112, 0.5)'
-            }}>
-              ₹
-            </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '16px' }}>
             <div>
-              <div style={{ fontSize: '0.88rem', color: '#3d5c34', fontWeight: 700 }}>
-                Total Cost Difference on ₹{neededAmount.toLocaleString()} Shock
-              </div>
-              <div style={{ fontSize: '1.6rem', fontWeight: 900, color: 'var(--wise-forest)' }}>
-                You save <span style={{ color: '#15803d' }}>₹{netSavings.toLocaleString()}</span> and{' '}
-                <span style={{ color: '#15803d' }}>{Math.round(netSavings / 250)} hours of labor</span> with VANTIQ
-              </div>
+              <h2 style={{ fontSize: '1.9rem', fontWeight: 800, color: '#f8fafc', lineHeight: 1.2, marginBottom: '8px' }}>
+                Fragmented Borrowing vs.{' '}
+                <span style={{ color: '#38bdf8' }}>VANTIQ Quantum Allocation</span>
+              </h2>
+              <p style={{ color: '#94a3b8', fontSize: '0.95rem', maxWidth: '620px' }}>
+                A rigorous counterfactual evaluation across five financial-health dimensions.
+                Toggle the projection horizon to see how the cost divergence compounds over time.
+              </p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px' }}>
+              <span style={{ fontSize: '0.72rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700 }}>
+                Projection Horizon
+              </span>
+              <HorizonToggle selected={horizon} onChange={setHorizon} />
             </div>
           </div>
-
-          <a
-            href="#rescue-split"
-            className="btn btn-primary"
-            style={{ padding: '14px 28px', fontSize: '0.95rem' }}
-          >
-            <span>Lock In Optimal Rescue</span>
-            <ArrowRight size={16} />
-          </a>
         </div>
 
-        {/* Filter View Tabs */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '24px' }}>
-          {[
-            { id: 'fees', label: 'Total Cost & Interest' },
-            { id: 'monthly', label: 'Monthly Repayment Shock' },
-            { id: 'traps', label: 'Hidden Fees & Default Risk' },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setComparisonTab(tab.id as 'fees' | 'monthly' | 'traps')}
-              style={{
-                padding: '9px 18px',
-                borderRadius: '9999px',
-                fontSize: '0.88rem',
-                fontWeight: 700,
-                border: '1px solid #d0d7cc',
-                backgroundColor: comparisonTab === tab.id ? 'var(--wise-forest)' : '#ffffff',
-                color: comparisonTab === tab.id ? '#ffffff' : 'var(--wise-forest)',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Wise-Style Interactive Comparison Table (Clean White Table) */}
-        <div style={{
-          overflowX: 'auto',
-          borderRadius: '24px',
-          border: '1px solid #e5e9e2',
-          backgroundColor: '#ffffff',
-          boxShadow: '0 16px 44px rgba(22, 51, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03)'
-        }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '780px' }}>
-            <thead>
-              <tr style={{ borderBottom: '1.5px solid #edf0ea', backgroundColor: '#fafbf9' }}>
-                <th style={{ padding: '22px 28px', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  Lending Provider
-                </th>
-                <th style={{ padding: '22px 20px', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  Speed & APR
-                </th>
-                <th style={{ padding: '22px 20px', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  Total Fees & Interest
-                </th>
-                <th style={{ padding: '22px 20px', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  Monthly Repayment
-                </th>
-                <th style={{ padding: '22px 28px', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  Default Safety
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {lenders.map((lender, i) => (
-                <tr
-                  key={i}
-                  style={{
-                    backgroundColor: lender.isHero ? '#f2f8ee' : '#ffffff',
-                    borderBottom: '1px solid #edf0ea',
-                    borderLeft: lender.isHero ? '4px solid #15803d' : 'none',
-                    transition: 'background-color 0.15s ease'
-                  }}
-                >
-                  {/* Provider Name */}
-                  <td style={{ padding: '22px 28px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <strong style={{ fontSize: '1.05rem', color: lender.isHero ? '#15803d' : 'var(--wise-forest)' }}>
-                        {lender.name}
-                      </strong>
-                      {lender.isHero ? (
-                        <span className="badge badge-emerald" style={{ fontSize: '0.7rem' }}>
-                          <Check size={12} />
-                          <span>{lender.badge}</span>
+        {/* Comparison Table */}
+        <div className='vantiq-card' style={{ overflow: 'hidden', padding: 0, marginBottom: '24px', border: '1px solid rgba(51,65,85,0.4)' }}>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
+              <thead>
+                <tr style={{ background: 'linear-gradient(90deg, rgba(15,23,42,0.95) 0%, rgba(10,17,36,0.95) 100%)', borderBottom: '2px solid rgba(51,65,85,0.5)' }}>
+                  <th style={{ padding: '18px 20px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.08em', borderRight: '1px solid rgba(51,65,85,0.3)' }}>
+                    Metric
+                  </th>
+                  <th style={{ padding: '18px 20px', textAlign: 'center', borderRight: '1px solid rgba(51,65,85,0.3)' }}>
+                    <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 12px', borderRadius: 'var(--radius-full)', background: 'rgba(239,68,68,0.12)', border: '1px solid rgba(239,68,68,0.35)' }}>
+                        <XCircle size={14} color='#ef4444' />
+                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#f87171', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                          Fragmented Multi-App Borrowing
                         </span>
-                      ) : (
-                        <span className="badge badge-amber" style={{ fontSize: '0.7rem' }}>
-                          {lender.badge}
+                      </span>
+                      <span style={{ fontSize: '0.7rem', color: '#64748b' }}>Predatory instant-loan trap</span>
+                    </div>
+                  </th>
+                  <th style={{ padding: '18px 20px', textAlign: 'center' }}>
+                    <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 12px', borderRadius: 'var(--radius-full)', background: 'rgba(6,182,212,0.12)', border: '1px solid rgba(6,182,212,0.35)' }}>
+                        <CheckCircle2 size={14} color='#06b6d4' />
+                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#38bdf8', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                          VANTIQ Quantum Allocation
                         </span>
-                      )}
+                      </span>
+                      <span style={{ fontSize: '0.7rem', color: '#64748b' }}>Multi-source quantum rescue</span>
                     </div>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '3px' }}>
-                      {lender.disbursement}
-                    </div>
-                  </td>
-
-                  {/* Speed & APR */}
-                  <td style={{ padding: '22px 20px' }}>
-                    <div style={{ fontWeight: 800, color: lender.isHero ? '#15803d' : 'var(--wise-forest)', fontSize: '1rem' }}>
-                      {lender.effectiveApr}
-                    </div>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                      Upfront: ₹{lender.upfrontFee.toLocaleString()}
-                    </div>
-                  </td>
-
-                  {/* Total Fees & Interest */}
-                  <td style={{ padding: '22px 20px' }}>
-                    <div style={{
-                      fontSize: '1.25rem',
-                      fontWeight: 900,
-                      color: lender.isHero ? '#15803d' : '#dc2626'
-                    }}>
-                      ₹{lender.totalCost.toLocaleString()}
-                    </div>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                      {neededAmount > 0 ? `${((lender.totalCost / neededAmount) * 100).toFixed(1)}% total surcharge` : '0.0% total surcharge'}
-                    </div>
-                  </td>
-
-                  {/* Monthly Repayment */}
-                  <td style={{ padding: '22px 20px' }}>
-                    <div style={{
-                      fontWeight: 900,
-                      fontSize: '1.05rem',
-                      color: lender.monthlyPayment > 15000 ? '#dc2626' : 'var(--wise-forest)'
-                    }}>
-                      ₹{lender.monthlyPayment.toLocaleString()} / mo
-                    </div>
-                    <div style={{ fontSize: '0.78rem', color: lender.monthlyPayment > 15000 ? '#b91c1c' : '#15803d', fontWeight: 600 }}>
-                      {lender.monthlyPayment > 15000 ? '⚠️ Exceeds ₹15k surplus' : '✓ Safe within surplus'}
-                    </div>
-                  </td>
-
-                  {/* Collision Risk */}
-                  <td style={{ padding: '22px 28px' }}>
-                    <div style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      fontSize: '0.88rem',
-                      fontWeight: 800,
-                      color: lender.isHero ? '#15803d' : '#dc2626'
-                    }}>
-                      {lender.isHero ? <Check size={17} /> : <X size={17} />}
-                      <span>{lender.collisionRisk}</span>
-                    </div>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '3px' }}>
-                      {lender.hiddenCharges}
-                    </div>
-                  </td>
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {METRICS.map((metric, i) => (
+                  <MetricRowItem key={metric.label} metric={metric} horizon={horizon} index={i} />
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        {/* Wise Micro-Copy Footer Guarantee */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '12px',
-          marginTop: '22px',
-          fontSize: '0.84rem',
-          color: 'var(--text-muted)'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <Info size={15} />
-            <span>Comparison based on empirical NBFC loan agreements & RBI fair practice disclosures (April 2026).</span>
+        {/* Projected Total Cost cards */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+          <div className='vantiq-card' style={{ border: '1.5px solid rgba(239,68,68,0.35)', background: 'rgba(239,68,68,0.04)', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
+              Fragmented - {horizon}-Month Total Repayment
+            </span>
+            <span style={{ fontSize: '1.6rem', fontWeight: 800, color: '#f87171' }}>
+              {fragmentedTotalCost(horizon)}
+            </span>
+            <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+              on Rs.50,000 principal @ 38.5% effective APR
+            </span>
           </div>
-          <div>
-            Data privacy: <strong>Zero credit bureau footprints initiated during simulation</strong>.
+          <div className='vantiq-card glow-emerald' style={{ border: '1.5px solid rgba(16,185,129,0.45)', background: 'rgba(16,185,129,0.04)', padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
+              VANTIQ - {horizon}-Month Total Repayment
+            </span>
+            <span style={{ fontSize: '1.6rem', fontWeight: 800, color: '#34d399' }}>
+              {VANTIQTotalCost(horizon)}
+            </span>
+            <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+              on Rs.50,000 principal @ 4.2% effective APR
+            </span>
           </div>
+        </div>
+
+        {/* Bottom impact banner */}
+        <div style={{ backgroundColor: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.3)', borderRadius: 'var(--radius-lg)', padding: '18px 28px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '28px', textAlign: 'center' }}>
+          {([
+            { label: 'Cash Saved',            value: summary.saved,        color: '#34d399' },
+            { label: 'Fees Dodged',           value: summary.feesDodged,   color: '#38bdf8' },
+            { label: 'Default Risk Reduction',value: summary.defaultDelta, color: '#c084fc' },
+          ] as { label: string; value: string; color: string }[]).map(({ label, value, color }) => (
+            <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              <span style={{ fontSize: '1.4rem', fontWeight: 800, color, letterSpacing: '-0.02em' }}>
+                {value}
+              </span>
+              <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.07em', fontWeight: 600 }}>
+                {label}
+              </span>
+            </div>
+          ))}
         </div>
 
       </div>

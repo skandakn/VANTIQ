@@ -296,7 +296,7 @@ export const CashflowRunwayChart: React.FC = () => {
   };
 
   return (
-    <section id="cashflow-twin" style={{ padding: '60px 0', borderTop: '1px solid rgba(139, 92, 246, 0.15)' }}>
+    <section id="digital-twin" style={{ padding: '60px 0', borderTop: '1px solid rgba(139, 92, 246, 0.15)' }}>
       <div className="container">
         
         {/* Section Header */}

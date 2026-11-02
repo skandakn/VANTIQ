@@ -14,7 +14,7 @@ import {
 
 const NAV_LINKS = [
   { id: 'simulator', label: 'Calculator', icon: Zap, fallbackId: 'crisis-intake' },
-  { id: 'health-aid', label: 'Health Aid & Loans', icon: HeartHandshake, fallbackId: 'health-navigator' },
+  { id: 'health-navigator', label: 'Loan Rankings & Reddit Reviews', icon: HeartHandshake, fallbackId: 'health-aid' },
   { id: 'ghost-debt', label: 'Debt Traps', icon: AlertTriangle, fallbackId: 'debt-mesh' },
   { id: 'digital-twin', label: 'Cash Runway', icon: Activity, fallbackId: 'cashflow-twin' },
   { id: 'comparison', label: 'Fee Comparison', icon: Scale, fallbackId: 'rescue-matrix' },
