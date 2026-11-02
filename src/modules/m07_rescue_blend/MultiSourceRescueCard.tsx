@@ -66,6 +66,9 @@ export const MultiSourceRescueCard: React.FC = () => {
   // Dynamic calculations relative to the ₹50,000 requirement baseline
   const totalRequired = Math.max(0, shock?.amount ?? 0);
   const scale = totalRequired / 50000;
+  const tenureMonths = Math.max(1, shock?.tenureMonths ?? 12);
+  const savingsUsed = Math.min(profile.emergencySavings, Math.round(totalRequired * 0.1));
+  const hospitalAdvance = Math.max(0, fundingPlan.tranches[0].allocatedAmount - savingsUsed);
 
   // Tri-Tranche Data Model adhering strictly to Member 08 specifications
   const tranches: TrancheDetail[] = [
@@ -78,7 +81,7 @@ export const MultiSourceRescueCard: React.FC = () => {
       percentage: 40,
       apr: 0.0,
       interestCost: 0,
-      tenureDisplay: '6-Month Interest-Free Buffer',
+      tenureDisplay: `${tenureMonths}-Month Interest-Free Buffer`,
       monthlyObligation: fundingPlan.tranches[0].monthlyObligation,
       gracePeriodDays: 0,
       colorHex: '#10b981',
@@ -88,13 +91,13 @@ export const MultiSourceRescueCard: React.FC = () => {
       subComponents: [
         {
           name: 'Self Liquid Reserve (Emergency Savings)',
-          amount: Math.min(profile.emergencySavings, Math.round(totalRequired * 0.1)),
+          amount: savingsUsed,
           apr: 0.0,
           description: 'Immediate zero-cost self-disbursement without touching long-term retirement or FD assets.'
         },
         {
           name: 'Hospital Institutional Advance Buffer',
-          amount: Math.max(0, fundingPlan.tranches[0].allocatedAmount - Math.min(profile.emergencySavings, Math.round(totalRequired * 0.1))),
+          amount: hospitalAdvance,
           apr: 0.0,
           description: 'Direct healthcare provider billing credit @ 0% APR via hospital emergency desk CSR partnership.'
         }
@@ -104,7 +107,7 @@ export const MultiSourceRescueCard: React.FC = () => {
         'Direct settlement with hospital billing counter',
         'No bureau inquiry or negative credit score footprint'
       ],
-      amortizationSummary: '₹5,000 self-funded immediately; ₹15,000 hospital advance amortized at ₹2,500/mo over 6 months with 0% APR.'
+      amortizationSummary: `₹${savingsUsed.toLocaleString('en-IN')} self-funded immediately; ₹${hospitalAdvance.toLocaleString('en-IN')} hospital advance amortized at ₹${fundingPlan.tranches[0].monthlyObligation.toLocaleString('en-IN')}/mo over ${tenureMonths} months with 0% APR.`
     },
     {
       id: 'tranche-b',
@@ -115,7 +118,7 @@ export const MultiSourceRescueCard: React.FC = () => {
       percentage: 40,
       apr: 6.5,
       interestCost: fundingPlan.tranches[1].interestCost,
-      tenureDisplay: '12 Months Amortized',
+      tenureDisplay: `${tenureMonths} Months Amortized`,
       monthlyObligation: fundingPlan.tranches[1].monthlyObligation,
       gracePeriodDays: 0,
       colorHex: '#06b6d4',
@@ -127,7 +130,7 @@ export const MultiSourceRescueCard: React.FC = () => {
         'No compounding late payment penalty ratchet',
         'Subsidized through pre-vetted corporate welfare treasury'
       ],
-      amortizationSummary: 'Smooth monthly obligation of ₹1,720/mo across 12 months, avoiding the toxic Day 32 payday collision.'
+      amortizationSummary: `Smooth monthly obligation of ₹${fundingPlan.tranches[1].monthlyObligation.toLocaleString('en-IN')}/mo across ${tenureMonths} months, avoiding the toxic Day 32 payday collision.`
     },
     {
       id: 'tranche-c',
@@ -138,7 +141,7 @@ export const MultiSourceRescueCard: React.FC = () => {
       percentage: 20,
       apr: 8.0,
       interestCost: fundingPlan.tranches[2].interestCost,
-      tenureDisplay: '6 Months (Starts Day 61)',
+      tenureDisplay: `${tenureMonths} Months (Starts Day 61)`,
       monthlyObligation: fundingPlan.tranches[2].monthlyObligation,
       gracePeriodDays: 60,
       colorHex: '#8b5cf6',
@@ -150,7 +153,7 @@ export const MultiSourceRescueCard: React.FC = () => {
         'EMI activates strictly on Day 61 after emergency stabilizes',
         'Autonomous rollover protection if health recovery is delayed'
       ],
-      amortizationSummary: '₹0 repayment for the first 60 days. Repayments commence on Day 61 at ₹1,795/mo over 6 months.'
+      amortizationSummary: `₹0 repayment for the first 60 days. Repayments commence on Day 61 at ₹${fundingPlan.tranches[2].monthlyObligation.toLocaleString('en-IN')}/mo over ${tenureMonths} months.`
     }
   ];
 
