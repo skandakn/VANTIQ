@@ -85,7 +85,7 @@ body {
   padding: 0 24px;
 }
 
-.chronos-card {
+.vantiq-card {
   background: #ffffff;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
@@ -95,20 +95,20 @@ body {
   color: var(--text-primary);
 }
 
-.chronos-card:hover {
+.vantiq-card:hover {
   border-color: var(--border-medium);
   box-shadow: var(--shadow-lg);
 }
 
-.chronos-card.glow-cyan:hover {
+.vantiq-card.glow-cyan:hover {
   border-color: var(--border-dark);
 }
 
-.chronos-card.glow-purple:hover {
+.vantiq-card.glow-purple:hover {
   border-color: var(--accent-purple);
 }
 
-.chronos-card.glow-emerald:hover {
+.vantiq-card.glow-emerald:hover {
   border-color: var(--wise-forest);
 }
 
@@ -373,7 +373,7 @@ body {
     box-sizing: border-box !important;
   }
 
-  .chronos-card {
+  .vantiq-card {
     padding: 18px 14px !important;
     border-radius: 16px !important;
   }
@@ -435,7 +435,7 @@ body {
     padding-right: 12px !important;
   }
 
-  .chronos-card {
+  .vantiq-card {
     padding: 16px 12px !important;
   }
 

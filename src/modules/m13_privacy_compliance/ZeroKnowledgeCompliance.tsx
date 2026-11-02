@@ -27,7 +27,7 @@ export const ZeroKnowledgeCompliance: React.FC = () => {
         {/* Compliance Checklist Cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '24px' }}>
           
-          <div className="chronos-card" style={{ padding: '32px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
+          <div className="vantiq-card" style={{ padding: '32px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
               <div style={{
                 width: '40px',
@@ -65,7 +65,7 @@ export const ZeroKnowledgeCompliance: React.FC = () => {
             </div>
           </div>
 
-          <div className="chronos-card" style={{ padding: '32px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
+          <div className="vantiq-card" style={{ padding: '32px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
               <div style={{
                 width: '40px',

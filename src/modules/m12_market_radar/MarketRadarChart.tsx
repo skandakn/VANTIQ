@@ -63,7 +63,7 @@ export const MarketRadarChart: React.FC = () => {
         {/* Market Size Cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: 20, marginBottom: 28 }}>
           {marketSizes.map((item) => (
-            <article key={item.label} className="chronos-card" style={{ padding: '24px 28px', backgroundColor: '#ffffff', borderTop: `4px solid ${item.color}`, border: '1px solid #e5e9e2', borderTopWidth: 4, transition: 'all 180ms ease' }}>
+            <article key={item.label} className="vantiq-card" style={{ padding: '24px 28px', backgroundColor: '#ffffff', borderTop: `4px solid ${item.color}`, border: '1px solid #e5e9e2', borderTopWidth: 4, transition: 'all 180ms ease' }}>
               <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12, marginBottom: 8 }}>
                 <span style={{ fontSize: '0.85rem', letterSpacing: '0.12em', fontWeight: 800, color: item.color }}>{item.label}</span>
                 <span style={{ fontSize: 'clamp(1.4rem, 3vw, 1.85rem)', fontWeight: 900, color: 'var(--wise-forest)', whiteSpace: 'nowrap' }}>{item.value}</span>
@@ -74,7 +74,7 @@ export const MarketRadarChart: React.FC = () => {
         </div>
 
         {/* Radar Chart Card */}
-        <div className="chronos-card" style={{ padding: '32px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
+        <div className="vantiq-card" style={{ padding: '32px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: 14, marginBottom: 16 }}>
             <div>
               <h3 style={{ fontSize: '1.25rem', color: 'var(--wise-forest)', fontWeight: 800, margin: '0 0 4px' }}>Competitive capability radar</h3>

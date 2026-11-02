@@ -1,6 +1,6 @@
 // src/modules/m05_cashflow_twin/CashflowRunwayChart.tsx
 // Module 6: Stochastic Cashflow Twin (Temporal Fusion Transformer 90-Day Runway)
-// Role: Member 06 (CHRONOS-FIN Team)
+// Role: Member 06 (VANTIQ Team)
 // Branch: feat/m06-cashflow-digital-twin
 
 import React, { useState, useRef, useMemo } from 'react';
@@ -26,8 +26,8 @@ interface MilestoneDetail {
   tag: string;
   type: 'deposit' | 'crash' | 'hazard' | 'recovery';
   title: string;
-  withoutChronosBalance: number;
-  withChronosBalance: number;
+  withoutVantiqBalance: number;
+  withVantiqBalance: number;
   upcomingEmiWithout: string;
   upcomingEmiWith: string;
   cashflowEvent: string;
@@ -46,7 +46,7 @@ export const CashflowRunwayChart: React.FC = () => {
   const [selectedDayIndex, setSelectedDayIndex] = useState<number>(3); // Default to Day 32 (Collision Crash)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [showQuantiles, setShowQuantiles] = useState<boolean>(true);
-  const [activeCurveFilter, setActiveCurveFilter] = useState<'both' | 'chronos' | 'naive'>('both');
+  const [activeCurveFilter, setActiveCurveFilter] = useState<'both' | 'vantiq' | 'naive'>('both');
   const [isSimulatingRunway, setIsSimulatingRunway] = useState<boolean>(false);
   const svgRef = useRef<SVGSVGElement | null>(null);
 
@@ -61,12 +61,12 @@ export const CashflowRunwayChart: React.FC = () => {
       tag: 'Crisis Outset',
       type: 'hazard',
       title: 'Emergency Medical Shock Incurred',
-      withoutChronosBalance: 38000,
-      withChronosBalance: 38000,
+      withoutVantiqBalance: 38000,
+      withVantiqBalance: 38000,
       upcomingEmiWithout: '₹0 immediate (4 loan contracts signed in panic)',
       upcomingEmiWith: '₹0 (Zero-cost hospital advance deployed)',
       cashflowEvent: '₹50,000 emergency medical deposit required.',
-      description: 'Without CHRONOS, borrower signs 4 fragmented instant loan apps with staggered due dates. With CHRONOS, Tri-Tranche Zero-Cost advance buffers the initial shock.'
+      description: 'Without VANTIQ, borrower signs 4 fragmented instant loan apps with staggered due dates. With VANTIQ, Tri-Tranche Zero-Cost advance buffers the initial shock.'
     },
     15: {
       day: 15,
@@ -74,8 +74,8 @@ export const CashflowRunwayChart: React.FC = () => {
       tag: 'First Drawdown',
       type: 'hazard',
       title: 'Payday App Clustered Deduction',
-      withoutChronosBalance: 23000,
-      withChronosBalance: 28000,
+      withoutVantiqBalance: 23000,
+      withVantiqBalance: 28000,
       upcomingEmiWithout: '₹5,400 (FastSalary 24x7 1st Payday EMI)',
       upcomingEmiWith: '₹0 (Co-op & hospital tranches deferred to month-end)',
       cashflowEvent: 'Mid-month payday loan deduction triggers early liquidity drain.',
@@ -87,8 +87,8 @@ export const CashflowRunwayChart: React.FC = () => {
       tag: 'Salary Milestone',
       type: 'deposit',
       title: 'Salary Deposit (+₹40,000) & Month-End Collisions',
-      withoutChronosBalance: -7500,
-      withChronosBalance: 16000,
+      withoutVantiqBalance: -7500,
+      withVantiqBalance: 16000,
       upcomingEmiWithout: '₹7,120 (QuickRupee Instant Pay) + ₹7,000 Rent + ₹8,000 EMI',
       upcomingEmiWith: '₹4,220 (Tranche A ₹2,500 + Tranche B ₹1,720)',
       cashflowEvent: '+₹40,000 Salary deposited; massive multi-app debits collide with rent.',
@@ -100,8 +100,8 @@ export const CashflowRunwayChart: React.FC = () => {
       tag: 'Critical Default Trap',
       type: 'crash',
       title: 'Clustered Debit Crash (-₹26,200 Total Outflow)',
-      withoutChronosBalance: -18000,
-      withChronosBalance: 15000,
+      withoutVantiqBalance: -18000,
+      withVantiqBalance: 15000,
       upcomingEmiWithout: '₹5,240 (SplitNow BNPL) + ₹5,640 (ApexCard) + Bounce Fees',
       upcomingEmiWith: '₹0 (No clustered debits; safe positive buffer)',
       cashflowEvent: '-₹26,200 Clustered multi-app debit shock triggers catastrophic insolvency.',
@@ -113,8 +113,8 @@ export const CashflowRunwayChart: React.FC = () => {
       tag: 'Compounding Spiral',
       type: 'hazard',
       title: 'Secondary Penalties & Rollover Charges',
-      withoutChronosBalance: -24000,
-      withChronosBalance: 17500,
+      withoutVantiqBalance: -24000,
+      withVantiqBalance: 17500,
       upcomingEmiWithout: '₹3,800 late fee penalties + 42% APR compounding interest',
       upcomingEmiWith: '₹0 (Tranche C 60-day grace period fully shields cashflow)',
       cashflowEvent: 'Late fees and default penalty ratchets accelerate negative cascade.',
@@ -125,13 +125,13 @@ export const CashflowRunwayChart: React.FC = () => {
       label: 'Day 60',
       tag: 'Grace Transition',
       type: 'recovery',
-      title: 'CHRONOS 60-Day Grace Period Transition',
-      withoutChronosBalance: -31000,
-      withChronosBalance: 19000,
+      title: 'VANTIQ 60-Day Grace Period Transition',
+      withoutVantiqBalance: -31000,
+      withVantiqBalance: 19000,
       upcomingEmiWithout: '₹22,400 accumulated delinquent arrears; 84% default probability',
       upcomingEmiWith: '₹1,795 (Tranche C micro-repayment activates smoothly on Day 61)',
       cashflowEvent: '60-day recovery grace period successfully completes; liquid reserves restored.',
-      description: 'With CHRONOS, borrower has safely rebuilt disposable liquidity. Tranche C micro-repayment begins on Day 61 without disturbing basic survival needs.'
+      description: 'With VANTIQ, borrower has safely rebuilt disposable liquidity. Tranche C micro-repayment begins on Day 61 without disturbing basic survival needs.'
     },
     75: {
       day: 75,
@@ -139,12 +139,12 @@ export const CashflowRunwayChart: React.FC = () => {
       tag: 'Surplus Restoration',
       type: 'recovery',
       title: 'Sustained Positive Trajectory',
-      withoutChronosBalance: -34500,
-      withChronosBalance: 20500,
+      withoutVantiqBalance: -34500,
+      withVantiqBalance: 20500,
       upcomingEmiWithout: 'Legal recovery notices & bureau credit freeze',
       upcomingEmiWith: '₹4,295 combined manageable monthly repayment',
       cashflowEvent: 'Solvent runway builds steady positive buffer.',
-      description: 'The CHRONOS-coordinated runway remains firmly above ₹20,000, fully absorbing month-end costs while naive borrowing collapses past -₹34,000.'
+      description: 'The VANTIQ-coordinated runway remains firmly above ₹20,000, fully absorbing month-end costs while naive borrowing collapses past -₹34,000.'
     },
     90: {
       day: 90,
@@ -152,12 +152,12 @@ export const CashflowRunwayChart: React.FC = () => {
       tag: 'Full Horizon Outcome',
       type: 'recovery',
       title: '90-Day Full Horizon Solvency Verdict',
-      withoutChronosBalance: -38000,
-      withChronosBalance: 22000,
+      withoutVantiqBalance: -38000,
+      withVantiqBalance: 22000,
       upcomingEmiWithout: 'Total Debt Trap: ₹68,400 owed, ruined credit score',
       upcomingEmiWith: '100% Solvent: +₹22,000 liquid buffer preserved',
       cashflowEvent: 'Full recovery accomplished; emergency overcome without debt spiral.',
-      description: 'At 90 days, CHRONOS has completely preserved financial dignity and creditworthiness with +₹22,000 surplus, whereas naive borrowing ended in complete bankruptcy.'
+      description: 'At 90 days, VANTIQ has completely preserved financial dignity and creditworthiness with +₹22,000 surplus, whereas naive borrowing ended in complete bankruptcy.'
     }
   }), []);
 
@@ -165,14 +165,14 @@ export const CashflowRunwayChart: React.FC = () => {
     day: currentPoint.day,
     label: currentPoint.dateLabel,
     tag: 'Trajectory Point',
-    type: currentPoint.balanceWithChronos > 0 ? 'recovery' : 'hazard',
+    type: currentPoint.balanceWithVantiq > 0 ? 'recovery' : 'hazard',
     title: `Runway State: Day ${currentPoint.day}`,
-    withoutChronosBalance: currentPoint.balanceWithoutChronos,
-    withChronosBalance: currentPoint.balanceWithChronos,
+    withoutVantiqBalance: currentPoint.balanceWithoutVantiq,
+    withVantiqBalance: currentPoint.balanceWithVantiq,
     upcomingEmiWithout: 'Standard predatory scheduled obligations',
     upcomingEmiWith: 'Coordinated non-colliding obligations',
-    cashflowEvent: `Net balance differential: +₹${(currentPoint.balanceWithChronos - currentPoint.balanceWithoutChronos).toLocaleString()}`,
-    description: `On Day ${currentPoint.day}, CHRONOS maintains solvency while naive multi-app borrowing risks default.`
+    cashflowEvent: `Net balance differential: +₹${(currentPoint.balanceWithVantiq - currentPoint.balanceWithoutVantiq).toLocaleString()}`,
+    description: `On Day ${currentPoint.day}, VANTIQ maintains solvency while naive multi-app borrowing risks default.`
   };
 
   // SVG Chart Geometry Specs
@@ -219,12 +219,12 @@ export const CashflowRunwayChart: React.FC = () => {
   // Coordinate arrays for curves
   const naiveCoordinates = cashflowRunway.map((pt, i) => ({
     x: getX(i),
-    y: getY(pt.balanceWithoutChronos)
+    y: getY(pt.balanceWithoutVantiq)
   }));
 
-  const chronosCoordinates = cashflowRunway.map((pt, i) => ({
+  const vantiqCoordinates = cashflowRunway.map((pt, i) => ({
     x: getX(i),
-    y: getY(pt.balanceWithChronos)
+    y: getY(pt.balanceWithVantiq)
   }));
 
   const q90Coordinates = cashflowRunway.map((pt, i) => ({
@@ -238,11 +238,11 @@ export const CashflowRunwayChart: React.FC = () => {
   }));
 
   const naiveSmoothPath = createSmoothPath(naiveCoordinates);
-  const chronosSmoothPath = createSmoothPath(chronosCoordinates);
+  const vantiqSmoothPath = createSmoothPath(vantiqCoordinates);
 
   // Closed area paths
   const naiveAreaPath = `${naiveSmoothPath} L ${naiveCoordinates[naiveCoordinates.length - 1].x} ${zeroY} L ${naiveCoordinates[0].x} ${zeroY} Z`;
-  const chronosAreaPath = `${chronosSmoothPath} L ${chronosCoordinates[chronosCoordinates.length - 1].x} ${zeroY} L ${chronosCoordinates[0].x} ${zeroY} Z`;
+  const vantiqAreaPath = `${vantiqSmoothPath} L ${vantiqCoordinates[vantiqCoordinates.length - 1].x} ${zeroY} L ${vantiqCoordinates[0].x} ${zeroY} Z`;
 
   // Quantile confidence ribbon path (q90 forward, q10 backward)
   const q90Path = createSmoothPath(q90Coordinates);
@@ -254,7 +254,7 @@ export const CashflowRunwayChart: React.FC = () => {
   const day30Index = cashflowRunway.findIndex((pt) => pt.day === 30);
   const day32Index = cashflowRunway.findIndex((pt) => pt.day === 32);
 
-  const day30Coord = day30Index >= 0 ? chronosCoordinates[day30Index] : null;
+  const day30Coord = day30Index >= 0 ? vantiqCoordinates[day30Index] : null;
   const day32Coord = day32Index >= 0 ? naiveCoordinates[day32Index] : null;
 
   // Handle interactive SVG mouse movement
@@ -406,15 +406,15 @@ export const CashflowRunwayChart: React.FC = () => {
               Uncoordinated Crash Only
             </button>
             <button
-              onClick={() => setActiveCurveFilter('chronos')}
+              onClick={() => setActiveCurveFilter('vantiq')}
               style={{
                 padding: '6px 14px',
                 borderRadius: '8px',
                 fontSize: '0.8rem',
                 fontWeight: 700,
-                border: activeCurveFilter === 'chronos' ? '1.5px solid #15803d' : '1px solid #d0d7cc',
-                backgroundColor: activeCurveFilter === 'chronos' ? '#edf4ea' : '#f4f5f1',
-                color: activeCurveFilter === 'chronos' ? '#15803d' : 'var(--text-secondary)',
+                border: activeCurveFilter === 'vantiq' ? '1.5px solid #15803d' : '1px solid #d0d7cc',
+                backgroundColor: activeCurveFilter === 'vantiq' ? '#edf4ea' : '#f4f5f1',
+                color: activeCurveFilter === 'vantiq' ? '#15803d' : 'var(--text-secondary)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
@@ -448,7 +448,7 @@ export const CashflowRunwayChart: React.FC = () => {
         </div>
 
         {/* REQUIREMENT 2 & 3: MAIN DUAL-CURVE SVG INTERACTIVE CHART */}
-        <div className="chronos-card" style={{ padding: '28px', backgroundColor: '#ffffff', marginBottom: '28px', position: 'relative', border: '1.5px solid #d0d7cc', boxShadow: 'var(--shadow-card)' }}>
+        <div className="vantiq-card" style={{ padding: '28px', backgroundColor: '#ffffff', marginBottom: '28px', position: 'relative', border: '1.5px solid #d0d7cc', boxShadow: 'var(--shadow-card)' }}>
           
           {/* Chart Sub-header Legends */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', flexWrap: 'wrap', gap: '12px' }}>
@@ -571,17 +571,17 @@ export const CashflowRunwayChart: React.FC = () => {
               )}
 
               {/* Curve 1: Red Uncoordinated Area Fill */}
-              {activeCurveFilter !== 'chronos' && (
+              {activeCurveFilter !== 'vantiq' && (
                 <path d={naiveAreaPath} fill="url(#redDangerGrad)" />
               )}
 
-              {/* Curve 2: Emerald CHRONOS Area Fill */}
+              {/* Curve 2: Emerald VANTIQ Area Fill */}
               {activeCurveFilter !== 'naive' && (
-                <path d={chronosAreaPath} fill="url(#emeraldSolvencyGrad)" />
+                <path d={vantiqAreaPath} fill="url(#emeraldSolvencyGrad)" />
               )}
 
               {/* Curve 1: Red Uncoordinated Line */}
-              {activeCurveFilter !== 'chronos' && (
+              {activeCurveFilter !== 'vantiq' && (
                 <path
                   d={naiveSmoothPath}
                   fill="none"
@@ -591,10 +591,10 @@ export const CashflowRunwayChart: React.FC = () => {
                 />
               )}
 
-              {/* Curve 2: Emerald CHRONOS Line */}
+              {/* Curve 2: Emerald VANTIQ Line */}
               {activeCurveFilter !== 'naive' && (
                 <path
-                  d={chronosSmoothPath}
+                  d={vantiqSmoothPath}
                   fill="none"
                   stroke="#10b981"
                   strokeWidth="4"
@@ -626,7 +626,7 @@ export const CashflowRunwayChart: React.FC = () => {
               )}
 
               {/* Alert Flag 2: Day 32 Clustered Debit Crash (-₹26,200) */}
-              {day32Coord && activeCurveFilter !== 'chronos' && (
+              {day32Coord && activeCurveFilter !== 'vantiq' && (
                 <g transform={`translate(${day32Coord.x}, ${day32Coord.y})`}>
                   {/* Vertical dashed line to zero line */}
                   <line x1="0" y1="0" x2="0" y2={-(day32Coord.y - zeroY)} stroke="#ef4444" strokeDasharray="3 3" strokeWidth="2" />
@@ -650,8 +650,8 @@ export const CashflowRunwayChart: React.FC = () => {
               {cashflowRunway.map((pt, i) => {
                 const isCurrent = i === activeIndex;
                 const x = getX(i);
-                const yNaive = getY(pt.balanceWithoutChronos);
-                const yChronos = getY(pt.balanceWithChronos);
+                const yNaive = getY(pt.balanceWithoutVantiq);
+                const yVantiq = getY(pt.balanceWithVantiq);
 
                 return (
                   <g key={i}>
@@ -669,7 +669,7 @@ export const CashflowRunwayChart: React.FC = () => {
                     )}
 
                     {/* Naive Curve Point */}
-                    {activeCurveFilter !== 'chronos' && (
+                    {activeCurveFilter !== 'vantiq' && (
                       <circle
                         cx={x}
                         cy={yNaive}
@@ -682,11 +682,11 @@ export const CashflowRunwayChart: React.FC = () => {
                       />
                     )}
 
-                    {/* CHRONOS Curve Point */}
+                    {/* VANTIQ Curve Point */}
                     {activeCurveFilter !== 'naive' && (
                       <circle
                         cx={x}
-                        cy={yChronos}
+                        cy={yVantiq}
                         r={isCurrent ? 8 : 5.5}
                         fill="#10b981"
                         stroke="#ffffff"
@@ -770,7 +770,7 @@ export const CashflowRunwayChart: React.FC = () => {
         </div>
 
         {/* REQUIREMENT 3: DAY-BY-DAY INTERACTIVE TOOLTIP / INSPECTOR COCKPIT */}
-        <div className="chronos-card glow-cyan" style={{ padding: '28px', marginBottom: '32px' }}>
+        <div className="vantiq-card glow-cyan" style={{ padding: '28px', marginBottom: '32px' }}>
           
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
             <div>
@@ -796,14 +796,14 @@ export const CashflowRunwayChart: React.FC = () => {
               fontSize: '0.82rem',
               color: '#cbd5e1'
             }}>
-              Net Difference on {currentMilestone.label}: <strong style={{ color: '#34d399', fontSize: '1rem' }}>+₹{(currentPoint.balanceWithChronos - currentPoint.balanceWithoutChronos).toLocaleString()}</strong>
+              Net Difference on {currentMilestone.label}: <strong style={{ color: '#34d399', fontSize: '1rem' }}>+₹{(currentPoint.balanceWithVantiq - currentPoint.balanceWithoutVantiq).toLocaleString()}</strong>
             </div>
           </div>
 
           {/* Three-Column Comparative Inspector */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '20px' }}>
             
-            {/* Box 1: Without CHRONOS Bank Balance & EMI */}
+            {/* Box 1: Without VANTIQ Bank Balance & EMI */}
             <div style={{
               padding: '20px',
               borderRadius: '12px',
@@ -813,7 +813,7 @@ export const CashflowRunwayChart: React.FC = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <XCircle size={18} color="#ef4444" />
                 <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#f87171', textTransform: 'uppercase' }}>
-                  Without CHRONOS (Predatory)
+                  Without VANTIQ (Predatory)
                 </span>
               </div>
 
@@ -821,11 +821,11 @@ export const CashflowRunwayChart: React.FC = () => {
               <div style={{
                 fontSize: '2rem',
                 fontWeight: 900,
-                color: currentPoint.balanceWithoutChronos < 0 ? '#ef4444' : '#f8fafc',
+                color: currentPoint.balanceWithoutVantiq < 0 ? '#ef4444' : '#f8fafc',
                 margin: '4px 0 12px 0'
               }}>
-                {currentPoint.balanceWithoutChronos < 0 ? `-₹${Math.abs(currentPoint.balanceWithoutChronos).toLocaleString()}` : `₹${currentPoint.balanceWithoutChronos.toLocaleString()}`}
-                {currentPoint.balanceWithoutChronos < 0 && (
+                {currentPoint.balanceWithoutVantiq < 0 ? `-₹${Math.abs(currentPoint.balanceWithoutVantiq).toLocaleString()}` : `₹${currentPoint.balanceWithoutVantiq.toLocaleString()}`}
+                {currentPoint.balanceWithoutVantiq < 0 && (
                   <span style={{ fontSize: '0.75rem', color: '#fca5a5', fontWeight: 700, display: 'block' }}>
                     🚨 OVERDRAFT / DEFAULT COLLISION
                   </span>
@@ -840,7 +840,7 @@ export const CashflowRunwayChart: React.FC = () => {
               </div>
             </div>
 
-            {/* Box 2: With CHRONOS Bank Balance & EMI */}
+            {/* Box 2: With VANTIQ Bank Balance & EMI */}
             <div style={{
               padding: '20px',
               borderRadius: '12px',
@@ -851,7 +851,7 @@ export const CashflowRunwayChart: React.FC = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <CheckCircle2 size={18} color="#10b981" />
                 <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#34d399', textTransform: 'uppercase' }}>
-                  With VANTIQ Funding Plan
+With VANTIQ Funding Plan
                 </span>
               </div>
 
@@ -862,7 +862,7 @@ export const CashflowRunwayChart: React.FC = () => {
                 color: '#34d399',
                 margin: '4px 0 12px 0'
               }}>
-                ₹{currentPoint.balanceWithChronos.toLocaleString()}
+                ₹{currentPoint.balanceWithVantiq.toLocaleString()}
                 <span style={{ fontSize: '0.75rem', color: '#6ee7b7', fontWeight: 700, display: 'block' }}>
                   🛡️ POSITIVE LIQUIDITY RUNWAY
                 </span>
@@ -936,7 +936,7 @@ export const CashflowRunwayChart: React.FC = () => {
         </div>
 
         {/* REQUIREMENT 4: MILESTONES & ALERT FLAGS TIMELINE FEED */}
-        <div className="chronos-card" style={{ padding: '24px' }}>
+        <div className="vantiq-card" style={{ padding: '24px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
             <Clock size={18} color="#38bdf8" />
             <h4 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>
@@ -970,7 +970,7 @@ export const CashflowRunwayChart: React.FC = () => {
                 Salary Deposit Arrives
               </h5>
               <p style={{ fontSize: '0.78rem', color: '#94a3b8', lineHeight: 1.4 }}>
-                Monthly paycheck is credited. With CHRONOS, you preserve +₹16,000 buffer. Without CHRONOS, rent + instant loan EMIs immediately consume it all.
+                Monthly paycheck is credited. With VANTIQ, you preserve +₹16,000 buffer. Without VANTIQ, rent + instant loan EMIs immediately consume it all.
               </p>
             </div>
 
@@ -995,7 +995,7 @@ export const CashflowRunwayChart: React.FC = () => {
                 Clustered Debit Crash (-₹18,000 Balance)
               </h5>
               <p style={{ fontSize: '0.78rem', color: '#cbd5e1', lineHeight: 1.4 }}>
-                4 fragmented apps execute uncoordinated auto-debits within 48h. The account crashes into deep insolvency! CHRONOS completely eliminates this collision.
+                4 fragmented apps execute uncoordinated auto-debits within 48h. The account crashes into deep insolvency! VANTIQ completely eliminates this collision.
               </p>
             </div>
 
@@ -1043,7 +1043,7 @@ export const CashflowRunwayChart: React.FC = () => {
                 100% Solvency Preserved
               </h5>
               <p style={{ fontSize: '0.78rem', color: '#94a3b8', lineHeight: 1.4 }}>
-                CHRONOS user enjoys +₹22,000 intact buffer and pristine credit score. Naive borrower remains trapped in -₹38,000 compounding delinquency.
+                VANTIQ user enjoys +₹22,000 intact buffer and pristine credit score. Naive borrower remains trapped in -₹38,000 compounding delinquency.
               </p>
             </div>
 

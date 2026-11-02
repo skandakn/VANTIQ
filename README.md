@@ -24,7 +24,7 @@ When an individual faces an acute out-of-pocket medical shock (e.g., ₹50,000 f
 - While they obtain the immediate ₹50,000, **the uncoordinated repayments aggregate to ₹26,200/month**.
 - Because ₹26,200 exceeds their ₹15,000 capacity, **they enter an irreversible insolvency debt spiral within 45 days.**
 
-**CHRONOS-FIN** is an open-source emergency finance planning tool that compares borrowing costs, estimates repayment capacity, and presents a multi-source funding plan.
+**VANTIQ** is an open-source emergency finance planning tool that compares borrowing costs, estimates repayment capacity, and presents a multi-source funding plan.
 
 ---
 
@@ -37,7 +37,7 @@ When an individual faces an acute out-of-pocket medical shock (e.g., ₹50,000 f
    - **Trust-Building Fee Comparison**: Gamified, transparent fee and repayment comparison directly showing predatory loan app penalties vs. transparent VANTIQ rescue.
    - **Low-Friction Exploratory CTAs**: Zero-signup barriers; users test and experience the math before any commitment.
    - **High-Trust Aesthetic**: Deep forest green palette with signature electric lime (`#9fe870`) accents, crisp modern typography, and clean cards.
-4. **90-Day Temporal Digital Twin (TFT)**: Simulates day-by-day cashflow runway under standard borrowing vs. CHRONOS-guided optimization.
+4. **90-Day Temporal Digital Twin (TFT)**: Simulates day-by-day cashflow runway under standard borrowing vs. VANTIQ-guided optimization.
 5. **Tri-Tranche Multi-Source Rescue Plan**: Displays an illustrative split across funding sources and repayment schedules.
 6. **TreeSHAP Explainer**: Shows which factors contribute to the displayed risk estimate.
 7. **Client-Side Privacy View**: Describes the app's intended approach to handling sensitive financial inputs.

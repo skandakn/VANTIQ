@@ -1,6 +1,6 @@
 // src/modules/m09_life_energy/LifeEnergyCalculator.tsx
 // Module 10: "Life-Energy" Labor Hours Equivalency Calculator
-// Role: Member 10 (CHRONOS-FIN Team)
+// Role: Member 10 (VANTIQ Team)
 // Translates predatory debt into real physical hours and days of human labor freedom.
 
 import React, { useState, useMemo } from 'react';
@@ -45,7 +45,7 @@ export const LifeEnergyCalculator: React.FC = () => {
 
   // Requirement 3: Compute Real Labor Hours required
   // Predatory Stacking repayment (₹68,400): 273.6 hours of labor (approx. 34 full working days)
-  // CHRONOS Plan repayment (₹51,420): 205.6 hours (approx. 25 days)
+  // VANTIQ Plan repayment (₹51,420): 205.6 hours (approx. 25 days)
   // Net life-energy saved: 68 working hours!
   const isDefaultBenchmark = effectiveSalary === 40000 && monthlyHours === 160;
 
@@ -59,7 +59,7 @@ export const LifeEnergyCalculator: React.FC = () => {
   }, [isDefaultBenchmark, shock]);
 
   // Estimated repayment from the current funding plan.
-  const chronosRepayment = useMemo(() => {
+  const vantiqRepayment = useMemo(() => {
     if (isDefaultBenchmark && (!shock || shock.amount === 50000)) {
       return 51420;
     }
@@ -74,34 +74,34 @@ export const LifeEnergyCalculator: React.FC = () => {
     return Math.round((predatoryRepayment / hourlyWage) * 10) / 10;
   }, [isDefaultBenchmark, hourlyWage, predatoryRepayment]);
 
-  const chronosHours = useMemo(() => {
-    if (isDefaultBenchmark && hourlyWage === 250 && chronosRepayment === 51420) {
+  const vantiqHours = useMemo(() => {
+    if (isDefaultBenchmark && hourlyWage === 250 && vantiqRepayment === 51420) {
       return 205.6;
     }
-    return Math.round((chronosRepayment / hourlyWage) * 10) / 10;
-  }, [isDefaultBenchmark, hourlyWage, chronosRepayment]);
+    return Math.round((vantiqRepayment / hourlyWage) * 10) / 10;
+  }, [isDefaultBenchmark, hourlyWage, vantiqRepayment]);
 
   const savedHours = useMemo(() => {
-    if (isDefaultBenchmark && predatoryHours === 273.6 && chronosHours === 205.6) {
+    if (isDefaultBenchmark && predatoryHours === 273.6 && vantiqHours === 205.6) {
       return 68.0;
     }
-    return Math.max(0, Math.round((predatoryHours - chronosHours) * 10) / 10);
-  }, [isDefaultBenchmark, predatoryHours, chronosHours]);
+    return Math.max(0, Math.round((predatoryHours - vantiqHours) * 10) / 10);
+  }, [isDefaultBenchmark, predatoryHours, vantiqHours]);
 
   // Working Days calculations (at specified hours/day)
   const predatoryDays = useMemo(() => {
     return Math.round((predatoryHours / hoursPerDay) * 10) / 10; // ~34.2 days
   }, [predatoryHours, hoursPerDay]);
 
-  const chronosDays = useMemo(() => {
-    return Math.round((chronosHours / hoursPerDay) * 10) / 10; // ~25.7 days
-  }, [chronosHours, hoursPerDay]);
+  const vantiqDays = useMemo(() => {
+    return Math.round((vantiqHours / hoursPerDay) * 10) / 10; // ~25.7 days
+  }, [vantiqHours, hoursPerDay]);
 
   const savedDays = useMemo(() => {
     return Math.round((savedHours / hoursPerDay) * 10) / 10; // ~8.5 days
   }, [savedHours, hoursPerDay]);
 
-  const savedCash = Math.max(0, predatoryRepayment - chronosRepayment);
+  const savedCash = Math.max(0, predatoryRepayment - vantiqRepayment);
 
   // Reset to canonical prompt parameters
   const handleReset = () => {
@@ -116,36 +116,36 @@ export const LifeEnergyCalculator: React.FC = () => {
   const calendarDays = useMemo(() => {
     const days = [];
     const totalDaysToRender = 35; // 7 weeks of 5-day workweeks
-    const chronosCutoffDay = Math.ceil(chronosDays); // Day 26 is first freedom day
+    const vantiqCutoffDay = Math.ceil(vantiqDays); // Day 26 is first freedom day
     const predatoryCutoffDay = Math.ceil(predatoryDays); // Day 35
 
     for (let i = 1; i <= totalDaysToRender; i++) {
-      let status: 'chronos_repayment' | 'freedom_saved' | 'post_freedom';
+      let status: 'vantiq_repayment' | 'freedom_saved' | 'post_freedom';
       let label: string;
       let description: string;
       let badgeText: string;
 
-      if (i <= Math.floor(chronosDays)) {
-        status = 'chronos_repayment';
+      if (i <= Math.floor(vantiqDays)) {
+        status = 'vantiq_repayment';
         label = `Debt Repayment Day ${i}`;
-        badgeText = 'CHRONOS';
+        badgeText = 'VANTIQ';
         description = `Day ${i} of structured low-cost repayment (₹${Math.round(hoursPerDay * hourlyWage).toLocaleString()}/day applied directly to principal).`;
-      } else if (i === chronosCutoffDay && chronosDays % 1 !== 0) {
+      } else if (i === vantiqCutoffDay && vantiqDays % 1 !== 0) {
         status = 'freedom_saved';
         label = `Day ${i}: Partial Freedom Day`;
         badgeText = 'FREEDOM';
-        description = `CHRONOS debt paid off early today! Final ${Math.round((1 - (chronosDays % 1)) * hoursPerDay * 10) / 10} hours belong entirely to you!`;
+        description = `VANTIQ debt paid off early today! Final ${Math.round((1 - (vantiqDays % 1)) * hoursPerDay * 10) / 10} hours belong entirely to you!`;
       } else if (i <= predatoryCutoffDay) {
         status = 'freedom_saved';
-        const freedomIndex = i - Math.floor(chronosDays);
+        const freedomIndex = i - Math.floor(vantiqDays);
         label = `Day ${i}: Freedom Day #${freedomIndex}`;
         badgeText = 'FREEDOM';
-        description = `Under predatory stacking, you would sweat 8 full hours today for loan shark interest. Under CHRONOS, you keep 100% of your ₹${Math.round(hoursPerDay * hourlyWage).toLocaleString()} earnings!`;
+        description = `Under predatory stacking, you would sweat 8 full hours today for loan shark interest. Under VANTIQ, you keep 100% of your ₹${Math.round(hoursPerDay * hourlyWage).toLocaleString()} earnings!`;
       } else {
         status = 'post_freedom';
         label = `Day ${i}: Sustained Solvency`;
         badgeText = 'SOLVENT';
-        description = 'Total freedom from emergency shock debt. Both plans completed, but CHRONOS freed you over a week earlier.';
+        description = 'Total freedom from emergency shock debt. Both plans completed, but VANTIQ freed you over a week earlier.';
       }
 
       days.push({
@@ -160,7 +160,7 @@ export const LifeEnergyCalculator: React.FC = () => {
       });
     }
     return days;
-  }, [chronosDays, predatoryDays, hoursPerDay, hourlyWage]);
+  }, [vantiqDays, predatoryDays, hoursPerDay, hourlyWage]);
 
   // Selected Day Details
   const activeDayData = useMemo(() => {
@@ -171,7 +171,7 @@ export const LifeEnergyCalculator: React.FC = () => {
   return (
     <section id="life-energy" style={{ padding: '40px 0', position: 'relative' }}>
       <div className="container">
-        
+
         {/* Section Header */}
         <div style={{ marginBottom: '28px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', marginBottom: '10px' }}>
@@ -200,13 +200,13 @@ export const LifeEnergyCalculator: React.FC = () => {
             Translating Predatory Debt into <span style={{ color: '#15803d' }}>Hours of Human Life</span>
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '880px', lineHeight: 1.6 }}>
-            Nominal APR percentages hide real suffering. By dividing predatory liabilities by your <strong>real hourly wage</strong>, 
+            Nominal APR percentages hide real suffering. By dividing predatory liabilities by your <strong>real hourly wage</strong>,
             we quantify exactly how many working days of your physical existence are hijacked by loan apps versus preserved by VANTIQ.
           </p>
         </div>
 
         {/* Real Hourly Wage Hero Formula Banner */}
-        <div className="chronos-card" style={{
+        <div className="vantiq-card" style={{
           padding: '24px 32px',
           marginBottom: '28px',
           backgroundColor: '#ffffff',
@@ -308,7 +308,7 @@ export const LifeEnergyCalculator: React.FC = () => {
           marginBottom: '32px'
         }}>
           {/* Card 1: Predatory Stacking Repayment */}
-          <div className="chronos-card" style={{
+          <div className="vantiq-card" style={{
             padding: '26px',
             borderRadius: '16px',
             backgroundColor: 'rgba(239, 68, 68, 0.05)',
@@ -326,7 +326,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             <div style={{ fontSize: '0.75rem', color: '#fca5a5', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '0.06em', marginBottom: '6px' }}>
               Predatory Stacking Repayment
             </div>
-            
+
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
               <span style={{ fontSize: '2.6rem', fontWeight: 900, color: '#f87171', lineHeight: 1 }}>
                 {predatoryHours}
@@ -341,7 +341,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
 
             <p style={{ fontSize: '0.82rem', color: '#cbd5e1', lineHeight: 1.5, marginBottom: '16px' }}>
-              Repaying <strong>₹{predatoryRepayment.toLocaleString()}</strong> at your ₹{hourlyWage}/hr wage forces you to sacrifice 
+              Repaying <strong>₹{predatoryRepayment.toLocaleString()}</strong> at your ₹{hourlyWage}/hr wage forces you to sacrifice
               over <strong>34 entire working days</strong> just to break even with aggressive lenders.
             </p>
 
@@ -360,8 +360,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 2: CHRONOS-FIN Funding Plan */}
-          <div className="chronos-card" style={{
+          {/* Card 2: VANTIQ Funding Plan */}\r\n          <div className="vantiq-card" style={{
             padding: '26px',
             borderRadius: '16px',
             backgroundColor: 'rgba(6, 182, 212, 0.05)',
@@ -377,12 +376,12 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
 
             <div style={{ fontSize: '0.75rem', color: '#67e8f9', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '0.06em', marginBottom: '6px' }}>
-              CHRONOS Plan Repayment
+              VANTIQ Plan Repayment
             </div>
-            
+
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
               <span style={{ fontSize: '2.6rem', fontWeight: 900, color: '#38bdf8', lineHeight: 1 }}>
-                {chronosHours}
+                {vantiqHours}
               </span>
               <span style={{ fontSize: '1.2rem', fontWeight: 700, color: '#67e8f9' }}>
                 Hours of Labor
@@ -390,11 +389,11 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
 
             <div style={{ display: 'inline-block', padding: '4px 10px', borderRadius: '6px', backgroundColor: 'rgba(6, 182, 212, 0.15)', color: '#38bdf8', fontSize: '0.85rem', fontWeight: 700, marginBottom: '14px' }}>
-              ≈ {chronosDays} Full Working Days (~{Math.round((chronosDays / 5) * 10) / 10} work weeks)
+              ≈ {vantiqDays} Full Working Days (~{Math.round((vantiqDays / 5) * 10) / 10} work weeks)
             </div>
 
             <p style={{ fontSize: '0.82rem', color: '#cbd5e1', lineHeight: 1.5, marginBottom: '16px' }}>
-              By blending zero-APR medical buffers and fair NBFC tranches (totaling <strong>₹{chronosRepayment.toLocaleString()}</strong>), 
+              By blending zero-APR medical buffers and fair NBFC tranches (totaling <strong>₹{vantiqRepayment.toLocaleString()}</strong>),
               your required labor time drops cleanly to <strong>205.6 hours</strong>.
             </p>
 
@@ -408,13 +407,13 @@ export const LifeEnergyCalculator: React.FC = () => {
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
-              <span>Total Debt: ₹{chronosRepayment.toLocaleString()}</span>
+              <span>Total Debt: ₹{vantiqRepayment.toLocaleString()}</span>
               <span style={{ color: '#06b6d4', fontWeight: 700 }}>205.6h Labor Total</span>
             </div>
           </div>
 
           {/* Card 3: Net Life-Energy Saved (HERO HIGHLIGHT) */}
-          <div className="chronos-card glow-emerald" style={{
+          <div className="vantiq-card glow-emerald" style={{
             padding: '26px',
             borderRadius: '16px',
             backgroundColor: 'rgba(16, 185, 129, 0.08)',
@@ -433,7 +432,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             <div style={{ fontSize: '0.75rem', color: '#6ee7b7', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '0.06em', marginBottom: '6px' }}>
               Net Life-Energy Reclaimed
             </div>
-            
+
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
               <span style={{ fontSize: '2.8rem', fontWeight: 900, color: '#34d399', lineHeight: 1, textShadow: '0 0 20px rgba(52, 211, 153, 0.5)' }}>
                 +{savedHours}
@@ -448,7 +447,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
 
             <p style={{ fontSize: '0.82rem', color: '#f1f5f9', lineHeight: 1.5, marginBottom: '16px' }}>
-              You win back <strong>{savedHours} working hours</strong> (~{savedDays} working days) of your life that would have otherwise gone directly 
+              You win back <strong>{savedHours} working hours</strong> (~{savedDays} working days) of your life that would have otherwise gone directly
               into predatory fees! That is <strong>₹{savedCash.toLocaleString()}</strong> kept in your family's hands.
             </p>
 
@@ -577,7 +576,7 @@ export const LifeEnergyCalculator: React.FC = () => {
 
         {/* TAB 1: INTERACTIVE CALENDAR VISUALIZER */}
         {activeTab === 'calendar' && (
-          <div className="chronos-card" style={{ padding: '32px', marginBottom: '28px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
+          <div className="vantiq-card" style={{ padding: '32px', marginBottom: '28px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
             {/* Visualizer Legend */}
             <div style={{
               display: 'flex',
@@ -603,7 +602,7 @@ export const LifeEnergyCalculator: React.FC = () => {
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', fontSize: '0.75rem' }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#38bdf8' }}>
                   <span style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#0284c7' }} />
-                  <span>Days 1-25: CHRONOS Work (205.6 hrs)</span>
+                  <span>Days 1-25: VANTIQ Work (205.6 hrs)</span>
                 </span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#34d399', fontWeight: 700 }}>
                   <span style={{ width: '12px', height: '12px', borderRadius: '3px', backgroundColor: '#10b981', boxShadow: '0 0 8px #10b981' }} />
@@ -640,7 +639,7 @@ export const LifeEnergyCalculator: React.FC = () => {
               {calendarDays.map((day) => {
                 const isSelected = selectedDay === day.dayNumber;
                 const isFreedom = day.isFreedom;
-                const isChronos = day.status === 'chronos_repayment';
+                const isVantiq = day.status === 'vantiq_repayment';
 
                 return (
                   <div
@@ -660,7 +659,7 @@ export const LifeEnergyCalculator: React.FC = () => {
                         ? isSelected
                           ? 'rgba(16, 185, 129, 0.28)'
                           : 'rgba(16, 185, 129, 0.12)'
-                        : isChronos
+                        : isVantiq
                         ? isSelected
                           ? 'rgba(6, 182, 212, 0.25)'
                           : 'rgba(15, 23, 42, 0.7)'
@@ -685,7 +684,7 @@ export const LifeEnergyCalculator: React.FC = () => {
                       <span style={{
                         fontSize: '0.85rem',
                         fontWeight: 800,
-                        color: isFreedom ? '#34d399' : isChronos ? '#f8fafc' : '#94a3b8'
+                        color: isFreedom ? '#34d399' : isVantiq ? '#f8fafc' : '#94a3b8'
                       }}>
                         D{day.dayNumber}
                       </span>
@@ -704,7 +703,7 @@ export const LifeEnergyCalculator: React.FC = () => {
                         </span>
                       )}
 
-                      {isChronos && (
+                      {isVantiq && (
                         <span style={{
                           backgroundColor: 'rgba(6, 182, 212, 0.2)',
                           color: '#38bdf8',
@@ -725,7 +724,7 @@ export const LifeEnergyCalculator: React.FC = () => {
                           <Sparkles size={14} />
                           <span style={{ fontSize: '0.7rem', fontWeight: 800 }}>8h Kept</span>
                         </div>
-                      ) : isChronos ? (
+                      ) : isVantiq ? (
                         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '3px', color: '#67e8f9' }}>
                           <CheckCircle2 size={13} />
                           <span style={{ fontSize: '0.7rem', fontWeight: 600 }}>8h Plan</span>
@@ -815,7 +814,7 @@ export const LifeEnergyCalculator: React.FC = () => {
 
         {/* TAB 2: CUMULATIVE LABOR HORIZON TIMELINE */}
         {activeTab === 'timeline' && (
-          <div className="chronos-card" style={{ padding: '32px', marginBottom: '28px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
+          <div className="vantiq-card" style={{ padding: '32px', marginBottom: '28px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
             <div style={{ marginBottom: '24px' }}>
               <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--wise-forest)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Hourglass size={20} color="#15803d" />
@@ -830,7 +829,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             <div style={{ marginBottom: '32px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: '#94a3b8', marginBottom: '8px' }}>
                 <span>Day 0 (Shock Disbursement)</span>
-                <span style={{ color: '#06b6d4', fontWeight: 700 }}>Day 25.7: CHRONOS Debt-Free (205.6 hrs)</span>
+                <span style={{ color: '#06b6d4', fontWeight: 700 }}>Day 25.7: VANTIQ Debt-Free (205.6 hrs)</span>
                 <span style={{ color: '#ef4444', fontWeight: 700 }}>Day 34.2: Predatory Payoff (273.6 hrs)</span>
               </div>
 
@@ -845,7 +844,7 @@ export const LifeEnergyCalculator: React.FC = () => {
                 overflow: 'hidden',
                 position: 'relative'
               }}>
-                {/* Segment 1: CHRONOS Hours (205.6 hrs / 273.6 = 75.1%) */}
+                {/* Segment 1: VANTIQ Hours (205.6 hrs / 273.6 = 75.1%) */}
                 <div style={{
                   width: '75.1%',
                   backgroundColor: '#0284c7',
@@ -859,7 +858,7 @@ export const LifeEnergyCalculator: React.FC = () => {
                   gap: '6px'
                 }}>
                   <ShieldCheck size={14} />
-                  <span>CHRONOS Obligation: 205.6 Hours (~25.7 Days)</span>
+                  <span>VANTIQ Obligation: 205.6 Hours (~25.7 Days)</span>
                 </div>
 
                 {/* Segment 2: Reclaimed Freedom Zone (68 hrs / 273.6 = 24.9%) */}
@@ -890,7 +889,7 @@ export const LifeEnergyCalculator: React.FC = () => {
 
             {/* Step-by-Step Milestones */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
-              <div className="chronos-card" style={{ padding: '16px', borderLeft: '4px solid #06b6d4' }}>
+              <div className="vantiq-card" style={{ padding: '16px', borderLeft: '4px solid #06b6d4' }}>
                 <div style={{ fontSize: '0.7rem', color: '#38bdf8', fontWeight: 800 }}>STAGE 1 (DAYS 1 - 10)</div>
                 <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f8fafc', margin: '4px 0' }}>80 Hours Labor</div>
                 <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
@@ -898,7 +897,7 @@ export const LifeEnergyCalculator: React.FC = () => {
                 </div>
               </div>
 
-              <div className="chronos-card" style={{ padding: '16px', borderLeft: '4px solid #38bdf8' }}>
+              <div className="vantiq-card" style={{ padding: '16px', borderLeft: '4px solid #38bdf8' }}>
                 <div style={{ fontSize: '0.7rem', color: '#38bdf8', fontWeight: 800 }}>STAGE 2 (DAYS 11 - 25)</div>
                 <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f8fafc', margin: '4px 0' }}>125.6 Hours Labor</div>
                 <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
@@ -906,7 +905,7 @@ export const LifeEnergyCalculator: React.FC = () => {
                 </div>
               </div>
 
-              <div className="chronos-card glow-emerald" style={{ padding: '16px', borderLeft: '4px solid #10b981', background: 'rgba(16, 185, 129, 0.06)' }}>
+              <div className="vantiq-card glow-emerald" style={{ padding: '16px', borderLeft: '4px solid #10b981', background: 'rgba(16, 185, 129, 0.06)' }}>
                 <div style={{ fontSize: '0.7rem', color: '#34d399', fontWeight: 800 }}>STAGE 3 (DAYS 26 - 35)</div>
                 <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#34d399', margin: '4px 0' }}>68 Hours of Pure Freedom</div>
                 <div style={{ fontSize: '0.78rem', color: '#cbd5e1' }}>
@@ -919,7 +918,7 @@ export const LifeEnergyCalculator: React.FC = () => {
 
         {/* TAB 3: DAILY SHIFT CLOCK (9 AM - 5 PM) */}
         {activeTab === 'shift' && (
-          <div className="chronos-card glow-purple" style={{ padding: '28px', marginBottom: '28px' }}>
+          <div className="vantiq-card glow-purple" style={{ padding: '28px', marginBottom: '28px' }}>
             <div style={{ marginBottom: '24px' }}>
               <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Clock size={18} color="#c084fc" />
@@ -952,10 +951,10 @@ export const LifeEnergyCalculator: React.FC = () => {
                 </div>
               </div>
 
-              {/* CHRONOS Day Breakdown */}
+              {/* VANTIQ Day Breakdown */}
               <div style={{ padding: '20px', borderRadius: '14px', backgroundColor: 'rgba(16, 185, 129, 0.06)', border: '1px solid rgba(16, 185, 129, 0.4)' }}>
                 <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#34d399', textTransform: 'uppercase', marginBottom: '8px' }}>
-                  Under CHRONOS-FIN (25 Days)
+                  Under VANTIQ (25 Days)
                 </div>
                 <div style={{ fontSize: '1.6rem', fontWeight: 850, color: '#34d399', marginBottom: '6px' }}>
                   0.3 Hours / Day Low-Cost Fee
@@ -978,7 +977,7 @@ export const LifeEnergyCalculator: React.FC = () => {
 
         {/* TAB 4: LIFE EQUIVALENCY IMPACT */}
         {activeTab === 'impact' && (
-          <div className="chronos-card glow-emerald" style={{ padding: '28px', marginBottom: '28px' }}>
+          <div className="vantiq-card glow-emerald" style={{ padding: '28px', marginBottom: '28px' }}>
             <div style={{ marginBottom: '24px' }}>
               <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <HeartHandshake size={18} color="#10b981" />
@@ -990,7 +989,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '18px' }}>
-              <div className="chronos-card" style={{ padding: '20px', borderTop: '3px solid #10b981' }}>
+              <div className="vantiq-card" style={{ padding: '20px', borderTop: '3px solid #10b981' }}>
                 <div style={{ color: '#34d399', marginBottom: '8px' }}><Smile size={24} /></div>
                 <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>8.5 Days</div>
                 <div style={{ fontSize: '0.75rem', color: '#34d399', fontWeight: 700, textTransform: 'uppercase', marginBottom: '6px' }}>
@@ -1001,7 +1000,7 @@ export const LifeEnergyCalculator: React.FC = () => {
                 </p>
               </div>
 
-              <div className="chronos-card" style={{ padding: '20px', borderTop: '3px solid #38bdf8' }}>
+              <div className="vantiq-card" style={{ padding: '20px', borderTop: '3px solid #38bdf8' }}>
                 <div style={{ color: '#38bdf8', marginBottom: '8px' }}><Sun size={24} /></div>
                 <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>17 Restorative Nights</div>
                 <div style={{ fontSize: '0.75rem', color: '#38bdf8', fontWeight: 700, textTransform: 'uppercase', marginBottom: '6px' }}>
@@ -1012,7 +1011,7 @@ export const LifeEnergyCalculator: React.FC = () => {
                 </p>
               </div>
 
-              <div className="chronos-card" style={{ padding: '20px', borderTop: '3px solid #c084fc' }}>
+              <div className="vantiq-card" style={{ padding: '20px', borderTop: '3px solid #c084fc' }}>
                 <div style={{ color: '#c084fc', marginBottom: '8px' }}><Coffee size={24} /></div>
                 <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>2,040 Kilometers</div>
                 <div style={{ fontSize: '0.75rem', color: '#c084fc', fontWeight: 700, textTransform: 'uppercase', marginBottom: '6px' }}>
@@ -1023,7 +1022,7 @@ export const LifeEnergyCalculator: React.FC = () => {
                 </p>
               </div>
 
-              <div className="chronos-card" style={{ padding: '20px', borderTop: '3px solid #f59e0b' }}>
+              <div className="vantiq-card" style={{ padding: '20px', borderTop: '3px solid #f59e0b' }}>
                 <div style={{ color: '#f59e0b', marginBottom: '8px' }}><Zap size={24} /></div>
                 <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>₹16,980 Kept</div>
                 <div style={{ fontSize: '0.75rem', color: '#f59e0b', fontWeight: 700, textTransform: 'uppercase', marginBottom: '6px' }}>
@@ -1055,9 +1054,9 @@ export const LifeEnergyCalculator: React.FC = () => {
               Behavioral Finance Insight: Why APR Deceives, But Life-Energy Liberates
             </h4>
             <p style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.6 }}>
-              Fintech cognitive research demonstrates that crisis victims experience severe "percentage numbness"—a 36% APR appears abstract and harmless during a panic. 
-              However, when confronted with the physical reality that <strong>they will spend 273.6 hours of their physical life</strong> working for loan sharks 
-              versus <strong>205.6 hours</strong> under CHRONOS, the reflective prefrontal cortex re-engages, preventing impulsive debt traps.
+              Fintech cognitive research demonstrates that crisis victims experience severe "percentage numbness"—a 36% APR appears abstract and harmless during a panic.
+              However, when confronted with the physical reality that <strong>they will spend 273.6 hours of their physical life</strong> working for loan sharks
+              versus <strong>205.6 hours</strong> under VANTIQ, the reflective prefrontal cortex re-engages, preventing impulsive debt traps.
             </p>
           </div>
         </div>

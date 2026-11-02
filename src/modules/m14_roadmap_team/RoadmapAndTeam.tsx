@@ -34,7 +34,7 @@ export const RoadmapAndTeam: React.FC = () => {
         {/* Roadmap Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginBottom: '40px' }}>
           {roadmapSteps.map((step, idx) => (
-            <div key={idx} className="chronos-card" style={{ borderLeft: '4px solid var(--wise-forest)', padding: '24px', backgroundColor: '#ffffff' }}>
+            <div key={idx} className="vantiq-card" style={{ borderLeft: '4px solid var(--wise-forest)', padding: '24px', backgroundColor: '#ffffff' }}>
               <div style={{ fontSize: '0.78rem', fontWeight: 800, color: '#15803d', textTransform: 'uppercase', marginBottom: '6px' }}>
                 {step.phase}
               </div>
@@ -49,7 +49,7 @@ export const RoadmapAndTeam: React.FC = () => {
         </div>
 
         {/* Team INNOVATEX Card */}
-        <div className="chronos-card" style={{ padding: '36px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
+        <div className="vantiq-card" style={{ padding: '36px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '18px' }}>
             <div style={{
               width: '44px',

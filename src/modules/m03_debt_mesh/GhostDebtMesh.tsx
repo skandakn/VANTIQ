@@ -184,7 +184,7 @@ export const GhostDebtMesh: React.FC = () => {
               <div
                 key={app.id}
                 onClick={() => toggleAppSelection(app.id)}
-                className="chronos-card"
+                className="vantiq-card"
                 style={{
                   cursor: 'pointer',
                   position: 'relative',
@@ -285,7 +285,7 @@ export const GhostDebtMesh: React.FC = () => {
 
         {/* Tab 1: Interactive SVG Ghost Debt Mesh Topology */}
         {activeTab === 'mesh' && (
-          <div className="chronos-card" style={{ padding: '32px', marginBottom: '32px', position: 'relative' }}>
+          <div className="vantiq-card" style={{ padding: '32px', marginBottom: '32px', position: 'relative' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
               <div>
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--wise-forest)' }}>
@@ -362,7 +362,7 @@ export const GhostDebtMesh: React.FC = () => {
 
         {/* Tab 2: Day 45 Default Collision Timeline */}
         {activeTab === 'timeline' && (
-          <div className="chronos-card" style={{ padding: '32px', marginBottom: '32px', borderLeft: '4px solid #dc2626' }}>
+          <div className="vantiq-card" style={{ padding: '32px', marginBottom: '32px', borderLeft: '4px solid #dc2626' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
               <Calendar size={22} color="#dc2626" />
               <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--wise-forest)' }}>
@@ -434,7 +434,7 @@ export const GhostDebtMesh: React.FC = () => {
           marginBottom: '32px'
         }}>
           {/* Left Panel: The Panic-Driven Illusion */}
-          <div className="chronos-card" style={{
+          <div className="vantiq-card" style={{
             padding: '30px',
             border: '1px solid #d0d7cc'
           }}>
@@ -469,7 +469,7 @@ export const GhostDebtMesh: React.FC = () => {
           </div>
 
           {/* Right Panel: The Harsh Reality */}
-          <div className="chronos-card" style={{
+          <div className="vantiq-card" style={{
             padding: '30px',
             border: '2px solid #dc2626',
             backgroundColor: '#fffafa'

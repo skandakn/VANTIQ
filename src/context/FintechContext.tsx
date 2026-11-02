@@ -170,42 +170,42 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const days = [0, 15, 30, 32, 45, 60, 75, 90];
     return days.map((day) => {
       let balanceNaive = 40000;
-      let balanceChronos = 40000;
+      let balanceVantiq = 40000;
 
       if (day === 0) {
         balanceNaive = 38000;
-        balanceChronos = 38000;
+        balanceVantiq = 38000;
       } else if (day === 15) {
         balanceNaive = 23000;
-        balanceChronos = 28000;
+        balanceVantiq = 28000;
       } else if (day === 30) {
         balanceNaive = -7500; // Rent + multiple BNPL collisions
-        balanceChronos = 16000;
+        balanceVantiq = 16000;
       } else if (day === 32) {
         balanceNaive = -18000; // Total Debt Trap Collision
-        balanceChronos = 15000;
+        balanceVantiq = 15000;
       } else if (day === 45) {
         balanceNaive = -24000;
-        balanceChronos = 17500;
+        balanceVantiq = 17500;
       } else if (day === 60) {
         balanceNaive = -31000;
-        balanceChronos = 19000;
+        balanceVantiq = 19000;
       } else if (day === 75) {
         balanceNaive = -34500;
-        balanceChronos = 20500;
+        balanceVantiq = 20500;
       } else {
         balanceNaive = -38000;
-        balanceChronos = 22000;
+        balanceVantiq = 22000;
       }
 
       return {
         day,
         dateLabel: `Day ${day}`,
-        balanceWithoutChronos: balanceNaive,
-        balanceWithChronos: balanceChronos,
-        pessimisticQuantile: balanceChronos - 3500,
-        expectedQuantile: balanceChronos,
-        optimisticQuantile: balanceChronos + 4000,
+        balanceWithoutVantiq: balanceNaive,
+        balanceWithVantiq: balanceVantiq,
+        pessimisticQuantile: balanceVantiq - 3500,
+        expectedQuantile: balanceVantiq,
+        optimisticQuantile: balanceVantiq + 4000,
       };
     });
   }, [profile, dynamicSurplus]);

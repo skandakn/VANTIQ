@@ -47,7 +47,7 @@ export const DualCapacityGauge: React.FC = () => {
             Compare the limit an app displays with the cash that is actually free after essential obligations.
           </p>
         </div>
-        <div className="chronos-card" style={{ padding: '32px' }}>
+        <div className="vantiq-card" style={{ padding: '32px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'stretch' }}>
             <CapacityDial label="Superficial Limit Offered" value={superficialLimit} color="#dc2626" glow="rgba(220, 38, 38, 0.08)" icon={<AlertTriangle size={32} />} caption="A ₹75,000 offer feels like safety, but its uncoordinated debits will bankrupt you on Day 32." />
             <CapacityDial label="Safe Absorptive Surplus" value={monthlySurplus} unit="per month" color="#15803d" glow="rgba(21, 128, 61, 0.08)" icon={<ShieldCheck size={32} />} caption="The actual cash surplus left each month after existing EMI, rent, and baseline living costs." />

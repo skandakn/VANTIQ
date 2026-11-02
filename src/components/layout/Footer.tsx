@@ -97,7 +97,7 @@ export const Footer: React.FC = () => {
             SECTION 1: System Architecture Status HUD Pill / Card
             ========================================================= */}
         <div
-          className="chronos-card"
+          className="vantiq-card"
           style={{
             marginBottom: '40px',
             padding: '20px 24px',
@@ -239,7 +239,7 @@ export const Footer: React.FC = () => {
             SECTION 2: RBI Regulatory Sandbox Testbed Disclaimer
             ========================================================= */}
         <div
-          className="chronos-card"
+          className="vantiq-card"
           style={{
             marginBottom: '44px',
             padding: '24px',
@@ -352,7 +352,7 @@ export const Footer: React.FC = () => {
                 <Shield size={20} color="#ffffff" />
               </div>
               <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em' }}>
-                CHRONOS<span style={{ color: '#38bdf8' }}>-FIN</span>
+                VANTIQ
               </span>
             </div>
 

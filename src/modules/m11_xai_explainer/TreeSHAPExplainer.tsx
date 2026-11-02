@@ -32,7 +32,7 @@ export const TreeSHAPExplainer: React.FC = () => {
         </div>
 
         {/* TreeSHAP Bars Card */}
-        <div className="chronos-card" style={{ padding: '32px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
+        <div className="vantiq-card" style={{ padding: '32px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
             {factors.map((f, i) => (
               <div key={i}>
