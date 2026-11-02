@@ -5,13 +5,11 @@ import {
   Zap, 
   Activity, 
   Cpu, 
-  Shield, 
   Download, 
   X, 
   AlertTriangle,
   Smartphone
 } from 'lucide-react';
-import { useFintech } from '../../context/FintechContext';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -19,7 +17,6 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export const PwaMobileNav: React.FC = () => {
-  const { triggerNeuroShield } = useFintech();
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isStandalone] = useState<boolean>(() => {
     if (typeof window === 'undefined') return false;
@@ -364,31 +361,6 @@ export const PwaMobileNav: React.FC = () => {
             <Cpu size={18} color={activeTab === 'quantum-solver' ? '#c084fc' : '#64748b'} />
             <span style={{ fontSize: '0.68rem', fontWeight: activeTab === 'quantum-solver' ? 700 : 500 }}>
               Quantum
-            </span>
-          </button>
-
-          {/* 45s Neuro Shield Trigger (Center Highlight Action) */}
-          <button
-            onClick={triggerNeuroShield}
-            style={{
-              background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.25) 0%, rgba(124, 58, 237, 0.15) 100%)',
-              border: '1px solid rgba(139, 92, 246, 0.5)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '4px',
-              padding: '6px 12px',
-              borderRadius: '10px',
-              color: '#c084fc',
-              boxShadow: '0 0 12px rgba(139, 92, 246, 0.25)',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-            }}
-            title="Launch 45s Neuro-Adaptive Grounding Protocol"
-          >
-            <Shield size={18} color="#c084fc" />
-            <span style={{ fontSize: '0.68rem', fontWeight: 800 }}>
-              45s Shield
             </span>
           </button>
         </div>

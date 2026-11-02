@@ -1,6 +1,6 @@
 // src/types/index.ts
 // PROJECT VANTIQ: Core Shared Type Contracts
-// All 15 modules share these interfaces for seamless real-time interoperability.
+// Modules share these interfaces for seamless real-time interoperability.
 
 export interface FinancialProfile {
   monthlyIncome: number;      // e.g., 40000
@@ -63,14 +63,6 @@ export interface CashflowRunwayPoint {
   pessimisticQuantile: number;   // q10
   expectedQuantile: number;      // q50
   optimisticQuantile: number;    // q90
-}
-
-export interface NeuroShieldState {
-  isShieldActive: boolean;
-  panicScore: number;            // 0 - 100 derived from MobileBERT keystroke jitter
-  timerSecondsRemaining: number; // 45 seconds countdown
-  isEmergencyBypassed: boolean;
-  lifeEnergyHourlyWage: number;  // e.g., Rs. 150/hr for Rs. 40k salary (40000 / 266 hrs)
 }
 
 export interface TeamMemberRole {

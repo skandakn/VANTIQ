@@ -1,6 +1,6 @@
 // src/context/FintechContext.tsx
 // Reactive State Hub for VANTIQ
-// Allows all 15 modular components to communicate in real-time.
+// Allows specialized modular components to communicate in real-time.
 
 import React, { createContext, useContext, useState, useMemo } from 'react';
 import type { 
@@ -8,8 +8,7 @@ import type {
   EmergencyShock, 
   PredatoryOffer, 
   QuantumKnapsackResult, 
-  CashflowRunwayPoint, 
-  NeuroShieldState 
+  CashflowRunwayPoint 
 } from '../types';
 
 interface FintechContextType {
@@ -21,10 +20,6 @@ interface FintechContextType {
   quantumResult: QuantumKnapsackResult;
   rescuePlan: QuantumKnapsackResult;
   runwayData: CashflowRunwayPoint[];
-  neuroState: NeuroShieldState;
-  setNeuroState: React.Dispatch<React.SetStateAction<NeuroShieldState>>;
-  triggerNeuroShield: () => void;
-  bypassNeuroShield: () => void;
   hourlyWage: number;
   triggerQuantumOptimization: () => void;
 }
@@ -99,13 +94,6 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [profile, setProfile] = useState<FinancialProfile>(defaultProfile);
   const [shock, setShock] = useState<EmergencyShock>(defaultShock);
   const [predatoryOffers] = useState<PredatoryOffer[]>(defaultOffers);
-  const [neuroState, setNeuroState] = useState<NeuroShieldState>({
-    isShieldActive: false,
-    panicScore: 78, // High distress detected via typing jitter
-    timerSecondsRemaining: 45,
-    isEmergencyBypassed: false,
-    lifeEnergyHourlyWage: 150, // Rs. 40,000 / 266 working hrs
-  });
 
   // Calculate Absorptive Surplus Dynamically
   const dynamicSurplus = useMemo(() => {
@@ -226,27 +214,10 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     });
   }, [profile, dynamicSurplus]);
 
-  const triggerNeuroShield = () => {
-    setNeuroState((prev) => ({
-      ...prev,
-      isShieldActive: true,
-      timerSecondsRemaining: 45,
-      isEmergencyBypassed: false,
-    }));
-  };
-
   const [, setQuantumIteration] = useState(0);
 
   const triggerQuantumOptimization = () => {
     setQuantumIteration((p) => p + 1);
-  };
-
-  const bypassNeuroShield = () => {
-    setNeuroState((prev) => ({
-      ...prev,
-      isShieldActive: false,
-      isEmergencyBypassed: true,
-    }));
   };
 
   return (
@@ -260,10 +231,6 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
         quantumResult,
         rescuePlan: quantumResult,
         runwayData,
-        neuroState,
-        setNeuroState,
-        triggerNeuroShield,
-        bypassNeuroShield,
         hourlyWage,
         triggerQuantumOptimization,
       }}

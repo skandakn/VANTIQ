@@ -41,34 +41,32 @@ When an individual faces an acute out-of-pocket medical shock (e.g., ₹50,000 f
 4. **90-Day Temporal Digital Twin (TFT)**: Simulates day-by-day cashflow runway under standard borrowing vs. CHRONOS-guided optimization.
 5. **QUBO / QAOA Quantum Knapsack Optimizer**: Formulates the debt relief problem as a Quadratic Unconstrained Binary Optimization (QUBO) solved via simulated quantum annealing in $<40\text{ ms}$.
 6. **Tri-Tranche Multi-Source Rescue Architecture**: Synthesizes 0% employer advances, co-op credit unions, and structured repayment schedules.
-7. **45-Second Neuro-Adaptive Grounding Protocol**: A behavioral friction circuit breaker preventing panic-driven one-click borrowing.
-8. **TreeSHAP Explainable AI**: Provides rigorous Shapley-value feature attribution explaining why specific relief tranches were recommended.
-9. **Client-Side Zero-Knowledge Privacy**: Employs client-side WASM ZK-proofs so sensitive bank statements never leave the user's browser.
+7. **TreeSHAP Explainable AI**: Provides rigorous Shapley-value feature attribution explaining why specific relief tranches were recommended.
+8. **Client-Side Zero-Knowledge Privacy**: Employs client-side WASM ZK-proofs so sensitive bank statements never leave the user's browser.
 
 ---
 
-## 👥 15-Member Modular Team Architecture
+## 👥 Modular Team Architecture
 
-The codebase is engineered with strict folder-level isolation so that **15 team members can write code simultaneously with zero merge conflicts**:
+The codebase is engineered with strict folder-level isolation across specialized modules:
 
 ```
 src/
-├── components/layout/       --> [Member 01] Header HUD, Nav & Footer
+├── components/layout/       --> Header HUD, Nav & Footer
 ├── modules/
-│   ├── m01_hero/            --> [Member 02] Scarcity Hero & Value Proposition
-│   ├── m02_crisis_input/    --> [Member 03] Emergency Crisis Simulator & Intake
-│   ├── m03_debt_mesh/       --> [Member 04] Ghost Debt Stacking Mesh
-│   ├── m04_dual_dial/       --> [Member 05] Absorptive Capacity Gauge
-│   ├── m05_cashflow_twin/   --> [Member 06] 90-Day Digital Twin Runway Chart
-│   ├── m06_quantum_solver/  --> [Member 07] QUBO / QAOA Solver Visualizer
-│   ├── m07_rescue_blend/    --> [Member 08] Multi-Source Rescue Cards
-│   ├── m08_neuro_shield/    --> [Member 09] 45s Grounding Shield Modal
-│   ├── m09_life_energy/     --> [Member 10] Life-Energy Labor Hours Calculator
-│   ├── m10_comparison_matrix/-> [Member 11] Counterfactual Comparison Matrix
-│   ├── m11_xai_explainer/   --> [Member 12] TreeSHAP Explainable AI Waterfall
-│   ├── m12_market_radar/    --> [Member 13] Competitive Radar & Market Sizing
-│   ├── m13_privacy_compliance/->[Member 14] ZK-SNARK Privacy & RBI Sandbox
-│   └── m14_roadmap_team/    --> [Member 15] 4-Quarter Roadmap & Team Credentials
+│   ├── m01_hero/            --> Scarcity Hero & Value Proposition
+│   ├── m02_crisis_input/    --> Emergency Crisis Simulator & Intake
+│   ├── m03_debt_mesh/       --> Ghost Debt Stacking Mesh
+│   ├── m04_dual_dial/       --> Absorptive Capacity Gauge
+│   ├── m05_cashflow_twin/   --> 90-Day Digital Twin Runway Chart
+│   ├── m06_quantum_solver/  --> QUBO / QAOA Solver Visualizer
+│   ├── m07_rescue_blend/    --> Multi-Source Rescue Cards
+│   ├── m09_life_energy/     --> Life-Energy Labor Hours Calculator
+│   ├── m10_comparison_matrix/-> Counterfactual Comparison Matrix
+│   ├── m11_xai_explainer/   --> TreeSHAP Explainable AI Waterfall
+│   ├── m12_market_radar/    --> Competitive Radar & Market Sizing
+│   ├── m13_privacy_compliance/-> ZK-SNARK Privacy & RBI Sandbox
+│   └── m14_roadmap_team/    --> 4-Quarter Roadmap & Team Credentials
 ├── context/
 │   └── FintechContext.tsx   --> Shared Reactive State Store & Dispatchers
 ├── types/
@@ -77,7 +75,7 @@ src/
     └── design-tokens.css    --> HSL Color Palette, Glassmorphism, Neon Glows
 ```
 
-> **For the full copy-paste prompts for all 15 members, see [`docs/TEAM_PROMPTS_GUIDE.md`](./docs/TEAM_PROMPTS_GUIDE.md)**.
+> **For the full copy-paste prompts guide, see [`docs/TEAM_PROMPTS_GUIDE.md`](./docs/TEAM_PROMPTS_GUIDE.md)**.
 
 ---
 
