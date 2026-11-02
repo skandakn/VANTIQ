@@ -1,4 +1,4 @@
-// Monthly cashflow inputs embedded in the emergency planner card.
+// Monthly cashflow inputs shown in their own hero planner card.
 import React, { useId } from 'react';
 import { Sparkles } from 'lucide-react';
 import { useFintech } from '../../context/FintechContext';
@@ -30,7 +30,7 @@ export const EmergencyIntake: React.FC = () => {
   ];
 
   return (
-    <div style={{ borderTop: '1px solid #e5e9e2', marginTop: '24px', paddingTop: '22px' }}>
+    <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '14px', flexWrap: 'wrap' }}>
         <div>
           <h3 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--wise-forest)', marginBottom: '3px' }}>
