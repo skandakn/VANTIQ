@@ -51,6 +51,8 @@ export const HealthReliefNavigator: React.FC = () => {
   const [comparedPlanIds, setComparedPlanIds] = useState<string[]>([]);
   const [showComparisonModal, setShowComparisonModal] = useState<boolean>(false);
   const [copiedNotification, setCopiedNotification] = useState<boolean>(false);
+  const [selectedPlanId, setSelectedPlanId] = useState<string | null>('tata-capital-medical');
+  const [isSearching, setIsSearching] = useState<boolean>(false);
 
   // Selected Condition Metadata
   const currentCondition = useMemo(() => {
@@ -79,6 +81,30 @@ export const HealthReliefNavigator: React.FC = () => {
     }
   };
 
+  // Trigger worldwide scan simulation
+  const triggerWorldwideSearch = () => {
+    setIsSearching(true);
+    setTimeout(() => {
+      setIsSearching(false);
+      const target = document.getElementById('vetted-options-grid');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 600);
+  };
+
+  // Handle choosing a specific plan
+  const handleChoosePlan = (plan: HealthReliefPlan) => {
+    setSelectedPlanId(plan.id);
+    setShock((prev) => ({
+      ...prev,
+      amount: Math.min(targetAmount, plan.maxAmount),
+      description: `${plan.name} (${plan.organization})`,
+      urgencyLevel: urgency,
+    }));
+    triggerQuantumOptimization();
+  };
+
   // Filter & Sort Plans
   const filteredPlans = useMemo(() => {
     return HEALTH_RELIEF_PLANS.filter((plan) => {
@@ -91,6 +117,8 @@ export const HealthReliefNavigator: React.FC = () => {
       if (categoryFilter !== 'all') {
         if (categoryFilter === 'free_aid') {
           if (plan.interestApr !== 0) return false;
+        } else if (categoryFilter === 'insurance') {
+          if (plan.category !== 'insurance_claim') return false;
         } else if (categoryFilter === 'low_loan') {
           if (plan.category !== 'medical_loan') return false;
         } else if (categoryFilter === 'govt') {
@@ -863,27 +891,100 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
               </h3>
             </div>
 
-            {/* Search Bar */}
-            <div style={{ position: 'relative', minWidth: '260px' }}>
-              <Search size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '12px' }} />
-              <input
-                type="text"
-                placeholder="Search lenders, schemes, or grants..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+            {/* Search Bar & Scan Button */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+              <div style={{ position: 'relative', minWidth: '240px' }}>
+                <Search size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '12px' }} />
+                <input
+                  type="text"
+                  placeholder="Search lenders, schemes, or grants..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '10px 14px 10px 38px',
+                    borderRadius: '9999px',
+                    border: '1.5px solid #d0d7cc',
+                    backgroundColor: '#f9faf7',
+                    fontSize: '0.85rem',
+                    color: 'var(--wise-forest)',
+                    outline: 'none',
+                  }}
+                />
+              </div>
+
+              <button
+                onClick={triggerWorldwideSearch}
+                className="btn btn-primary"
                 style={{
-                  width: '100%',
-                  padding: '10px 14px 10px 38px',
+                  padding: '10px 18px',
+                  fontSize: '0.82rem',
+                  fontWeight: 800,
                   borderRadius: '9999px',
-                  border: '1.5px solid #d0d7cc',
-                  backgroundColor: '#f9faf7',
-                  fontSize: '0.85rem',
-                  color: 'var(--wise-forest)',
-                  outline: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  whiteSpace: 'nowrap',
                 }}
-              />
+              >
+                <Globe size={14} />
+                <span>{isSearching ? 'Scanning Worldwide...' : 'Search Options Worldwide'}</span>
+              </button>
             </div>
           </div>
+
+          {/* If Searching, show animated scan pill */}
+          {isSearching && (
+            <div
+              style={{
+                backgroundColor: '#edf2ea',
+                border: '1px solid #d8e2d4',
+                padding: '12px 18px',
+                borderRadius: '14px',
+                marginBottom: '16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                fontSize: '0.85rem',
+                color: 'var(--wise-forest)',
+                fontWeight: 700,
+              }}
+            >
+              <Sparkles size={16} color="#15803d" className="pulse-icon" />
+              <span>Scanning 280+ worldwide medical relief options, insurance claims, and low-interest loans...</span>
+            </div>
+          )}
+
+          {/* Active Chosen Plan Notification Banner */}
+          {selectedPlanId && (
+            <div
+              style={{
+                backgroundColor: '#f0fdf4',
+                border: '1.5px solid #86efac',
+                padding: '12px 20px',
+                borderRadius: '16px',
+                marginBottom: '18px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '8px',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Check size={16} color="#15803d" />
+                <span style={{ fontSize: '0.86rem', fontWeight: 800, color: '#166534' }}>
+                  Active Chosen Plan: {filteredPlans.find((p) => p.id === selectedPlanId)?.name || 'Selected Plan'}
+                </span>
+                <span style={{ fontSize: '0.78rem', color: '#15803d' }}>
+                  ({filteredPlans.find((p) => p.id === selectedPlanId)?.organization})
+                </span>
+              </div>
+              <span style={{ fontSize: '0.76rem', color: '#166534', fontWeight: 600 }}>
+                ✓ Synced with VANTIQ Knapsack Solver & Cashflow Runway
+              </span>
+            </div>
+          )}
 
           {/* Filter Pills & Sorting */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
@@ -893,6 +994,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
               {[
                 { id: 'all', label: 'All Plans' },
                 { id: 'free_aid', label: '✨ 0% Free Grants & Subsidies' },
+                { id: 'insurance', label: '🛡️ Health Insurance Policies' },
                 { id: 'low_loan', label: 'Low-Interest Loans (<11%)' },
                 { id: 'govt', label: 'Sovereign Govt Schemes' },
                 { id: 'crowdfunding', label: 'Crowdfunding & Trusts' },
@@ -950,6 +1052,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
             5. Plan Cards Grid
             ========================================================= */}
         <div
+          id="vetted-options-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
@@ -957,8 +1060,10 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
             marginBottom: '40px',
           }}
         >
-          {filteredPlans.map((plan) => {
+          {filteredPlans.map((plan, idx) => {
             const isCompared = comparedPlanIds.includes(plan.id);
+            const isChosen = selectedPlanId === plan.id;
+            const isTopRanked = idx === 0 && !searchQuery;
 
             return (
               <div
@@ -966,18 +1071,70 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
                 className="chronos-card"
                 style={{
                   padding: '24px',
-                  backgroundColor: '#ffffff',
-                  border: plan.interestApr === 0 ? '1.5px solid #86efac' : '1.5px solid #d0d7cc',
+                  backgroundColor: isChosen ? '#fafdf9' : '#ffffff',
+                  border: isChosen
+                    ? '2.5px solid #16a34a'
+                    : isTopRanked
+                    ? '2px solid #f59e0b'
+                    : plan.interestApr === 0
+                    ? '1.5px solid #86efac'
+                    : '1.5px solid #d0d7cc',
                   borderRadius: '20px',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  boxShadow: '0 8px 24px rgba(22, 51, 0, 0.05)',
+                  boxShadow: isChosen
+                    ? '0 12px 32px rgba(22, 163, 74, 0.18)'
+                    : isTopRanked
+                    ? '0 10px 28px rgba(245, 158, 11, 0.15)'
+                    : '0 8px 24px rgba(22, 51, 0, 0.05)',
                   transition: 'all 0.2s ease',
                   position: 'relative',
                 }}
               >
                 <div>
+                  {/* Top Crown Ribbon for #1 or Active Chosen Badge */}
+                  {isTopRanked && (
+                    <div
+                      style={{
+                        marginBottom: '10px',
+                        padding: '4px 12px',
+                        borderRadius: '9999px',
+                        backgroundColor: '#fef3c7',
+                        border: '1px solid #fde68a',
+                        color: '#92400e',
+                        fontSize: '0.72rem',
+                        fontWeight: 800,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                      }}
+                    >
+                      <span>👑 Ranked #1 Best Match (Lowest Outflow & Top Trust)</span>
+                    </div>
+                  )}
+
+                  {isChosen && (
+                    <div
+                      style={{
+                        marginBottom: '10px',
+                        padding: '4px 12px',
+                        borderRadius: '9999px',
+                        backgroundColor: '#dcfce7',
+                        border: '1px solid #86efac',
+                        color: '#166534',
+                        fontSize: '0.72rem',
+                        fontWeight: 800,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                      }}
+                    >
+                      <Check size={13} />
+                      <span>Active Selected Solution in VANTIQ</span>
+                    </div>
+                  )}
+
                   {/* Top Badges */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', marginBottom: '12px' }}>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -1094,6 +1251,29 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
                   >
                     <Scale size={13} />
                     <span>{isCompared ? 'Compared ✓' : 'Compare'}</span>
+                  </button>
+
+                  {/* Choose / Select This Plan Action Button */}
+                  <button
+                    onClick={() => handleChoosePlan(plan)}
+                    style={{
+                      background: isChosen ? '#15803d' : '#f4f5f1',
+                      border: isChosen ? '1.5px solid #15803d' : '1px solid #d0d7cc',
+                      color: isChosen ? '#ffffff' : 'var(--wise-forest)',
+                      fontSize: '0.74rem',
+                      fontWeight: 800,
+                      padding: '7px 12px',
+                      borderRadius: '9999px',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      transition: 'all 0.15s ease',
+                    }}
+                    title="Select this plan as your primary relief solution in VANTIQ"
+                  >
+                    <Check size={13} />
+                    <span>{isChosen ? 'Chosen ✓' : 'Choose Plan'}</span>
                   </button>
 
                   <div style={{ display: 'flex', gap: '6px' }}>

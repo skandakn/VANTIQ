@@ -107,7 +107,7 @@ export const EmergencyIntake: React.FC = () => {
             </div>
 
             {/* Category & Available Liquid Savings */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px' }}>
                   Category
@@ -127,10 +127,10 @@ export const EmergencyIntake: React.FC = () => {
                     outline: 'none'
                   }}
                 >
-                  <option value="medical">Hospital Emergency</option>
-                  <option value="vehicle">Critical Vehicle Repair</option>
-                  <option value="home_repair">Home Disaster Fix</option>
-                  <option value="job_loss">Layoff Buffer</option>
+                  <option value="medical">🏥 Hospital Emergency</option>
+                  <option value="vehicle">🚗 Critical Vehicle Repair</option>
+                  <option value="home_repair">🏠 Home Disaster Fix</option>
+                  <option value="job_loss">💼 Layoff Buffer</option>
                 </select>
               </div>
 
@@ -157,6 +157,92 @@ export const EmergencyIntake: React.FC = () => {
                 />
               </div>
             </div>
+
+            {/* If Category is Medical: Specific Health Problem Picker */}
+            {shock.category === 'medical' && (
+              <div style={{ marginBottom: '20px', padding: '14px', backgroundColor: '#f0fdf4', border: '1.5px solid #bbf7d0', borderRadius: '14px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                  <label style={{ fontSize: '0.8rem', fontWeight: 800, color: '#166534', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                    Choose Specific Health Problem:
+                  </label>
+                  <span style={{ fontSize: '0.72rem', color: '#15803d', fontWeight: 600 }}>
+                    Auto-fills typical cost
+                  </span>
+                </div>
+                <select
+                  value={shock.description}
+                  onChange={(e) => {
+                    const desc = e.target.value;
+                    const costMap: Record<string, number> = {
+                      'Cardiac Care & Bypass / Valve Surgery': 450000,
+                      'Oncology / Cancer Chemotherapy & Radiation': 650000,
+                      'Kidney Dialysis & Renal Transplant': 800000,
+                      'Orthopedic & Total Joint Replacement': 280000,
+                      'Emergency Trauma & ICU Life Support': 320000,
+                      'Neurological Surgery & Brain Tumor': 550000,
+                      'Pediatric & Neonatal ICU (NICU) Care': 250000,
+                      'General & Laparoscopic Surgeries': 120000,
+                    };
+                    const autoCost = costMap[desc] || shock.amount;
+                    setShock((prev) => ({
+                      ...prev,
+                      description: desc,
+                      amount: autoCost,
+                    }));
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    borderRadius: '10px',
+                    border: '1px solid #86efac',
+                    backgroundColor: '#ffffff',
+                    color: 'var(--wise-forest)',
+                    fontSize: '0.85rem',
+                    fontWeight: 700,
+                    outline: 'none',
+                    marginBottom: '10px',
+                  }}
+                >
+                  <option value="Cardiac Care & Bypass / Valve Surgery">🫀 Cardiac Care & Bypass Surgery (~₹4.5L)</option>
+                  <option value="Oncology / Cancer Chemotherapy & Radiation">🎗️ Oncology & Chemotherapy (~₹6.5L)</option>
+                  <option value="Kidney Dialysis & Renal Transplant">🧬 Kidney Dialysis & Renal Transplant (~₹8.0L)</option>
+                  <option value="Orthopedic & Total Joint Replacement">🦴 Orthopedic Joint Replacement (~₹2.8L)</option>
+                  <option value="Emergency Trauma & ICU Life Support">🚑 Emergency Trauma & ICU Care (~₹3.2L)</option>
+                  <option value="Neurological Surgery & Brain Tumor">🧠 Neurological Surgery / Brain Tumor (~₹5.5L)</option>
+                  <option value="Pediatric & Neonatal ICU (NICU) Care">👶 Pediatric & Neonatal ICU (~₹2.5L)</option>
+                  <option value="General & Laparoscopic Surgeries">🏥 General & Laparoscopic Surgeries (~₹1.2L)</option>
+                  <option value="Urgent Hospital Surgery & Medication Deposit">Custom Hospital Procedure</option>
+                </select>
+
+                <button
+                  onClick={() => {
+                    const el = document.getElementById('health-navigator') || document.getElementById('health-aid');
+                    if (el) {
+                      el.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '9px 14px',
+                    borderRadius: '9999px',
+                    backgroundColor: 'var(--wise-forest)',
+                    color: 'var(--wise-lime)',
+                    border: 'none',
+                    fontSize: '0.82rem',
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  <span>Find Suggested Plans & Loans for this Condition</span>
+                  <Sparkles size={14} />
+                </button>
+              </div>
+            )}
 
             {/* Unfunded Deficit Pill */}
             <div style={{
