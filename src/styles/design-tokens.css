@@ -37,7 +37,7 @@
   /* Status Accents */
   --neon-cyan: #0284c7;
   --neon-emerald: #15803d;
-  --quantum-purple: #7c3aed;
+  --accent-purple: #7c3aed;
   --alert-red: #dc2626;
   --alert-red-bg: #fef2f2;
   --alert-red-border: #fecaca;
@@ -95,20 +95,20 @@ body {
   color: var(--text-primary);
 }
 
-.vantiq-card:hover:hover {
+.vantiq-card:hover {
   border-color: var(--border-medium);
   box-shadow: var(--shadow-lg);
 }
 
-.vantiq-card.glow-cyan:hover.glow-cyan:hover {
+.vantiq-card.glow-cyan:hover {
   border-color: var(--border-dark);
 }
 
-.vantiq-card.glow-purple:hover.glow-purple:hover {
-  border-color: var(--quantum-purple);
+.vantiq-card.glow-purple:hover {
+  border-color: var(--accent-purple);
 }
 
-.vantiq-card.glow-emerald:hover.glow-emerald:hover {
+.vantiq-card.glow-emerald:hover {
   border-color: var(--wise-forest);
 }
 
@@ -202,17 +202,6 @@ body {
 }
 
 .btn-forest:hover {
-  background: var(--wise-forest-light);
-  transform: translateY(-1px);
-}
-
-.btn-quantum {
-  background: var(--wise-forest);
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(22, 51, 0, 0.15);
-}
-
-.btn-quantum:hover {
   background: var(--wise-forest-light);
   transform: translateY(-1px);
 }

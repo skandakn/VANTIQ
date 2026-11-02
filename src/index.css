@@ -8,3 +8,50 @@ html {
 code, pre {
   font-family: 'Fira Code', 'Courier New', Courier, monospace;
 }
+
+/* High-contrast fields for the emergency cashflow calculator. */
+.cashflow-field:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.12);
+}
+
+.cashflow-field option {
+  color: #163300;
+  background-color: #ffffff;
+}
+
+/* Keep section headings and card copy readable across modules that still
+   contain inline colors from the earlier dark theme. */
+main section h1,
+main section h2,
+main section h3 {
+  color: var(--text-primary) !important;
+}
+
+.chronos-card [style*="#f8fafc"],
+.chronos-card [style*="#F8FAFC"] {
+  color: var(--text-primary) !important;
+}
+
+.chronos-card [style*="#fca5a5"],
+.chronos-card [style*="#FCA5A5"],
+.chronos-card [style*="#f87171"],
+.chronos-card [style*="#F87171"] {
+  color: #b91c1c !important;
+}
+
+.chronos-card [style*="#94a3b8"],
+.chronos-card [style*="#94A3B8"] {
+  color: #475569 !important;
+}
+
+.chronos-card [style*="#cbd5e1"],
+.chronos-card [style*="#CBD5E1"] {
+  color: #334155 !important;
+}
+
+.chronos-card [style*="#34d399"],
+.chronos-card [style*="#34D399"] {
+  color: #15803d !important;
+}

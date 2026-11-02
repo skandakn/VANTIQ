@@ -6,7 +6,7 @@ import { Target } from 'lucide-react';
 const axes = [
   'Cross-App Awareness',
   'Scarcity Friction',
-  'Quantum Optimization',
+  'Repayment Fit',
   'Zero Hidden Fees',
   'Real-time Runway Twin',
 ];

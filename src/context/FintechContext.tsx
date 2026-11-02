@@ -7,8 +7,8 @@ import type {
   FinancialProfile, 
   EmergencyShock, 
   PredatoryOffer, 
-  QuantumKnapsackResult, 
-  CashflowRunwayPoint 
+  FundingPlanResult,
+  CashflowRunwayPoint
 } from '../types';
 
 interface FintechContextType {
@@ -17,11 +17,9 @@ interface FintechContextType {
   shock: EmergencyShock;
   setShock: React.Dispatch<React.SetStateAction<EmergencyShock>>;
   predatoryOffers: PredatoryOffer[];
-  quantumResult: QuantumKnapsackResult;
-  rescuePlan: QuantumKnapsackResult;
+  fundingPlan: FundingPlanResult;
   runwayData: CashflowRunwayPoint[];
   hourlyWage: number;
-  triggerQuantumOptimization: () => void;
 }
 
 const defaultProfile: FinancialProfile = {
@@ -105,8 +103,8 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return Math.max(50, Math.round(profile.monthlyIncome / 176));
   }, [profile.monthlyIncome]);
 
-  // Dynamic Quantum Knapsack Optimization
-  const quantumResult = useMemo<QuantumKnapsackResult>(() => {
+  // Estimate the funding plan from available savings and the emergency amount.
+  const fundingPlan = useMemo<FundingPlanResult>(() => {
     const shockAmt = shock.amount;
     const savingsAlloc = Math.min(profile.emergencySavings, 5000);
     const remainingAfterSavings = Math.max(0, shockAmt - savingsAlloc);
@@ -162,8 +160,6 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
       totalInterestAndFees: Math.round(cardInterest + microLoanInterest + 600),
       directCashSaved: Math.round(directCashSaved),
       humanLifeEnergyHoursSaved: lifeHoursSaved,
-      quantumSolveTimeMs: 134,
-      hamiltonianEnergy: -42.85,
       defaultProbabilityBefore: 84,
       defaultProbabilityAfter: 4,
     };
@@ -214,12 +210,6 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     });
   }, [profile, dynamicSurplus]);
 
-  const [, setQuantumIteration] = useState(0);
-
-  const triggerQuantumOptimization = () => {
-    setQuantumIteration((p) => p + 1);
-  };
-
   return (
     <FintechContext.Provider
       value={{
@@ -228,11 +218,9 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
         shock,
         setShock,
         predatoryOffers,
-        quantumResult,
-        rescuePlan: quantumResult,
+        fundingPlan,
         runwayData,
         hourlyWage,
-        triggerQuantumOptimization,
       }}
     >
       {children}

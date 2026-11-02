@@ -12,7 +12,7 @@ export default defineConfig({
       manifest: {
         name: 'VANTIQ – Emergency Finance Optimizer',
         short_name: 'VANTIQ',
-        description: 'Quantum-Enhanced Counterfactual Digital Twin & Anti-Predatory Emergency Finance Engine.',
+        description: 'Emergency finance planning, repayment estimates, and borrowing risk comparisons.',
         theme_color: '#9fe870',
         background_color: '#f4f5f1',
         display: 'standalone',
@@ -30,11 +30,6 @@ export default defineConfig({
             name: 'Emergency Simulator',
             short_name: 'Simulator',
             url: '/#simulator',
-          },
-          {
-            name: 'Quantum Solver',
-            short_name: 'Quantum',
-            url: '/#quantum-solver',
           },
         ],
       },

@@ -13,22 +13,22 @@ import {
   Info
 } from 'lucide-react';
 import { useFintech } from '../../context/FintechContext';
+import { EmergencyIntake } from '../m02_crisis_input/EmergencyIntake';
 
 export const HeroSection: React.FC = () => {
-  const { shock, setShock, profile, quantumResult } = useFintech();
+  const { shock, setShock, profile, fundingPlan } = useFintech();
   const emergencyAmountId = useId();
 
   // Local state for interactive currency/emergency converter
-  const [selectedCategory, setSelectedCategory] = useState<string>('Medical Emergency');
   const [showCategoryDropdown, setShowCategoryDropdown] = useState<boolean>(false);
 
   const categories = [
-    'Medical Emergency',
-    'Hospital ICU Deposit',
-    'Emergency Surgery',
-    'Prescription & Labs',
-    'Urgent Vehicle Repair'
-  ];
+    { label: 'Medical Emergency', value: 'medical' },
+    { label: 'Urgent Vehicle Repair', value: 'vehicle' },
+    { label: 'Home Repair', value: 'home_repair' },
+    { label: 'Job Loss', value: 'job_loss' },
+  ] as const;
+  const selectedCategory = categories.find(({ value }) => value === shock.category)?.label ?? categories[0].label;
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = Number(e.target.value.replace(/[^0-9]/g, '')) || 0;
@@ -46,7 +46,7 @@ export const HeroSection: React.FC = () => {
   };
 
   // Dynamic calculations based on current shock amount
-  const neededAmount = shock.amount || 50000;
+  const neededAmount = Math.max(0, shock.amount);
   
   // Tranche dynamic split
   const savingsTranche = Math.min(profile.emergencySavings, Math.round(neededAmount * 0.1));
@@ -56,6 +56,7 @@ export const HeroSection: React.FC = () => {
 
   // Dynamic fee calculation
   const vantiqTotalFee = Math.round(neededAmount * 0.0284); // 2.84% blended fee (₹1,420 for ₹50k)
+  const vantiqFeePercent = neededAmount > 0 ? (vantiqTotalFee / neededAmount) * 100 : 0;
   const predatoryTotalFee = Math.round(neededAmount * 0.368); // 36.8% predatory fee + interest (₹18,400 for ₹50k)
   const totalSavings = Math.max(0, predatoryTotalFee - vantiqTotalFee);
   
@@ -69,8 +70,9 @@ export const HeroSection: React.FC = () => {
   };
 
   return (
-    <section id="hero" style={{ padding: '50px 0 70px 0', position: 'relative', backgroundColor: 'var(--bg-deep)' }}>
+    <section id="simulator" style={{ padding: '50px 0 70px 0', position: 'relative', backgroundColor: 'var(--bg-deep)' }}>
       <div className="container">
+        <div id="hero" />
         
         {/* Main 2-Column Hero Layout - Just Like Wise */}
         <div style={{
@@ -165,13 +167,6 @@ export const HeroSection: React.FC = () => {
                 <ArrowRight size={18} />
               </button>
 
-              <button
-                onClick={() => scrollToSection('quantum-solver')}
-                className="btn btn-secondary"
-                style={{ fontSize: '1.02rem', padding: '16px 28px' }}
-              >
-                <span>See Quantum Knapsack</span>
-              </button>
             </div>
 
             {/* Harvard / Princeton Micro-quote */}
@@ -307,21 +302,21 @@ export const HeroSection: React.FC = () => {
                       }}>
                         {categories.map((cat) => (
                           <div
-                            key={cat}
+                            key={cat.value}
                             onClick={() => {
-                              setSelectedCategory(cat);
+                              setShock((prev) => ({ ...prev, category: cat.value }));
                               setShowCategoryDropdown(false);
                             }}
                             style={{
                               padding: '10px 16px',
                               fontSize: '0.86rem',
-                              color: selectedCategory === cat ? '#15803d' : 'var(--wise-forest)',
-                              fontWeight: selectedCategory === cat ? 800 : 500,
+                              color: shock.category === cat.value ? '#15803d' : 'var(--wise-forest)',
+                              fontWeight: shock.category === cat.value ? 800 : 500,
                               cursor: 'pointer',
-                              backgroundColor: selectedCategory === cat ? '#f4f5f1' : 'transparent'
+                              backgroundColor: shock.category === cat.value ? '#f4f5f1' : 'transparent'
                             }}
                           >
-                            {cat}
+                            {cat.label}
                           </div>
                         ))}
                       </div>
@@ -383,7 +378,7 @@ export const HeroSection: React.FC = () => {
                     <span>Total transparent interest & fees:</span>
                   </div>
                   <strong style={{ fontSize: '0.94rem', color: '#15803d', fontWeight: 900 }}>
-                    ₹{vantiqTotalFee.toLocaleString()} ({((vantiqTotalFee / neededAmount) * 100).toFixed(1)}%)
+                    ₹{vantiqTotalFee.toLocaleString()} ({vantiqFeePercent.toFixed(1)}%)
                   </strong>
                 </div>
 
@@ -437,10 +432,10 @@ export const HeroSection: React.FC = () => {
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ color: 'var(--text-secondary)' }}>Allocation Architecture:</span>
-                  <strong style={{ color: 'var(--wise-forest)' }}>Tri-Tranche Quantum Blend</strong>
+                  <strong style={{ color: 'var(--wise-forest)' }}>Tri-Tranche Funding Plan</strong>
                 </div>
                 <span style={{ color: '#15803d', fontWeight: 700, cursor: 'pointer' }}>
-                  {quantumResult.tranches.length} Sources Optimal &gt;
+                  {fundingPlan.tranches.length} Funding Sources &gt;
                 </span>
               </div>
 
@@ -467,9 +462,11 @@ export const HeroSection: React.FC = () => {
                 </div>
               </div>
 
+              <EmergencyIntake />
+
               {/* Big Wise-Style Action Button */}
               <button
-                onClick={() => scrollToSection('simulator')}
+                onClick={() => scrollToSection('rescue-split')}
                 className="btn btn-primary"
                 style={{
                   width: '100%',
@@ -484,7 +481,7 @@ export const HeroSection: React.FC = () => {
                 }}
               >
                 <Sparkles size={18} />
-                <span>Simulate Your Free Rescue Plan</span>
+                <span>View Your Detailed Rescue Plan</span>
               </button>
 
               <div style={{ textAlign: 'center', marginTop: '12px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>

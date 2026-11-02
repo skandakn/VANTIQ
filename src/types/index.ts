@@ -42,15 +42,13 @@ export interface FundingTranche {
   notes: string;
 }
 
-export interface QuantumKnapsackResult {
+export interface FundingPlanResult {
   tranches: FundingTranche[];
   totalAllocated: number;
   totalRepayment: number;
   totalInterestAndFees: number;
   directCashSaved: number;
   humanLifeEnergyHoursSaved: number;
-  quantumSolveTimeMs: number;
-  hamiltonianEnergy: number;
   defaultProbabilityBefore: number; // e.g., 84%
   defaultProbabilityAfter: number;  // e.g., 4%
 }
@@ -87,13 +85,13 @@ export interface HealthConditionPreset {
   commonProcedures: string[];
 }
 
-export type HealthOptionCategory = 
-  | 'medical_loan' 
-  | 'zero_cost_emi' 
-  | 'insurance_claim' 
-  | 'government_scheme' 
-  | 'crowdfunding' 
-  | 'charitable_trust' 
+export type HealthOptionCategory =
+  | 'medical_loan'
+  | 'zero_cost_emi'
+  | 'insurance_claim'
+  | 'government_scheme'
+  | 'crowdfunding'
+  | 'charitable_trust'
   | 'hospital_hardship';
 
 export interface HealthReliefPlan {
@@ -147,4 +145,3 @@ export interface HealthReliefStrategy {
     notes: string;
   }[];
 }
-

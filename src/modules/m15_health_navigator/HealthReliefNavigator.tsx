@@ -30,7 +30,7 @@ import { HealthPlanComparisonModal } from './HealthPlanComparisonModal';
 import type { HealthReliefPlan, HealthReliefStrategy } from '../../types';
 
 export const HealthReliefNavigator: React.FC = () => {
-  const { shock, setShock, hourlyWage, triggerQuantumOptimization } = useFintech();
+  const { shock, setShock, hourlyWage } = useFintech();
 
   // State
   const [selectedConditionId, setSelectedConditionId] = useState<string>('cardiac');
@@ -38,7 +38,7 @@ export const HealthReliefNavigator: React.FC = () => {
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState<'recommended' | 'lowest_apr' | 'highest_trust' | 'fastest'>('recommended');
-  
+
   // Funding Parameters
   const [targetAmount, setTargetAmount] = useState<number>(shock.amount || 450000);
   const [urgency, setUrgency] = useState<'critical' | 'high' | 'moderate'>('critical');
@@ -102,7 +102,6 @@ export const HealthReliefNavigator: React.FC = () => {
       description: `${plan.name} (${plan.organization})`,
       urgencyLevel: urgency,
     }));
-    triggerQuantumOptimization();
   };
 
   // Filter & Sort Plans
@@ -161,11 +160,11 @@ export const HealthReliefNavigator: React.FC = () => {
   // Compute Optimal Suggested Multi-Tier Relief Strategy
   const smartStrategy = useMemo<HealthReliefStrategy>(() => {
     const totalRequired = targetAmount;
-    
+
     // Tier 1: Insurance or Sovereign Non-Repayable Safety Net
     let tier1GrantCover = 0;
     let tier1Name = 'Ayushman Bharat PM-JAY / Sovereign Health Relief';
-    
+
     if (insuranceStatus === 'partial') {
       tier1GrantCover = Math.min(existingInsuranceCover, totalRequired);
       tier1Name = 'Cashless Health Insurance Pre-Authorization Claim';
@@ -194,7 +193,7 @@ export const HealthReliefNavigator: React.FC = () => {
     const tier3Loan = remainingAfterTier2;
     const tier3Apr = creditTier === 'excellent' ? 10.49 : creditTier === 'good' ? 11.25 : 12.80;
     const loanTenure = 24; // 24 months
-    
+
     // Loan interest computation
     const monthlyRate = tier3Apr / 12 / 100;
     const tier3MonthlyEmi = tier3Loan > 0
@@ -208,9 +207,9 @@ export const HealthReliefNavigator: React.FC = () => {
 
     // Total Repayment across all tiers (tier1GrantCover is 0 debt / non-repayable)
     const totalRepayment = tier2ZeroEmi + tier3TotalRepayment;
-    
+
     // Blended APR: (Total Interest / Principal) / (Tenure in Years) * 100
-    const blendedApr = totalRequired > 0 
+    const blendedApr = totalRequired > 0
       ? Math.round((tier3Interest / totalRequired / 2) * 100 * 10) / 10
       : 0;
 
@@ -292,10 +291,8 @@ export const HealthReliefNavigator: React.FC = () => {
       urgencyLevel: urgency,
       daysToDisbursement: urgency === 'critical' ? 1 : 3,
     });
-    triggerQuantumOptimization();
-
-    // Smooth scroll down to Quantum Visualizer
-    const target = document.getElementById('quantum-solver') || document.getElementById('quantum-knapsack');
+    // Return to the emergency calculator with the selected amount applied.
+    const target = document.getElementById('simulator');
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
     }
@@ -354,7 +351,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
       <div id="health-aid" style={{ position: 'relative', top: '-80px', visibility: 'hidden' }} />
 
       <div className="container">
-        
+
         {/* =========================================================
             1. Section Header: Wise High-Trust Aesthetic
             ========================================================= */}
@@ -874,7 +871,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
             4. Verified Directory & Filter Controls
             ========================================================= */}
         <div style={{ marginBottom: '24px' }}>
-          
+
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', marginBottom: '18px' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -988,7 +985,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
 
           {/* Filter Pills & Sorting */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
-            
+
             {/* Filter Categories */}
             <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
               {[
@@ -1231,7 +1228,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
 
                 {/* Card Bottom Actions */}
                 <div style={{ borderTop: '1px solid #e5e9e2', paddingTop: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
-                  
+
                   {/* Compare Toggle */}
                   <button
                     onClick={() => toggleComparePlan(plan.id)}
@@ -1407,7 +1404,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
-            
+
             <div style={{ backgroundColor: '#ffffff', padding: '16px', borderRadius: '14px', border: '1px solid #e5e9e2' }}>
               <div style={{ fontWeight: 800, fontSize: '0.9rem', color: 'var(--wise-forest)', marginBottom: '4px' }}>
                 1. Obtain Doctor's Estimation Letter

@@ -1,11 +1,10 @@
 # VANTIQ
-### Quantum-Assisted Counter-Predatory Financial Resilience Platform
+### Emergency Finance Planning & Borrowing Risk Comparison
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18-61dafb?logo=react)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-6.x-646cff?logo=vite)](https://vitejs.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Quantum_Engine-Online-cyan)](#)
 
 > *"Scarcity captures attention, but it narrows focus—leading to decisions that solve today's crisis by engineering tomorrow's catastrophe."*  
 > — **Sendhil Mullainathan & Eldar Shafir (Scarcity: Why Having Too Little Means So Much)**
@@ -25,7 +24,7 @@ When an individual faces an acute out-of-pocket medical shock (e.g., ₹50,000 f
 - While they obtain the immediate ₹50,000, **the uncoordinated repayments aggregate to ₹26,200/month**.
 - Because ₹26,200 exceeds their ₹15,000 capacity, **they enter an irreversible insolvency debt spiral within 45 days.**
 
-**VANTIQ** is an open-source, quantum-inspired behavioral defense system that intercepts predatory debt-stacking, simulates a 90-day cashflow digital twin, and synthesizes an optimal multi-source rescue package.
+**VANTIQ** is an open-source emergency finance planning tool that compares borrowing costs, estimates repayment capacity, and presents a multi-source funding plan.
 
 ---
 
@@ -39,10 +38,9 @@ When an individual faces an acute out-of-pocket medical shock (e.g., ₹50,000 f
    - **Low-Friction Exploratory CTAs**: Zero-signup barriers; users test and experience the math before any commitment.
    - **High-Trust Aesthetic**: Deep forest green palette with signature electric lime (`#9fe870`) accents, crisp modern typography, and clean cards.
 4. **90-Day Temporal Digital Twin (TFT)**: Simulates day-by-day cashflow runway under standard borrowing vs. VANTIQ-guided optimization.
-5. **QUBO / QAOA Quantum Knapsack Optimizer**: Formulates the debt relief problem as a Quadratic Unconstrained Binary Optimization (QUBO) solved via simulated quantum annealing in $<40\text{ ms}$.
-6. **Tri-Tranche Multi-Source Rescue Architecture**: Synthesizes 0% employer advances, co-op credit unions, and structured repayment schedules.
-7. **TreeSHAP Explainable AI**: Provides rigorous Shapley-value feature attribution explaining why specific relief tranches were recommended.
-8. **Client-Side Zero-Knowledge Privacy**: Employs client-side WASM ZK-proofs so sensitive bank statements never leave the user's browser.
+5. **Tri-Tranche Multi-Source Rescue Plan**: Displays an illustrative split across funding sources and repayment schedules.
+6. **TreeSHAP Explainer**: Shows which factors contribute to the displayed risk estimate.
+7. **Client-Side Privacy View**: Describes the app's intended approach to handling sensitive financial inputs.
 
 ---
 
@@ -59,8 +57,8 @@ src/
 │   ├── m03_debt_mesh/       --> Ghost Debt Stacking Mesh
 │   ├── m04_dual_dial/       --> Absorptive Capacity Gauge
 │   ├── m05_cashflow_twin/   --> 90-Day Digital Twin Runway Chart
-│   ├── m06_quantum_solver/  --> QUBO / QAOA Solver Visualizer
 │   ├── m07_rescue_blend/    --> Multi-Source Rescue Cards
+│   ├── m15_health_navigator/--> Health Relief & EMI Calculator
 │   ├── m09_life_energy/     --> Life-Energy Labor Hours Calculator
 │   ├── m10_comparison_matrix/-> Counterfactual Comparison Matrix
 │   ├── m11_xai_explainer/   --> TreeSHAP Explainable AI Waterfall
@@ -104,20 +102,6 @@ npm run build
 ```
 
 ---
-
-## 🔬 Mathematical Formulation: The QUBO Rescue Knapsack
-
-The multi-source emergency liquidity formulation minimizes total expected repayment and default probability while ensuring strict shock coverage:
-
-$$\min_{x} \quad H(x) = \sum_{i=1}^{N} c_i x_i + \lambda \left( \sum_{i=1}^{N} w_i x_i - S \right)^2 + \mu \sum_{i=1}^{N} \sum_{j=1}^{N} J_{ij} x_i x_j$$
-
-Where:
-- $x_i \in \{0, 1\}$ represents the activation state of candidate liquidity tranche $i$.
-- $c_i$ is the effective cost coefficient (APR + processing churn + cognitive penalty).
-- $w_i$ is the capital tranche volume.
-- $S$ is the total emergency capital required (e.g., ₹50,000).
-- $\lambda$ is the severe penalty multiplier for underfunding the medical emergency.
-- $J_{ij}$ is the covariance coupling matrix penalizing clustered repayment deadlines that fall on the same pay cycle.
 
 ---
 

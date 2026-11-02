@@ -1,7 +1,7 @@
 {
   "name": "VANTIQ – Emergency Finance Optimizer",
   "short_name": "VANTIQ",
-  "description": "Quantum-Enhanced Counterfactual Digital Twin & Anti-Predatory Emergency Finance Engine for salaried households.",
+  "description": "Emergency finance planning, repayment estimates, and borrowing risk comparisons for salaried households.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -44,12 +44,5 @@
       "url": "/#simulator",
       "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
     },
-    {
-      "name": "Quantum Solver",
-      "short_name": "Quantum",
-      "description": "Run the QUBO/QAOA quantum knapsack optimizer",
-      "url": "/#quantum-solver",
-      "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
-    }
   ]
 }

@@ -26,8 +26,7 @@ import {
 import { useFintech } from '../../context/FintechContext';
 
 export const LifeEnergyCalculator: React.FC = () => {
-  // Requirement 1: Consume profile and rescuePlan from useFintech()
-  const { profile, rescuePlan, shock } = useFintech();
+  const { profile, fundingPlan, shock } = useFintech();
 
   // Interactive Configuration Controls
   const [customSalary, setCustomSalary] = useState<number | null>(null);
@@ -59,13 +58,13 @@ export const LifeEnergyCalculator: React.FC = () => {
     return Math.round(base * 1.368); // 36.8% all-in predatory rate
   }, [isDefaultBenchmark, shock]);
 
-  // VANTIQ Repayment: Defaults to ₹51,420, or consumes rescuePlan.totalRepayment
+  // Estimated repayment from the current funding plan.
   const vantiqRepayment = useMemo(() => {
     if (isDefaultBenchmark && (!shock || shock.amount === 50000)) {
       return 51420;
     }
-    return rescuePlan?.totalRepayment || 51420;
-  }, [isDefaultBenchmark, shock, rescuePlan]);
+    return fundingPlan?.totalRepayment || 51420;
+  }, [isDefaultBenchmark, shock, fundingPlan]);
 
   // Real Labor Hours calculations
   const predatoryHours = useMemo(() => {
@@ -172,7 +171,7 @@ export const LifeEnergyCalculator: React.FC = () => {
   return (
     <section id="life-energy" style={{ padding: '40px 0', position: 'relative' }}>
       <div className="container">
-        
+
         {/* Section Header */}
         <div style={{ marginBottom: '28px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', marginBottom: '10px' }}>
@@ -201,7 +200,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             Translating Predatory Debt into <span style={{ color: '#15803d' }}>Hours of Human Life</span>
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '880px', lineHeight: 1.6 }}>
-            Nominal APR percentages hide real suffering. By dividing predatory liabilities by your <strong>real hourly wage</strong>, 
+            Nominal APR percentages hide real suffering. By dividing predatory liabilities by your <strong>real hourly wage</strong>,
             we quantify exactly how many working days of your physical existence are hijacked by loan apps versus preserved by VANTIQ.
           </p>
         </div>
@@ -327,7 +326,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             <div style={{ fontSize: '0.75rem', color: '#fca5a5', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '0.06em', marginBottom: '6px' }}>
               Predatory Stacking Repayment
             </div>
-            
+
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
               <span style={{ fontSize: '2.6rem', fontWeight: 900, color: '#f87171', lineHeight: 1 }}>
                 {predatoryHours}
@@ -342,7 +341,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
 
             <p style={{ fontSize: '0.82rem', color: '#cbd5e1', lineHeight: 1.5, marginBottom: '16px' }}>
-              Repaying <strong>₹{predatoryRepayment.toLocaleString()}</strong> at your ₹{hourlyWage}/hr wage forces you to sacrifice 
+              Repaying <strong>₹{predatoryRepayment.toLocaleString()}</strong> at your ₹{hourlyWage}/hr wage forces you to sacrifice
               over <strong>34 entire working days</strong> just to break even with aggressive lenders.
             </p>
 
@@ -361,8 +360,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 2: VANTIQ Quantum Allocation */}
-          <div className="vantiq-card" style={{
+          {/* Card 2: VANTIQ Funding Plan */}\r\n          <div className="vantiq-card" style={{
             padding: '26px',
             borderRadius: '16px',
             backgroundColor: 'rgba(6, 182, 212, 0.05)',
@@ -380,7 +378,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             <div style={{ fontSize: '0.75rem', color: '#67e8f9', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '0.06em', marginBottom: '6px' }}>
               VANTIQ Plan Repayment
             </div>
-            
+
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
               <span style={{ fontSize: '2.6rem', fontWeight: 900, color: '#38bdf8', lineHeight: 1 }}>
                 {vantiqHours}
@@ -395,7 +393,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
 
             <p style={{ fontSize: '0.82rem', color: '#cbd5e1', lineHeight: 1.5, marginBottom: '16px' }}>
-              By blending zero-APR medical buffers and fair NBFC tranches (totaling <strong>₹{vantiqRepayment.toLocaleString()}</strong>), 
+              By blending zero-APR medical buffers and fair NBFC tranches (totaling <strong>₹{vantiqRepayment.toLocaleString()}</strong>),
               your required labor time drops cleanly to <strong>205.6 hours</strong>.
             </p>
 
@@ -434,7 +432,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             <div style={{ fontSize: '0.75rem', color: '#6ee7b7', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '0.06em', marginBottom: '6px' }}>
               Net Life-Energy Reclaimed
             </div>
-            
+
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
               <span style={{ fontSize: '2.8rem', fontWeight: 900, color: '#34d399', lineHeight: 1, textShadow: '0 0 20px rgba(52, 211, 153, 0.5)' }}>
                 +{savedHours}
@@ -449,7 +447,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
 
             <p style={{ fontSize: '0.82rem', color: '#f1f5f9', lineHeight: 1.5, marginBottom: '16px' }}>
-              You win back <strong>{savedHours} working hours</strong> (~{savedDays} working days) of your life that would have otherwise gone directly 
+              You win back <strong>{savedHours} working hours</strong> (~{savedDays} working days) of your life that would have otherwise gone directly
               into predatory fees! That is <strong>₹{savedCash.toLocaleString()}</strong> kept in your family's hands.
             </p>
 
@@ -1056,8 +1054,8 @@ export const LifeEnergyCalculator: React.FC = () => {
               Behavioral Finance Insight: Why APR Deceives, But Life-Energy Liberates
             </h4>
             <p style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.6 }}>
-              Fintech cognitive research demonstrates that crisis victims experience severe "percentage numbness"—a 36% APR appears abstract and harmless during a panic. 
-              However, when confronted with the physical reality that <strong>they will spend 273.6 hours of their physical life</strong> working for loan sharks 
+              Fintech cognitive research demonstrates that crisis victims experience severe "percentage numbness"—a 36% APR appears abstract and harmless during a panic.
+              However, when confronted with the physical reality that <strong>they will spend 273.6 hours of their physical life</strong> working for loan sharks
               versus <strong>205.6 hours</strong> under VANTIQ, the reflective prefrontal cortex re-engages, preventing impulsive debt traps.
             </p>
           </div>
