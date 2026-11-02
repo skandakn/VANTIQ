@@ -199,7 +199,7 @@ export const MultiSourceRescueCard: React.FC = () => {
   };
 
   return (
-    <section id="quantum-solver" style={{ padding: '60px 0', borderTop: '1px solid rgba(6, 182, 212, 0.15)' }}>
+    <section id="rescue-split" style={{ padding: '60px 0', borderTop: '1px solid rgba(6, 182, 212, 0.15)' }}>
       <div className="container">
         
         {/* Section Header */}
@@ -207,7 +207,7 @@ export const MultiSourceRescueCard: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
             <span className="badge badge-emerald" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <Sparkles size={13} />
-              <span>Step 6: Multi-Source Rescue Architecture</span>
+              <span>Multi-Source Rescue Architecture</span>
             </span>
             <span className="badge badge-cyan" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <Layers size={13} />
@@ -224,7 +224,7 @@ export const MultiSourceRescueCard: React.FC = () => {
               <h2 style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', marginBottom: '8px' }}>
                 Tri-Tranche Multi-Source Solvency Architecture
               </h2>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '850px', lineHeight: 1.6 }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '850px', lineHeight: 1.6, fontWeight: 500 }}>
                 Predatory instant loan apps push borrowers into a single toxic 36%–48% APR debt trap. VANTIQ breaks the emergency requirement into three scientifically calibrated tranches—maximizing zero-cost liquidity and shielding monthly cashflow.
               </p>
             </div>
@@ -266,17 +266,17 @@ export const MultiSourceRescueCard: React.FC = () => {
           borderRadius: '16px',
           border: '1.5px solid #d0d7cc'
         }}>
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             <button
               onClick={() => setActiveTab('overview')}
               style={{
                 padding: '8px 18px',
                 borderRadius: '8px',
                 fontSize: '0.85rem',
-                fontWeight: 600,
-                border: activeTab === 'overview' ? '1px solid #10b981' : '1px solid transparent',
-                backgroundColor: activeTab === 'overview' ? 'rgba(16, 185, 129, 0.2)' : 'transparent',
-                color: activeTab === 'overview' ? '#34d399' : '#94a3b8',
+                fontWeight: activeTab === 'overview' ? 800 : 600,
+                border: activeTab === 'overview' ? '1.5px solid #15803d' : '1px solid #d0d7cc',
+                backgroundColor: activeTab === 'overview' ? '#dcfce7' : '#ffffff',
+                color: activeTab === 'overview' ? '#15803d' : '#334155',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -294,10 +294,10 @@ export const MultiSourceRescueCard: React.FC = () => {
                 padding: '8px 18px',
                 borderRadius: '8px',
                 fontSize: '0.85rem',
-                fontWeight: 600,
-                border: activeTab === 'comparison' ? '1px solid #06b6d4' : '1px solid transparent',
-                backgroundColor: activeTab === 'comparison' ? 'rgba(6, 182, 212, 0.2)' : 'transparent',
-                color: activeTab === 'comparison' ? '#38bdf8' : '#94a3b8',
+                fontWeight: activeTab === 'comparison' ? 800 : 600,
+                border: activeTab === 'comparison' ? '1.5px solid #0284c7' : '1px solid #d0d7cc',
+                backgroundColor: activeTab === 'comparison' ? '#e0f2fe' : '#ffffff',
+                color: activeTab === 'comparison' ? '#0284c7' : '#334155',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -315,10 +315,10 @@ export const MultiSourceRescueCard: React.FC = () => {
                 padding: '8px 18px',
                 borderRadius: '8px',
                 fontSize: '0.85rem',
-                fontWeight: 600,
-                border: activeTab === 'timeline' ? '1px solid #8b5cf6' : '1px solid transparent',
-                backgroundColor: activeTab === 'timeline' ? 'rgba(139, 92, 246, 0.2)' : 'transparent',
-                color: activeTab === 'timeline' ? '#c084fc' : '#94a3b8',
+                fontWeight: activeTab === 'timeline' ? 800 : 600,
+                border: activeTab === 'timeline' ? '1.5px solid #7c3aed' : '1px solid #d0d7cc',
+                backgroundColor: activeTab === 'timeline' ? '#f3e8ff' : '#ffffff',
+                color: activeTab === 'timeline' ? '#7c3aed' : '#334155',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -337,15 +337,14 @@ export const MultiSourceRescueCard: React.FC = () => {
         <div className="vantiq-card" style={{ marginBottom: '32px', padding: '24px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
             <div>
-              <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <PieChart size={18} color="#38bdf8" />
+              <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--wise-forest)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <PieChart size={18} color="#0284c7" />
                 <span>Proportional Allocation Progress Bar (Total Requirement: ₹{totalRequired.toLocaleString()})</span>
               </div>
-              <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '2px' }}>
-                Allocation balances the amount needed with estimated fees and repayment timing.
+              <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '2px', fontWeight: 500 }}>
+                Allocation balances the amount needed with estimated fees and subsidized windows.
               </div>
             </div>
-            
             <div style={{ display: 'flex', gap: '8px' }}>
               <span className="badge badge-emerald">Tranche A: 40%</span>
               <span className="badge badge-cyan">Tranche B: 40%</span>
@@ -453,7 +452,7 @@ export const MultiSourceRescueCard: React.FC = () => {
             gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
             gap: '14px',
             fontSize: '0.82rem',
-            color: '#cbd5e1'
+            color: 'var(--text-secondary)'
           }}>
             <div
               onClick={() => setSelectedTrancheId(selectedTrancheId === 'tranche-a' ? null : 'tranche-a')}
@@ -463,16 +462,16 @@ export const MultiSourceRescueCard: React.FC = () => {
                 gap: '10px',
                 padding: '10px 14px',
                 borderRadius: '8px',
-                backgroundColor: selectedTrancheId === 'tranche-a' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(15, 23, 42, 0.5)',
-                border: selectedTrancheId === 'tranche-a' ? '1px solid #10b981' : '1px solid var(--border-subtle)',
+                backgroundColor: selectedTrancheId === 'tranche-a' ? '#dcfce7' : '#ffffff',
+                border: selectedTrancheId === 'tranche-a' ? '2px solid #15803d' : '1.5px solid #d0d7cc',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
             >
               <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#10b981', flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 700, color: '#34d399' }}>Tranche A: Zero-Cost Liquidity (40%)</div>
-                <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>₹5,000 Savings + ₹15,000 Hospital Advance @ 0% APR</div>
+                <div style={{ fontWeight: 800, color: '#15803d', fontSize: '0.88rem' }}>Tranche A: Zero-Cost Liquidity (40%)</div>
+                <div style={{ fontSize: '0.78rem', color: '#1e293b', fontWeight: 600 }}>₹5,000 Savings + ₹15,000 Hospital Advance @ 0% APR</div>
               </div>
             </div>
 
@@ -484,16 +483,16 @@ export const MultiSourceRescueCard: React.FC = () => {
                 gap: '10px',
                 padding: '10px 14px',
                 borderRadius: '8px',
-                backgroundColor: selectedTrancheId === 'tranche-b' ? 'rgba(6, 182, 212, 0.15)' : 'rgba(15, 23, 42, 0.5)',
-                border: selectedTrancheId === 'tranche-b' ? '1px solid #06b6d4' : '1px solid var(--border-subtle)',
+                backgroundColor: selectedTrancheId === 'tranche-b' ? '#e0f2fe' : '#ffffff',
+                border: selectedTrancheId === 'tranche-b' ? '2px solid #0284c7' : '1.5px solid #d0d7cc',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
             >
               <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#06b6d4', flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 700, color: '#38bdf8' }}>Tranche B: Co-op Bridge (40%)</div>
-                <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>₹20,000 Low-Interest Bridge @ 6.5% APR</div>
+                <div style={{ fontWeight: 800, color: '#0284c7', fontSize: '0.88rem' }}>Tranche B: Co-op Bridge (40%)</div>
+                <div style={{ fontSize: '0.78rem', color: '#1e293b', fontWeight: 600 }}>₹20,000 Low-Interest Bridge @ 6.5% APR</div>
               </div>
             </div>
 
@@ -505,16 +504,16 @@ export const MultiSourceRescueCard: React.FC = () => {
                 gap: '10px',
                 padding: '10px 14px',
                 borderRadius: '8px',
-                backgroundColor: selectedTrancheId === 'tranche-c' ? 'rgba(139, 92, 246, 0.15)' : 'rgba(15, 23, 42, 0.5)',
-                border: selectedTrancheId === 'tranche-c' ? '1px solid #8b5cf6' : '1px solid var(--border-subtle)',
+                backgroundColor: selectedTrancheId === 'tranche-c' ? '#f3e8ff' : '#ffffff',
+                border: selectedTrancheId === 'tranche-c' ? '2px solid #7c3aed' : '1.5px solid #d0d7cc',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
             >
               <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#8b5cf6', flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 700, color: '#c084fc' }}>Tranche C: Deferred Micro-Repay (20%)</div>
-                <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>₹10,000 @ 8% APR • 60-day recovery grace period</div>
+                <div style={{ fontWeight: 800, color: '#7c3aed', fontSize: '0.88rem' }}>Tranche C: Deferred Micro-Repay (20%)</div>
+                <div style={{ fontSize: '0.78rem', color: '#1e293b', fontWeight: 600 }}>₹10,000 @ 8% APR • 60-day recovery grace period</div>
               </div>
             </div>
           </div>
@@ -534,10 +533,11 @@ export const MultiSourceRescueCard: React.FC = () => {
                   fontSize: '0.75rem',
                   color: 'var(--text-secondary)',
                   background: 'none',
-                  border: '1px solid #d0d7cc',
+                  border: '1.5px solid #d0d7cc',
                   borderRadius: '6px',
                   padding: '4px 10px',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  fontWeight: 600
                 }}
               >
                 Clear Filter (Show All 3)
@@ -562,7 +562,7 @@ export const MultiSourceRescueCard: React.FC = () => {
                     style={{
                       backgroundColor: '#ffffff',
                       borderTop: `4px solid ${tranche.colorHex}`,
-                      border: isSelected ? `2px solid ${tranche.colorHex}` : '1px solid #e5e9e2',
+                      border: isSelected ? `2px solid ${tranche.colorHex}` : '1.5px solid #d0d7cc',
                       padding: '24px',
                       display: 'flex',
                       flexDirection: 'column',
@@ -573,7 +573,7 @@ export const MultiSourceRescueCard: React.FC = () => {
                     <div>
                       {/* Card Header */}
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                        <span className={`badge ${tranche.badgeClass}`} style={{ fontSize: '0.75rem' }}>
+                        <span className={`badge ${tranche.badgeClass}`} style={{ fontSize: '0.78rem', fontWeight: 800 }}>
                           {tranche.trancheCode} • {tranche.percentage}% of Need
                         </span>
                         <span style={{
@@ -583,19 +583,19 @@ export const MultiSourceRescueCard: React.FC = () => {
                           backgroundColor: '#f4f5f1',
                           padding: '4px 10px',
                           borderRadius: '6px',
-                          border: `1px solid #d0d7cc`
+                          border: '1.5px solid #d0d7cc'
                         }}>
                           {tranche.apr === 0 ? '0% APR (Free)' : `${tranche.apr}% APR`}
                         </span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
                         {tranche.icon}
-                        <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--wise-forest)' }}>
+                        <h4 style={{ fontSize: '1.3rem', fontWeight: 900, color: '#0f172a' }}>
                           {tranche.title}
                         </h4>
                       </div>
-                      <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '16px', lineHeight: 1.5 }}>
+                      <p style={{ fontSize: '0.88rem', color: '#1e293b', marginBottom: '16px', lineHeight: 1.5, fontWeight: 600 }}>
                         {tranche.subtitle}
                       </p>
 
@@ -604,26 +604,26 @@ export const MultiSourceRescueCard: React.FC = () => {
                         padding: '16px',
                         borderRadius: '12px',
                         backgroundColor: '#f4f5f1',
-                        border: '1px solid #d0d7cc',
+                        border: '1.5px solid #d0d7cc',
                         marginBottom: '18px'
                       }}>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>
+                        <div style={{ fontSize: '0.78rem', color: '#334155', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '0.04em' }}>
                           Allocated Principal
                         </div>
-                        <div style={{ fontSize: '2.1rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', margin: '4px 0' }}>
+                        <div style={{ fontSize: '2.2rem', fontWeight: 900, color: '#0f172a', letterSpacing: '-0.02em', margin: '4px 0' }}>
                           ₹{tranche.allocatedAmount.toLocaleString()}
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                          <span>Tenure: <strong>{tranche.tenureDisplay}</strong></span>
-                          <span>Interest Cost: <strong style={{ color: tranche.apr === 0 ? '#15803d' : 'var(--wise-forest)' }}>₹{tranche.interestCost.toLocaleString()}</strong></span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.84rem', color: '#1e293b', fontWeight: 700 }}>
+                          <span>Tenure: <strong style={{ color: '#0f172a', fontWeight: 800 }}>{tranche.tenureDisplay}</strong></span>
+                          <span>Interest Cost: <strong style={{ color: tranche.apr === 0 ? '#15803d' : 'var(--wise-forest)', fontWeight: 800 }}>₹{tranche.interestCost.toLocaleString()}</strong></span>
                         </div>
                       </div>
 
                       {/* Sub-Components (For Tranche A: Savings ₹5k + Hospital Advance ₹15k) */}
                       {tranche.subComponents && (
                         <div style={{ marginBottom: '18px' }}>
-                          <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#38bdf8', textTransform: 'uppercase', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <Info size={13} />
+                          <div style={{ fontSize: '0.82rem', fontWeight: 900, color: '#0284c7', textTransform: 'uppercase', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <Info size={14} />
                             <span>Tranche A Dual Liquidity Split</span>
                           </div>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -631,20 +631,20 @@ export const MultiSourceRescueCard: React.FC = () => {
                               <div
                                 key={sIdx}
                                 style={{
-                                  padding: '10px 12px',
+                                  padding: '12px 14px',
                                   borderRadius: '8px',
-                                  backgroundColor: 'rgba(16, 185, 129, 0.08)',
-                                  border: '1px solid rgba(16, 185, 129, 0.25)',
+                                  backgroundColor: '#ecfdf5',
+                                  border: '1.5px solid #6ee7b7',
                                   display: 'flex',
                                   flexDirection: 'column',
-                                  gap: '3px'
+                                  gap: '4px'
                                 }}
                               >
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                  <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#f8fafc' }}>{sub.name}</span>
-                                  <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#34d399' }}>₹{sub.amount.toLocaleString()}</span>
+                                  <span style={{ fontSize: '0.92rem', fontWeight: 800, color: '#064e3b' }}>{sub.name}</span>
+                                  <span style={{ fontSize: '1rem', fontWeight: 900, color: '#047857' }}>₹{sub.amount.toLocaleString()}</span>
                                 </div>
-                                <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
+                                <div style={{ fontSize: '0.82rem', color: '#065f46', fontWeight: 600, lineHeight: 1.45 }}>
                                   {sub.description}
                                 </div>
                               </div>
@@ -656,21 +656,21 @@ export const MultiSourceRescueCard: React.FC = () => {
                       {/* Tranche C 60-Day Grace Period Special Highlight */}
                       {tranche.gracePeriodDays > 0 && (
                         <div style={{
-                          padding: '12px',
+                          padding: '12px 14px',
                           borderRadius: '8px',
-                          backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                          border: '1px solid rgba(139, 92, 246, 0.35)',
+                          backgroundColor: '#f5f3ff',
+                          border: '1.5px solid #c4b5fd',
                           marginBottom: '18px',
                           display: 'flex',
                           alignItems: 'flex-start',
                           gap: '10px'
                         }}>
-                          <Clock size={18} color="#c084fc" style={{ flexShrink: 0, marginTop: '2px' }} />
+                          <Clock size={18} color="#6b21a8" style={{ flexShrink: 0, marginTop: '2px' }} />
                           <div>
-                            <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#c084fc' }}>
+                            <div style={{ fontSize: '0.92rem', fontWeight: 900, color: '#581c87' }}>
                               Protected 60-Day Grace Period Active
                             </div>
-                            <div style={{ fontSize: '0.74rem', color: '#94a3b8', lineHeight: 1.4, marginTop: '2px' }}>
+                            <div style={{ fontSize: '0.82rem', color: '#4c1d95', lineHeight: 1.45, marginTop: '3px', fontWeight: 600 }}>
                               No payments or interest penalties required during Days 1–60. Repayment only activates on Day 61 after primary medical recovery.
                             </div>
                           </div>
@@ -679,13 +679,13 @@ export const MultiSourceRescueCard: React.FC = () => {
 
                       {/* Safeguards Bullet List */}
                       <div style={{ marginBottom: '18px' }}>
-                        <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', marginBottom: '8px' }}>
+                        <div style={{ fontSize: '0.82rem', fontWeight: 900, color: '#0f172a', textTransform: 'uppercase', marginBottom: '10px', letterSpacing: '0.04em' }}>
                           Institutional Safeguards
                         </div>
-                        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                           {tranche.safeguards.map((item, idx) => (
-                            <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: '#cbd5e1' }}>
-                              <CheckCircle2 size={13} color={tranche.colorHex} style={{ flexShrink: 0 }} />
+                            <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.84rem', color: '#0f172a', fontWeight: 600, lineHeight: 1.4 }}>
+                              <CheckCircle2 size={16} color={tranche.colorHex} style={{ flexShrink: 0, marginTop: '2px' }} />
                               <span>{item}</span>
                             </li>
                           ))}
@@ -695,23 +695,24 @@ export const MultiSourceRescueCard: React.FC = () => {
 
                     {/* Bottom Amortization Footprint */}
                     <div style={{
-                      backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                      padding: '12px 14px',
+                      backgroundColor: '#0f172a',
+                      padding: '14px 16px',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
                       borderRadius: '8px',
-                      border: '1px solid var(--border-subtle)',
+                      border: '1px solid #334155',
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      fontSize: '0.8rem',
+                      fontSize: '0.84rem',
                       marginTop: '8px'
                     }}>
                       <div>
-                        <span style={{ color: '#94a3b8' }}>Monthly Impact: </span>
-                        <strong style={{ color: '#f8fafc', fontSize: '0.95rem' }}>
+                        <span style={{ color: '#cbd5e1', fontWeight: 700 }}>Monthly Impact: </span>
+                        <strong style={{ color: '#4ade80', fontSize: '1.1rem', fontWeight: 900 }}>
                           {tranche.gracePeriodDays > 0 ? '₹0 for 60d, then ₹' + tranche.monthlyObligation.toLocaleString() : '₹' + tranche.monthlyObligation.toLocaleString()}
                         </strong>
                       </div>
-                      <span className={`badge ${tranche.badgeClass}`} style={{ fontSize: '0.68rem' }}>
+                      <span className={`badge ${tranche.badgeClass}`} style={{ fontSize: '0.72rem', fontWeight: 800 }}>
                         {tranche.apr === 0 ? 'Zero APR' : `${tranche.apr}% APR`}
                       </span>
                     </div>
@@ -758,7 +759,7 @@ export const MultiSourceRescueCard: React.FC = () => {
               <h3 style={{ fontSize: '1.7rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.01em' }}>
                 Total Interest Comparison: VANTIQ vs. Fragmented Loan Apps
               </h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', fontWeight: 500 }}>
                 Direct mathematical comparison for borrowing ₹{totalRequired.toLocaleString()} in an emergency.
               </p>
             </div>
@@ -795,8 +796,8 @@ export const MultiSourceRescueCard: React.FC = () => {
             <div style={{
               padding: '24px',
               borderRadius: '14px',
-              backgroundColor: 'rgba(239, 68, 68, 0.06)',
-              border: '1.5px solid rgba(239, 68, 68, 0.35)',
+              backgroundColor: '#fff5f5',
+              border: '1.5px solid #fca5a5',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between'
@@ -805,45 +806,45 @@ export const MultiSourceRescueCard: React.FC = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <AlertTriangle size={18} color="#ef4444" />
-                    <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f87171', textTransform: 'uppercase' }}>
+                    <span style={{ fontSize: '0.88rem', fontWeight: 900, color: '#991b1b', textTransform: 'uppercase' }}>
                       Fragmented Loan Apps
                     </span>
                   </div>
-                  <span className="badge badge-red" style={{ fontSize: '0.68rem' }}>
+                  <span className="badge badge-red" style={{ fontSize: '0.68rem', fontWeight: 800 }}>
                     Predatory Debt Trap
                   </span>
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>Total Interest & Upfront Fees Paid:</div>
-                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#f87171', letterSpacing: '-0.02em', margin: '4px 0' }}>
+                  <div style={{ fontSize: '0.8rem', color: '#7f1d1d', fontWeight: 700 }}>Total Interest & Upfront Fees Paid:</div>
+                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#dc2626', letterSpacing: '-0.02em', margin: '4px 0' }}>
                     ₹{predatoryTotalInterestAndFees.toLocaleString()}
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: '#fca5a5' }}>
+                  <div style={{ fontSize: '0.82rem', color: '#991b1b', fontWeight: 600 }}>
                     Effective APR: <strong>{predatoryEffectiveApr}%</strong> across 4 stacked apps
                   </div>
                 </div>
 
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.82rem', color: '#cbd5e1', marginBottom: '16px' }}>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem', marginBottom: '16px' }}>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(239, 68, 68, 0.15)', paddingBottom: '6px' }}>
-                    <span style={{ color: '#94a3b8' }}>Emergency Borrowed:</span>
-                    <strong>₹{totalRequired.toLocaleString()}</strong>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Emergency Borrowed:</span>
+                    <strong style={{ color: '#0f172a' }}>₹{totalRequired.toLocaleString()}</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(239, 68, 68, 0.15)', paddingBottom: '6px' }}>
-                    <span style={{ color: '#94a3b8' }}>Processing & Platform Fees:</span>
-                    <strong style={{ color: '#f87171' }}>₹{Math.round(2800 * scale).toLocaleString()}</strong>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Processing & Platform Fees:</span>
+                    <strong style={{ color: '#dc2626', fontWeight: 800 }}>₹{Math.round(2800 * scale).toLocaleString()}</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(239, 68, 68, 0.15)', paddingBottom: '6px' }}>
-                    <span style={{ color: '#94a3b8' }}>Compounding Interest:</span>
-                    <strong style={{ color: '#f87171' }}>₹{Math.round(15600 * scale).toLocaleString()}</strong>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Compounding Interest:</span>
+                    <strong style={{ color: '#dc2626', fontWeight: 800 }}>₹{Math.round(15600 * scale).toLocaleString()}</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(239, 68, 68, 0.15)', paddingBottom: '6px' }}>
-                    <span style={{ color: '#94a3b8' }}>Total Cash Outflow:</span>
-                    <strong style={{ color: '#f87171', fontSize: '0.95rem' }}>₹{predatoryTotalRepayment.toLocaleString()}</strong>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Total Cash Outflow:</span>
+                    <strong style={{ color: '#dc2626', fontSize: '0.95rem', fontWeight: 900 }}>₹{predatoryTotalRepayment.toLocaleString()}</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ color: '#94a3b8' }}>Month 1 Immediate Payment:</span>
-                    <strong style={{ color: '#ef4444' }}>₹{predatoryMonth1Obligation.toLocaleString()}/mo</strong>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Month 1 Immediate Payment:</span>
+                    <strong style={{ color: '#dc2626', fontWeight: 800 }}>₹{predatoryMonth1Obligation.toLocaleString()}/mo</strong>
                   </li>
                 </ul>
               </div>
@@ -851,10 +852,11 @@ export const MultiSourceRescueCard: React.FC = () => {
               <div style={{
                 padding: '10px 12px',
                 borderRadius: '8px',
-                backgroundColor: 'rgba(239, 68, 68, 0.15)',
-                color: '#fca5a5',
-                fontSize: '0.75rem',
-                fontWeight: 700,
+                backgroundColor: '#fee2e2',
+                color: '#991b1b',
+                border: '1.5px solid #fca5a5',
+                fontSize: '0.78rem',
+                fontWeight: 800,
                 textAlign: 'center'
               }}>
                 Day 32 Default Probability: 84% (Insolvency Shock)
@@ -865,8 +867,8 @@ export const MultiSourceRescueCard: React.FC = () => {
             <div style={{
               padding: '24px',
               borderRadius: '14px',
-              backgroundColor: 'rgba(16, 185, 129, 0.08)',
-              border: '2px solid rgba(16, 185, 129, 0.5)',
+              backgroundColor: '#f0fdf4',
+              border: '2px solid #86efac',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -876,49 +878,49 @@ export const MultiSourceRescueCard: React.FC = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <ShieldCheck size={20} color="#10b981" />
-                    <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#34d399', textTransform: 'uppercase' }}>
+                    <span style={{ fontSize: '0.88rem', fontWeight: 900, color: '#166534', textTransform: 'uppercase' }}>
                       VANTIQ Tri-Tranche Rescue
                     </span>
                   </div>
-                  <span className="badge badge-emerald" style={{ fontSize: '0.68rem' }}>
+                  <span className="badge badge-emerald" style={{ fontSize: '0.68rem', fontWeight: 800 }}>
                     Optimal Ground State
                   </span>
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>Total Interest & Upfront Fees Paid:</div>
-                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#34d399', letterSpacing: '-0.02em', margin: '4px 0' }}>
+                  <div style={{ fontSize: '0.8rem', color: '#14532d', fontWeight: 700 }}>Total Interest & Upfront Fees Paid:</div>
+                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#15803d', letterSpacing: '-0.02em', margin: '4px 0' }}>
                     ₹{vantiqTotalInterest.toLocaleString()}
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: '#6ee7b7' }}>
+                  <div style={{ fontSize: '0.82rem', color: '#14532d', fontWeight: 600 }}>
                     Blended Effective APR: <strong>{vantiqEffectiveApr}%</strong> (Tranche A @ 0%, B @ 6.5%, C @ 8%)
                   </div>
                 </div>
 
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.82rem', color: '#cbd5e1', marginBottom: '16px' }}>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem', marginBottom: '16px' }}>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(16, 185, 129, 0.15)', paddingBottom: '6px' }}>
-                    <span style={{ color: '#94a3b8' }}>Emergency Borrowed:</span>
-                    <strong>₹{totalRequired.toLocaleString()}</strong>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Emergency Borrowed:</span>
+                    <strong style={{ color: '#0f172a' }}>₹{totalRequired.toLocaleString()}</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(16, 185, 129, 0.15)', paddingBottom: '6px' }}>
-                    <span style={{ color: '#94a3b8' }}>Tranche A Zero-Cost Interest:</span>
-                    <strong style={{ color: '#34d399' }}>₹0 (0% APR)</strong>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Tranche A Zero-Cost Interest:</span>
+                    <strong style={{ color: '#15803d', fontWeight: 800 }}>₹0 (0% APR)</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(16, 185, 129, 0.15)', paddingBottom: '6px' }}>
-                    <span style={{ color: '#94a3b8' }}>Tranche B Co-op Bridge Interest:</span>
-                    <strong style={{ color: '#38bdf8' }}>₹{Math.round(650 * scale).toLocaleString()} (6.5% APR)</strong>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Tranche B Co-op Bridge Interest:</span>
+                    <strong style={{ color: '#0284c7', fontWeight: 800 }}>₹{Math.round(650 * scale).toLocaleString()} (6.5% APR)</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(16, 185, 129, 0.15)', paddingBottom: '6px' }}>
-                    <span style={{ color: '#94a3b8' }}>Tranche C Micro-Repayment Interest:</span>
-                    <strong style={{ color: '#c084fc' }}>₹{Math.round(770 * scale).toLocaleString()} (8.0% APR)</strong>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Tranche C Micro-Repayment Interest:</span>
+                    <strong style={{ color: '#7c3aed', fontWeight: 800 }}>₹{Math.round(770 * scale).toLocaleString()} (8.0% APR)</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(16, 185, 129, 0.15)', paddingBottom: '6px' }}>
-                    <span style={{ color: '#94a3b8' }}>Total Cash Outflow:</span>
-                    <strong style={{ color: '#34d399', fontSize: '0.95rem' }}>₹{vantiqTotalRepayment.toLocaleString()}</strong>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Total Cash Outflow:</span>
+                    <strong style={{ color: '#15803d', fontSize: '0.95rem', fontWeight: 900 }}>₹{vantiqTotalRepayment.toLocaleString()}</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ color: '#94a3b8' }}>Month 1 Obligation (Safe Buffer):</span>
-                    <strong style={{ color: '#34d399' }}>₹{vantiqMonth1Obligation.toLocaleString()}/mo (vs ₹{predatoryMonth1Obligation.toLocaleString()})</strong>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Month 1 Obligation (Safe Buffer):</span>
+                    <strong style={{ color: '#15803d', fontWeight: 800 }}>₹{vantiqMonth1Obligation.toLocaleString()}/mo (vs ₹{predatoryMonth1Obligation.toLocaleString()})</strong>
                   </li>
                 </ul>
               </div>
@@ -926,12 +928,12 @@ export const MultiSourceRescueCard: React.FC = () => {
               <div style={{
                 padding: '10px 12px',
                 borderRadius: '8px',
-                backgroundColor: 'rgba(16, 185, 129, 0.18)',
-                color: '#6ee7b7',
-                fontSize: '0.75rem',
-                fontWeight: 700,
-                textAlign: 'center',
-                border: '1px solid rgba(16, 185, 129, 0.3)'
+                backgroundColor: '#dcfce7',
+                color: '#14532d',
+                border: '1.5px solid #86efac',
+                fontSize: '0.78rem',
+                fontWeight: 800,
+                textAlign: 'center'
               }}>
                 Day 32 Default Probability: 4% (100% Solvent Cashflow Runway)
               </div>
@@ -941,15 +943,15 @@ export const MultiSourceRescueCard: React.FC = () => {
 
           {/* Visual Ratio Comparison Bar */}
           <div style={{
-            backgroundColor: 'rgba(11, 19, 41, 0.8)',
+            backgroundColor: '#ffffff',
             padding: '20px',
             borderRadius: '12px',
-            border: '1px solid var(--border-subtle)',
+            border: '1.5px solid #d0d7cc',
             marginBottom: '20px'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', fontSize: '0.82rem' }}>
-              <span style={{ color: '#cbd5e1', fontWeight: 600 }}>Visual Interest Burden Scale (₹1,420 vs. ₹18,400)</span>
-              <span style={{ color: '#34d399', fontWeight: 700 }}>13.0x Lower Interest with VANTIQ</span>
+              <span style={{ color: 'var(--wise-forest)', fontWeight: 800 }}>Visual Interest Burden Scale (₹1,420 vs. ₹18,400)</span>
+              <span style={{ color: '#15803d', fontWeight: 800 }}>13.0x Lower Interest with VANTIQ</span>
             </div>
 
             <div style={{ position: 'relative', height: '24px', backgroundColor: '#050914', borderRadius: '6px', overflow: 'hidden', display: 'flex' }}>
@@ -980,9 +982,10 @@ export const MultiSourceRescueCard: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#fca5a5',
+                  color: '#ffffff',
                   fontSize: '0.75rem',
-                  fontWeight: 700
+                  fontWeight: 800,
+                  textShadow: '0 1px 2px rgba(0,0,0,0.8)'
                 }}
                 title="Predatory Excess Interest: ₹16,980 wasted"
               >
@@ -990,9 +993,9 @@ export const MultiSourceRescueCard: React.FC = () => {
               </div>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '6px', fontSize: '0.72rem', color: '#94a3b8' }}>
-              <span>VANTIQ: ₹{vantiqTotalInterest.toLocaleString()}</span>
-              <span>Predatory Total: ₹{predatoryTotalInterestAndFees.toLocaleString()}</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '6px', fontSize: '0.78rem', color: '#475569', fontWeight: 600 }}>
+              <span>VANTIQ: <strong style={{ color: '#15803d' }}>₹{vantiqTotalInterest.toLocaleString()}</strong></span>
+              <span>Predatory Total: <strong style={{ color: '#dc2626' }}>₹{predatoryTotalInterestAndFees.toLocaleString()}</strong></span>
             </div>
           </div>
 
@@ -1007,16 +1010,16 @@ export const MultiSourceRescueCard: React.FC = () => {
                 alignItems: 'center',
                 padding: '12px 16px',
                 borderRadius: '8px',
-                backgroundColor: 'rgba(15, 23, 42, 0.8)',
-                border: '1px solid var(--border-subtle)',
-                color: '#cbd5e1',
-                fontSize: '0.85rem',
-                fontWeight: 600,
+                backgroundColor: '#ffffff',
+                border: '1.5px solid #d0d7cc',
+                color: 'var(--wise-forest)',
+                fontSize: '0.88rem',
+                fontWeight: 700,
                 cursor: 'pointer'
               }}
             >
               <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Info size={16} color="#38bdf8" />
+                <Info size={16} color="#0284c7" />
                 <span>Why is VANTIQ ₹16,980 cheaper than borrowing from 4 apps?</span>
               </span>
               {expandedBreakdown ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
@@ -1027,24 +1030,24 @@ export const MultiSourceRescueCard: React.FC = () => {
                 marginTop: '10px',
                 padding: '18px',
                 borderRadius: '8px',
-                backgroundColor: 'rgba(11, 19, 41, 0.95)',
-                border: '1px solid var(--border-medium)',
-                fontSize: '0.82rem',
+                backgroundColor: '#f8fafc',
+                border: '1.5px solid #cbd5e1',
+                fontSize: '0.84rem',
                 lineHeight: 1.6,
-                color: '#cbd5e1'
+                color: '#1e293b'
               }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
                   <div>
-                    <strong style={{ color: '#34d399', display: 'block', marginBottom: '4px' }}>1. Elimination of Multi-Origination Churn</strong>
-                    Predatory apps deduct 4.5%–6% upfront as "processing & insurance" fees. On ₹50,000, you pay ₹2,800 before receiving a single rupee. VANTIQ eliminates synthetic churn by coordinating zero-cost institutional buffers.
+                    <strong style={{ color: '#15803d', display: 'block', marginBottom: '4px', fontWeight: 800 }}>1. Elimination of Multi-Origination Churn</strong>
+                    <span style={{ fontWeight: 500 }}>Predatory apps deduct 4.5%–6% upfront as "processing & insurance" fees. On ₹50,000, you pay ₹2,800 before receiving a single rupee. VANTIQ eliminates synthetic churn by coordinating zero-cost institutional buffers.</span>
                   </div>
                   <div>
-                    <strong style={{ color: '#38bdf8', display: 'block', marginBottom: '4px' }}>2. 0% APR Liquidity Absorption (Tranche A)</strong>
-                    By tapping ₹5,000 in liquid savings and unlocking ₹15,000 hospital advance at 0% APR, 40% of the entire emergency requirement carries ₹0 interest penalty.
+                    <strong style={{ color: '#0284c7', display: 'block', marginBottom: '4px', fontWeight: 800 }}>2. 0% APR Liquidity Absorption (Tranche A)</strong>
+                    <span style={{ fontWeight: 500 }}>By tapping ₹5,000 in liquid savings and unlocking ₹15,000 hospital advance at 0% APR, 40% of the entire emergency requirement carries ₹0 interest penalty.</span>
                   </div>
                   <div>
-                    <strong style={{ color: '#c084fc', display: 'block', marginBottom: '4px' }}>3. 60-Day Grace Period Staggering (Tranche C)</strong>
-                    Instead of front-loading debt service on Day 30 (causing a catastrophic collision with house rent), Tranche C delays payment until Day 61 at an institutional 8% APR rate.
+                    <strong style={{ color: '#7c3aed', display: 'block', marginBottom: '4px', fontWeight: 800 }}>3. 60-Day Grace Period Staggering (Tranche C)</strong>
+                    <span style={{ fontWeight: 500 }}>Instead of front-loading debt service on Day 30 (causing a catastrophic collision with house rent), Tranche C delays payment until Day 61 at an institutional 8% APR rate.</span>
                   </div>
                 </div>
               </div>
@@ -1058,18 +1061,18 @@ export const MultiSourceRescueCard: React.FC = () => {
           <div className="vantiq-card" style={{ marginBottom: '32px', padding: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
               <Calendar size={18} color="#8b5cf6" />
-              <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc' }}>
+              <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--wise-forest)' }}>
                 12-Month Staggered Cashflow Trajectory (Grace Period Protection)
               </h4>
             </div>
-            <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginBottom: '18px' }}>
+            <p style={{ fontSize: '0.88rem', color: '#334155', fontWeight: 600, marginBottom: '18px' }}>
               Notice how Month 1 and Month 2 obligations remain low (₹{vantiqMonth1Obligation.toLocaleString()}/mo), leaving ₹{Math.max(0, 15000 - vantiqMonth1Obligation).toLocaleString()} of your ₹15,000 disposable surplus intact!
             </p>
 
             <div style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem', textAlign: 'left' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem', textAlign: 'left' }}>
                 <thead>
-                  <tr style={{ borderBottom: '1px solid var(--border-medium)', color: '#94a3b8' }}>
+                  <tr style={{ borderBottom: '2px solid #cbd5e1', color: '#0f172a', fontWeight: 800 }}>
                     <th style={{ padding: '10px' }}>Month</th>
                     <th style={{ padding: '10px' }}>Tranche A (Hospital @ 0%)</th>
                     <th style={{ padding: '10px' }}>Tranche B (Co-op @ 6.5%)</th>
@@ -1089,20 +1092,20 @@ export const MultiSourceRescueCard: React.FC = () => {
                     const surplusRemaining = Math.round(15000 - totalMonth);
 
                     return (
-                      <tr key={m} style={{ borderBottom: '1px solid rgba(51, 65, 85, 0.3)', backgroundColor: m <= 2 ? 'rgba(139, 92, 246, 0.05)' : undefined }}>
-                        <td style={{ padding: '10px', fontWeight: 700, color: m <= 2 ? '#c084fc' : '#f8fafc' }}>
+                      <tr key={m} style={{ borderBottom: '1px solid #e2e8f0', backgroundColor: m <= 2 ? 'rgba(139, 92, 246, 0.08)' : undefined }}>
+                        <td style={{ padding: '10px', fontWeight: 800, color: m <= 2 ? '#6b21a8' : '#0f172a' }}>
                           Month {m} {m <= 2 && '(Grace Active)'}
                         </td>
-                        <td style={{ padding: '10px', color: '#34d399' }}>₹{trancheA.toLocaleString()}</td>
-                        <td style={{ padding: '10px', color: '#38bdf8' }}>₹{trancheB.toLocaleString()}</td>
-                        <td style={{ padding: '10px', color: m <= 2 ? '#94a3b8' : '#c084fc' }}>
+                        <td style={{ padding: '10px', color: '#15803d', fontWeight: 600 }}>₹{trancheA.toLocaleString()}</td>
+                        <td style={{ padding: '10px', color: '#0284c7', fontWeight: 600 }}>₹{trancheB.toLocaleString()}</td>
+                        <td style={{ padding: '10px', color: m <= 2 ? '#64748b' : '#7c3aed', fontWeight: 600 }}>
                           {m <= 2 ? '₹0 (Deferred)' : `₹${trancheC.toLocaleString()}`}
                         </td>
-                        <td style={{ padding: '10px', fontWeight: 800, color: '#34d399' }}>₹{totalMonth.toLocaleString()}</td>
-                        <td style={{ padding: '10px', fontWeight: 700, color: predatory > 15000 ? '#ef4444' : '#cbd5e1' }}>
+                        <td style={{ padding: '10px', fontWeight: 800, color: '#15803d' }}>₹{totalMonth.toLocaleString()}</td>
+                        <td style={{ padding: '10px', fontWeight: 700, color: predatory > 15000 ? '#dc2626' : '#334155' }}>
                           ₹{predatory.toLocaleString()} {predatory > 15000 && '⚠️ DEFAULT TRAP'}
                         </td>
-                        <td style={{ padding: '10px', color: '#38bdf8' }}>₹{surplusRemaining.toLocaleString()} remaining</td>
+                        <td style={{ padding: '10px', color: '#0369a1', fontWeight: 700 }}>₹{surplusRemaining.toLocaleString()} remaining</td>
                       </tr>
                     );
                   })}
@@ -1120,8 +1123,9 @@ export const MultiSourceRescueCard: React.FC = () => {
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '20px',
-          backgroundColor: isDisbursed ? 'rgba(16, 185, 129, 0.12)' : 'rgba(15, 23, 42, 0.85)',
-          border: isDisbursed ? '2px solid #10b981' : '1px solid var(--border-medium)',
+          backgroundColor: isDisbursed ? 'rgba(16, 185, 129, 0.12)' : '#ffffff',
+          border: isDisbursed ? '2px solid #10b981' : '1.5px solid #d0d7cc',
+          boxShadow: 'var(--shadow-card)',
           transition: 'all 0.3s ease'
         }}>
           <div>
@@ -1129,16 +1133,16 @@ export const MultiSourceRescueCard: React.FC = () => {
               <span className="badge badge-emerald">Disbursement Execution Cockpit</span>
               {isDisbursed && <span className="badge badge-cyan">Disbursed Successfully</span>}
             </div>
-            <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#f8fafc' }}>
+            <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--wise-forest)' }}>
               Execute Tri-Tranche Coordinated Allocation
             </div>
-            <div style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '2px' }}>
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px', fontWeight: 500 }}>
               Routes ₹{(20000 * scale).toLocaleString()} to hospital counter (Tranche A), locks ₹{(20000 * scale).toLocaleString()} credit union bridge (Tranche B), and schedules ₹{(10000 * scale).toLocaleString()} for Day 61 repayment (Tranche C).
             </div>
 
             {/* Stepper text if disbursing */}
             {isDisbursing && (
-              <div style={{ marginTop: '10px', fontSize: '0.85rem', color: '#38bdf8', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ marginTop: '10px', fontSize: '0.85rem', color: '#0284c7', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Zap size={16} className="animate-spin" />
                 <span>
                   {disburseStep === 1 && 'Step 1/3: Validating zero-cost hospital emergency desk credit line...'}
@@ -1149,7 +1153,7 @@ export const MultiSourceRescueCard: React.FC = () => {
             )}
 
             {isDisbursed && (
-              <div style={{ marginTop: '10px', fontSize: '0.85rem', color: '#34d399', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ marginTop: '10px', fontSize: '0.85rem', color: '#15803d', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <CheckCircle2 size={16} />
                 <span>
                   All 3 tranches successfully funded! ₹{totalRequired.toLocaleString()} disbursed with ₹16,980 preserved.
