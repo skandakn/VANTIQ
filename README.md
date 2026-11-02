@@ -1,4 +1,4 @@
-# CHRONOS-FIN (VANTIQ)
+# VANTIQ
 ### Quantum-Assisted Counter-Predatory Financial Resilience Platform
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)](https://www.typescriptlang.org/)
