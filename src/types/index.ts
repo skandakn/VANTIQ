@@ -74,3 +74,77 @@ export interface TeamMemberRole {
   gitBranch: string;
   status: 'In Development' | 'Ready for Review' | 'Integrated';
 }
+
+export interface HealthConditionPreset {
+  id: string;
+  name: string;
+  iconName: string;
+  category: string;
+  typicalCostInr: number;
+  typicalCostUsd: number;
+  urgencyDefault: 'critical' | 'high' | 'moderate';
+  description: string;
+  commonProcedures: string[];
+}
+
+export type HealthOptionCategory = 
+  | 'medical_loan' 
+  | 'zero_cost_emi' 
+  | 'insurance_claim' 
+  | 'government_scheme' 
+  | 'crowdfunding' 
+  | 'charitable_trust' 
+  | 'hospital_hardship';
+
+export interface HealthReliefPlan {
+  id: string;
+  name: string;
+  organization: string;
+  category: HealthOptionCategory;
+  categoryLabel: string;
+  region: 'India' | 'USA' | 'UK' | 'Global';
+  currency: 'INR' | 'USD' | 'GBP' | 'EUR';
+  interestApr: number; // 0 for grants/insurance/0% EMI
+  minInterestApr?: number;
+  maxInterestApr?: number;
+  maxAmount: number; // e.g. 2500000 or 50000
+  minAmount?: number;
+  tenureMonthsMax: number;
+  disbursementSpeed: string; // e.g., 'Instant (< 2 hrs)', '24 Hours', '2-5 Days'
+  trustScore: number; // e.g. 4.9 (out of 5.0)
+  ratingCount: number;
+  regulatoryBody: string; // e.g. 'RBI Regulated NBFC', 'IRDAI Approved', 'US Federal / ACA'
+  isRepayable: boolean; // false for grants, crowdfunding, Ayushman Bharat
+  processingFeePercent: number;
+  eligibilityCriteria: string[];
+  documentsRequired: string[];
+  keyBenefits: string[];
+  drawbacksOrGotchas: string[];
+  directApplyUrl: string;
+  officialHelpline?: string;
+  recommendedFor: string;
+  tags: string[];
+}
+
+export interface HealthReliefStrategy {
+  targetAmount: number;
+  currency: string;
+  selectedCondition: string;
+  urgency: string;
+  blendedApr: number;
+  totalRepayment: number;
+  totalInterestSavedVsPredatory: number;
+  lifeHoursSaved: number;
+  allocations: {
+    sourceName: string;
+    category: string;
+    amount: number;
+    interestRate: number;
+    tenure: string;
+    monthlyEmi: number;
+    isNonRepayable: boolean;
+    trustScore: number;
+    notes: string;
+  }[];
+}
+

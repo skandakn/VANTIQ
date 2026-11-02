@@ -9,11 +9,13 @@ import {
   Scale, 
   AlertTriangle, 
   Menu, 
-  X
+  X,
+  HeartHandshake
 } from 'lucide-react';
 
 const NAV_LINKS = [
   { id: 'simulator', label: 'Calculator', icon: Zap, fallbackId: 'crisis-intake' },
+  { id: 'health-aid', label: 'Health Aid & Loans', icon: HeartHandshake, fallbackId: 'health-navigator' },
   { id: 'ghost-debt', label: 'Debt Traps', icon: AlertTriangle, fallbackId: 'debt-mesh' },
   { id: 'quantum-solver', label: 'Quantum Solver', icon: Cpu, fallbackId: 'quantum-knapsack' },
   { id: 'digital-twin', label: 'Cash Runway', icon: Activity, fallbackId: 'cashflow-twin' },

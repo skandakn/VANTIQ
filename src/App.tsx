@@ -10,6 +10,7 @@ import { PwaMobileNav } from './components/layout/PwaMobileNav';
 
 import { HeroSection } from './modules/m01_hero/HeroSection';
 import { EmergencyIntake } from './modules/m02_crisis_input/EmergencyIntake';
+import { HealthReliefNavigator } from './modules/m15_health_navigator/HealthReliefNavigator';
 import { GhostDebtMesh } from './modules/m03_debt_mesh/GhostDebtMesh';
 import { DualCapacityGauge } from './modules/m04_dual_dial/DualCapacityGauge';
 import { CashflowRunwayChart } from './modules/m05_cashflow_twin/CashflowRunwayChart';
@@ -31,8 +32,10 @@ export const App: React.FC = () => {
         <main style={{ flex: 1 }}>
           <HeroSection />
           <EmergencyIntake />
+          <HealthReliefNavigator />
           <GhostDebtMesh />
           <DualCapacityGauge />
+
           <CashflowRunwayChart />
           <QuantumKnapsackVisualizer />
           <MultiSourceRescueCard />

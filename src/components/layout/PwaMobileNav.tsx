@@ -8,7 +8,8 @@ import {
   Download, 
   X, 
   AlertTriangle,
-  Smartphone
+  Smartphone,
+  HeartHandshake
 } from 'lucide-react';
 
 interface BeforeInstallPromptEvent extends Event {
@@ -45,7 +46,7 @@ export const PwaMobileNav: React.FC = () => {
     // Track active section on scroll for mobile nav icons
     const handleScroll = () => {
       const scrollPos = window.scrollY + 200;
-      const sections = ['simulator', 'ghost-debt', 'digital-twin', 'quantum-solver'];
+      const sections = ['simulator', 'health-aid', 'ghost-debt', 'digital-twin', 'quantum-solver'];
       for (let i = sections.length - 1; i >= 0; i--) {
         const id = sections[i];
         const el = document.getElementById(id);
@@ -85,6 +86,7 @@ export const PwaMobileNav: React.FC = () => {
     const directEl = document.getElementById(id);
     const fallbackMap: Record<string, string> = {
       simulator: 'crisis-intake',
+      'health-aid': 'health-navigator',
       'ghost-debt': 'debt-mesh',
       'digital-twin': 'cashflow-twin',
       'quantum-solver': 'quantum-knapsack',
@@ -292,6 +294,29 @@ export const PwaMobileNav: React.FC = () => {
             <Zap size={18} color={activeTab === 'simulator' ? '#38bdf8' : '#64748b'} />
             <span style={{ fontSize: '0.68rem', fontWeight: activeTab === 'simulator' ? 700 : 500 }}>
               Simulator
+            </span>
+          </button>
+
+          {/* Health Aid Tab */}
+          <button
+            onClick={() => scrollTo('health-aid')}
+            style={{
+              background: 'none',
+              border: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '4px',
+              padding: '6px 10px',
+              borderRadius: '8px',
+              color: activeTab === 'health-aid' ? '#15803d' : '#64748b',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <HeartHandshake size={18} color={activeTab === 'health-aid' ? '#15803d' : '#64748b'} />
+            <span style={{ fontSize: '0.68rem', fontWeight: activeTab === 'health-aid' ? 700 : 500 }}>
+              Health Aid
             </span>
           </button>
 
