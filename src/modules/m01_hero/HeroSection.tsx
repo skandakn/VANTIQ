@@ -190,7 +190,8 @@ export const HeroSection: React.FC = () => {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))',
             gap: '20px',
-            alignItems: 'stretch'
+            alignItems: 'stretch',
+            gridAutoRows: '1fr'
           }}>
             <div className="wise-converter-box" style={{
               backgroundColor: '#ffffff',
@@ -198,7 +199,10 @@ export const HeroSection: React.FC = () => {
               borderRadius: '24px',
               padding: '32px',
               boxShadow: '0 20px 50px rgba(22, 51, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03)',
-              minWidth: 0
+              width: '100%',
+              height: '100%',
+              minWidth: 0,
+              boxSizing: 'border-box'
             }}>
               
               {/* Top Rate & Buffer Guarantee Pill */}
@@ -497,7 +501,10 @@ export const HeroSection: React.FC = () => {
               borderRadius: '24px',
               padding: '32px',
               boxShadow: '0 20px 50px rgba(22, 51, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03)',
-              minWidth: 0
+              width: '100%',
+              height: '100%',
+              minWidth: 0,
+              boxSizing: 'border-box'
             }}>
               <EmergencyIntake />
             </div>
