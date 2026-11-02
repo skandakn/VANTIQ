@@ -33,7 +33,7 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
             <span className="badge badge-purple">
               <Atom size={13} />
-              <span>Step 5: Quantum Combinatorial Knapsack</span>
+              <span>Quantum Combinatorial Knapsack</span>
             </span>
           </div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc' }}>

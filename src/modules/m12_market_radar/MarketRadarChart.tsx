@@ -43,7 +43,7 @@ export const MarketRadarChart: React.FC = () => {
       <div className="container">
         <div style={{ marginBottom: 24 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-            <span className="badge badge-cyan"><Target size={13} /><span>Step 10: Market Opportunity &amp; Positioning</span></span>
+            <span className="badge badge-cyan"><Target size={13} /><span>Market Opportunity &amp; Positioning</span></span>
           </div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc', margin: '0 0 8px' }}>
             Competitive Advantage &amp; TAM/SAM/SOM Hub

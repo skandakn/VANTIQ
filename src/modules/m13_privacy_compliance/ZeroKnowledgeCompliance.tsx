@@ -194,7 +194,7 @@ export const ZeroKnowledgeCompliance: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px', marginBottom: '10px' }}>
             <span className="badge badge-emerald" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <ShieldCheck size={14} />
-              <span>Step 11 • Member 14 Module</span>
+              <span>Privacy &amp; Compliance</span>
             </span>
             <span className="badge badge-cyan" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <Lock size={14} />

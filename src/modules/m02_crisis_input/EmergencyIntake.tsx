@@ -30,7 +30,7 @@ export const EmergencyIntake: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
             <span className="badge badge-red">
               <AlertTriangle size={13} />
-              <span>Step 1: Emergency Shock Input</span>
+              <span>Emergency Shock Input</span>
             </span>
           </div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc' }}>

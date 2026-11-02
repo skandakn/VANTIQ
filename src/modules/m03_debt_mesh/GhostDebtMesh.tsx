@@ -81,7 +81,7 @@ export const GhostDebtMesh: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
             <span className="badge badge-amber" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <Layers size={13} />
-              <span>Step 2: Ghost Debt Mesh Visualizer</span>
+              <span>Ghost Debt Mesh Visualizer</span>
             </span>
             <span className="badge badge-red" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <Skull size={13} />
