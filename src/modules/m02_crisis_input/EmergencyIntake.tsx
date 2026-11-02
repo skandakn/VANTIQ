@@ -54,7 +54,7 @@ export const EmergencyIntake: React.FC = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: '28px' }}>
           
           {/* Card 1: Emergency Bill Requirement */}
-          <div className="chronos-card" style={{ border: '1px solid #fecaca', padding: '32px', backgroundColor: '#ffffff' }}>
+          <div className="vantiq-card" style={{ border: '1px solid #fecaca', padding: '32px', backgroundColor: '#ffffff' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '22px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div style={{
@@ -264,7 +264,7 @@ export const EmergencyIntake: React.FC = () => {
           </div>
 
           {/* Card 2: Salaried Monthly Household Cashflow */}
-          <div className="chronos-card" style={{ border: '1px solid #d0d7cc', padding: '32px', backgroundColor: '#ffffff' }}>
+          <div className="vantiq-card" style={{ border: '1px solid #d0d7cc', padding: '32px', backgroundColor: '#ffffff' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '22px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div style={{

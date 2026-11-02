@@ -67,7 +67,7 @@ export const Navbar: React.FC = () => {
         anchor.style.position = 'relative';
         anchor.style.top = '-80px';
         anchor.style.visibility = 'hidden';
-        anchor.setAttribute('data-chronos-anchor', 'true');
+        anchor.setAttribute('data-vantiq-anchor', 'true');
         parent.prepend(anchor);
       }
     });

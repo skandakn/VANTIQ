@@ -48,7 +48,7 @@ export const HealthPlanComparisonModal: React.FC<HealthPlanComparisonModalProps>
       onClick={onClose}
     >
       <div
-        className="chronos-card"
+        className="vantiq-card"
         style={{
           maxWidth: '1060px',
           width: '100%',

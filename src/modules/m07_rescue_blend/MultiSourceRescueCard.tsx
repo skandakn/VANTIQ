@@ -160,20 +160,20 @@ export const MultiSourceRescueCard: React.FC = () => {
     }
   ];
 
-  // Total Interest Comparison Metrics: CHRONOS ₹1,420 vs Fragmented Loan Apps ₹18,400
-  const chronosTotalInterest = Math.round(1420 * scale);
-  const chronosTotalRepayment = totalRequired + chronosTotalInterest;
-  const chronosEffectiveApr = 3.4;
+  // Total Interest Comparison Metrics: VANTIQ ₹1,420 vs Fragmented Loan Apps ₹18,400
+  const vantiqTotalInterest = Math.round(1420 * scale);
+  const vantiqTotalRepayment = totalRequired + vantiqTotalInterest;
+  const vantiqEffectiveApr = 3.4;
 
   const predatoryTotalInterestAndFees = Math.round(18400 * scale);
   const predatoryTotalRepayment = totalRequired + predatoryTotalInterestAndFees;
   const predatoryEffectiveApr = 38.8;
 
-  const directSavings = predatoryTotalRepayment - chronosTotalRepayment;
+  const directSavings = predatoryTotalRepayment - vantiqTotalRepayment;
   const savingsPercent = Math.round((directSavings / predatoryTotalRepayment) * 100);
 
   // Monthly obligation during critical Month 1 (where predatory loans demand ₹26,200)
-  const chronosMonth1Obligation = Math.round((2500 + 1720) * scale); // Tranche A advance + Tranche B
+  const vantiqMonth1Obligation = Math.round((2500 + 1720) * scale); // Tranche A advance + Tranche B
   const predatoryMonth1Obligation = Math.round(26200 * scale);
 
   // Multi-step disbursement simulation handler
@@ -346,7 +346,7 @@ export const MultiSourceRescueCard: React.FC = () => {
         </div>
 
         {/* REQUIREMENT 3: VISUAL TRANCHE PROGRESS BAR */}
-        <div className="chronos-card" style={{ marginBottom: '32px', padding: '24px' }}>
+        <div className="vantiq-card" style={{ marginBottom: '32px', padding: '24px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
             <div>
               <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -570,7 +570,7 @@ export const MultiSourceRescueCard: React.FC = () => {
                 return (
                   <div
                     key={tranche.id}
-                    className="chronos-card"
+                    className="vantiq-card"
                     style={{
                       backgroundColor: '#ffffff',
                       borderTop: `4px solid ${tranche.colorHex}`,
@@ -735,8 +735,8 @@ export const MultiSourceRescueCard: React.FC = () => {
         </div>
 
         {/* REQUIREMENT 4: TOTAL INTEREST COMPARISON CARD */}
-        {/* ₹1,420 with CHRONOS vs. ₹18,400 with fragmented loan apps */}
-        <div className="chronos-card glow-emerald" style={{
+        {/* ₹1,420 with VANTIQ vs. ₹18,400 with fragmented loan apps */}
+        <div className="vantiq-card glow-emerald" style={{
           padding: '32px',
           marginBottom: '32px',
           border: '2px solid rgba(16, 185, 129, 0.4)',
@@ -889,7 +889,7 @@ export const MultiSourceRescueCard: React.FC = () => {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <ShieldCheck size={20} color="#10b981" />
                     <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#34d399', textTransform: 'uppercase' }}>
-                      CHRONOS Tri-Tranche Rescue
+                      VANTIQ Tri-Tranche Rescue
                     </span>
                   </div>
                   <span className="badge badge-emerald" style={{ fontSize: '0.68rem' }}>
@@ -900,10 +900,10 @@ export const MultiSourceRescueCard: React.FC = () => {
                 <div style={{ marginBottom: '16px' }}>
                   <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>Total Interest & Upfront Fees Paid:</div>
                   <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#34d399', letterSpacing: '-0.02em', margin: '4px 0' }}>
-                    ₹{chronosTotalInterest.toLocaleString()}
+                    ₹{vantiqTotalInterest.toLocaleString()}
                   </div>
                   <div style={{ fontSize: '0.8rem', color: '#6ee7b7' }}>
-                    Blended Effective APR: <strong>{chronosEffectiveApr}%</strong> (Tranche A @ 0%, B @ 6.5%, C @ 8%)
+                    Blended Effective APR: <strong>{vantiqEffectiveApr}%</strong> (Tranche A @ 0%, B @ 6.5%, C @ 8%)
                   </div>
                 </div>
 
@@ -926,11 +926,11 @@ export const MultiSourceRescueCard: React.FC = () => {
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(16, 185, 129, 0.15)', paddingBottom: '6px' }}>
                     <span style={{ color: '#94a3b8' }}>Total Cash Outflow:</span>
-                    <strong style={{ color: '#34d399', fontSize: '0.95rem' }}>₹{chronosTotalRepayment.toLocaleString()}</strong>
+                    <strong style={{ color: '#34d399', fontSize: '0.95rem' }}>₹{vantiqTotalRepayment.toLocaleString()}</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <span style={{ color: '#94a3b8' }}>Month 1 Obligation (Safe Buffer):</span>
-                    <strong style={{ color: '#34d399' }}>₹{chronosMonth1Obligation.toLocaleString()}/mo (vs ₹{predatoryMonth1Obligation.toLocaleString()})</strong>
+                    <strong style={{ color: '#34d399' }}>₹{vantiqMonth1Obligation.toLocaleString()}/mo (vs ₹{predatoryMonth1Obligation.toLocaleString()})</strong>
                   </li>
                 </ul>
               </div>
@@ -961,11 +961,11 @@ export const MultiSourceRescueCard: React.FC = () => {
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', fontSize: '0.82rem' }}>
               <span style={{ color: '#cbd5e1', fontWeight: 600 }}>Visual Interest Burden Scale (₹1,420 vs. ₹18,400)</span>
-              <span style={{ color: '#34d399', fontWeight: 700 }}>13.0x Lower Interest with CHRONOS</span>
+              <span style={{ color: '#34d399', fontWeight: 700 }}>13.0x Lower Interest with VANTIQ</span>
             </div>
 
             <div style={{ position: 'relative', height: '24px', backgroundColor: '#050914', borderRadius: '6px', overflow: 'hidden', display: 'flex' }}>
-              {/* CHRONOS bar segment */}
+              {/* VANTIQ bar segment */}
               <div
                 style={{
                   width: `${(1420 / 18400) * 100}%`,
@@ -978,9 +978,9 @@ export const MultiSourceRescueCard: React.FC = () => {
                   fontSize: '0.72rem',
                   fontWeight: 800
                 }}
-                title="CHRONOS Total Interest: ₹1,420"
+                title="VANTIQ Total Interest: ₹1,420"
               >
-                ₹{chronosTotalInterest.toLocaleString()}
+                ₹{vantiqTotalInterest.toLocaleString()}
               </div>
 
               {/* Predatory Excess Segment */}
@@ -1003,7 +1003,7 @@ export const MultiSourceRescueCard: React.FC = () => {
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '6px', fontSize: '0.72rem', color: '#94a3b8' }}>
-              <span>CHRONOS: ₹{chronosTotalInterest.toLocaleString()}</span>
+              <span>VANTIQ: ₹{vantiqTotalInterest.toLocaleString()}</span>
               <span>Predatory Total: ₹{predatoryTotalInterestAndFees.toLocaleString()}</span>
             </div>
           </div>
@@ -1029,7 +1029,7 @@ export const MultiSourceRescueCard: React.FC = () => {
             >
               <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Info size={16} color="#38bdf8" />
-                <span>Why is CHRONOS ₹16,980 cheaper than borrowing from 4 apps?</span>
+                <span>Why is VANTIQ ₹16,980 cheaper than borrowing from 4 apps?</span>
               </span>
               {expandedBreakdown ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
             </button>
@@ -1048,7 +1048,7 @@ export const MultiSourceRescueCard: React.FC = () => {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
                   <div>
                     <strong style={{ color: '#34d399', display: 'block', marginBottom: '4px' }}>1. Elimination of Multi-Origination Churn</strong>
-                    Predatory apps deduct 4.5%–6% upfront as "processing & insurance" fees. On ₹50,000, you pay ₹2,800 before receiving a single rupee. CHRONOS eliminates synthetic churn by coordinating zero-cost institutional buffers.
+                    Predatory apps deduct 4.5%–6% upfront as "processing & insurance" fees. On ₹50,000, you pay ₹2,800 before receiving a single rupee. VANTIQ eliminates synthetic churn by coordinating zero-cost institutional buffers.
                   </div>
                   <div>
                     <strong style={{ color: '#38bdf8', display: 'block', marginBottom: '4px' }}>2. 0% APR Liquidity Absorption (Tranche A)</strong>
@@ -1067,7 +1067,7 @@ export const MultiSourceRescueCard: React.FC = () => {
 
         {/* 12-MONTH REPAYMENT TRAJECTORY PREVIEW (TAB: TIMELINE) */}
         {activeTab === 'timeline' && (
-          <div className="chronos-card" style={{ marginBottom: '32px', padding: '24px' }}>
+          <div className="vantiq-card" style={{ marginBottom: '32px', padding: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
               <Calendar size={18} color="#8b5cf6" />
               <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc' }}>
@@ -1075,7 +1075,7 @@ export const MultiSourceRescueCard: React.FC = () => {
               </h4>
             </div>
             <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginBottom: '18px' }}>
-              Notice how Month 1 and Month 2 obligations remain low (₹{chronosMonth1Obligation.toLocaleString()}/mo), leaving ₹{Math.max(0, 15000 - chronosMonth1Obligation).toLocaleString()} of your ₹15,000 disposable surplus intact!
+              Notice how Month 1 and Month 2 obligations remain low (₹{vantiqMonth1Obligation.toLocaleString()}/mo), leaving ₹{Math.max(0, 15000 - vantiqMonth1Obligation).toLocaleString()} of your ₹15,000 disposable surplus intact!
             </p>
 
             <div style={{ overflowX: 'auto' }}>
@@ -1125,7 +1125,7 @@ export const MultiSourceRescueCard: React.FC = () => {
         )}
 
         {/* INTERACTIVE DISBURSEMENT SIMULATOR COCKPIT */}
-        <div className="chronos-card" style={{
+        <div className="vantiq-card" style={{
           padding: '24px',
           display: 'flex',
           justifyContent: 'space-between',

@@ -209,7 +209,7 @@ export const PwaMobileNav: React.FC = () => {
           onClick={() => setShowIosGuide(false)}
         >
           <div
-            className="chronos-card"
+            className="vantiq-card"
             style={{
               maxWidth: '380px',
               width: '100%',

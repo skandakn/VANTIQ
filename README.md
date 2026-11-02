@@ -25,7 +25,7 @@ When an individual faces an acute out-of-pocket medical shock (e.g., ₹50,000 f
 - While they obtain the immediate ₹50,000, **the uncoordinated repayments aggregate to ₹26,200/month**.
 - Because ₹26,200 exceeds their ₹15,000 capacity, **they enter an irreversible insolvency debt spiral within 45 days.**
 
-**CHRONOS-FIN** is an open-source, quantum-inspired behavioral defense system that intercepts predatory debt-stacking, simulates a 90-day cashflow digital twin, and synthesizes an optimal multi-source rescue package.
+**VANTIQ** is an open-source, quantum-inspired behavioral defense system that intercepts predatory debt-stacking, simulates a 90-day cashflow digital twin, and synthesizes an optimal multi-source rescue package.
 
 ---
 
@@ -38,7 +38,7 @@ When an individual faces an acute out-of-pocket medical shock (e.g., ₹50,000 f
    - **Trust-Building Fee Comparison**: Gamified, transparent fee and repayment comparison directly showing predatory loan app penalties vs. transparent VANTIQ rescue.
    - **Low-Friction Exploratory CTAs**: Zero-signup barriers; users test and experience the math before any commitment.
    - **High-Trust Aesthetic**: Deep forest green palette with signature electric lime (`#9fe870`) accents, crisp modern typography, and clean cards.
-4. **90-Day Temporal Digital Twin (TFT)**: Simulates day-by-day cashflow runway under standard borrowing vs. CHRONOS-guided optimization.
+4. **90-Day Temporal Digital Twin (TFT)**: Simulates day-by-day cashflow runway under standard borrowing vs. VANTIQ-guided optimization.
 5. **QUBO / QAOA Quantum Knapsack Optimizer**: Formulates the debt relief problem as a Quadratic Unconstrained Binary Optimization (QUBO) solved via simulated quantum annealing in $<40\text{ ms}$.
 6. **Tri-Tranche Multi-Source Rescue Architecture**: Synthesizes 0% employer advances, co-op credit unions, and structured repayment schedules.
 7. **TreeSHAP Explainable AI**: Provides rigorous Shapley-value feature attribution explaining why specific relief tranches were recommended.

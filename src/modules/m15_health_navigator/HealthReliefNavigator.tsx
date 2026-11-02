@@ -431,7 +431,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
             2. Medical Condition Presets & Parameters Console
             ========================================================= */}
         <div
-          className="chronos-card"
+          className="vantiq-card"
           style={{
             padding: '28px',
             backgroundColor: '#f9faf7',
@@ -688,7 +688,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
             3. AI-Suggested Multi-Tier Optimal Funding Plan
             ========================================================= */}
         <div
-          className="chronos-card"
+          className="vantiq-card"
           style={{
             padding: '32px',
             backgroundColor: '#ffffff',
@@ -1068,7 +1068,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
             return (
               <div
                 key={plan.id}
-                className="chronos-card"
+                className="vantiq-card"
                 style={{
                   padding: '24px',
                   backgroundColor: isChosen ? '#fafdf9' : '#ffffff',
@@ -1388,7 +1388,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
             7. Emergency Hospital Admission & Paperwork Action Kit
             ========================================================= */}
         <div
-          className="chronos-card"
+          className="vantiq-card"
           style={{
             padding: '28px',
             backgroundColor: '#f4f5f1',

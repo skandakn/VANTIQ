@@ -1,6 +1,6 @@
 // src/modules/m06_quantum_solver/QuantumKnapsackVisualizer.tsx
 // Module 6 / Step 5: Quantum Combinatorial Knapsack Optimization Engine (QUBO / QAOA)
-// Role: Member 07 (CHRONOS-FIN Team)
+// Role: Member 07 (VANTIQ Team)
 // Branch: feat/m07-quantum-knapsack
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -403,7 +403,7 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
           marginBottom: '28px'
         }}>
           {/* Ground State Energy Metric */}
-          <div className="chronos-card glow-purple" style={{
+          <div className="vantiq-card glow-purple" style={{
             background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%)',
             border: '1px solid rgba(139, 92, 246, 0.4)',
             padding: '20px'
@@ -425,7 +425,7 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
           </div>
 
           {/* Annealing Time Metric (38 ms) */}
-          <div className="chronos-card glow-cyan" style={{
+          <div className="vantiq-card glow-cyan" style={{
             background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%)',
             border: '1px solid rgba(6, 182, 212, 0.4)',
             padding: '20px'
@@ -447,7 +447,7 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
           </div>
 
           {/* Constraint Violation Penalty Metric (0.000) */}
-          <div className="chronos-card glow-emerald" style={{
+          <div className="vantiq-card glow-emerald" style={{
             background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%)',
             border: '1px solid rgba(16, 185, 129, 0.4)',
             padding: '20px'
@@ -469,7 +469,7 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
           </div>
 
           {/* Ground State Fidelity Metric */}
-          <div className="chronos-card glow-cyan" style={{
+          <div className="vantiq-card glow-cyan" style={{
             background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%)',
             border: '1px solid rgba(56, 189, 248, 0.4)',
             padding: '20px'
@@ -576,7 +576,7 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
 
         {/* TAB 1: Simulated Quantum Annealing Convergence Animation */}
         {activeTab === 'annealing' && (
-          <div className="chronos-card" style={{ padding: '32px', marginBottom: '28px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
+          <div className="vantiq-card" style={{ padding: '32px', marginBottom: '28px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '14px', marginBottom: '20px' }}>
               <div>
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--wise-forest)', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -746,7 +746,7 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
 
         {/* TAB 2: Optimal Hamiltonian Eigenstate Representation */}
         {activeTab === 'eigenstate' && (
-          <div className="chronos-card glow-cyan" style={{ padding: '28px', marginBottom: '24px' }}>
+          <div className="vantiq-card glow-cyan" style={{ padding: '28px', marginBottom: '24px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '14px', marginBottom: '20px' }}>
               <div>
                 <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -940,7 +940,7 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
 
         {/* TAB 3: Hamiltonian Mathematical Formulation Display */}
         {activeTab === 'formulation' && (
-          <div className="chronos-card glow-emerald" style={{ padding: '28px', marginBottom: '24px' }}>
+          <div className="vantiq-card glow-emerald" style={{ padding: '28px', marginBottom: '24px' }}>
             <div style={{ marginBottom: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <Cpu size={20} color="#34d399" />
@@ -1057,7 +1057,7 @@ export const QuantumKnapsackVisualizer: React.FC = () => {
 
         {/* TAB 4: QUBO Interaction Matrix Inspector */}
         {activeTab === 'qubo_matrix' && (
-          <div className="chronos-card glow-amber" style={{ padding: '28px', marginBottom: '24px' }}>
+          <div className="vantiq-card glow-amber" style={{ padding: '28px', marginBottom: '24px' }}>
             <div style={{ marginBottom: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <Layers size={20} color="#fbbf24" />

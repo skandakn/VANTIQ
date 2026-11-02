@@ -1,4 +1,4 @@
-# CHRONOS-FIN: 15-Member Simultaneous Engineering Delegation Guide
+# VANTIQ: 15-Member Simultaneous Engineering Delegation Guide
 
 > **Repository**: [https://github.com/skandakn/VANTIQ](https://github.com/skandakn/VANTIQ)  
 > **Architecture**: Vite + React 18 + TypeScript + Vanilla CSS Glassmorphic Tokens  
@@ -21,7 +21,7 @@
 | **Member 08** | `src/modules/m07_rescue_blend/` | `MultiSourceRescueCard.tsx` | Tri-Tranche Multi-Source Rescue Architecture |
 | **Member 09** | `src/modules/m08_neuro_shield/` | `NeuroAdaptiveShieldModal.tsx` | 45-Second Neuro-Adaptive Grounding Protocol Modal |
 | **Member 10** | `src/modules/m09_life_energy/` | `LifeEnergyCalculator.tsx` | Real Labor Life-Energy Equivalency Hours Calculator |
-| **Member 11** | `src/modules/m10_comparison_matrix/` | `ComparativeRescueMatrix.tsx` | Naive Multi-App vs. CHRONOS Counterfactual Matrix |
+| **Member 11** | `src/modules/m10_comparison_matrix/` | `ComparativeRescueMatrix.tsx` | Naive Multi-App vs. VANTIQ Counterfactual Matrix |
 | **Member 12** | `src/modules/m11_xai_explainer/` | `TreeSHAPExplainer.tsx` | TreeSHAP Explainable AI Waterfall & Feature Impact |
 | **Member 13** | `src/modules/m12_market_radar/` | `MarketRadarChart.tsx` | Competitive Radar & FinTech TAM / SAM / SOM Metrics |
 | **Member 14** | `src/modules/m13_privacy_compliance/` | `ZeroKnowledgeCompliance.tsx` | ZK-SNARK Privacy Proofs & RBI Sandbox Architecture |
@@ -36,8 +36,8 @@
 - **Files Assigned**: `src/components/layout/Navbar.tsx`, `src/components/layout/Footer.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 01 on the CHRONOS-FIN team.
-Your task is to build and polish the Global Shell, Header HUD, and Footer for the CHRONOS-FIN application in https://github.com/skandakn/VANTIQ.
+You are Member 01 on the VANTIQ team.
+Your task is to build and polish the Global Shell, Header HUD, and Footer for the VANTIQ application in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
 - `src/components/layout/Navbar.tsx`
@@ -45,7 +45,7 @@ Files to edit:
 
 Requirements:
 1. Glassmorphic Sticky Header:
-   - Logo with a glowing cyan gradient badge "CHRONOS-FIN".
+   - Logo with a glowing cyan gradient badge "VANTIQ".
    - Real-time status indicator showing quantum engine online and state pill.
    - Smooth anchor navigation links to `#simulator`, `#ghost-debt`, `#quantum-solver`, `#digital-twin`, `#comparison`, `#compliance`.
    - Emergency Simulator CTA button that smooth-scrolls to `#simulator`.
@@ -64,7 +64,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m01_hero/HeroSection.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 02 on the CHRONOS-FIN team.
+You are Member 02 on the VANTIQ team.
 Your task is to develop the Landing Hero Section with dynamic crisis statistics and the core problem statement in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -92,7 +92,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m02_crisis_input/EmergencyIntake.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 03 on the CHRONOS-FIN team.
+You are Member 03 on the VANTIQ team.
 Your task is to develop the Emergency Crisis Intake & Budget Customizer in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -120,7 +120,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m03_debt_mesh/GhostDebtMesh.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 04 on the CHRONOS-FIN team.
+You are Member 04 on the VANTIQ team.
 Your task is to build the Ghost Debt Stacking Mesh Visualizer in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -148,7 +148,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m04_dual_dial/DualCapacityGauge.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 05 on the CHRONOS-FIN team.
+You are Member 05 on the VANTIQ team.
 Your task is to develop the Dual-Dial Absorptive Capacity Meter in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -172,7 +172,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m05_cashflow_twin/CashflowRunwayChart.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 06 on the CHRONOS-FIN team.
+You are Member 06 on the VANTIQ team.
 Your task is to build the 90-Day Cashflow Digital Twin Interactive Chart in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -182,7 +182,7 @@ Requirements:
 1. Consume `cashflowRunway` from `useFintech()`.
 2. Interactive SVG or Canvas dual-curve trajectory chart:
    - Red Curve: "Uncoordinated Multi-App Borrowing" (plummeting below ₹0 into insolvency by Day 32).
-   - Emerald Curve: "CHRONOS Optimized Multi-Source Path" (remains positive, recovering to surplus).
+   - Emerald Curve: "VANTIQ Optimized Multi-Source Path" (remains positive, recovering to surplus).
 3. Day-by-Day Interactive Scrubber or hover tooltips:
    - Hovering over Day 15, Day 30, Day 45, Day 60, Day 90 shows bank balance and upcoming EMI.
 4. Milestones & Alert Flags:
@@ -197,7 +197,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m06_quantum_solver/QuantumKnapsackVisualizer.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 07 on the CHRONOS-FIN team.
+You are Member 07 on the VANTIQ team.
 Your task is to build the Quantum Knapsack Visualizer in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -221,7 +221,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m07_rescue_blend/MultiSourceRescueCard.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 08 on the CHRONOS-FIN team.
+You are Member 08 on the VANTIQ team.
 Your task is to build the Multi-Source Rescue Architecture Display in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -234,7 +234,7 @@ Requirements:
    - Tranche B: Low-Interest Co-op / Credit Union Bridge (₹20,000 @ 6.5% APR).
    - Tranche C: Deferred Staggered Micro-Repayment (₹10,000 @ 8% APR, grace period 60 days).
 3. Visual Tranche Progress Bar showing proportional allocation of the ₹50,000 total requirement.
-4. Total Interest Comparison Card: ₹1,420 with CHRONOS vs. ₹18,400 with fragmented loan apps.
+4. Total Interest Comparison Card: ₹1,420 with VANTIQ vs. ₹18,400 with fragmented loan apps.
 ```
 
 ---
@@ -244,7 +244,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m08_neuro_shield/NeuroAdaptiveShieldModal.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 09 on the CHRONOS-FIN team.
+You are Member 09 on the VANTIQ team.
 Your task is to build the Neuro-Adaptive Shield Grounding Modal in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -269,7 +269,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m09_life_energy/LifeEnergyCalculator.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 10 on the CHRONOS-FIN team.
+You are Member 10 on the VANTIQ team.
 Your task is to create the Life-Energy Labor Hours Equivalency Calculator in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -281,7 +281,7 @@ Requirements:
    - Monthly salary ÷ 160 working hours = Net hourly wage (e.g., ₹40,000 / 160 = ₹250/hour).
 3. Compute Real Labor Hours required:
    - For Predatory Stacking total repayment (₹68,400): 273.6 hours of labor (approx. 34 full working days).
-   - For CHRONOS Plan total repayment (₹51,420): 205.6 hours (approx. 25 days).
+   - For VANTIQ Plan total repayment (₹51,420): 205.6 hours (approx. 25 days).
    - Net life-energy saved: 68 working hours!
 4. Visual representation:
    - Interactive calendar/clock visualizer showing days of freedom saved.
@@ -294,7 +294,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m10_comparison_matrix/ComparativeRescueMatrix.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 11 on the CHRONOS-FIN team.
+You are Member 11 on the VANTIQ team.
 Your task is to build the Counterfactual Comparison Matrix in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -302,7 +302,7 @@ Files to edit:
 
 Requirements:
 1. Create a head-to-head table comparing:
-   - "Fragmented Multi-App Borrowing" vs. "CHRONOS-FIN Quantum Allocation".
+   - "Fragmented Multi-App Borrowing" vs. "VANTIQ Quantum Allocation".
 2. Metrics to compare:
    - Effective APR (38.5% vs. 4.2%).
    - Processing Fees & Hidden Churn (₹4,800 vs. ₹0).
@@ -319,7 +319,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m11_xai_explainer/TreeSHAPExplainer.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 12 on the CHRONOS-FIN team.
+You are Member 12 on the VANTIQ team.
 Your task is to build the TreeSHAP Explainable AI Feature Attribution Waterfall in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -345,7 +345,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m12_market_radar/MarketRadarChart.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 13 on the CHRONOS-FIN team.
+You are Member 13 on the VANTIQ team.
 Your task is to build the Competitive Radar & Market Sizing Hub in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -353,7 +353,7 @@ Files to edit:
 
 Requirements:
 1. SVG Radar / Spider Chart comparing:
-   - CHRONOS-FIN vs. Traditional Banks vs. Instant Loan Apps vs. Credit Cards.
+   - VANTIQ vs. Traditional Banks vs. Instant Loan Apps vs. Credit Cards.
    - Axes: Cross-App Awareness, Scarcity Friction, Quantum Optimization, Zero Hidden Fees, Real-time Runway Twin.
 2. Market Sizing Cards:
    - TAM: $48.2 Billion (Emerging Market Short-term Liquidity Deficit).
@@ -369,7 +369,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m13_privacy_compliance/ZeroKnowledgeCompliance.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 14 on the CHRONOS-FIN team.
+You are Member 14 on the VANTIQ team.
 Your task is to build the Zero-Knowledge Privacy & Regulatory Compliance Module in https://github.com/skandakn/VANTIQ.
 
 Files to edit:
@@ -393,7 +393,7 @@ Requirements:
 - **Files Assigned**: `src/modules/m14_roadmap_team/RoadmapAndTeam.tsx`
 - **Copy-Paste Prompt**:
 ```markdown
-You are Member 15 on the CHRONOS-FIN team.
+You are Member 15 on the VANTIQ team.
 Your task is to build the 4-Quarter Engineering Roadmap and Team Credentials Section in https://github.com/skandakn/VANTIQ.
 
 Files to edit:

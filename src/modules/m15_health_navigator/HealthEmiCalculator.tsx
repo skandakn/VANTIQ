@@ -79,7 +79,7 @@ export const HealthEmiCalculator: React.FC<HealthEmiCalculatorProps> = ({
       onClick={onClose}
     >
       <div
-        className="chronos-card"
+        className="vantiq-card"
         style={{
           maxWidth: '680px',
           width: '100%',

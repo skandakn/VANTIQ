@@ -58,8 +58,8 @@ export interface QuantumKnapsackResult {
 export interface CashflowRunwayPoint {
   day: number;
   dateLabel: string;
-  balanceWithoutChronos: number; // Cascades into negative default
-  balanceWithChronos: number;    // Stays above zero buffer
+  balanceWithoutVantiq: number; // Cascades into negative default
+  balanceWithVantiq: number;    // Stays above zero buffer
   pessimisticQuantile: number;   // q10
   expectedQuantile: number;      // q50
   optimisticQuantile: number;    // q90
