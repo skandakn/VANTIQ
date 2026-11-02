@@ -74,12 +74,12 @@ export const HeroSection: React.FC = () => {
       <div className="container">
         <div id="hero" />
         
-        {/* Main 2-Column Hero Layout - Just Like Wise */}
+        {/* Keep the introduction above the two planner panels. */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-          gap: '56px',
-          alignItems: 'center'
+          gridTemplateColumns: 'minmax(0, 1fr)',
+          gap: '32px',
+          alignItems: 'start'
         }}>
           
           {/* Left Column: Bold Value Proposition & Social Proof */}
@@ -171,12 +171,9 @@ export const HeroSection: React.FC = () => {
 
             {/* Harvard / Princeton Micro-quote */}
             <div style={{
-              padding: '18px 24px',
-              borderRadius: '16px',
-              backgroundColor: '#ffffff',
-              border: '1px solid #e5e9e2',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
-              maxWidth: '560px'
+              maxWidth: '720px',
+              paddingLeft: '16px',
+              borderLeft: '3px solid #9fe870'
             }}>
               <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', fontStyle: 'italic', lineHeight: 1.6, marginBottom: '6px' }}>
                 "Scarcity captures attention, but narrows focus—leading to decisions that solve today's crisis by engineering tomorrow's catastrophe."
@@ -188,14 +185,20 @@ export const HeroSection: React.FC = () => {
 
           </div>
 
-          {/* Right Column: The Pure White Wise-Style Product Hero Converter */}
-          <div>
+          {/* Two adjacent planner boxes: emergency plan and monthly cashflow. */}
+          <div className="hero-planner-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))',
+            gap: '20px',
+            alignItems: 'stretch'
+          }}>
             <div className="wise-converter-box" style={{
               backgroundColor: '#ffffff',
               border: '1px solid #e5e9e2',
               borderRadius: '24px',
               padding: '32px',
-              boxShadow: '0 20px 50px rgba(22, 51, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03)'
+              boxShadow: '0 20px 50px rgba(22, 51, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03)',
+              minWidth: 0
             }}>
               
               {/* Top Rate & Buffer Guarantee Pill */}
@@ -462,8 +465,6 @@ export const HeroSection: React.FC = () => {
                 </div>
               </div>
 
-              <EmergencyIntake />
-
               {/* Big Wise-Style Action Button */}
               <button
                 onClick={() => scrollToSection('rescue-split')}
@@ -488,6 +489,17 @@ export const HeroSection: React.FC = () => {
                 Takes 30 seconds · No credit score footprint · 100% Client-side Private
               </div>
 
+            </div>
+
+            <div className="wise-converter-box" style={{
+              backgroundColor: '#ffffff',
+              border: '1px solid #e5e9e2',
+              borderRadius: '24px',
+              padding: '32px',
+              boxShadow: '0 20px 50px rgba(22, 51, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03)',
+              minWidth: 0
+            }}>
+              <EmergencyIntake />
             </div>
           </div>
 
