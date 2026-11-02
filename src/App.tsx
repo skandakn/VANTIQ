@@ -13,7 +13,6 @@ import { HealthReliefNavigator } from './modules/m15_health_navigator/HealthReli
 import { GhostDebtMesh } from './modules/m03_debt_mesh/GhostDebtMesh';
 import { DualCapacityGauge } from './modules/m04_dual_dial/DualCapacityGauge';
 import { CashflowRunwayChart } from './modules/m05_cashflow_twin/CashflowRunwayChart';
-import { QuantumKnapsackVisualizer } from './modules/m06_quantum_solver/QuantumKnapsackVisualizer';
 import { MultiSourceRescueCard } from './modules/m07_rescue_blend/MultiSourceRescueCard';
 import { LifeEnergyCalculator } from './modules/m09_life_energy/LifeEnergyCalculator';
 import { ComparativeRescueMatrix } from './modules/m10_comparison_matrix/ComparativeRescueMatrix';
@@ -35,7 +34,6 @@ export const App: React.FC = () => {
           <DualCapacityGauge />
 
           <CashflowRunwayChart />
-          <QuantumKnapsackVisualizer />
           <MultiSourceRescueCard />
           <LifeEnergyCalculator />
           <ComparativeRescueMatrix />
