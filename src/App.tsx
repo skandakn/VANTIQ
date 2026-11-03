@@ -14,7 +14,6 @@ import { NeuroAdaptiveShieldModal } from './modules/m08_neuro_shield/NeuroAdapti
 // Dedicated Independent Feature Route Pages
 import { DashboardPage } from './pages/DashboardPage';
 import { CalculatorPage } from './pages/CalculatorPage';
-import { DebtTrapsPage } from './pages/DebtTrapsPage';
 import { QuantumSolverPage } from './pages/QuantumSolverPage';
 import { CashRunwayPage } from './pages/CashRunwayPage';
 import { FeeComparisonPage } from './pages/FeeComparisonPage';
@@ -49,7 +48,7 @@ const AppShell: React.FC = () => {
 
             {/* Dedicated Independent Feature Pages */}
             <Route path="/calculator" element={<CalculatorPage />} />
-            <Route path="/debt-traps" element={<DebtTrapsPage />} />
+            <Route path="/debt-traps" element={<Navigate to="/calculator" replace />} />
             <Route path="/quantum-solver" element={<QuantumSolverPage />} />
             <Route path="/cash-runway" element={<CashRunwayPage />} />
             <Route path="/fee-comparison" element={<FeeComparisonPage />} />
