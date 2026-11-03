@@ -61,7 +61,7 @@ export const DashboardPage: React.FC = () => {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Feature Modules Hub Grid (Dedicated Feature Hub by SaiArvind18) */}
+      {/* Feature Modules Hub Grid */}
       <section style={{ padding: '30px 0 50px 0', backgroundColor: 'var(--bg-deep)' }}>
         <div className="container">
           

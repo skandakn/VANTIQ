@@ -2,7 +2,7 @@
 // Dedicated Route Page: /45s-shield
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Lock, Heart, ZapOff, CheckCircle, RotateCcw, Play, Pause, Shield } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Heart, ZapOff, CheckCircle, RotateCcw, Play, Pause, Shield } from 'lucide-react';
 import { useFintech } from '../context/FintechContext';
 
 export const ShieldPage: React.FC = () => {
@@ -51,13 +51,27 @@ export const ShieldPage: React.FC = () => {
       <div className="container">
         
         {/* Navigation Breadcrumb Bar */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-            <span className="badge badge-emerald" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-              <Lock size={13} />
-              <span>Dedicated Feature Page: /45s-shield</span>
-            </span>
-          </div>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
+          <Link
+            to="/"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              color: '#94a3b8',
+              textDecoration: 'none',
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              padding: '6px 12px',
+              borderRadius: '8px',
+              backgroundColor: 'rgba(30, 41, 59, 0.4)',
+              border: '1px solid rgba(51, 65, 85, 0.5)',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <ArrowLeft size={16} color="#34d399" />
+            <span>Back to Dashboard</span>
+          </Link>
         </div>
 
         {/* Feature Section Header */}
