@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard,
   Banknote,
-  Atom, 
+  Layers,
   Wallet, 
   X, 
   ChevronRight, 
@@ -42,10 +42,10 @@ export const VANTIQ_FEATURES: VantiqFeatureItem[] = [
   },
   {
     id: 'quantum-solver',
-    name: 'Quantum Solver',
-    subtitle: 'QAOA Knapsack Engine',
+    name: 'Emergency Funding Plan',
+    subtitle: 'Multi-Source Funding Estimate',
     path: '/quantum-solver',
-    icon: Atom,
+    icon: Layers,
   },
   {
     id: 'cash-runway',
@@ -124,7 +124,7 @@ export const Sidebar: React.FC = () => {
             </div>
             <div style={{ minWidth: 0, overflow: 'hidden' }}>
               <div className="vantiq-sidebar-brand-title">FEATURE NAVIGATION</div>
-              <div className="vantiq-sidebar-brand-sub">VANTIQ Quantum Suite</div>
+              <div className="vantiq-sidebar-brand-sub">VANTIQ Financial Suite</div>
             </div>
           </div>
 
@@ -269,12 +269,12 @@ export const Sidebar: React.FC = () => {
                 <span className="vantiq-telemetry-ping" />
                 <span className="vantiq-telemetry-dot" />
               </div>
-              <span className="vantiq-telemetry-title">QUANTUM SOLVER ONLINE</span>
+              <span className="vantiq-telemetry-title">EMERGENCY FUNDING PLAN</span>
             </div>
             <div className="vantiq-telemetry-body">
               <span>Latency: <strong>38ms</strong></span>
               <span className="vantiq-telemetry-sep">|</span>
-              <span>QAOA Resilient</span>
+              <span>Multi-Tranche Verified</span>
             </div>
 
             {/* Direct Close Sidebar Action */}
