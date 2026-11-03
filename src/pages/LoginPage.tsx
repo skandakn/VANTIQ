@@ -507,7 +507,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ initialMode }) => {
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#f4f5f1')}
                   >
                     <Zap size={16} color="var(--wise-forest, #163300)" />
-                    <span>Run Quantum Solver</span>
+                    <span>View Emergency Funding Plan</span>
                   </button>
 
                   <button
@@ -658,7 +658,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ initialMode }) => {
                     }}
                   >
                     <Zap size={14} color="#15803d" />
-                    <span>Run Quantum Solver as Guest →</span>
+                    <span>View Emergency Funding Plan as Guest →</span>
                   </button>
                 </div>
 
