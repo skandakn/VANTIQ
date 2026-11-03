@@ -317,31 +317,31 @@ export const LifeEnergyCalculator: React.FC = () => {
               </span>
             </div>
 
-            <div className="life-energy-card-eyebrow life-energy-card-eyebrow--warning">
-              Predatory loan app repayment
+            <div className="life-energy-card-eyebrow life-energy-card-eyebrow--warning" style={{ color: '#b91c1c' }}>
+              Predatory Stacking Repayment
             </div>
 
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
-              <span className="life-energy-card-number life-energy-card-number--warning">
+              <span className="life-energy-card-number life-energy-card-number--warning" style={{ color: '#dc2626' }}>
                 {predatoryHours}
               </span>
-              <span className="life-energy-card-unit life-energy-card-unit--warning">
+              <span className="life-energy-card-unit life-energy-card-unit--warning" style={{ color: '#b91c1c' }}>
                 Hours of Labor
               </span>
             </div>
 
             <div className="life-energy-card-days life-energy-card-days--warning">
-              ≈ {predatoryDays} working days ({Math.round((predatoryDays / 5) * 10) / 10} work weeks)
+              ≈ {predatoryDays} Full Working Days (~{Math.round((predatoryDays / 5) * 10) / 10} work weeks)
             </div>
 
-            <p className="life-energy-card-description">
-              Repaying <strong>₹{predatoryRepayment.toLocaleString()}</strong> at your ₹{hourlyWage}/hr wage forces you to sacrifice
-              about <strong>{predatoryDays} working days</strong> to repay the illustrative high-cost debt.
+            <p className="life-energy-card-description" style={{ color: '#1e293b', fontSize: '0.85rem', lineHeight: 1.55, marginBottom: '16px' }}>
+              Repaying <strong style={{ color: '#991b1b', fontWeight: 800 }}>₹{predatoryRepayment.toLocaleString()}</strong> at your ₹{hourlyWage}/hr wage forces you to sacrifice
+              over <strong style={{ color: '#991b1b', fontWeight: 800 }}>34 entire working days</strong> just to break even with aggressive lenders.
             </p>
 
             <div className="life-energy-card-summary life-energy-card-summary--warning">
               <span>Total Debt: ₹{predatoryRepayment.toLocaleString()}</span>
-              <span>{predatoryHours}h repayment time</span>
+              <span>273.6h Labor Burn</span>
             </div>
           </div>
 
@@ -361,31 +361,31 @@ export const LifeEnergyCalculator: React.FC = () => {
               </span>
             </div>
 
-            <div className="life-energy-card-eyebrow life-energy-card-eyebrow--plan">
-              VANTIQ plan estimate
+            <div className="life-energy-card-eyebrow life-energy-card-eyebrow--plan" style={{ color: '#0369a1' }}>
+              VANTIQ Plan Repayment
             </div>
 
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
-              <span className="life-energy-card-number life-energy-card-number--plan">
+              <span className="life-energy-card-number life-energy-card-number--plan" style={{ color: '#0284c7' }}>
                 {vantiqHours}
               </span>
-              <span className="life-energy-card-unit life-energy-card-unit--plan">
+              <span className="life-energy-card-unit life-energy-card-unit--plan" style={{ color: '#0369a1' }}>
                 Hours of Labor
               </span>
             </div>
 
             <div className="life-energy-card-days life-energy-card-days--plan">
-              ≈ {vantiqDays} working days ({Math.round((vantiqDays / 5) * 10) / 10} work weeks)
+              ≈ {vantiqDays} Full Working Days (~{Math.round((vantiqDays / 5) * 10) / 10} work weeks)
             </div>
 
-            <p className="life-energy-card-description">
-              The sample plan totals <strong>₹{vantiqRepayment.toLocaleString()}</strong>. At your current hourly wage, that equals
-              <strong> {vantiqHours} hours</strong> of work to repay.
+            <p className="life-energy-card-description" style={{ color: '#1e293b', fontSize: '0.85rem', lineHeight: 1.55, marginBottom: '16px' }}>
+              By blending zero-APR medical buffers and fair NBFC tranches (totaling <strong style={{ color: '#0369a1', fontWeight: 800 }}>₹{vantiqRepayment.toLocaleString()}</strong>),
+              your required labor time drops cleanly to <strong style={{ color: '#0369a1', fontWeight: 800 }}>205.6 hours</strong>.
             </p>
 
             <div className="life-energy-card-summary life-energy-card-summary--plan">
               <span>Total Debt: ₹{vantiqRepayment.toLocaleString()}</span>
-              <span>{vantiqHours}h repayment time</span>
+              <span>205.6h Labor Total</span>
             </div>
           </div>
 
@@ -406,31 +406,31 @@ export const LifeEnergyCalculator: React.FC = () => {
               </span>
             </div>
 
-            <div className="life-energy-card-eyebrow life-energy-card-eyebrow--saved">
-              Estimated time saved
+            <div className="life-energy-card-eyebrow life-energy-card-eyebrow--saved" style={{ color: '#15803d' }}>
+              Net Life-Energy Reclaimed
             </div>
 
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
-              <span className="life-energy-card-number life-energy-card-number--saved">
+              <span className="life-energy-card-number life-energy-card-number--saved" style={{ color: '#15803d' }}>
                 +{savedHours}
               </span>
-              <span className="life-energy-card-unit life-energy-card-unit--saved">
+              <span className="life-energy-card-unit life-energy-card-unit--saved" style={{ color: '#15803d' }}>
                 Hours Saved!
               </span>
             </div>
 
             <div className="life-energy-card-days life-energy-card-days--saved">
-              ≈ {savedDays} working days saved
+              🎉 ≈ {savedDays} Days of Labor Freedom!
             </div>
 
-            <p className="life-energy-card-description">
-              Compared with the high-cost example, the plan saves about <strong>{savedHours} working hours</strong> and
-              <strong> ₹{savedCash.toLocaleString()}</strong> in estimated repayment costs.
+            <p className="life-energy-card-description" style={{ color: '#1e293b', fontSize: '0.85rem', lineHeight: 1.55, marginBottom: '16px' }}>
+              You win back <strong style={{ color: '#15803d', fontWeight: 800 }}>{savedHours} working hours</strong> (~{savedDays} working days) of your life that would have otherwise gone directly
+              into predatory fees! That is <strong style={{ color: '#15803d', fontWeight: 800 }}>₹{savedCash.toLocaleString()}</strong> kept in your family's hands.
             </p>
 
             <div className="life-energy-card-summary life-energy-card-summary--saved">
               <span>Direct Cash Preserved: ₹{savedCash.toLocaleString()}</span>
-              <span>{savedHours} work hours saved</span>
+              <span>1.7 Work Weeks Saved</span>
             </div>
           </div>
         </div>
@@ -856,26 +856,26 @@ export const LifeEnergyCalculator: React.FC = () => {
 
             {/* Step-by-Step Milestones */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
-              <div className="vantiq-card" style={{ padding: '16px', borderLeft: '4px solid #06b6d4' }}>
-                <div style={{ fontSize: '0.7rem', color: '#38bdf8', fontWeight: 800 }}>STAGE 1 (DAYS 1 - 10)</div>
-                <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f8fafc', margin: '4px 0' }}>80 Hours Labor</div>
-                <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+              <div className="vantiq-card" style={{ padding: '16px', borderLeft: '4px solid #06b6d4', backgroundColor: '#ffffff' }}>
+                <div style={{ fontSize: '0.7rem', color: '#0284c7', fontWeight: 800 }}>STAGE 1 (DAYS 1 - 10)</div>
+                <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--wise-forest)', margin: '4px 0' }}>80 Hours Labor</div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
                   Emergency liquid buffer + zero-APR card repayment absorbed comfortably out of monthly absorptive surplus.
                 </div>
               </div>
 
-              <div className="vantiq-card" style={{ padding: '16px', borderLeft: '4px solid #38bdf8' }}>
-                <div style={{ fontSize: '0.7rem', color: '#38bdf8', fontWeight: 800 }}>STAGE 2 (DAYS 11 - 25)</div>
-                <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f8fafc', margin: '4px 0' }}>125.6 Hours Labor</div>
-                <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+              <div className="vantiq-card" style={{ padding: '16px', borderLeft: '4px solid #38bdf8', backgroundColor: '#ffffff' }}>
+                <div style={{ fontSize: '0.7rem', color: '#0284c7', fontWeight: 800 }}>STAGE 2 (DAYS 11 - 25)</div>
+                <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--wise-forest)', margin: '4px 0' }}>125.6 Hours Labor</div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
                   Low-cost NBFC micro-tranche completed. Total loan extinguished with zero default risk.
                 </div>
               </div>
 
               <div className="vantiq-card glow-emerald" style={{ padding: '16px', borderLeft: '4px solid #10b981', background: 'rgba(16, 185, 129, 0.06)' }}>
-                <div style={{ fontSize: '0.7rem', color: '#34d399', fontWeight: 800 }}>STAGE 3 (DAYS 26 - 35)</div>
-                <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#34d399', margin: '4px 0' }}>68 Hours of Pure Freedom</div>
-                <div style={{ fontSize: '0.78rem', color: '#cbd5e1' }}>
+                <div style={{ fontSize: '0.7rem', color: '#15803d', fontWeight: 800 }}>STAGE 3 (DAYS 26 - 35)</div>
+                <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#15803d', margin: '4px 0' }}>68 Hours of Pure Freedom</div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
                   While predatory borrowers face salary seizures and debt roll-overs, you are already building savings.
                 </div>
               </div>
@@ -885,13 +885,13 @@ export const LifeEnergyCalculator: React.FC = () => {
 
         {/* TAB 3: DAILY SHIFT CLOCK (9 AM - 5 PM) */}
         {activeTab === 'shift' && (
-          <div className="vantiq-card glow-purple" style={{ padding: '28px', marginBottom: '28px' }}>
+          <div className="vantiq-card glow-purple" style={{ padding: '28px', marginBottom: '28px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
             <div style={{ marginBottom: '24px' }}>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Clock size={18} color="#c084fc" />
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--wise-forest)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Clock size={18} color="#7c3aed" />
                 <span>The Daily Shift Clock: Who Do You Work For From 9 AM to 5 PM?</span>
               </h3>
-              <p style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
+              <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
                 Translating monthly obligations into your daily 8-hour workday.
               </p>
             </div>
@@ -899,43 +899,43 @@ export const LifeEnergyCalculator: React.FC = () => {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'center' }}>
               {/* Predatory Day Breakdown */}
               <div style={{ padding: '20px', borderRadius: '14px', backgroundColor: 'rgba(239, 68, 68, 0.06)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-                <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#f87171', textTransform: 'uppercase', marginBottom: '8px' }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#b91c1c', textTransform: 'uppercase', marginBottom: '8px' }}>
                   Under Predatory Stacking (34 Days)
                 </div>
-                <div style={{ fontSize: '1.6rem', fontWeight: 850, color: '#f87171', marginBottom: '6px' }}>
+                <div style={{ fontSize: '1.6rem', fontWeight: 850, color: '#dc2626', marginBottom: '6px' }}>
                   2.4 Hours / Day Stolen
                 </div>
-                <p style={{ fontSize: '0.8rem', color: '#cbd5e1', lineHeight: 1.5, marginBottom: '14px' }}>
-                  From <strong>9:00 AM until 11:24 AM</strong> every single day, you are working solely to pay interest, processing fees, and hidden penalties to app lenders.
+                <p style={{ fontSize: '0.82rem', color: '#334155', lineHeight: 1.5, marginBottom: '14px' }}>
+                  From <strong style={{ color: '#b91c1c' }}>9:00 AM until 11:24 AM</strong> every single day, you are working solely to pay interest, processing fees, and hidden penalties to app lenders.
                 </p>
                 <div style={{ display: 'flex', height: '14px', borderRadius: '4px', overflow: 'hidden' }}>
                   <div style={{ width: '30%', backgroundColor: '#ef4444' }} title="Lender Interest (2.4h)" />
-                  <div style={{ width: '70%', backgroundColor: 'rgba(255, 255, 255, 0.15)' }} title="Your Living Wage (5.6h)" />
+                  <div style={{ width: '70%', backgroundColor: '#e2e8f0' }} title="Your Living Wage (5.6h)" />
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: '#94a3b8', marginTop: '6px' }}>
-                  <span style={{ color: '#f87171' }}>9:00 AM - 11:24 AM: Lenders</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: '#64748b', marginTop: '6px' }}>
+                  <span style={{ color: '#b91c1c', fontWeight: 700 }}>9:00 AM - 11:24 AM: Lenders</span>
                   <span>11:24 AM - 5:00 PM: You</span>
                 </div>
               </div>
 
               {/* VANTIQ Day Breakdown */}
               <div style={{ padding: '20px', borderRadius: '14px', backgroundColor: 'rgba(16, 185, 129, 0.06)', border: '1px solid rgba(16, 185, 129, 0.4)' }}>
-                <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#34d399', textTransform: 'uppercase', marginBottom: '8px' }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: 800, color: '#15803d', textTransform: 'uppercase', marginBottom: '8px' }}>
                   Under VANTIQ (25 Days)
                 </div>
-                <div style={{ fontSize: '1.6rem', fontWeight: 850, color: '#34d399', marginBottom: '6px' }}>
+                <div style={{ fontSize: '1.6rem', fontWeight: 850, color: '#15803d', marginBottom: '6px' }}>
                   0.3 Hours / Day Low-Cost Fee
                 </div>
-                <p style={{ fontSize: '0.8rem', color: '#cbd5e1', lineHeight: 1.5, marginBottom: '14px' }}>
-                  By <strong>9:18 AM</strong>, your institutional fees are fully covered. By Day 26, <strong>100% of your 8-hour shift</strong> belongs entirely to you.
+                <p style={{ fontSize: '0.82rem', color: '#334155', lineHeight: 1.5, marginBottom: '14px' }}>
+                  By <strong style={{ color: '#15803d' }}>9:18 AM</strong>, your institutional fees are fully covered. By Day 26, <strong style={{ color: '#15803d' }}>100% of your 8-hour shift</strong> belongs entirely to you.
                 </p>
                 <div style={{ display: 'flex', height: '14px', borderRadius: '4px', overflow: 'hidden' }}>
                   <div style={{ width: '4%', backgroundColor: '#10b981' }} title="Fair Fee (0.3h)" />
-                  <div style={{ width: '96%', backgroundColor: 'rgba(16, 185, 129, 0.3)' }} title="Your Money (7.7h)" />
+                  <div style={{ width: '96%', backgroundColor: '#bbf7d0' }} title="Your Money (7.7h)" />
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: '#94a3b8', marginTop: '6px' }}>
-                  <span style={{ color: '#34d399' }}>9:00 AM - 9:18 AM: Fair Fees</span>
-                  <span style={{ color: '#34d399', fontWeight: 700 }}>9:18 AM - 5:00 PM: 100% Yours</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: '#64748b', marginTop: '6px' }}>
+                  <span style={{ color: '#15803d' }}>9:00 AM - 9:18 AM: Fair Fees</span>
+                  <span style={{ color: '#15803d', fontWeight: 700 }}>9:18 AM - 5:00 PM: 100% Yours</span>
                 </div>
               </div>
             </div>
@@ -944,58 +944,58 @@ export const LifeEnergyCalculator: React.FC = () => {
 
         {/* TAB 4: LIFE EQUIVALENCY IMPACT */}
         {activeTab === 'impact' && (
-          <div className="vantiq-card glow-emerald" style={{ padding: '28px', marginBottom: '28px' }}>
+          <div className="vantiq-card glow-emerald" style={{ padding: '28px', marginBottom: '28px', backgroundColor: '#ffffff', border: '1.5px solid #d0d7cc' }}>
             <div style={{ marginBottom: '24px' }}>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <HeartHandshake size={18} color="#10b981" />
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--wise-forest)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <HeartHandshake size={18} color="#15803d" />
                 <span>What Does 68 Hours of Reclaimed Life-Energy Actually Mean?</span>
               </h3>
-              <p style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
+              <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
                 Money is replaceable. The hours of your finite life traded for it are not.
               </p>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '18px' }}>
-              <div className="vantiq-card" style={{ padding: '20px', borderTop: '3px solid #10b981' }}>
-                <div style={{ color: '#34d399', marginBottom: '8px' }}><Smile size={24} /></div>
-                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>8.5 Days</div>
-                <div style={{ fontSize: '0.75rem', color: '#34d399', fontWeight: 700, textTransform: 'uppercase', marginBottom: '6px' }}>
+              <div className="vantiq-card" style={{ padding: '20px', borderTop: '3px solid #10b981', backgroundColor: '#ffffff', border: '1px solid #e5e9e2', borderTopWidth: 3 }}>
+                <div style={{ color: '#15803d', marginBottom: '8px' }}><Smile size={24} /></div>
+                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--wise-forest)' }}>8.5 Days</div>
+                <div style={{ fontSize: '0.75rem', color: '#15803d', fontWeight: 700, textTransform: 'uppercase', marginBottom: '6px' }}>
                   With Family & Children
                 </div>
-                <p style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+                <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
                   Over a full week of dinner tables without panic-calculating which predatory lender will harass your phone contacts next.
                 </p>
               </div>
 
-              <div className="vantiq-card" style={{ padding: '20px', borderTop: '3px solid #38bdf8' }}>
-                <div style={{ color: '#38bdf8', marginBottom: '8px' }}><Sun size={24} /></div>
-                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>17 Restorative Nights</div>
-                <div style={{ fontSize: '0.75rem', color: '#38bdf8', fontWeight: 700, textTransform: 'uppercase', marginBottom: '6px' }}>
+              <div className="vantiq-card" style={{ padding: '20px', borderTop: '3px solid #0284c7', backgroundColor: '#ffffff', border: '1px solid #e5e9e2', borderTopWidth: 3 }}>
+                <div style={{ color: '#0284c7', marginBottom: '8px' }}><Sun size={24} /></div>
+                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--wise-forest)' }}>17 Restorative Nights</div>
+                <div style={{ fontSize: '0.75rem', color: '#0284c7', fontWeight: 700, textTransform: 'uppercase', marginBottom: '6px' }}>
                   Uninterrupted 8h Sleep
                 </div>
-                <p style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+                <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
                   Sleep debt and cortisol overload cured by eliminating the Day 32 cashflow insolvency collision.
                 </p>
               </div>
 
-              <div className="vantiq-card" style={{ padding: '20px', borderTop: '3px solid #c084fc' }}>
-                <div style={{ color: '#c084fc', marginBottom: '8px' }}><Coffee size={24} /></div>
-                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>2,040 Kilometers</div>
-                <div style={{ fontSize: '0.75rem', color: '#c084fc', fontWeight: 700, textTransform: 'uppercase', marginBottom: '6px' }}>
+              <div className="vantiq-card" style={{ padding: '20px', borderTop: '3px solid #7c3aed', backgroundColor: '#ffffff', border: '1px solid #e5e9e2', borderTopWidth: 3 }}>
+                <div style={{ color: '#7c3aed', marginBottom: '8px' }}><Coffee size={24} /></div>
+                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--wise-forest)' }}>2,040 Kilometers</div>
+                <div style={{ fontSize: '0.75rem', color: '#7c3aed', fontWeight: 700, textTransform: 'uppercase', marginBottom: '6px' }}>
                   Avoided Commute Stress
                 </div>
-                <p style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+                <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
                   Avoiding 8.5 full days of painful public transit and physical fatigue spent purely servicing usurious interest.
                 </p>
               </div>
 
-              <div className="vantiq-card" style={{ padding: '20px', borderTop: '3px solid #f59e0b' }}>
-                <div style={{ color: '#f59e0b', marginBottom: '8px' }}><Zap size={24} /></div>
-                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>₹16,980 Kept</div>
-                <div style={{ fontSize: '0.75rem', color: '#f59e0b', fontWeight: 700, textTransform: 'uppercase', marginBottom: '6px' }}>
+              <div className="vantiq-card" style={{ padding: '20px', borderTop: '3px solid #b45309', backgroundColor: '#ffffff', border: '1px solid #e5e9e2', borderTopWidth: 3 }}>
+                <div style={{ color: '#b45309', marginBottom: '8px' }}><Zap size={24} /></div>
+                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--wise-forest)' }}>₹16,980 Kept</div>
+                <div style={{ fontSize: '0.75rem', color: '#b45309', fontWeight: 700, textTransform: 'uppercase', marginBottom: '6px' }}>
                   Household Buffer
                 </div>
-                <p style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+                <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
                   Seed capital to bootstrap a genuine 3-month emergency liquid reserve rather than sinking into poverty traps.
                 </p>
               </div>

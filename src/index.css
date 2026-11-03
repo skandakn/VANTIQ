@@ -495,8 +495,10 @@ main section h3 {
 }
 
 .vantiq-card [style*="#cbd5e1"],
-.vantiq-card [style*="#CBD5E1"] {
-  color: #334155 !important;
+.vantiq-card [style*="#CBD5E1"],
+.vantiq-card [style*="#f1f5f9"],
+.vantiq-card [style*="#F1F5F9"] {
+  color: #1e293b !important;
 }
 
 .vantiq-card [style*="#34d399"],
