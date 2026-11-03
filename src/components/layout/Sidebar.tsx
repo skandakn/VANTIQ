@@ -11,7 +11,6 @@ import {
   X, 
   ChevronRight, 
   Activity,
-  Zap,
   LogIn
 } from 'lucide-react';
 import { UserButton, useUser } from '@clerk/react';
@@ -140,7 +139,8 @@ export const Sidebar: React.FC = () => {
             className="vantiq-sidebar-brand"
             onClick={() => {
               navigate('/');
-              if (window.innerWidth < 1024) setIsSidebarOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              setIsSidebarOpen(false);
             }}
             style={{ cursor: 'pointer' }}
             title="Return to Dashboard Overview"
@@ -199,10 +199,9 @@ export const Sidebar: React.FC = () => {
                     }
                   } else {
                     navigate(feature.path);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                   }
-                  if (window.innerWidth < 1024) {
-                    setIsSidebarOpen(false);
-                  }
+                  setIsSidebarOpen(false);
                 }}
                 className={`vantiq-sidebar-item ${isSelected ? 'active' : ''} ${isShieldActive ? 'shield-pulse' : ''}`}
                 role="menuitem"
@@ -245,7 +244,8 @@ export const Sidebar: React.FC = () => {
               <button
                 onClick={() => {
                   navigate('/login');
-                  if (window.innerWidth < 1024) setIsSidebarOpen(false);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  setIsSidebarOpen(false);
                 }}
                 style={{
                   width: '100%',
@@ -309,17 +309,6 @@ export const Sidebar: React.FC = () => {
               <span className="vantiq-telemetry-sep">|</span>
               <span>QAOA Resilient</span>
             </div>
-
-            <button
-              onClick={() => {
-                navigate('/calculator');
-                if (window.innerWidth < 1024) setIsSidebarOpen(false);
-              }}
-              className="vantiq-sidebar-action-cta"
-            >
-              <Zap size={14} color="var(--wise-lime, #9fe870)" />
-              <span>Simulate Emergency Shock</span>
-            </button>
 
             {/* Direct Close Sidebar Action */}
             <button
@@ -792,31 +781,6 @@ export const Sidebar: React.FC = () => {
 
         .vantiq-telemetry-sep {
           color: var(--border-medium, #d0d7cc);
-        }
-
-        .vantiq-sidebar-action-cta {
-          width: 100%;
-          padding: 9px 12px;
-          border-radius: 8px;
-          background: var(--wise-forest, #163300);
-          border: 1px solid var(--wise-forest, #163300);
-          color: var(--wise-lime, #9fe870);
-          font-size: 0.75rem;
-          font-weight: 800;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 6px;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          box-shadow: 0 2px 6px rgba(22, 51, 0, 0.12);
-        }
-
-        .vantiq-sidebar-action-cta:hover {
-          background: #0d1f00;
-          border-color: #0d1f00;
-          box-shadow: 0 4px 12px rgba(22, 51, 0, 0.2);
-          transform: translateY(-1px);
         }
 
         /* Mobile Adjustments */
