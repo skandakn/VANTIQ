@@ -6,7 +6,6 @@ import {
   ArrowUp, 
   Zap, 
   Activity, 
-  Scale, 
   Lock
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -110,15 +109,6 @@ export const Footer: React.FC = () => {
                   <span>90-Day Cashflow Digital Twin</span>
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/fee-comparison"
-                  style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.84rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                >
-                  <Scale size={13} color="var(--wise-lime, #9fe870)" />
-                  <span>Fee &amp; APR Comparison Matrix</span>
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -144,15 +134,6 @@ export const Footer: React.FC = () => {
                 >
                   <Lock size={13} color="var(--wise-lime, #9fe870)" />
                   <span>Zero-Knowledge Proof Security</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/45s-shield"
-                  style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.84rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                >
-                  <Shield size={13} color="var(--wise-lime, #9fe870)" />
-                  <span>45-Second Neuro-Shield Protocol</span>
                 </Link>
               </li>
               <li>

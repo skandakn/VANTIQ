@@ -6,8 +6,6 @@ import {
   HeartHandshake,
   Atom, 
   Wallet, 
-  Scale, 
-  Lock, 
   X, 
   ChevronRight, 
   Activity,
@@ -64,28 +62,12 @@ export const VANTIQ_FEATURES: VantiqFeatureItem[] = [
     path: '/cash-runway',
     icon: Wallet,
   },
-  {
-    id: 'fee-comparison',
-    name: 'Fee Comparison',
-    subtitle: 'Counterfactual Matrix',
-    path: '/fee-comparison',
-    icon: Scale,
-  },
-  {
-    id: '45s-shield',
-    name: '45s Shield',
-    subtitle: 'Neuro-Adaptive Pacing',
-    path: '/45s-shield',
-    icon: Lock,
-    isAction: true,
-  },
 ];
 
 export const Sidebar: React.FC = () => {
   const { 
     isSidebarOpen, 
-    setIsSidebarOpen, 
-    neuroState 
+    setIsSidebarOpen 
   } = useFintech();
 
   const navigate = useNavigate();
@@ -167,7 +149,7 @@ export const Sidebar: React.FC = () => {
         {/* Section Category Indicator */}
         <div className="vantiq-sidebar-section-label">
           <span>CORE FINANCIAL MODULES</span>
-          <span className="vantiq-sidebar-count-badge">7 AVAILABLE</span>
+          <span className="vantiq-sidebar-count-badge">{VANTIQ_FEATURES.length} AVAILABLE</span>
         </div>
 
         {/* Navigation Feature Links List */}
@@ -180,7 +162,6 @@ export const Sidebar: React.FC = () => {
               : feature.isAnchor
                 ? location.hash.includes('health-navigator')
                 : location.pathname === feature.path;
-            const isShieldActive = feature.id === '45s-shield' && neuroState.isShieldActive;
 
             return (
               <button
@@ -203,7 +184,7 @@ export const Sidebar: React.FC = () => {
                   }
                   setIsSidebarOpen(false);
                 }}
-                className={`vantiq-sidebar-item ${isSelected ? 'active' : ''} ${isShieldActive ? 'shield-pulse' : ''}`}
+                className={`vantiq-sidebar-item ${isSelected ? 'active' : ''}`}
                 role="menuitem"
                 aria-current={isSelected ? 'page' : undefined}
                 data-feature-id={feature.id}

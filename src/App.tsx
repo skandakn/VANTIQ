@@ -9,15 +9,12 @@ import { Navbar } from './components/layout/Navbar';
 import { Sidebar } from './components/layout/Sidebar';
 import { Footer } from './components/layout/Footer';
 import { PwaMobileNav } from './components/layout/PwaMobileNav';
-import { NeuroAdaptiveShieldModal } from './modules/m08_neuro_shield/NeuroAdaptiveShieldModal';
 
 // Dedicated Independent Feature Route Pages
 import { DashboardPage } from './pages/DashboardPage';
 import { CalculatorPage } from './pages/CalculatorPage';
 import { QuantumSolverPage } from './pages/QuantumSolverPage';
 import { CashRunwayPage } from './pages/CashRunwayPage';
-import { FeeComparisonPage } from './pages/FeeComparisonPage';
-import { ShieldPage } from './pages/ShieldPage';
 import { LoginPage } from './pages/LoginPage';
 import { UserProfilePage } from './pages/UserProfilePage';
 
@@ -50,9 +47,9 @@ const AppShell: React.FC = () => {
             <Route path="/debt-traps" element={<Navigate to="/calculator" replace />} />
             <Route path="/quantum-solver" element={<QuantumSolverPage />} />
             <Route path="/cash-runway" element={<CashRunwayPage />} />
-            <Route path="/fee-comparison" element={<FeeComparisonPage />} />
+            <Route path="/fee-comparison" element={<Navigate to="/" replace />} />
             <Route path="/security-zk" element={<Navigate to="/" replace />} />
-            <Route path="/45s-shield" element={<ShieldPage />} />
+            <Route path="/45s-shield" element={<Navigate to="/" replace />} />
 
             {/* Clerk Authentication & User Security Profile Routes */}
             <Route path="/login" element={<LoginPage initialMode="sign-in" />} />
@@ -66,7 +63,7 @@ const AppShell: React.FC = () => {
             <Route path="/simulator" element={<Navigate to="/calculator" replace />} />
             <Route path="/ghost-debt" element={<Navigate to="/debt-traps" replace />} />
             <Route path="/digital-twin" element={<Navigate to="/cash-runway" replace />} />
-            <Route path="/comparison" element={<Navigate to="/fee-comparison" replace />} />
+            <Route path="/comparison" element={<Navigate to="/" replace />} />
             <Route path="/compliance" element={<Navigate to="/security-zk" replace />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
@@ -75,8 +72,6 @@ const AppShell: React.FC = () => {
         <Footer />
         <PwaMobileNav />
       </div>
-
-      <NeuroAdaptiveShieldModal />
     </div>
   );
 };

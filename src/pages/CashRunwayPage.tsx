@@ -62,7 +62,7 @@ export const CashRunwayPage: React.FC = () => {
           </Link>
 
           <Link
-            to="/fee-comparison"
+            to="/"
             className="btn btn-secondary"
             style={{
               display: 'inline-flex',
@@ -74,7 +74,7 @@ export const CashRunwayPage: React.FC = () => {
               color: '#34d399',
             }}
           >
-            <span>Next: Fee Comparison</span>
+            <span>Overview Dashboard</span>
             <ArrowRight size={15} />
           </Link>
         </div>

@@ -33,10 +33,6 @@ export const Navbar: React.FC = () => {
         return 'Quantum Rescue Solver';
       case '/cash-runway':
         return '90-Day Digital Twin Cash Runway';
-      case '/fee-comparison':
-        return 'Counterfactual Fee Comparison';
-            case '/45s-shield':
-        return '45-Second Neuro-Adaptive Shield';
       case '/profile':
         return 'User Security Profile & Settings';
       default:
