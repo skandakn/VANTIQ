@@ -193,24 +193,42 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     };
   }, [shock.amount, shock.tenureMonths, profile.emergencySavings, hourlyWage]);
 
-  // Illustrative 90-day cashflow projection using the current profile and plan.
+  // Dynamic, calendar-aware 90-day cashflow digital twin projection
   const runwayData = useMemo<CashflowRunwayPoint[]>(() => {
     const days = [0, 15, 30, 32, 45, 60, 75, 90];
     const shockAmt = Math.max(0, shock.amount);
     const savingsUsed = Math.min(profile.emergencySavings, Math.round(shockAmt * 0.1));
     const startingCash = Math.max(0, profile.emergencySavings - savingsUsed);
-    const dailySurplus = dynamicSurplus / 30;
-    const amountScale = shockAmt / 50000;
+    const dailyLivingBurn = Math.round(profile.livingExpenses / 30);
+    const amountScale = shockAmt > 0 ? shockAmt / 50000 : 1;
     const plan = fundingPlan.tranches.map((tranche) => tranche.monthlyObligation);
     const scenarioBalances = new Map<number, { withoutVantiq: number; withVantiq: number }>();
+
     let balanceWithoutVantiq = startingCash;
     let balanceWithVantiq = startingCash;
     scenarioBalances.set(0, { withoutVantiq: balanceWithoutVantiq, withVantiq: balanceWithVantiq });
 
     for (let day = 1; day <= 90; day += 1) {
-      balanceWithoutVantiq += dailySurplus;
-      balanceWithVantiq += dailySurplus;
+      // Daily essential living expense burn
+      balanceWithoutVantiq -= dailyLivingBurn;
+      balanceWithVantiq -= dailyLivingBurn;
 
+      // Existing fixed personal/car loan EMI on Day 5, 35, 65
+      if (day === 5 || day === 35 || day === 65) {
+        balanceWithoutVantiq -= profile.existingEmi;
+        balanceWithVantiq -= profile.existingEmi;
+      }
+
+      // Monthly Payroll Inflow on Day 30, 60, 90
+      if (day === 30 || day === 60 || day === 90) {
+        balanceWithoutVantiq += profile.monthlyIncome;
+        balanceWithVantiq += profile.monthlyIncome;
+        // House rent deduction on Day 30 and Day 60
+        balanceWithoutVantiq -= profile.houseRent;
+        balanceWithVantiq -= profile.houseRent;
+      }
+
+      // Predatory fragmented instant loan deductions:
       for (const offer of defaultOffers) {
         const installmentIndex = Math.floor((day - offer.defaultCollisionDay) / 30);
         if (
@@ -218,13 +236,21 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
           (day - offer.defaultCollisionDay) % 30 === 0 &&
           installmentIndex < offer.tenureMonths
         ) {
-          balanceWithoutVantiq -= offer.monthlyEmi * amountScale;
+          balanceWithoutVantiq -= Math.round(offer.monthlyEmi * amountScale);
         }
       }
 
-      if (shockAmt > 0 && day % 30 === 0) {
+      // Predatory overdue late fee penalties & NACH bounce fees if underwater
+      if (balanceWithoutVantiq < 0 && (day === 45 || day === 75)) {
+        balanceWithoutVantiq -= Math.round(1800 + Math.abs(balanceWithoutVantiq) * 0.035);
+      }
+
+      // VANTIQ coordinated relief schedule:
+      // Tranche A (0% Advance) & Tranche B (Co-op bridge) aligned with payday
+      if (shockAmt > 0 && (day === 30 || day === 60)) {
         balanceWithVantiq -= plan[0] + plan[1];
       }
+      // Tranche C (Deferred micro-loan) begins only after Day 60 grace period
       if (shockAmt > 0 && day >= 61 && (day - 61) % 30 === 0) {
         balanceWithVantiq -= plan[2];
       }
@@ -236,18 +262,19 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
     return days.map((day) => {
       const balance = scenarioBalances.get(day) ?? { withoutVantiq: startingCash, withVantiq: startingCash };
-      const uncertainty = Math.round(Math.abs(dynamicSurplus) * (day / 30) * 0.1);
+      // Volatility quantile bounds (P10 Pessimistic / P90 Optimistic)
+      const incomeVol = Math.round(profile.monthlyIncome * 0.08 * (day / 30));
       return {
         day,
         dateLabel: `Day ${day}`,
         balanceWithoutVantiq: Math.round(balance.withoutVantiq),
         balanceWithVantiq: Math.round(balance.withVantiq),
-        pessimisticQuantile: Math.round(balance.withVantiq - uncertainty),
+        pessimisticQuantile: Math.round(balance.withVantiq - incomeVol),
         expectedQuantile: Math.round(balance.withVantiq),
-        optimisticQuantile: Math.round(balance.withVantiq + uncertainty),
+        optimisticQuantile: Math.round(balance.withVantiq + incomeVol),
       };
     });
-  }, [profile.emergencySavings, shock.amount, dynamicSurplus, fundingPlan]);
+  }, [profile.monthlyIncome, profile.houseRent, profile.existingEmi, profile.livingExpenses, profile.emergencySavings, shock.amount, fundingPlan]);
 
   const triggerNeuroShield = useCallback(() => {
     setNeuroState((prev) => ({
