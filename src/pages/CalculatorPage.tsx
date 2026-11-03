@@ -66,7 +66,7 @@ export const CalculatorPage: React.FC = () => {
           </Link>
 
           <Link
-            to="/debt-traps"
+            to="/quantum-solver"
             className="btn btn-secondary"
             style={{
               display: 'inline-flex',
@@ -78,7 +78,7 @@ export const CalculatorPage: React.FC = () => {
               color: '#34d399',
             }}
           >
-            <span>Next: Ghost Debt Traps</span>
+            <span>Next: Quantum Solver</span>
             <ArrowRight size={15} />
           </Link>
         </div>

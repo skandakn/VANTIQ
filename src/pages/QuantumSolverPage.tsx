@@ -49,7 +49,7 @@ export const QuantumSolverPage: React.FC = () => {
         {/* Bottom Feature Navigation Footer */}
         <div style={{ marginTop: '48px', paddingTop: '24px', borderTop: '1px solid rgba(51, 65, 85, 0.4)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <Link
-            to="/debt-traps"
+            to="/calculator"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -60,7 +60,7 @@ export const QuantumSolverPage: React.FC = () => {
             }}
           >
             <ArrowLeft size={14} />
-            <span>Previous: Ghost Debt Traps</span>
+            <span>Previous: Calculator</span>
           </Link>
 
           <Link

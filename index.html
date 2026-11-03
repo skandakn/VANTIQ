@@ -2,6 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Instant Cache & Service Worker Purge -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (var reg of registrations) { reg.unregister(); }
+        });
+      }
+      if ('caches' in window) {
+        caches.keys().then(function(names) {
+          for (var name of names) { caches.delete(name); }
+        });
+      }
+    </script>
+
 
     <!-- Viewport & Mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -20,7 +34,7 @@
     <title>VANTIQ – Emergency Finance Optimizer</title>
     <meta name="description" content="Emergency finance planning, repayment estimates, and borrowing risk comparisons for salaried households facing urgent expenses." />
     <meta name="keywords" content="emergency finance, repayment planning, borrowing costs, VANTIQ, fintech" />
-    <meta name="author" content="Team INNOVATEX" />
+    <meta name="author" content="VANTIQ" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="VANTIQ – Emergency Finance Optimizer" />
     <meta property="og:description" content="Compare emergency borrowing costs and review repayment estimates." />
