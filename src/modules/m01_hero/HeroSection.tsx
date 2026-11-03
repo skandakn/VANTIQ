@@ -4,7 +4,6 @@ import React, { useState, useId, useEffect } from 'react';
 import {
   ShieldCheck,
   Star,
-  Check,
   ArrowRight,
   TrendingDown,
   Lock,
@@ -210,9 +209,15 @@ export const HeroSection: React.FC = () => {
               minWidth: 0,
               boxSizing: 'border-box'
             }}>
+
+              <div className="planner-card-heading">
+                <span className="planner-step-label">YOUR ESTIMATE</span>
+                <h2>Your emergency plan</h2>
+                <p>See one possible way to cover the bill and what the monthly payment could look like.</p>
+              </div>
               
               {/* Top Rate & Buffer Guarantee Pill */}
-              <div style={{
+              <div className="rescue-status-row" style={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
@@ -222,11 +227,11 @@ export const HeroSection: React.FC = () => {
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', color: '#15803d', fontWeight: 800 }}>
                   <Lock size={15} />
-                  <span>Available for repayments: ₹{profile.absorptiveSurplus.toLocaleString('en-IN')}/month</span>
+                  <span>Estimated room for a new payment: ₹{profile.absorptiveSurplus.toLocaleString('en-IN')}/month</span>
                 </div>
                 <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                  <span>No stacked high-cost loans in this plan</span>
-                  <Check size={14} color="#15803d" />
+                  <span>Illustrative estimate</span>
+                  <Info size={14} color="#64748b" />
                 </div>
               </div>
 
@@ -240,7 +245,7 @@ export const HeroSection: React.FC = () => {
                   fontWeight: 700,
                   color: 'var(--wise-forest)'
                 }}>
-                  <label htmlFor={emergencyAmountId} style={{ cursor: 'pointer' }}>How much do you need today?</label>
+                  <label htmlFor={emergencyAmountId} style={{ cursor: 'pointer' }}>Emergency bill amount</label>
                   <div style={{ display: 'flex', gap: '6px' }}>
                     {[30000, 50000, 80000].map((amt) => (
                       <button
@@ -299,7 +304,7 @@ export const HeroSection: React.FC = () => {
                 <div style={{ marginTop: '14px', marginBottom: '4px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                     <label style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--wise-forest)' }}>
-                      Choose a repayment period
+                      How long would you repay?
                     </label>
                     <span style={{ fontSize: '0.86rem', fontWeight: 900, color: '#15803d' }}>
                       {tenureMonths} {tenureMonths === 1 ? 'month' : 'months'}
@@ -365,7 +370,7 @@ export const HeroSection: React.FC = () => {
                 {/* Node 1: Savings */}
                 <div className="wise-stepper-node">
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                    <span style={{ color: 'var(--text-secondary)' }}>Your savings used</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>From your available savings</span>
                     <strong style={{ color: '#15803d' }}>- ₹{savingsTranche.toLocaleString()} (0% APR)</strong>
                   </div>
                 </div>
@@ -373,7 +378,7 @@ export const HeroSection: React.FC = () => {
                 {/* Node 2: Subsidized Advance */}
                 <div className="wise-stepper-node">
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                    <span style={{ color: 'var(--text-secondary)' }}>0% hospital / employer advance</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>Potential hospital / employer advance</span>
                     <strong style={{ color: '#15803d' }}>- ₹{subsidizedTranche.toLocaleString()} (0% APR)</strong>
                   </div>
                 </div>
@@ -381,7 +386,7 @@ export const HeroSection: React.FC = () => {
                 {/* Node 3: Co-op Credit Union */}
                 <div className="wise-stepper-node">
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                    <span style={{ color: 'var(--text-secondary)' }}>Co-op loan estimate</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>Estimated co-op loan</span>
                     <strong style={{ color: 'var(--wise-forest)' }}>- ₹{coOpTranche.toLocaleString()} (6.5% APR)</strong>
                   </div>
                 </div>
@@ -390,7 +395,7 @@ export const HeroSection: React.FC = () => {
                 {deferredTranche > 0 && (
                   <div className="wise-stepper-node">
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                      <span style={{ color: 'var(--text-secondary)' }}>Deferred loan estimate</span>
+                      <span style={{ color: 'var(--text-secondary)' }}>Estimated deferred loan</span>
                       <strong style={{ color: 'var(--wise-forest)' }}>- ₹{deferredTranche.toLocaleString()} (8.0% APR)</strong>
                     </div>
                   </div>
@@ -409,7 +414,7 @@ export const HeroSection: React.FC = () => {
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.84rem', color: '#15803d', fontWeight: 600 }}>
                     <Info size={15} />
-                    <span>Estimated interest cost for this term:</span>
+                    <span>Estimated interest for this plan:</span>
                   </div>
                   <strong style={{ fontSize: '0.94rem', color: '#15803d', fontWeight: 900 }}>
                     ₹{vantiqTotalFee.toLocaleString()} ({vantiqFeePercent.toFixed(1)}%)
