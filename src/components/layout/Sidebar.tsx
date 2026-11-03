@@ -357,23 +357,45 @@ export const Sidebar: React.FC = () => {
         /* Sidebar Container */
         .vantiq-sidebar {
           position: fixed;
-          top: 68px; /* Below header on desktop */
+          top: 0;
           left: 0;
           bottom: 0;
-          width: 280px;
+          width: 260px;
           background: #ffffff;
           border-right: 1px solid var(--border-subtle, #e5e9e2);
-          box-shadow: 6px 0 24px rgba(22, 51, 0, 0.06);
           z-index: 1050;
           display: flex;
           flex-direction: column;
-          transform: translateX(-100%);
-          transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-          overflow: hidden;
+          overflow-y: auto;
+          overflow-x: hidden;
+          transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
         }
 
-        .vantiq-sidebar.open {
-          transform: translateX(0);
+        /* Desktop: Always Visible on Left */
+        @media (min-width: 1024px) {
+          .vantiq-sidebar {
+            transform: translateX(0) !important;
+            visibility: visible !important;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03) !important;
+          }
+          .vantiq-sidebar-close-btn {
+            display: none !important;
+          }
+          .vantiq-sidebar-overlay {
+            display: none !important;
+          }
+        }
+
+        /* Mobile & Tablet: Drawer Slide-in */
+        @media (max-width: 1023px) {
+          .vantiq-sidebar {
+            width: 280px;
+            transform: translateX(-100%);
+            box-shadow: 12px 0 35px rgba(22, 51, 0, 0.18);
+          }
+          .vantiq-sidebar.open {
+            transform: translateX(0);
+          }
         }
 
         /* Sidebar Header */

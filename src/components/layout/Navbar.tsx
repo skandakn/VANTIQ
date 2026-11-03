@@ -71,21 +71,21 @@ export const Navbar: React.FC = () => {
     >
       {/* Left: Mobile Toggle & Page Title */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-        {/* Mobile Hamburger Toggle for Left Sidebar */}
+        {/* Hamburger Toggle for Left Sidebar */}
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="dashboard-menu-toggle"
           aria-label={isSidebarOpen ? 'Close sidebar' : 'Open features sidebar'}
           style={{
-            border: '1px solid #e2e8f0',
-            backgroundColor: '#f8fafc',
+            border: '1px solid var(--border-medium, #d0d7cc)',
+            backgroundColor: 'var(--bg-deep, #f4f5f1)',
             borderRadius: '8px',
             padding: '7px 9px',
             cursor: 'pointer',
-            display: 'none',
+            display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#0f172a',
+            color: 'var(--wise-forest, #163300)',
           }}
         >
           {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
