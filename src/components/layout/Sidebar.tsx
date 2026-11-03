@@ -33,7 +33,7 @@ export const VANTIQ_FEATURES: VantiqFeatureItem[] = [
   {
     id: 'overview',
     name: 'Overview',
-    subtitle: 'Cardiovascular & Finance',
+    subtitle: 'Emergency Finance Hub',
     path: '/',
     icon: LayoutDashboard,
   },

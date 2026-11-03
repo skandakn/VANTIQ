@@ -1,14 +1,12 @@
 // src/components/layout/Navbar.tsx
 // Modern Top Dashboard Header Bar (BeatAhead Style)
 // All feature links moved to the persistent Left Sidebar
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   Menu, 
   X,
-  Settings,
-  Globe,
-  ChevronDown
+  Settings
 } from 'lucide-react';
 import { UserButton, useUser, useClerk } from '@clerk/react';
 import { SignedIn, SignedOut } from '../../config/clerk';
@@ -22,17 +20,15 @@ export const Navbar: React.FC = () => {
     setIsSidebarOpen
   } = useFintech();
 
-  const [selectedCurrency, setSelectedCurrency] = useState<'INR' | 'USD' | 'GBP'>('INR');
   const { user } = useUser();
   const { signOut } = useClerk();
-  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
 
   const getPageTitle = () => {
     switch (location.pathname) {
       case '/calculator':
-        return 'Cardiovascular Emergency Calculator';
+        return 'Emergency Liquidity Calculator';
       case '/debt-traps':
-        return 'Ghost Debt Traps & Mesh Radar';
+        return 'Debt Traps & Stacking Radar';
       case '/quantum-solver':
         return 'Quantum Rescue Solver';
       case '/cash-runway':
@@ -46,12 +42,13 @@ export const Navbar: React.FC = () => {
       case '/profile':
         return 'User Security Profile & Settings';
       default:
-        return 'Cardiovascular Health Dashboard';
+        return '';
     }
   };
 
-  const displayName = user?.fullName || user?.firstName || 'Skanda K N';
-  const initialLetter = displayName.charAt(0).toUpperCase() || 'S';
+  const displayName = user?.fullName || user?.firstName || 'My Account';
+  const initialLetter = displayName.charAt(0).toUpperCase() || 'M';
+  const pageTitle = getPageTitle();
 
   return (
     <header
@@ -69,7 +66,7 @@ export const Navbar: React.FC = () => {
         boxShadow: '0 1px 3px rgba(0, 0, 0, 0.02)',
       }}
     >
-      {/* Left: Mobile Toggle & Page Title */}
+      {/* Left: Mobile Toggle & Page Title (Empty on Home Dashboard) */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
         {/* Hamburger Toggle for Left Sidebar */}
         <button
@@ -91,117 +88,25 @@ export const Navbar: React.FC = () => {
           {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
 
-        <div>
-          <h1
-            style={{
-              fontSize: '1.25rem',
-              fontWeight: 800,
-              color: '#0f172a',
-              letterSpacing: '-0.02em',
-              margin: 0,
-            }}
-          >
-            {getPageTitle()}
-          </h1>
-        </div>
-      </div>
-
-      {/* Right Area: Currency Switcher, Language Switcher, Settings, User Profile */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        {/* Currency Switcher Pill */}
-        <div 
-          style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            backgroundColor: '#f1f5f9', 
-            borderRadius: '9999px', 
-            padding: '2px',
-            border: '1px solid #e2e8f0',
-          }}
-        >
-          {(['INR', 'USD', 'GBP'] as const).map((curr) => {
-            const isCurrActive = selectedCurrency === curr;
-            return (
-              <button
-                key={curr}
-                onClick={() => setSelectedCurrency(curr)}
-                style={{
-                  border: 'none',
-                  background: isCurrActive ? '#0f172a' : 'transparent',
-                  color: isCurrActive ? '#ffffff' : '#64748b',
-                  fontWeight: isCurrActive ? 700 : 500,
-                  fontSize: '0.72rem',
-                  padding: '4px 10px',
-                  borderRadius: '9999px',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                }}
-              >
-                {curr === 'INR' ? '₹ INR' : curr === 'USD' ? '$ USD' : '£ GBP'}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Language Switcher Dropdown (Matching BeatAhead reference screenshot) */}
-        <div style={{ position: 'relative' }}>
-          <button
-            onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              backgroundColor: 'transparent',
-              border: 'none',
-              color: '#475569',
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              cursor: 'pointer',
-              padding: '6px 8px',
-              borderRadius: '8px',
-            }}
-          >
-            <Globe size={15} color="#64748b" />
-            <span>English</span>
-            <ChevronDown size={14} color="#64748b" />
-          </button>
-
-          {langDropdownOpen && (
-            <div
+        {pageTitle && (
+          <div>
+            <h1
               style={{
-                position: 'absolute',
-                top: '100%',
-                right: 0,
-                marginTop: '4px',
-                backgroundColor: '#ffffff',
-                border: '1px solid #e2e8f0',
-                borderRadius: '8px',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
-                zIndex: 100,
-                minWidth: '120px',
-                padding: '4px 0',
+                fontSize: '1.25rem',
+                fontWeight: 800,
+                color: '#0f172a',
+                letterSpacing: '-0.02em',
+                margin: 0,
               }}
             >
-              {['English', 'Hindi', 'Spanish'].map((lang) => (
-                <div
-                  key={lang}
-                  onClick={() => setLangDropdownOpen(false)}
-                  style={{
-                    padding: '8px 14px',
-                    fontSize: '0.82rem',
-                    color: '#0f172a',
-                    cursor: 'pointer',
-                    fontWeight: lang === 'English' ? 700 : 500,
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f1f5f9')}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
-                >
-                  {lang}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+              {pageTitle}
+            </h1>
+          </div>
+        )}
+      </div>
+
+      {/* Right Area: Settings & User Profile Auth */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
 
         {/* Settings Gear Button */}
         <button
