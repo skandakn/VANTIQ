@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard,
   Banknote,
-  Atom, 
   Wallet, 
   X, 
   ChevronRight, 
@@ -42,10 +41,10 @@ export const VANTIQ_FEATURES: VantiqFeatureItem[] = [
   },
   {
     id: 'quantum-solver',
-    name: 'Quantum Solver',
-    subtitle: 'QAOA Knapsack Engine',
+    name: 'Emergency Funding Plan',
+    subtitle: 'Multi-source funding estimate',
     path: '/quantum-solver',
-    icon: Atom,
+    icon: Banknote,
   },
   {
     id: 'cash-runway',
@@ -269,7 +268,7 @@ export const Sidebar: React.FC = () => {
                 <span className="vantiq-telemetry-ping" />
                 <span className="vantiq-telemetry-dot" />
               </div>
-              <span className="vantiq-telemetry-title">QUANTUM SOLVER ONLINE</span>
+              <span className="vantiq-telemetry-title">EMERGENCY FUNDING PLAN</span>
             </div>
             <div className="vantiq-telemetry-body">
               <span>Latency: <strong>38ms</strong></span>

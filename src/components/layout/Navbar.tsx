@@ -26,7 +26,7 @@ export const Navbar: React.FC = () => {
   const getPageTitle = () => {
     switch (location.pathname) {
       case '/quantum-solver':
-        return 'Quantum Rescue Solver';
+        return 'Emergency Funding Plan';
       case '/cash-runway':
         return '90-Day Digital Twin Cash Runway';
       case '/profile':

@@ -28,7 +28,7 @@ export const CashRunwayPage: React.FC = () => {
             }}
           >
             <ArrowLeft size={14} />
-            <span>Previous: Quantum Solver</span>
+            <span>Previous: Emergency Funding Plan</span>
           </Link>
 
           <Link

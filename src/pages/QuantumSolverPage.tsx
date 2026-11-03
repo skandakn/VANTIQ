@@ -11,7 +11,7 @@ export const QuantumSolverPage: React.FC = () => {
       <div className="container">
         
 
-        {/* Feature 3: Quantum QAOA Knapsack Visualizer */}
+        {/* Emergency funding estimate and multi-source plan */}
 
         {/* Multi-Source Rescue Split Package */}
         <MultiSourceRescueCard />
