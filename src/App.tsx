@@ -20,6 +20,8 @@ import { CashRunwayPage } from './pages/CashRunwayPage';
 import { FeeComparisonPage } from './pages/FeeComparisonPage';
 import { SecurityZkPage } from './pages/SecurityZkPage';
 import { ShieldPage } from './pages/ShieldPage';
+import { LoginPage } from './pages/LoginPage';
+import { UserProfilePage } from './pages/UserProfilePage';
 
 // Scroll to top helper on route transition
 const ScrollToTop: React.FC = () => {
@@ -63,6 +65,14 @@ const AppShell: React.FC = () => {
             <Route path="/fee-comparison" element={<FeeComparisonPage />} />
             <Route path="/security-zk" element={<SecurityZkPage />} />
             <Route path="/45s-shield" element={<ShieldPage />} />
+
+            {/* Clerk Authentication & User Security Profile Routes */}
+            <Route path="/login" element={<LoginPage initialMode="sign-in" />} />
+            <Route path="/sign-in" element={<LoginPage initialMode="sign-in" />} />
+            <Route path="/sign-up" element={<LoginPage initialMode="sign-up" />} />
+            <Route path="/register" element={<LoginPage initialMode="sign-up" />} />
+            <Route path="/profile" element={<UserProfilePage />} />
+            <Route path="/account" element={<UserProfilePage />} />
 
             {/* Legacy & Fallback Route Redirects */}
             <Route path="/simulator" element={<Navigate to="/calculator" replace />} />

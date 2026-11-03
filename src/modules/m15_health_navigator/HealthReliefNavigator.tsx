@@ -45,15 +45,58 @@ export const HealthReliefNavigator: React.FC = () => {
   const [targetAmount, setTargetAmount] = useState<number>(shock.amount || 450000);
   const [desiredTenureMonths, setDesiredTenureMonths] = useState<number>(shock.tenureMonths || 24);
 
-  // Synchronize with external shock updates (from Hero or Crisis Input)
+  // Track previous shock values to detect when changes come externally from context
+  const prevShockRef = React.useRef({
+    amount: shock.amount,
+    tenure: shock.tenureMonths,
+  });
+
+  // Synchronize only when external shock updates (e.g. from HeroSection or presets)
   React.useEffect(() => {
-    if (shock.amount && shock.amount > 0 && shock.amount !== targetAmount) {
+    if (shock.amount && shock.amount > 0 && shock.amount !== prevShockRef.current.amount) {
+      prevShockRef.current.amount = shock.amount;
       setTargetAmount(shock.amount);
     }
-    if (shock.tenureMonths && shock.tenureMonths > 0 && shock.tenureMonths !== desiredTenureMonths) {
+    if (shock.tenureMonths && shock.tenureMonths > 0 && shock.tenureMonths !== prevShockRef.current.tenure) {
+      prevShockRef.current.tenure = shock.tenureMonths;
       setDesiredTenureMonths(shock.tenureMonths);
     }
-  }, [shock.amount, shock.tenureMonths, targetAmount, desiredTenureMonths]);
+  }, [shock.amount, shock.tenureMonths]);
+
+  // Handler for updating target amount locally and broadcasting to FintechContext
+  const handleTargetAmountChange = (newAmount: number) => {
+    const minVal = regionFilter === 'India' ? 25000 : 1000;
+    const maxVal = regionFilter === 'India' ? 2500000 : 100000;
+    const clamped = Number.isFinite(newAmount) ? Math.min(maxVal, Math.max(minVal, newAmount)) : minVal;
+
+    setTargetAmount(clamped);
+    prevShockRef.current.amount = clamped;
+    setShock((prev) => ({
+      ...prev,
+      amount: clamped,
+    }));
+
+    if (existingInsuranceCover > clamped) {
+      setExistingInsuranceCover(clamped);
+    }
+  };
+
+  // Handler for updating tenure locally and broadcasting to FintechContext
+  const handleTenureChange = (months: number) => {
+    setDesiredTenureMonths(months);
+    prevShockRef.current.tenure = months;
+    setShock((prev) => ({
+      ...prev,
+      tenureMonths: months,
+    }));
+  };
+
+  const handleRegionChange = (newRegion: 'All' | 'India' | 'USA' | 'UK' | 'Global') => {
+    setRegionFilter(newRegion);
+    const cond = HEALTH_CONDITIONS.find((c) => c.id === selectedConditionId) || HEALTH_CONDITIONS[0];
+    const newAmt = newRegion === 'India' ? cond.typicalCostInr : cond.typicalCostUsd;
+    handleTargetAmountChange(newAmt);
+  };
   const [urgency, setUrgency] = useState<'critical' | 'high' | 'moderate'>('critical');
   const [insuranceStatus, setInsuranceStatus] = useState<'uninsured' | 'partial' | 'full'>('partial');
   const [existingInsuranceCover, setExistingInsuranceCover] = useState<number>(150000);
@@ -94,7 +137,7 @@ export const HealthReliefNavigator: React.FC = () => {
     const cond = HEALTH_CONDITIONS.find((c) => c.id === conditionId);
     if (cond) {
       const newAmt = regionFilter === 'India' ? cond.typicalCostInr : cond.typicalCostUsd;
-      setTargetAmount(newAmt);
+      handleTargetAmountChange(newAmt);
       setUrgency(cond.urgencyDefault);
     }
   };
@@ -472,7 +515,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
                   <button
                     type="button"
                     key={r}
-                    onClick={() => setRegionFilter(r)}
+                    onClick={() => handleRegionChange(r)}
                     style={{
                       border: 'none',
                       background: regionFilter === r ? 'var(--wise-forest)' : 'transparent',
@@ -567,9 +610,44 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
                   <label style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
                     Total Amount Needed
                   </label>
-                  <span style={{ fontSize: '1.35rem', fontWeight: 900, color: 'var(--wise-forest)' }}>
-                    {currencyConfig.symbol}{targetAmount.toLocaleString()}
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <span style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--wise-forest)' }}>
+                      {currencyConfig.symbol}
+                    </span>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      aria-label="Total Amount Needed input"
+                      value={targetAmount.toLocaleString()}
+                      onChange={(e) => {
+                        const raw = e.target.value.replace(/[^0-9]/g, '');
+                        if (!raw) {
+                          setTargetAmount(0);
+                          return;
+                        }
+                        const val = parseInt(raw, 10);
+                        handleTargetAmountChange(val);
+                      }}
+                      onBlur={() => {
+                        const minVal = regionFilter === 'India' ? 25000 : 1000;
+                        if (targetAmount < minVal) {
+                          handleTargetAmountChange(minVal);
+                        }
+                      }}
+                      style={{
+                        fontSize: '1.25rem',
+                        fontWeight: 900,
+                        color: 'var(--wise-forest)',
+                        border: '1px solid #d0d7cc',
+                        borderRadius: '8px',
+                        padding: '2px 8px',
+                        width: '140px',
+                        textAlign: 'right',
+                        backgroundColor: '#f9faf7',
+                        outline: 'none',
+                      }}
+                    />
+                  </div>
                 </div>
                 <input
                   type="range"
@@ -577,12 +655,51 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
                   max={regionFilter === 'India' ? 2500000 : 100000}
                   step={regionFilter === 'India' ? 25000 : 1000}
                   value={targetAmount}
-                  onChange={(e) => setTargetAmount(Number(e.target.value))}
+                  onChange={(e) => handleTargetAmountChange(Number(e.target.value))}
                   style={{ width: '100%', accentColor: 'var(--wise-forest)', cursor: 'pointer' }}
                 />
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '4px' }}>
                   <span>Min: {currencyConfig.symbol}{regionFilter === 'India' ? '25,000' : '1,000'}</span>
                   <span>Max: {currencyConfig.symbol}{regionFilter === 'India' ? '25,00,000' : '100,000'}</span>
+                </div>
+
+                {/* Quick Preset Buttons for easy 1-click amount selection */}
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginTop: '8px' }}>
+                  {(regionFilter === 'India'
+                    ? [
+                        { label: '₹50K', val: 50000 },
+                        { label: '₹1 Lakh', val: 100000 },
+                        { label: '₹2.5L', val: 250000 },
+                        { label: '₹5 Lakh', val: 500000 },
+                        { label: '₹10L', val: 1000000 },
+                      ]
+                    : [
+                        { label: '$2K', val: 2000 },
+                        { label: '$5K', val: 5000 },
+                        { label: '$10K', val: 10000 },
+                        { label: '$25K', val: 25000 },
+                        { label: '$50K', val: 50000 },
+                      ]
+                  ).map((preset) => (
+                    <button
+                      type="button"
+                      key={preset.label}
+                      onClick={() => handleTargetAmountChange(preset.val)}
+                      style={{
+                        padding: '3px 8px',
+                        borderRadius: '6px',
+                        border: targetAmount === preset.val ? '1px solid var(--wise-forest)' : '1px solid #e2e8f0',
+                        backgroundColor: targetAmount === preset.val ? '#edf2ea' : '#ffffff',
+                        color: targetAmount === preset.val ? 'var(--wise-forest)' : 'var(--text-muted)',
+                        fontSize: '0.7rem',
+                        fontWeight: targetAmount === preset.val ? 800 : 600,
+                        cursor: 'pointer',
+                        transition: 'all 0.15s',
+                      }}
+                    >
+                      {preset.label}
+                    </button>
+                  ))}
                 </div>
               </div>
 
@@ -601,7 +718,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
                     <button
                       type="button"
                       key={months}
-                      onClick={() => setDesiredTenureMonths(months)}
+                      onClick={() => handleTenureChange(months)}
                       style={{
                         padding: '8px 4px',
                         borderRadius: '10px',
@@ -663,10 +780,10 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
                     </div>
                     <input
                       type="range"
-                      min={25000}
-                      max={targetAmount}
-                      step={25000}
-                      value={existingInsuranceCover}
+                      min={regionFilter === 'India' ? Math.min(25000, targetAmount) : 0}
+                      max={Math.max(regionFilter === 'India' ? 25000 : 1000, targetAmount)}
+                      step={regionFilter === 'India' ? 25000 : 1000}
+                      value={Math.min(existingInsuranceCover, targetAmount)}
                       onChange={(e) => setExistingInsuranceCover(Number(e.target.value))}
                       style={{ width: '100%', accentColor: '#15803d', marginTop: '4px' }}
                     />

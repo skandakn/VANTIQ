@@ -1,6 +1,7 @@
 // src/components/layout/PwaMobileNav.tsx
 // PWA Installation Controller & Mobile-First Bottom Navigation Bar
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Zap, 
   Activity, 
@@ -8,8 +9,10 @@ import {
   X, 
   AlertTriangle,
   Smartphone,
-  HeartHandshake
+  HeartHandshake,
+  User
 } from 'lucide-react';
+import { SignedIn, SignedOut } from '../../config/clerk';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -17,6 +20,7 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export const PwaMobileNav: React.FC = () => {
+  const navigate = useNavigate();
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isStandalone] = useState<boolean>(() => {
     if (typeof window === 'undefined') return false;
@@ -362,6 +366,37 @@ export const PwaMobileNav: React.FC = () => {
             <span style={{ fontSize: '0.68rem', fontWeight: activeTab === 'digital-twin' ? 700 : 500 }}>
               Runway
             </span>
+          </button>
+
+          {/* Account / Login Tab */}
+          <button
+            onClick={() => navigate('/login')}
+            style={{
+              background: 'none',
+              border: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '4px',
+              padding: '6px 10px',
+              borderRadius: '8px',
+              color: '#15803d',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <SignedOut>
+              <User size={18} color="#15803d" />
+              <span style={{ fontSize: '0.68rem', fontWeight: 700 }}>
+                Sign In
+              </span>
+            </SignedOut>
+            <SignedIn>
+              <User size={18} color="#10b981" />
+              <span style={{ fontSize: '0.68rem', fontWeight: 700 }}>
+                Profile
+              </span>
+            </SignedIn>
           </button>
 
         </div>

@@ -11,8 +11,13 @@ import {
   ShieldCheck, 
   Lock, 
   ArrowRight,
-  Layers
+  Layers,
+  UserCheck,
+  Shield,
+  LogIn
 } from 'lucide-react';
+import { useUser } from '@clerk/react';
+import { SignedIn, SignedOut } from '../config/clerk';
 import { HeroSection } from '../modules/m01_hero/HeroSection';
 import { HealthReliefNavigator } from '../modules/m15_health_navigator/HealthReliefNavigator';
 import { GhostDebtMesh } from '../modules/m03_debt_mesh/GhostDebtMesh';
@@ -100,6 +105,8 @@ const FEATURE_CARDS = [
 ];
 
 export const DashboardPage: React.FC = () => {
+  const { user } = useUser();
+
   return (
     <div className="vantiq-dashboard-page" style={{ paddingBottom: '60px' }}>
       
@@ -109,6 +116,125 @@ export const DashboardPage: React.FC = () => {
       {/* Feature Modules Hub Grid (Dedicated Feature Hub by SaiArvind18) */}
       <section style={{ padding: '30px 0 50px 0', backgroundColor: 'var(--bg-deep)' }}>
         <div className="container">
+          
+          {/* Clerk Security & Personalization HUD Banner */}
+          <div style={{ marginBottom: '28px' }}>
+            <SignedIn>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '12px',
+                  padding: '14px 20px',
+                  borderRadius: '14px',
+                  backgroundColor: '#edf5e8',
+                  border: '1px solid #cce1c3',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div
+                    style={{
+                      width: '34px',
+                      height: '34px',
+                      borderRadius: '50%',
+                      backgroundColor: 'var(--wise-lime, #9fe870)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <UserCheck size={18} color="var(--wise-forest, #163300)" />
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.90rem', fontWeight: 800, color: 'var(--wise-forest, #163300)' }}>
+                      Authenticated Emergency Session: {user?.firstName || user?.fullName || 'Active User'}
+                    </span>
+                    <span style={{ fontSize: '0.78rem', color: '#536851', display: 'block' }}>
+                      All debt simulations and neuro-shield settings are securely encrypted under your profile.
+                    </span>
+                  </div>
+                </div>
+                <Link
+                  to="/profile"
+                  style={{
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    color: 'var(--wise-forest, #163300)',
+                    textDecoration: 'none',
+                    padding: '6px 14px',
+                    borderRadius: '9999px',
+                    backgroundColor: '#ffffff',
+                    border: '1px solid #d0dec9',
+                  }}
+                >
+                  Manage Security & MFA →
+                </Link>
+              </div>
+            </SignedIn>
+
+            <SignedOut>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '12px',
+                  padding: '14px 20px',
+                  borderRadius: '14px',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #dbe5d6',
+                  boxShadow: '0 2px 10px rgba(22, 51, 0, 0.04)',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div
+                    style={{
+                      width: '34px',
+                      height: '34px',
+                      borderRadius: '8px',
+                      backgroundColor: '#eef5ea',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Shield size={18} color="#15803d" />
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.90rem', fontWeight: 800, color: 'var(--wise-forest, #163300)' }}>
+                      Save your emergency debt meshes & customized rescue plans
+                    </span>
+                    <span style={{ fontSize: '0.78rem', color: '#566a54', display: 'block' }}>
+                      Sign in with Clerk to access cross-device sync, Zero-Knowledge vaults, and tailored debt relief.
+                    </span>
+                  </div>
+                </div>
+                <Link
+                  to="/login"
+                  style={{
+                    fontSize: '0.82rem',
+                    fontWeight: 800,
+                    color: 'var(--wise-lime, #9fe870)',
+                    backgroundColor: 'var(--wise-forest, #163300)',
+                    textDecoration: 'none',
+                    padding: '8px 18px',
+                    borderRadius: '9999px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  <LogIn size={13} />
+                  <span>Sign In Free</span>
+                </Link>
+              </div>
+            </SignedOut>
+          </div>
           
           <div style={{ marginBottom: '32px', textAlign: 'center' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>

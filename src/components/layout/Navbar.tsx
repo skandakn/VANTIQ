@@ -11,8 +11,11 @@ import {
   Menu, 
   X,
   Lock,
-  HeartHandshake
+  HeartHandshake,
+  LogIn
 } from 'lucide-react';
+import { UserButton } from '@clerk/react';
+import { SignedIn, SignedOut } from '../../config/clerk';
 import { useFintech } from '../../context/FintechContext';
 
 const NAV_LINKS = [
@@ -316,9 +319,61 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Action Area: 45s Shield + Simulate Free CTA */}
+          {/* Action Area: Clerk Auth + 45s Shield + Simulate Free CTA */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             
+            {/* Clerk Authentication Action */}
+            <SignedOut>
+              <button
+                onClick={() => navigate('/login')}
+                style={{
+                  fontSize: '0.84rem',
+                  fontWeight: 700,
+                  padding: '8px 16px',
+                  borderRadius: '9999px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  whiteSpace: 'nowrap',
+                  border: '1px solid #d0d7cc',
+                  backgroundColor: '#ffffff',
+                  color: 'var(--wise-forest, #163300)',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#edf2ea';
+                  e.currentTarget.style.borderColor = '#9fe870';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#ffffff';
+                  e.currentTarget.style.borderColor = '#d0d7cc';
+                }}
+                title="Sign in to save your emergency plan"
+              >
+                <LogIn size={14} color="#15803d" />
+                <span>Log In</span>
+              </button>
+            </SignedOut>
+
+            <SignedIn>
+              <div 
+                style={{ 
+                  display: 'inline-flex', 
+                  alignItems: 'center', 
+                  padding: '2px', 
+                  borderRadius: '9999px',
+                  border: '1px solid #d8e2d4',
+                  backgroundColor: '#ffffff',
+                }}
+              >
+                <UserButton 
+                  userProfileMode="navigation"
+                  userProfileUrl="/profile"
+                />
+              </div>
+            </SignedIn>
+
             {/* 45s Shield button */}
             <button
               onClick={() => {
@@ -428,6 +483,55 @@ export const Navbar: React.FC = () => {
                 </button>
               );
             })}
+
+            {/* Mobile Auth Button */}
+            <div style={{ borderTop: '1px solid #e5e9e2', paddingTop: '10px', marginTop: '6px' }}>
+              <SignedOut>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    navigate('/login');
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '12px 14px',
+                    borderRadius: '10px',
+                    fontSize: '0.95rem',
+                    fontWeight: 800,
+                    backgroundColor: 'var(--wise-forest, #163300)',
+                    color: 'var(--wise-lime, #9fe870)',
+                    border: 'none',
+                    width: '100%',
+                    cursor: 'pointer',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <LogIn size={18} />
+                  <span>Sign In / Create Account</span>
+                </button>
+              </SignedOut>
+
+              <SignedIn>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '10px 14px',
+                    borderRadius: '10px',
+                    backgroundColor: '#f4f5f1',
+                    border: '1px solid #d8e2d4',
+                  }}
+                >
+                  <span style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--wise-forest)' }}>
+                    My Account
+                  </span>
+                  <UserButton />
+                </div>
+              </SignedIn>
+            </div>
           </div>
         )}
       </header>

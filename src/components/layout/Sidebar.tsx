@@ -11,8 +11,11 @@ import {
   X, 
   ChevronRight, 
   Activity,
-  Zap
+  Zap,
+  LogIn
 } from 'lucide-react';
+import { UserButton, useUser } from '@clerk/react';
+import { SignedIn, SignedOut } from '../../config/clerk';
 import { useFintech } from '../../context/FintechContext';
 
 export interface VantiqFeatureItem {
@@ -87,6 +90,7 @@ export const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const { user } = useUser();
 
   // Close sidebar on Escape key press
   useEffect(() => {
@@ -213,8 +217,63 @@ export const Sidebar: React.FC = () => {
           })}
         </div>
 
-        {/* Sidebar Footer System Telemetry Status */}
+        {/* Sidebar Footer User Account & System Telemetry Status */}
         <div className="vantiq-sidebar-footer">
+          {/* Clerk Auth Section */}
+          <div style={{ marginBottom: '12px' }}>
+            <SignedOut>
+              <button
+                onClick={() => {
+                  navigate('/login');
+                  if (window.innerWidth < 1024) setIsSidebarOpen(false);
+                }}
+                style={{
+                  width: '100%',
+                  padding: '10px 14px',
+                  borderRadius: '8px',
+                  backgroundColor: 'rgba(159, 232, 112, 0.12)',
+                  border: '1px solid rgba(159, 232, 112, 0.35)',
+                  color: '#9fe870',
+                  fontSize: '0.80rem',
+                  fontWeight: 700,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                <LogIn size={15} />
+                <span>Sign In / Create Account</span>
+              </button>
+            </SignedOut>
+
+            <SignedIn>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '8px 12px',
+                  borderRadius: '8px',
+                  backgroundColor: 'rgba(15, 23, 42, 0.75)',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                }}
+              >
+                <UserButton />
+                <div style={{ minWidth: 0, overflow: 'hidden', flex: 1 }}>
+                  <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#f8fafc', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {user?.firstName || user?.fullName || 'Active User'}
+                  </div>
+                  <div style={{ fontSize: '0.66rem', color: '#34d399', fontWeight: 600 }}>
+                    Verified Account
+                  </div>
+                </div>
+              </div>
+            </SignedIn>
+          </div>
+
           <div className="vantiq-sidebar-telemetry-card">
             <div className="vantiq-telemetry-header">
               <div className="vantiq-telemetry-beacon">
