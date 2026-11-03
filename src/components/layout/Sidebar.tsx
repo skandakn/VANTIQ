@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { 
+  LayoutDashboard,
   Calculator, 
+  HeartHandshake,
   Atom, 
   Wallet, 
   Scale, 
@@ -24,15 +26,31 @@ export interface VantiqFeatureItem {
   path: string;
   icon: React.ComponentType<{ size?: number | string; color?: string; style?: React.CSSProperties; className?: string }>;
   isAction?: boolean;
+  isAnchor?: boolean;
 }
 
 export const VANTIQ_FEATURES: VantiqFeatureItem[] = [
+  {
+    id: 'overview',
+    name: 'Overview',
+    subtitle: 'Cardiovascular & Finance',
+    path: '/',
+    icon: LayoutDashboard,
+  },
   {
     id: 'calculator',
     name: 'Calculator',
     subtitle: 'Crisis Shock & Capacity',
     path: '/calculator',
     icon: Calculator,
+  },
+  {
+    id: 'health-navigator',
+    name: 'Health Relief Navigator',
+    subtitle: 'Hospital Plans & Reviews',
+    path: '/#health-navigator',
+    icon: HeartHandshake,
+    isAnchor: true,
   },
   {
     id: 'quantum-solver',
@@ -136,7 +154,7 @@ export const Sidebar: React.FC = () => {
             title="Return to Dashboard Overview"
           >
             <div className="vantiq-sidebar-brand-icon">
-              <Activity size={18} color="#10b981" />
+              <Activity size={18} color="var(--wise-lime, #9fe870)" />
             </div>
             <div>
               <div className="vantiq-sidebar-brand-title">FEATURE NAVIGATION</div>
@@ -164,14 +182,32 @@ export const Sidebar: React.FC = () => {
         <div className="vantiq-sidebar-nav-list">
           {VANTIQ_FEATURES.map((feature) => {
             const Icon = feature.icon;
-            const isSelected = location.pathname === feature.path;
+            const isOverview = feature.id === 'overview';
+            const isSelected = isOverview 
+              ? location.pathname === '/' && !location.hash.includes('health-navigator')
+              : feature.isAnchor
+                ? location.hash.includes('health-navigator')
+                : location.pathname === feature.path;
             const isShieldActive = feature.id === '45s-shield' && neuroState.isShieldActive;
 
             return (
               <button
                 key={feature.id}
                 onClick={() => {
-                  navigate(feature.path);
+                  if (feature.isAnchor) {
+                    if (location.pathname !== '/') {
+                      navigate('/');
+                      setTimeout(() => {
+                        const el = document.getElementById('health-navigator');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }, 120);
+                    } else {
+                      const el = document.getElementById('health-navigator');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  } else {
+                    navigate(feature.path);
+                  }
                   if (window.innerWidth < 1024) {
                     setIsSidebarOpen(false);
                   }
@@ -222,18 +258,19 @@ export const Sidebar: React.FC = () => {
                 style={{
                   width: '100%',
                   padding: '10px 14px',
-                  borderRadius: '8px',
-                  backgroundColor: 'rgba(159, 232, 112, 0.12)',
-                  border: '1px solid rgba(159, 232, 112, 0.35)',
-                  color: '#9fe870',
-                  fontSize: '0.80rem',
-                  fontWeight: 700,
+                  borderRadius: '10px',
+                  backgroundColor: 'var(--wise-forest, #163300)',
+                  border: '1px solid var(--wise-forest, #163300)',
+                  color: 'var(--wise-lime, #9fe870)',
+                  fontSize: '0.82rem',
+                  fontWeight: 800,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '8px',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
+                  boxShadow: '0 2px 8px rgba(22, 51, 0, 0.12)',
                 }}
               >
                 <LogIn size={15} />
@@ -247,18 +284,19 @@ export const Sidebar: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '10px',
-                  padding: '8px 12px',
-                  borderRadius: '8px',
-                  backgroundColor: 'rgba(15, 23, 42, 0.75)',
-                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                  padding: '10px 12px',
+                  borderRadius: '10px',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid var(--border-medium, #d0d7cc)',
+                  boxShadow: '0 2px 6px rgba(22, 51, 0, 0.04)',
                 }}
               >
                 <UserButton />
                 <div style={{ minWidth: 0, overflow: 'hidden', flex: 1 }}>
-                  <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#f8fafc', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--wise-forest, #163300)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {user?.firstName || user?.fullName || 'Active User'}
                   </div>
-                  <div style={{ fontSize: '0.66rem', color: '#34d399', fontWeight: 600 }}>
+                  <div style={{ fontSize: '0.68rem', color: '#15803d', fontWeight: 700 }}>
                     Verified Account
                   </div>
                 </div>
@@ -287,7 +325,7 @@ export const Sidebar: React.FC = () => {
               }}
               className="vantiq-sidebar-action-cta"
             >
-              <Zap size={14} color="#facc15" />
+              <Zap size={14} color="var(--wise-lime, #9fe870)" />
               <span>Simulate Emergency Shock</span>
             </button>
           </div>
@@ -303,9 +341,9 @@ export const Sidebar: React.FC = () => {
           left: 0;
           width: 100vw;
           height: 100vh;
-          background: rgba(3, 7, 18, 0.75);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
+          background: rgba(22, 51, 0, 0.32);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
           z-index: 1040;
           opacity: 0;
           visibility: hidden;
@@ -323,11 +361,9 @@ export const Sidebar: React.FC = () => {
           left: 0;
           bottom: 0;
           width: 280px;
-          background: linear-gradient(180deg, rgba(6, 11, 25, 0.98) 0%, rgba(4, 8, 18, 0.99) 100%);
-          backdrop-filter: blur(24px);
-          -webkit-backdrop-filter: blur(24px);
-          border-right: 1px solid rgba(16, 185, 129, 0.2);
-          box-shadow: 10px 0 30px -10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(16, 185, 129, 0.08);
+          background: #ffffff;
+          border-right: 1px solid var(--border-subtle, #e5e9e2);
+          box-shadow: 6px 0 24px rgba(22, 51, 0, 0.06);
           z-index: 1050;
           display: flex;
           flex-direction: column;
@@ -346,7 +382,8 @@ export const Sidebar: React.FC = () => {
           align-items: center;
           justify-content: space-between;
           padding: 18px 20px 14px 20px;
-          border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+          border-bottom: 1px solid var(--border-subtle, #e5e9e2);
+          background: #ffffff;
         }
 
         .vantiq-sidebar-brand {
@@ -359,34 +396,35 @@ export const Sidebar: React.FC = () => {
           width: 32px;
           height: 32px;
           border-radius: 8px;
-          background: rgba(16, 185, 129, 0.12);
-          border: 1px solid rgba(16, 185, 129, 0.35);
+          background: var(--wise-forest, #163300);
+          border: 1px solid var(--wise-forest, #163300);
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+          box-shadow: 0 2px 8px rgba(22, 51, 0, 0.15);
         }
 
         .vantiq-sidebar-brand-title {
           font-size: 0.78rem;
           font-weight: 850;
           letter-spacing: 0.08em;
-          color: #f8fafc;
+          color: var(--wise-forest, #163300);
           text-transform: uppercase;
         }
 
         .vantiq-sidebar-brand-sub {
           font-size: 0.68rem;
-          color: #94a3b8;
+          color: var(--text-muted, #6b7f6e);
+          font-weight: 600;
         }
 
         .vantiq-sidebar-close-btn {
           width: 32px;
           height: 32px;
           border-radius: 8px;
-          border: 1px solid rgba(71, 85, 105, 0.4);
-          background: rgba(30, 41, 59, 0.4);
-          color: #94a3b8;
+          border: 1px solid var(--border-medium, #d0d7cc);
+          background: var(--bg-deep, #f4f5f1);
+          color: var(--wise-forest, #163300);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -395,9 +433,9 @@ export const Sidebar: React.FC = () => {
         }
 
         .vantiq-sidebar-close-btn:hover {
-          background: rgba(239, 68, 68, 0.15);
-          border-color: rgba(239, 68, 68, 0.5);
-          color: #f87171;
+          background: #edf0ea;
+          border-color: var(--wise-forest, #163300);
+          color: var(--wise-forest, #163300);
           transform: rotate(90deg);
         }
 
@@ -408,19 +446,19 @@ export const Sidebar: React.FC = () => {
           align-items: center;
           justify-content: space-between;
           font-size: 0.68rem;
-          font-weight: 700;
+          font-weight: 800;
           letter-spacing: 0.08em;
-          color: #64748b;
+          color: var(--text-muted, #6b7f6e);
         }
 
         .vantiq-sidebar-count-badge {
-          background: rgba(16, 185, 129, 0.12);
-          color: #34d399;
-          border: 1px solid rgba(16, 185, 129, 0.3);
-          padding: 2px 6px;
+          background: var(--bg-subtle, #edf0ea);
+          color: var(--wise-forest, #163300);
+          border: 1px solid var(--border-medium, #d0d7cc);
+          padding: 2px 7px;
           border-radius: 4px;
           font-size: 0.62rem;
-          font-weight: 700;
+          font-weight: 800;
           letter-spacing: 0.02em;
         }
 
@@ -438,7 +476,7 @@ export const Sidebar: React.FC = () => {
           width: 4px;
         }
         .vantiq-sidebar-nav-list::-webkit-scrollbar-thumb {
-          background: rgba(51, 65, 85, 0.5);
+          background: var(--border-medium, #d0d7cc);
           border-radius: 4px;
         }
 
@@ -452,7 +490,7 @@ export const Sidebar: React.FC = () => {
           border-radius: 10px;
           background: transparent;
           border: 1px solid transparent;
-          color: #cbd5e1;
+          color: var(--text-secondary, #425444);
           text-align: left;
           cursor: pointer;
           transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -461,17 +499,17 @@ export const Sidebar: React.FC = () => {
         }
 
         .vantiq-sidebar-item:hover {
-          background: rgba(30, 41, 59, 0.5);
-          border-color: rgba(51, 65, 85, 0.5);
-          color: #f8fafc;
+          background: var(--bg-deep, #f4f5f1);
+          border-color: var(--border-subtle, #e5e9e2);
+          color: var(--wise-forest, #163300);
           transform: translateX(3px);
         }
 
         .vantiq-sidebar-item.active {
-          background: linear-gradient(90deg, rgba(16, 185, 129, 0.18) 0%, rgba(6, 182, 212, 0.08) 100%);
-          border-color: rgba(16, 185, 129, 0.45);
-          color: #ffffff;
-          box-shadow: 0 0 16px rgba(16, 185, 129, 0.15), inset 0 0 12px rgba(16, 185, 129, 0.05);
+          background: #eef6e8;
+          border-color: #c7e5a8;
+          color: var(--wise-forest, #163300);
+          box-shadow: 0 2px 8px rgba(22, 51, 0, 0.04);
         }
 
         .vantiq-sidebar-item.shield-pulse {
@@ -479,8 +517,8 @@ export const Sidebar: React.FC = () => {
         }
 
         @keyframes shieldPulseBorder {
-          0%, 100% { border-color: rgba(16, 185, 129, 0.45); }
-          50% { border-color: rgba(245, 158, 11, 0.8); }
+          0%, 100% { border-color: #c7e5a8; }
+          50% { border-color: #b45309; }
         }
 
         /* Active Left Indicator */
@@ -492,12 +530,11 @@ export const Sidebar: React.FC = () => {
           width: 3px;
           border-radius: 0 4px 4px 0;
           background: transparent;
-          transition: background 0.2s ease, box-shadow 0.2s ease;
+          transition: background 0.2s ease;
         }
 
         .vantiq-sidebar-item.active .vantiq-sidebar-active-indicator {
-          background: #10b981;
-          box-shadow: 0 0 8px #10b981, 0 0 14px rgba(16, 185, 129, 0.8);
+          background: var(--wise-forest, #163300);
         }
 
         /* Icon Wrapper */
@@ -505,9 +542,9 @@ export const Sidebar: React.FC = () => {
           width: 34px;
           height: 34px;
           border-radius: 8px;
-          background: rgba(30, 41, 59, 0.6);
-          border: 1px solid rgba(51, 65, 85, 0.5);
-          color: #94a3b8;
+          background: var(--bg-deep, #f4f5f1);
+          border: 1px solid var(--border-subtle, #e5e9e2);
+          color: var(--wise-forest, #163300);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -516,16 +553,16 @@ export const Sidebar: React.FC = () => {
         }
 
         .vantiq-sidebar-item:hover .vantiq-sidebar-icon-wrap {
-          color: #34d399;
-          border-color: rgba(16, 185, 129, 0.4);
-          background: rgba(16, 185, 129, 0.1);
+          color: var(--wise-forest, #163300);
+          border-color: var(--border-medium, #d0d7cc);
+          background: #ffffff;
         }
 
         .vantiq-sidebar-item.active .vantiq-sidebar-icon-wrap {
-          background: rgba(16, 185, 129, 0.22);
-          border-color: #10b981;
-          color: #34d399;
-          box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
+          background: var(--wise-forest, #163300);
+          border-color: var(--wise-forest, #163300);
+          color: var(--wise-lime, #9fe870);
+          box-shadow: 0 2px 6px rgba(22, 51, 0, 0.15);
         }
 
         /* Text Block */
@@ -547,26 +584,28 @@ export const Sidebar: React.FC = () => {
           font-size: 0.86rem;
           font-weight: 600;
           letter-spacing: -0.01em;
+          color: var(--wise-forest, #163300);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
 
         .vantiq-sidebar-item.active .vantiq-sidebar-item-title {
-          font-weight: 750;
-          color: #f0fdf4;
+          font-weight: 800;
+          color: var(--wise-forest, #163300);
         }
 
         .vantiq-sidebar-item-sub {
           font-size: 0.70rem;
-          color: #64748b;
+          color: var(--text-muted, #6b7f6e);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
 
         .vantiq-sidebar-item.active .vantiq-sidebar-item-sub {
-          color: #86efac;
+          color: var(--text-secondary, #425444);
+          font-weight: 500;
         }
 
         /* Tag Pill */
@@ -574,18 +613,18 @@ export const Sidebar: React.FC = () => {
           font-size: 0.62rem;
           padding: 2px 6px;
           border-radius: 4px;
-          background: rgba(30, 41, 59, 0.8);
-          border: 1px solid rgba(71, 85, 105, 0.5);
-          color: #94a3b8;
+          background: var(--bg-deep, #f4f5f1);
+          border: 1px solid var(--border-subtle, #e5e9e2);
+          color: var(--text-muted, #6b7f6e);
           font-family: monospace;
           font-weight: 600;
           flex-shrink: 0;
         }
 
         .vantiq-sidebar-tag.active-tag {
-          background: rgba(16, 185, 129, 0.25);
-          border-color: rgba(16, 185, 129, 0.6);
-          color: #34d399;
+          background: var(--wise-forest, #163300);
+          border-color: var(--wise-forest, #163300);
+          color: var(--wise-lime, #9fe870);
         }
 
         /* Trailing Element */
@@ -598,12 +637,12 @@ export const Sidebar: React.FC = () => {
         }
 
         .vantiq-sidebar-arrow {
-          color: #475569;
+          color: var(--border-medium, #d0d7cc);
           transition: transform 0.2s ease, color 0.2s ease;
         }
 
         .vantiq-sidebar-item:hover .vantiq-sidebar-arrow {
-          color: #34d399;
+          color: var(--wise-forest, #163300);
           transform: translateX(2px);
         }
 
@@ -611,23 +650,23 @@ export const Sidebar: React.FC = () => {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: #10b981;
-          box-shadow: 0 0 8px #10b981, 0 0 12px rgba(16, 185, 129, 0.8);
+          background: #15803d;
+          box-shadow: 0 0 6px rgba(21, 128, 61, 0.4);
         }
 
         /* Sidebar Footer Telemetry Card */
         .vantiq-sidebar-footer {
           padding: 14px 16px;
-          border-top: 1px solid rgba(51, 65, 85, 0.4);
-          background: rgba(5, 9, 20, 0.7);
+          border-top: 1px solid var(--border-subtle, #e5e9e2);
+          background: var(--bg-deep, #f4f5f1);
         }
 
         .vantiq-sidebar-telemetry-card {
           padding: 12px;
           border-radius: 10px;
-          background: rgba(15, 23, 42, 0.6);
-          border: 1px solid rgba(16, 185, 129, 0.25);
-          box-shadow: inset 0 0 14px rgba(16, 185, 129, 0.05);
+          background: #ffffff;
+          border: 1px solid var(--border-medium, #d0d7cc);
+          box-shadow: 0 2px 8px rgba(22, 51, 0, 0.04);
         }
 
         .vantiq-telemetry-header {
@@ -648,7 +687,7 @@ export const Sidebar: React.FC = () => {
           width: 100%;
           height: 100%;
           border-radius: 50%;
-          background: #10b981;
+          background: #15803d;
           opacity: 0.75;
           animation: pulseGlow 2s infinite;
         }
@@ -659,20 +698,19 @@ export const Sidebar: React.FC = () => {
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: #10b981;
-          box-shadow: 0 0 8px #10b981;
+          background: #15803d;
         }
 
         .vantiq-telemetry-title {
           font-size: 0.68rem;
           font-weight: 800;
           letter-spacing: 0.04em;
-          color: #34d399;
+          color: var(--wise-forest, #163300);
         }
 
         .vantiq-telemetry-body {
           font-size: 0.70rem;
-          color: #94a3b8;
+          color: var(--text-muted, #6b7f6e);
           display: flex;
           align-items: center;
           gap: 6px;
@@ -680,35 +718,37 @@ export const Sidebar: React.FC = () => {
         }
 
         .vantiq-telemetry-body strong {
-          color: #38bdf8;
+          color: var(--wise-forest, #163300);
           font-family: monospace;
+          font-weight: 700;
         }
 
         .vantiq-telemetry-sep {
-          color: rgba(255, 255, 255, 0.2);
+          color: var(--border-medium, #d0d7cc);
         }
 
         .vantiq-sidebar-action-cta {
           width: 100%;
-          padding: 8px 12px;
-          border-radius: 6px;
-          background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(6, 182, 212, 0.18) 100%);
-          border: 1px solid rgba(16, 185, 129, 0.4);
-          color: #f8fafc;
+          padding: 9px 12px;
+          border-radius: 8px;
+          background: var(--wise-forest, #163300);
+          border: 1px solid var(--wise-forest, #163300);
+          color: var(--wise-lime, #9fe870);
           font-size: 0.75rem;
-          font-weight: 700;
+          font-weight: 800;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 6px;
           cursor: pointer;
           transition: all 0.2s ease;
+          box-shadow: 0 2px 6px rgba(22, 51, 0, 0.12);
         }
 
         .vantiq-sidebar-action-cta:hover {
-          background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(6, 182, 212, 0.3) 100%);
-          border-color: #10b981;
-          box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+          background: #0d1f00;
+          border-color: #0d1f00;
+          box-shadow: 0 4px 12px rgba(22, 51, 0, 0.2);
           transform: translateY(-1px);
         }
 
@@ -718,7 +758,7 @@ export const Sidebar: React.FC = () => {
             top: 0; /* Full height slide-in drawer on mobile */
             z-index: 1200;
             width: min(320px, 86vw);
-            box-shadow: 20px 0 50px rgba(0, 0, 0, 0.95);
+            box-shadow: 12px 0 35px rgba(22, 51, 0, 0.18);
           }
         }
       `}</style>
