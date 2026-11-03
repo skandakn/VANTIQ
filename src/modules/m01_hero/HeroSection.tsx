@@ -452,27 +452,6 @@ export const HeroSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Paying with / Allocation Blend */}
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '12px 16px',
-                borderRadius: '12px',
-                backgroundColor: '#f4f5f1',
-                border: '1px solid #e5e9e2',
-                marginBottom: '20px',
-                fontSize: '0.85rem'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ color: 'var(--text-secondary)' }}>Allocation Architecture:</span>
-                  <strong style={{ color: 'var(--wise-forest)' }}>Tri-Tranche Funding Plan</strong>
-                </div>
-                <span style={{ color: '#15803d', fontWeight: 700, cursor: 'pointer' }}>
-                  {fundingPlan.tranches.length} Funding Sources &gt;
-                </span>
-              </div>
-
               {/* Cost Savings vs. Predatory Apps Callout */}
               <div style={{
                 backgroundColor: '#fef2f2',
