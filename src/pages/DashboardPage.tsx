@@ -19,11 +19,8 @@ import { useUser } from '@clerk/react';
 import { SignedIn, SignedOut } from '../config/clerk';
 import { HeroSection } from '../modules/m01_hero/HeroSection';
 import { HealthReliefNavigator } from '../modules/m15_health_navigator/HealthReliefNavigator';
-import { DualCapacityGauge } from '../modules/m04_dual_dial/DualCapacityGauge';
 import { CashflowRunwayChart } from '../modules/m05_cashflow_twin/CashflowRunwayChart';
-import { MultiSourceRescueCard } from '../modules/m07_rescue_blend/MultiSourceRescueCard';
 import { LifeEnergyCalculator } from '../modules/m09_life_energy/LifeEnergyCalculator';
-import { ComparativeRescueMatrix } from '../modules/m10_comparison_matrix/ComparativeRescueMatrix';
 import { TreeSHAPExplainer } from '../modules/m11_xai_explainer/TreeSHAPExplainer';
 import { ZeroKnowledgeCompliance } from '../modules/m13_privacy_compliance/ZeroKnowledgeCompliance';
 
@@ -326,20 +323,11 @@ export const DashboardPage: React.FC = () => {
       <HealthReliefNavigator />
 
 
-      {/* Absorptive Capacity Gauge */}
-      <DualCapacityGauge />
-
       {/* 90-Day Cashflow Digital Twin */}
       <CashflowRunwayChart />
 
-      {/* Multi-Source Rescue Split */}
-      <MultiSourceRescueCard />
-
       {/* Life Energy Labor Cost Calculator */}
       <LifeEnergyCalculator />
-
-      {/* Counterfactual Comparison Matrix */}
-      <ComparativeRescueMatrix />
 
       {/* Explainable AI Model Explanations (TreeSHAP) */}
       <TreeSHAPExplainer />
