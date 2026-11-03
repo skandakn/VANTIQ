@@ -67,8 +67,11 @@ export const MultiSourceRescueCard: React.FC = () => {
   const totalRequired = Math.max(0, shock?.amount ?? 0);
   const scale = totalRequired / 50000;
   const tenureMonths = Math.max(1, shock?.tenureMonths ?? 12);
-  const savingsUsed = Math.min(profile.emergencySavings, Math.round(totalRequired * 0.1));
+  const savingsUsed = Math.min(profile.emergencySavings, totalRequired);
   const hospitalAdvance = Math.max(0, fundingPlan.tranches[0].allocatedAmount - savingsUsed);
+  const allocationPercent = (amount: number) => totalRequired > 0
+    ? Math.round((amount / totalRequired) * 100)
+    : 0;
 
   // Tri-Tranche Data Model adhering strictly to Member 08 specifications
   const tranches: TrancheDetail[] = [
@@ -78,7 +81,7 @@ export const MultiSourceRescueCard: React.FC = () => {
       title: 'Zero-Cost Liquidity',
       subtitle: 'Emergency Savings + Subsidized Hospital Direct Advance',
       allocatedAmount: fundingPlan.tranches[0].allocatedAmount,
-      percentage: 40,
+      percentage: allocationPercent(fundingPlan.tranches[0].allocatedAmount),
       apr: 0.0,
       interestCost: 0,
       tenureDisplay: `${tenureMonths}-Month Interest-Free Buffer`,
@@ -115,7 +118,7 @@ export const MultiSourceRescueCard: React.FC = () => {
       title: 'Low-Interest Co-op / Credit Union Bridge',
       subtitle: 'Employer Credit Co-op Subsidized Emergency Window',
       allocatedAmount: fundingPlan.tranches[1].allocatedAmount,
-      percentage: 40,
+      percentage: allocationPercent(fundingPlan.tranches[1].allocatedAmount),
       apr: 6.5,
       interestCost: fundingPlan.tranches[1].interestCost,
       tenureDisplay: `${tenureMonths} Months Amortized`,
@@ -138,7 +141,7 @@ export const MultiSourceRescueCard: React.FC = () => {
       title: 'Deferred Staggered Micro-Repayment',
       subtitle: 'Post-Crisis Recovery Tier with Built-in Breathing Room',
       allocatedAmount: fundingPlan.tranches[2].allocatedAmount,
-      percentage: 20,
+      percentage: allocationPercent(fundingPlan.tranches[2].allocatedAmount),
       apr: 8.0,
       interestCost: fundingPlan.tranches[2].interestCost,
       tenureDisplay: `${tenureMonths} Months (Starts Day 61)`,

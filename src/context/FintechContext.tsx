@@ -107,11 +107,16 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const fundingPlan = useMemo<FundingPlanResult>(() => {
     const shockAmt = Math.max(0, shock.amount);
     const repaymentMonths = Math.max(1, shock.tenureMonths ?? 12);
-    const savingsAlloc = Math.min(profile.emergencySavings, Math.round(shockAmt * 0.1));
+    const savingsAlloc = Math.min(profile.emergencySavings, shockAmt);
     const trancheAAlloc = Math.round(shockAmt * 0.4);
-    const hospitalAdvanceAlloc = Math.max(0, trancheAAlloc - savingsAlloc);
-    const coopAlloc = Math.round(shockAmt * 0.4);
-    const deferredAlloc = Math.max(0, shockAmt - trancheAAlloc - coopAlloc);
+    const hospitalAdvanceAlloc = Math.min(
+      Math.max(0, trancheAAlloc - savingsAlloc),
+      Math.max(0, shockAmt - savingsAlloc),
+    );
+    const zeroCostAlloc = savingsAlloc + hospitalAdvanceAlloc;
+    const remainingNeed = Math.max(0, shockAmt - zeroCostAlloc);
+    const coopAlloc = Math.min(Math.round(shockAmt * 0.4), remainingNeed);
+    const deferredAlloc = Math.max(0, remainingNeed - coopAlloc);
 
     const coopInterest = Math.round(coopAlloc * 0.065 * (repaymentMonths / 12));
     const deferredInterest = Math.round(deferredAlloc * 0.08 * (repaymentMonths / 12));
@@ -126,7 +131,7 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
         {
           sourceName: 'Zero-Cost Liquidity (Savings + Hospital Advance)',
           sourceType: 'emergency_nbfc',
-          allocatedAmount: trancheAAlloc,
+          allocatedAmount: zeroCostAlloc,
           interestApr: 0,
           tenureMonths: repaymentMonths,
           monthlyObligation: Math.ceil(hospitalAdvanceAlloc / repaymentMonths),
@@ -154,7 +159,7 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
           notes: 'Estimated repayment begins after the 60-day grace period',
         },
       ],
-      totalAllocated: trancheAAlloc + coopAlloc + deferredAlloc,
+      totalAllocated: zeroCostAlloc + coopAlloc + deferredAlloc,
       totalRepayment: Math.round(totalRepayment),
       totalInterestAndFees,
       directCashSaved: Math.round(directCashSaved),
@@ -168,7 +173,7 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const runwayData = useMemo<CashflowRunwayPoint[]>(() => {
     const days = [0, 15, 30, 32, 45, 60, 75, 90];
     const shockAmt = Math.max(0, shock.amount);
-    const savingsUsed = Math.min(profile.emergencySavings, Math.round(shockAmt * 0.1));
+    const savingsUsed = Math.min(profile.emergencySavings, shockAmt);
     const startingCash = Math.max(0, profile.emergencySavings - savingsUsed);
     const dailySurplus = dynamicSurplus / 30;
     const amountScale = shockAmt / 50000;
