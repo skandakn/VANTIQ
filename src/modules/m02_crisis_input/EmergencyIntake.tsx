@@ -27,10 +27,10 @@ export const EmergencyIntake: React.FC = () => {
   };
 
   const fields = [
-    { id: salaryInputId, label: 'Monthly net salary', field: 'monthlyIncome' as const, value: profile.monthlyIncome },
-    { id: emiInputId, label: 'Existing EMI', field: 'existingEmi' as const, value: profile.existingEmi },
-    { id: rentInputId, label: 'House rent', field: 'houseRent' as const, value: profile.houseRent },
-    { id: foodInputId, label: 'Living & food', field: 'livingExpenses' as const, value: profile.livingExpenses },
+    { id: salaryInputId, label: 'Take-home pay', field: 'monthlyIncome' as const, value: profile.monthlyIncome },
+    { id: emiInputId, label: 'Existing loan payments', field: 'existingEmi' as const, value: profile.existingEmi },
+    { id: rentInputId, label: 'Rent', field: 'houseRent' as const, value: profile.houseRent },
+    { id: foodInputId, label: 'Other living costs', field: 'livingExpenses' as const, value: profile.livingExpenses },
   ];
 
   return (
@@ -39,17 +39,18 @@ export const EmergencyIntake: React.FC = () => {
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '5px' }}>
             <span className="cashflow-heading-icon"><WalletCards size={17} /></span>
-            <span className="cashflow-eyebrow">MONTHLY BUDGET</span>
+            <span className="cashflow-eyebrow">YOUR MONTHLY BUDGET</span>
           </div>
           <h3 style={{ fontSize: '1.18rem', fontWeight: 850, color: 'var(--wise-forest)', marginBottom: '3px' }}>
             Your monthly budget
           </h3>
           <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-            Enter take-home pay and regular costs. We estimate what may be left for repayments.
+            Add your take-home pay, monthly bills, and savings. The estimate updates as you type.
           </p>
         </div>
-        <div style={{ padding: '6px 10px', borderRadius: '9px', backgroundColor: '#fff1f2', color: '#7f1d1d', fontSize: '0.76rem', fontWeight: 700 }}>
-          Still needed after savings: ₹{unfundedGap.toLocaleString('en-IN')}
+        <div className="cashflow-gap" aria-live="polite">
+          <span>Bill left after savings</span>
+          <strong>₹{unfundedGap.toLocaleString('en-IN')}</strong>
         </div>
       </div>
 
@@ -70,7 +71,7 @@ export const EmergencyIntake: React.FC = () => {
           </label>
         ))}
         <label htmlFor={savingsInputId} style={{ display: 'block', minWidth: 0, color: '#34443a', fontSize: '0.76rem', fontWeight: 700 }}>
-          Savings available now (₹)
+          Savings you can use now (₹)
           <input
             id={savingsInputId}
             className="cashflow-field"
@@ -110,7 +111,7 @@ export const EmergencyIntake: React.FC = () => {
 
       <div className="cashflow-guidance">
         <Sparkles size={16} aria-hidden="true" />
-        <span>This is an estimate from the amounts entered, not a lender approval. Your repayment plan is shown in the panel beside this one.</span>
+        <span><strong>Monthly capacity = take-home pay − EMI − rent − living costs.</strong> This estimate is not lender approval; compare it with the payment in the emergency plan.</span>
       </div>
 
       <div style={{ marginTop: '10px', textAlign: 'center' }}>

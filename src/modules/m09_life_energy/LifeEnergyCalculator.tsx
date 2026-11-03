@@ -300,14 +300,9 @@ export const LifeEnergyCalculator: React.FC = () => {
         </div>
 
         {/* 3-Way Labor Hours Comparison Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-          gap: '20px',
-          marginBottom: '32px'
-        }}>
+        <div className="life-energy-comparison-grid">
           {/* Card 1: Predatory Stacking Repayment */}
-          <div className="vantiq-card" style={{
+          <div className="vantiq-card life-energy-comparison-card" style={{
             padding: '26px',
             borderRadius: '16px',
             backgroundColor: 'rgba(239, 68, 68, 0.05)',
@@ -359,7 +354,8 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 2: VANTIQ Funding Plan */}\r\n          <div className="vantiq-card" style={{
+          {/* Card 2: VANTIQ Funding Plan */}
+          <div className="vantiq-card life-energy-comparison-card" style={{
             padding: '26px',
             borderRadius: '16px',
             backgroundColor: 'rgba(6, 182, 212, 0.05)',
@@ -412,7 +408,7 @@ export const LifeEnergyCalculator: React.FC = () => {
           </div>
 
           {/* Card 3: Net Life-Energy Saved (HERO HIGHLIGHT) */}
-          <div className="vantiq-card glow-emerald" style={{
+          <div className="vantiq-card glow-emerald life-energy-comparison-card" style={{
             padding: '26px',
             borderRadius: '16px',
             backgroundColor: 'rgba(16, 185, 129, 0.08)',
