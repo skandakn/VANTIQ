@@ -186,6 +186,123 @@ code, pre {
   box-sizing: border-box;
 }
 
+.life-energy-card-badge-wrap {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 28px;
+  margin-bottom: 8px;
+}
+
+.life-energy-card-eyebrow {
+  margin-bottom: 6px;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.055em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.life-energy-card-eyebrow--warning { color: #b42318 !important; }
+.life-energy-card-eyebrow--plan { color: #08718a !important; }
+.life-energy-card-eyebrow--saved { color: #047857 !important; }
+
+.life-energy-card-number {
+  font-size: 2.55rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  text-shadow: none !important;
+}
+
+.life-energy-card-number--warning { color: #c2413a !important; }
+.life-energy-card-number--plan { color: #087e9b !important; }
+.life-energy-card-number--saved { color: #047857 !important; }
+
+.life-energy-card-unit {
+  font-size: 1rem !important;
+  font-weight: 750 !important;
+  line-height: 1.3;
+}
+
+.life-energy-card-unit--warning { color: #9f332d !important; }
+.life-energy-card-unit--plan { color: #086b80 !important; }
+.life-energy-card-unit--saved { color: #06724f !important; }
+
+.life-energy-card-days {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  padding: 6px 10px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.life-energy-card-days--warning {
+  color: #982c25;
+  background: #fee4e2;
+}
+
+.life-energy-card-days--plan {
+  color: #075f73;
+  background: #d9f3f7;
+}
+
+.life-energy-card-days--saved {
+  color: #056342;
+  background: #d8f5e8;
+  border: 1px solid #8bd8b4;
+}
+
+.life-energy-card-description {
+  margin: 0 0 16px;
+  color: #344155;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.life-energy-card-description strong {
+  color: #172b3d;
+  font-weight: 800;
+}
+
+.life-energy-card-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  margin-top: auto;
+  border-radius: 9px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.life-energy-card-summary--warning {
+  color: #ffffff;
+  background: #505968;
+}
+
+.life-energy-card-summary--warning span:last-child { color: #ffd1ce; }
+
+.life-energy-card-summary--plan {
+  color: #ffffff;
+  background: #505968;
+}
+
+.life-energy-card-summary--plan span:last-child { color: #a7eff7; }
+
+.life-energy-card-summary--saved {
+  color: #ffffff;
+  background: #344b56;
+}
+
+.life-energy-card-summary--saved span:last-child { color: #9ce8c7; }
+
 .life-energy-comparison-card > div:last-child {
   flex-wrap: wrap;
   gap: 8px;
@@ -207,6 +324,14 @@ code, pre {
 
   .life-energy-comparison-card {
     padding: 22px !important;
+  }
+
+  .life-energy-card-number {
+    font-size: 2.2rem !important;
+  }
+
+  .life-energy-card-summary {
+    font-size: 0.72rem;
   }
 }
 

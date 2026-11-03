@@ -28,7 +28,7 @@ export const EmergencyIntake: React.FC = () => {
 
   const fields = [
     { id: salaryInputId, label: 'Take-home pay', field: 'monthlyIncome' as const, value: profile.monthlyIncome },
-    { id: emiInputId, label: 'Existing loan payments', field: 'existingEmi' as const, value: profile.existingEmi },
+    { id: emiInputId, label: 'Existing EMI', field: 'existingEmi' as const, value: profile.existingEmi },
     { id: rentInputId, label: 'Rent', field: 'houseRent' as const, value: profile.houseRent },
     { id: foodInputId, label: 'Other living costs', field: 'livingExpenses' as const, value: profile.livingExpenses },
   ];

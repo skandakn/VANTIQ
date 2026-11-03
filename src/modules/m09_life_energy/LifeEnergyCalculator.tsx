@@ -310,47 +310,38 @@ export const LifeEnergyCalculator: React.FC = () => {
             position: 'relative',
             overflow: 'hidden'
           }}>
-            <div style={{ position: 'absolute', top: '16px', right: '16px' }}>
+            <div className="life-energy-card-badge-wrap">
               <span className="badge badge-red" style={{ fontSize: '0.7rem' }}>
                 <AlertTriangle size={12} />
                 <span>36.8% Debt Trap</span>
               </span>
             </div>
 
-            <div style={{ fontSize: '0.75rem', color: '#fca5a5', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '0.06em', marginBottom: '6px' }}>
-              Predatory Stacking Repayment
+            <div className="life-energy-card-eyebrow life-energy-card-eyebrow--warning">
+              Predatory loan app repayment
             </div>
 
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
-              <span style={{ fontSize: '2.6rem', fontWeight: 900, color: '#f87171', lineHeight: 1 }}>
+              <span className="life-energy-card-number life-energy-card-number--warning">
                 {predatoryHours}
               </span>
-              <span style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fca5a5' }}>
+              <span className="life-energy-card-unit life-energy-card-unit--warning">
                 Hours of Labor
               </span>
             </div>
 
-            <div style={{ display: 'inline-block', padding: '4px 10px', borderRadius: '6px', backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#f87171', fontSize: '0.85rem', fontWeight: 700, marginBottom: '14px' }}>
-              ≈ {predatoryDays} Full Working Days (~{Math.round((predatoryDays / 5) * 10) / 10} work weeks)
+            <div className="life-energy-card-days life-energy-card-days--warning">
+              ≈ {predatoryDays} working days ({Math.round((predatoryDays / 5) * 10) / 10} work weeks)
             </div>
 
-            <p style={{ fontSize: '0.82rem', color: '#cbd5e1', lineHeight: 1.5, marginBottom: '16px' }}>
+            <p className="life-energy-card-description">
               Repaying <strong>₹{predatoryRepayment.toLocaleString()}</strong> at your ₹{hourlyWage}/hr wage forces you to sacrifice
-              over <strong>34 entire working days</strong> just to break even with aggressive lenders.
+              about <strong>{predatoryDays} working days</strong> to repay the illustrative high-cost debt.
             </p>
 
-            <div style={{
-              backgroundColor: 'rgba(15, 23, 42, 0.65)',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '0.75rem',
-              color: '#94a3b8',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center'
-            }}>
+            <div className="life-energy-card-summary life-energy-card-summary--warning">
               <span>Total Debt: ₹{predatoryRepayment.toLocaleString()}</span>
-              <span style={{ color: '#ef4444', fontWeight: 700 }}>273.6h Labor Burn</span>
+              <span>{predatoryHours}h repayment time</span>
             </div>
           </div>
 
@@ -363,47 +354,38 @@ export const LifeEnergyCalculator: React.FC = () => {
             position: 'relative',
             overflow: 'hidden'
           }}>
-            <div style={{ position: 'absolute', top: '16px', right: '16px' }}>
+            <div className="life-energy-card-badge-wrap">
               <span className="badge badge-cyan" style={{ fontSize: '0.7rem' }}>
                 <ShieldCheck size={12} />
                 <span>Multi-Source Blend</span>
               </span>
             </div>
 
-            <div style={{ fontSize: '0.75rem', color: '#67e8f9', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '0.06em', marginBottom: '6px' }}>
-              VANTIQ Plan Repayment
+            <div className="life-energy-card-eyebrow life-energy-card-eyebrow--plan">
+              VANTIQ plan estimate
             </div>
 
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
-              <span style={{ fontSize: '2.6rem', fontWeight: 900, color: '#38bdf8', lineHeight: 1 }}>
+              <span className="life-energy-card-number life-energy-card-number--plan">
                 {vantiqHours}
               </span>
-              <span style={{ fontSize: '1.2rem', fontWeight: 700, color: '#67e8f9' }}>
+              <span className="life-energy-card-unit life-energy-card-unit--plan">
                 Hours of Labor
               </span>
             </div>
 
-            <div style={{ display: 'inline-block', padding: '4px 10px', borderRadius: '6px', backgroundColor: 'rgba(6, 182, 212, 0.15)', color: '#38bdf8', fontSize: '0.85rem', fontWeight: 700, marginBottom: '14px' }}>
-              ≈ {vantiqDays} Full Working Days (~{Math.round((vantiqDays / 5) * 10) / 10} work weeks)
+            <div className="life-energy-card-days life-energy-card-days--plan">
+              ≈ {vantiqDays} working days ({Math.round((vantiqDays / 5) * 10) / 10} work weeks)
             </div>
 
-            <p style={{ fontSize: '0.82rem', color: '#cbd5e1', lineHeight: 1.5, marginBottom: '16px' }}>
-              By blending zero-APR medical buffers and fair NBFC tranches (totaling <strong>₹{vantiqRepayment.toLocaleString()}</strong>),
-              your required labor time drops cleanly to <strong>205.6 hours</strong>.
+            <p className="life-energy-card-description">
+              The sample plan totals <strong>₹{vantiqRepayment.toLocaleString()}</strong>. At your current hourly wage, that equals
+              <strong> {vantiqHours} hours</strong> of work to repay.
             </p>
 
-            <div style={{
-              backgroundColor: 'rgba(15, 23, 42, 0.65)',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '0.75rem',
-              color: '#94a3b8',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center'
-            }}>
+            <div className="life-energy-card-summary life-energy-card-summary--plan">
               <span>Total Debt: ₹{vantiqRepayment.toLocaleString()}</span>
-              <span style={{ color: '#06b6d4', fontWeight: 700 }}>205.6h Labor Total</span>
+              <span>{vantiqHours}h repayment time</span>
             </div>
           </div>
 
@@ -417,48 +399,38 @@ export const LifeEnergyCalculator: React.FC = () => {
             overflow: 'hidden',
             boxShadow: '0 0 30px rgba(16, 185, 129, 0.2)'
           }}>
-            <div style={{ position: 'absolute', top: '16px', right: '16px' }}>
+            <div className="life-energy-card-badge-wrap">
               <span className="badge badge-emerald" style={{ fontSize: '0.7rem', padding: '4px 10px' }}>
                 <Trophy size={12} />
                 <span>Freedom Reclaimed</span>
               </span>
             </div>
 
-            <div style={{ fontSize: '0.75rem', color: '#6ee7b7', textTransform: 'uppercase', fontWeight: 800, letterSpacing: '0.06em', marginBottom: '6px' }}>
-              Net Life-Energy Reclaimed
+            <div className="life-energy-card-eyebrow life-energy-card-eyebrow--saved">
+              Estimated time saved
             </div>
 
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
-              <span style={{ fontSize: '2.8rem', fontWeight: 900, color: '#34d399', lineHeight: 1, textShadow: '0 0 20px rgba(52, 211, 153, 0.5)' }}>
+              <span className="life-energy-card-number life-energy-card-number--saved">
                 +{savedHours}
               </span>
-              <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#6ee7b7' }}>
+              <span className="life-energy-card-unit life-energy-card-unit--saved">
                 Hours Saved!
               </span>
             </div>
 
-            <div style={{ display: 'inline-block', padding: '4px 12px', borderRadius: '6px', backgroundColor: 'rgba(16, 185, 129, 0.2)', border: '1px solid #10b981', color: '#34d399', fontSize: '0.9rem', fontWeight: 800, marginBottom: '14px' }}>
-              🎉 ≈ {savedDays} Days of Labor Freedom!
+            <div className="life-energy-card-days life-energy-card-days--saved">
+              ≈ {savedDays} working days saved
             </div>
 
-            <p style={{ fontSize: '0.82rem', color: '#f1f5f9', lineHeight: 1.5, marginBottom: '16px' }}>
-              You win back <strong>{savedHours} working hours</strong> (~{savedDays} working days) of your life that would have otherwise gone directly
-              into predatory fees! That is <strong>₹{savedCash.toLocaleString()}</strong> kept in your family's hands.
+            <p className="life-energy-card-description">
+              Compared with the high-cost example, the plan saves about <strong>{savedHours} working hours</strong> and
+              <strong> ₹{savedCash.toLocaleString()}</strong> in estimated repayment costs.
             </p>
 
-            <div style={{
-              backgroundColor: 'rgba(15, 23, 42, 0.75)',
-              padding: '10px 14px',
-              borderRadius: '8px',
-              fontSize: '0.75rem',
-              color: '#34d399',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              fontWeight: 700
-            }}>
+            <div className="life-energy-card-summary life-energy-card-summary--saved">
               <span>Direct Cash Preserved: ₹{savedCash.toLocaleString()}</span>
-              <span>1.7 Work Weeks Saved</span>
+              <span>{savedHours} work hours saved</span>
             </div>
           </div>
         </div>
