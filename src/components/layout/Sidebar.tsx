@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard,
   Calculator, 
-  HeartHandshake,
+  Banknote,
   Atom, 
   Wallet, 
   X, 
@@ -42,10 +42,10 @@ export const VANTIQ_FEATURES: VantiqFeatureItem[] = [
   },
   {
     id: 'health-navigator',
-    name: 'Health Relief Navigator',
+    name: 'Fund Finder',
     subtitle: 'Hospital Plans & Reviews',
     path: '/#health-navigator',
-    icon: HeartHandshake,
+    icon: Banknote,
     isAnchor: true,
   },
   {
