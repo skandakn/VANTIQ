@@ -21,7 +21,6 @@ import { HeroSection } from '../modules/m01_hero/HeroSection';
 import { HealthReliefNavigator } from '../modules/m15_health_navigator/HealthReliefNavigator';
 import { CashflowRunwayChart } from '../modules/m05_cashflow_twin/CashflowRunwayChart';
 import { LifeEnergyCalculator } from '../modules/m09_life_energy/LifeEnergyCalculator';
-import { TreeSHAPExplainer } from '../modules/m11_xai_explainer/TreeSHAPExplainer';
 import { ZeroKnowledgeCompliance } from '../modules/m13_privacy_compliance/ZeroKnowledgeCompliance';
 
 const FEATURE_CARDS = [
@@ -328,10 +327,6 @@ export const DashboardPage: React.FC = () => {
 
       {/* Life Energy Labor Cost Calculator */}
       <LifeEnergyCalculator />
-
-      {/* Explainable AI Model Explanations (TreeSHAP) */}
-      <TreeSHAPExplainer />
-
 
       {/* Zero-Knowledge Compliance Engine & RBI Master Directions */}
       <ZeroKnowledgeCompliance />
