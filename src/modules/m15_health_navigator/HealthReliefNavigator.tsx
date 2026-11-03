@@ -12,7 +12,6 @@ import {
   ExternalLink,
   Search,
   Clock,
-  Globe,
   FileText,
   Share2,
   ChevronRight,
@@ -41,7 +40,7 @@ export const HealthReliefNavigator: React.FC = () => {
 
   // User Input Parameters
   const [selectedConditionId, setSelectedConditionId] = useState<string>('cardiac');
-  const [regionFilter, setRegionFilter] = useState<'All' | 'India' | 'USA' | 'UK' | 'Global'>('India');
+  const [regionFilter] = useState<'All' | 'India' | 'USA' | 'UK' | 'Global'>('India');
   const [targetAmount, setTargetAmount] = useState<number>(shock.amount || 450000);
   const [desiredTenureMonths, setDesiredTenureMonths] = useState<number>(shock.tenureMonths || 24);
 
@@ -91,12 +90,6 @@ export const HealthReliefNavigator: React.FC = () => {
     }));
   };
 
-  const handleRegionChange = (newRegion: 'All' | 'India' | 'USA' | 'UK' | 'Global') => {
-    setRegionFilter(newRegion);
-    const cond = HEALTH_CONDITIONS.find((c) => c.id === selectedConditionId) || HEALTH_CONDITIONS[0];
-    const newAmt = newRegion === 'India' ? cond.typicalCostInr : cond.typicalCostUsd;
-    handleTargetAmountChange(newAmt);
-  };
   const [urgency, setUrgency] = useState<'critical' | 'high' | 'moderate'>('critical');
   const [insuranceStatus, setInsuranceStatus] = useState<'uninsured' | 'partial' | 'full'>('partial');
   const [existingInsuranceCover, setExistingInsuranceCover] = useState<number>(150000);
@@ -497,41 +490,14 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
               boxShadow: '0 12px 36px rgba(22, 51, 0, 0.06)',
             }}
           >
-            {/* Form Top Title & Region */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px', marginBottom: '24px' }}>
-              <div>
-                <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', fontWeight: 800, color: '#3b543d', letterSpacing: '0.04em' }}>
-                  Step 1: Input Your Medical & Financial Requirements
-                </span>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--wise-forest)' }}>
-                  Enter Amount, Tenure & Medical Details
-                </h3>
-              </div>
-
-              {/* Region / Country Switcher */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#ffffff', padding: '4px', borderRadius: '9999px', border: '1px solid #d0d7cc' }}>
-                <Globe size={14} color="var(--wise-forest)" style={{ marginLeft: '8px' }} />
-                {(['India', 'USA', 'UK', 'Global'] as const).map((r) => (
-                  <button
-                    type="button"
-                    key={r}
-                    onClick={() => handleRegionChange(r)}
-                    style={{
-                      border: 'none',
-                      background: regionFilter === r ? 'var(--wise-forest)' : 'transparent',
-                      color: regionFilter === r ? 'var(--wise-lime)' : 'var(--text-secondary)',
-                      fontWeight: regionFilter === r ? 800 : 600,
-                      fontSize: '0.78rem',
-                      padding: '6px 14px',
-                      borderRadius: '9999px',
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
-                    }}
-                  >
-                    {r === 'India' ? '🇮🇳 India' : r === 'USA' ? '🇺🇸 USA' : r === 'UK' ? '🇬🇧 UK' : '🌍 Global'}
-                  </button>
-                ))}
-              </div>
+            {/* Form Top Title */}
+            <div style={{ marginBottom: '24px' }}>
+              <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', fontWeight: 800, color: '#3b543d', letterSpacing: '0.04em' }}>
+                Step 1: Input Your Medical & Financial Requirements
+              </span>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--wise-forest)' }}>
+                Enter Amount, Tenure & Medical Details
+              </h3>
             </div>
 
             {/* Health Condition Presets */}
