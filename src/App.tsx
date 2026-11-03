@@ -1,51 +1,92 @@
 // src/App.tsx
 // VANTIQ Master Application Shell
-// Integrates specialized modules into a seamless, high-performance UI.
+// Fully independent route-level architecture for all 7 fintech features + unified dashboard.
 
-import React from 'react';
-import { FintechProvider } from './context/FintechContext';
+import React, { useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { FintechProvider, useFintech } from './context/FintechContext';
 import { Navbar } from './components/layout/Navbar';
+import { Sidebar } from './components/layout/Sidebar';
 import { Footer } from './components/layout/Footer';
 import { PwaMobileNav } from './components/layout/PwaMobileNav';
+import { NeuroAdaptiveShieldModal } from './modules/m08_neuro_shield/NeuroAdaptiveShieldModal';
 
-import { HeroSection } from './modules/m01_hero/HeroSection';
-import { HealthReliefNavigator } from './modules/m15_health_navigator/HealthReliefNavigator';
-import { GhostDebtMesh } from './modules/m03_debt_mesh/GhostDebtMesh';
-import { DualCapacityGauge } from './modules/m04_dual_dial/DualCapacityGauge';
-import { CashflowRunwayChart } from './modules/m05_cashflow_twin/CashflowRunwayChart';
-import { MultiSourceRescueCard } from './modules/m07_rescue_blend/MultiSourceRescueCard';
-import { LifeEnergyCalculator } from './modules/m09_life_energy/LifeEnergyCalculator';
-import { ComparativeRescueMatrix } from './modules/m10_comparison_matrix/ComparativeRescueMatrix';
-import { TreeSHAPExplainer } from './modules/m11_xai_explainer/TreeSHAPExplainer';
-import { MarketRadarChart } from './modules/m12_market_radar/MarketRadarChart';
-import { ZeroKnowledgeCompliance } from './modules/m13_privacy_compliance/ZeroKnowledgeCompliance';
-import { RoadmapAndTeam } from './modules/m14_roadmap_team/RoadmapAndTeam';
+// Dedicated Independent Feature Route Pages (built by SaiArvind18)
+import { DashboardPage } from './pages/DashboardPage';
+import { CalculatorPage } from './pages/CalculatorPage';
+import { DebtTrapsPage } from './pages/DebtTrapsPage';
+import { QuantumSolverPage } from './pages/QuantumSolverPage';
+import { CashRunwayPage } from './pages/CashRunwayPage';
+import { FeeComparisonPage } from './pages/FeeComparisonPage';
+import { SecurityZkPage } from './pages/SecurityZkPage';
+import { ShieldPage } from './pages/ShieldPage';
 
-export const App: React.FC = () => {
+// Scroll to top helper on route transition
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+  }, [pathname]);
+
+  return null;
+};
+
+const AppShell: React.FC = () => {
+  const { isSidebarOpen } = useFintech();
+
   return (
-    <FintechProvider>
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-        <Navbar />
-        
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <ScrollToTop />
+      <Navbar />
+      <Sidebar />
+      
+      <div 
+        className={`vantiq-body-content ${isSidebarOpen ? 'sidebar-expanded' : ''}`}
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          transition: 'margin-left 0.32s cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+      >
         <main style={{ flex: 1 }}>
-          <HeroSection />
-          <HealthReliefNavigator />
-          <GhostDebtMesh />
-          <DualCapacityGauge />
+          <Routes>
+            {/* Dashboard / Home Route */}
+            <Route path="/" element={<DashboardPage />} />
 
-          <CashflowRunwayChart />
-          <MultiSourceRescueCard />
-          <LifeEnergyCalculator />
-          <ComparativeRescueMatrix />
-          <TreeSHAPExplainer />
-          <MarketRadarChart />
-          <ZeroKnowledgeCompliance />
-          <RoadmapAndTeam />
+            {/* Dedicated 7 Independent Feature Pages */}
+            <Route path="/calculator" element={<CalculatorPage />} />
+            <Route path="/debt-traps" element={<DebtTrapsPage />} />
+            <Route path="/quantum-solver" element={<QuantumSolverPage />} />
+            <Route path="/cash-runway" element={<CashRunwayPage />} />
+            <Route path="/fee-comparison" element={<FeeComparisonPage />} />
+            <Route path="/security-zk" element={<SecurityZkPage />} />
+            <Route path="/45s-shield" element={<ShieldPage />} />
+
+            {/* Legacy & Fallback Route Redirects */}
+            <Route path="/simulator" element={<Navigate to="/calculator" replace />} />
+            <Route path="/ghost-debt" element={<Navigate to="/debt-traps" replace />} />
+            <Route path="/digital-twin" element={<Navigate to="/cash-runway" replace />} />
+            <Route path="/comparison" element={<Navigate to="/fee-comparison" replace />} />
+            <Route path="/compliance" element={<Navigate to="/security-zk" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
         </main>
 
         <Footer />
         <PwaMobileNav />
       </div>
+
+      <NeuroAdaptiveShieldModal />
+    </div>
+  );
+};
+
+export const App: React.FC = () => {
+  return (
+    <FintechProvider>
+      <AppShell />
     </FintechProvider>
   );
 };

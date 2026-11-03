@@ -231,3 +231,10 @@ main section h3 {
 .chronos-card [style*="#34D399"] {
   color: #15803d !important;
 }
+
+/* Responsive Desktop Content Adjustment for Sidebar */
+@media (min-width: 1024px) {
+  .vantiq-body-content.sidebar-expanded {
+    margin-left: 280px;
+  }
+}

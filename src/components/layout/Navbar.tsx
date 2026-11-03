@@ -1,6 +1,7 @@
 // src/components/layout/Navbar.tsx
-// VANTIQ: Authentic Wise-Inspired Clean Light Navigation
+// VANTIQ: Authentic Clean Navigation with Sidebar & 45s Shield Integration
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Shield, 
   Zap, 
@@ -9,8 +10,10 @@ import {
   AlertTriangle, 
   Menu, 
   X,
+  Lock,
   HeartHandshake
 } from 'lucide-react';
+import { useFintech } from '../../context/FintechContext';
 
 const NAV_LINKS = [
   { id: 'simulator', label: 'Calculator', icon: Zap, fallbackId: 'crisis-intake' },
@@ -22,12 +25,36 @@ const NAV_LINKS = [
 ];
 
 export const Navbar: React.FC = () => {
+  const navigate = useNavigate();
+  const { 
+    isSidebarOpen, 
+    toggleSidebar, 
+    neuroState, 
+    triggerNeuroShield 
+  } = useFintech();
+
   const [activeSection, setActiveSection] = useState<string>('simulator');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
   const scrollToSection = (targetId: string) => {
     setMobileMenuOpen(false);
+
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          const headerOffset = 76;
+          const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: Math.max(0, elementPosition - headerOffset),
+            behavior: 'smooth',
+          });
+        }
+      }, 120);
+      return;
+    }
 
     const directEl = document.getElementById(targetId);
     const linkDef = NAV_LINKS.find((link) => link.id === targetId);
@@ -117,51 +144,86 @@ export const Navbar: React.FC = () => {
       >
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
           
-          {/* Wise-Style Bold Wordmark Logo */}
-          <div 
-            style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer', textDecoration: 'none' }}
-            onClick={() => scrollToSection('simulator')}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => { if (e.key === 'Enter') scrollToSection('simulator'); }}
-          >
-            <div
+          {/* Left Area: Sidebar Toggle & Brand Wordmark Logo */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {/* Hamburger / Menu Icon Toggle for Sidebar */}
+            <button
+              onClick={toggleSidebar}
               style={{
-                width: '36px',
-                height: '36px',
+                background: isSidebarOpen ? '#edf2ea' : 'transparent',
+                border: '1px solid #d0d7cc',
                 borderRadius: '8px',
-                background: 'var(--wise-forest)',
-                color: 'var(--wise-lime)',
+                padding: '6px 8px',
+                cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontWeight: 900,
-                fontSize: '1.25rem',
-                flexShrink: 0,
+                color: 'var(--wise-forest)',
+                transition: 'all 0.15s ease',
+              }}
+              aria-label={isSidebarOpen ? 'Collapse feature sidebar' : 'Open feature navigation sidebar'}
+              aria-expanded={isSidebarOpen}
+              title={isSidebarOpen ? 'Collapse feature sidebar (Esc)' : 'Open feature sidebar'}
+            >
+              {isSidebarOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
+
+            <div 
+              style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', textDecoration: 'none' }}
+              onClick={() => {
+                if (window.location.pathname !== '/') {
+                  navigate('/');
+                } else {
+                  scrollToSection('simulator');
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { 
+                if (e.key === 'Enter') {
+                  if (window.location.pathname !== '/') navigate('/');
+                  else scrollToSection('simulator');
+                }
               }}
             >
-              V
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span
+              <div
                 style={{
-                  fontSize: '1.4rem',
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '8px',
+                  background: 'var(--wise-forest)',
+                  color: 'var(--wise-lime)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   fontWeight: 900,
-                  letterSpacing: '-0.04em',
-                  color: 'var(--wise-forest)',
+                  fontSize: '1.25rem',
+                  flexShrink: 0,
                 }}
               >
-                vantiq
-              </span>
-              <span
-                style={{
-                  width: '6px',
-                  height: '6px',
-                  borderRadius: '50%',
-                  backgroundColor: 'var(--wise-lime)',
-                }}
-              />
+                V
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span
+                  style={{
+                    fontSize: '1.4rem',
+                    fontWeight: 900,
+                    letterSpacing: '-0.04em',
+                    color: 'var(--wise-forest)',
+                  }}
+                >
+                  vantiq
+                </span>
+                <span
+                  style={{
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--wise-lime)',
+                  }}
+                />
+              </div>
             </div>
           </div>
 
@@ -190,7 +252,7 @@ export const Navbar: React.FC = () => {
                     borderRadius: '50%',
                     backgroundColor: '#15803d',
                     opacity: 0.75,
-                    animation: 'pulseGlow 2s infinite',
+                    animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite',
                   }}
                 />
                 <span
@@ -204,15 +266,28 @@ export const Navbar: React.FC = () => {
                 />
               </span>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ color: '#596d5a' }}>Funding Plan:</span>
-                <span style={{ color: 'var(--wise-forest)', fontWeight: 700 }}>Available</span>
-              </div>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ color: 'var(--wise-forest)', fontWeight: 800 }}>Quantum Engine:</span>
+                <span style={{ color: '#15803d', fontWeight: 800 }}>Online</span>
+                <span style={{ color: '#94a3b8' }}>•</span>
+                <span style={{ color: 'var(--text-secondary)' }}>38ms latency</span>
+              </span>
             </div>
           </div>
 
-          {/* Smooth Anchor Navigation Links (Desktop) */}
-          <nav className="desktop-nav-menu" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          {/* Center/Desktop Navigation Pill Group */}
+          <nav
+            className="navbar-desktop-links"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              backgroundColor: '#edf2ea',
+              padding: '4px',
+              borderRadius: '9999px',
+              border: '1px solid #d8e2d4',
+            }}
+          >
             {NAV_LINKS.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -241,9 +316,36 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Action Area: Wise-style Low-Friction CTA */}
+          {/* Action Area: 45s Shield + Simulate Free CTA */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             
+            {/* 45s Shield button */}
+            <button
+              onClick={() => {
+                triggerNeuroShield();
+                navigate('/45s-shield');
+              }}
+              style={{
+                fontSize: '0.84rem',
+                fontWeight: 700,
+                padding: '8px 16px',
+                borderRadius: '9999px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                whiteSpace: 'nowrap',
+                border: neuroState.isShieldActive ? '1.5px solid #f59e0b' : '1px solid #d0d7cc',
+                backgroundColor: neuroState.isShieldActive ? '#fffbeb' : '#ffffff',
+                color: neuroState.isShieldActive ? '#b45309' : 'var(--wise-forest)',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+              }}
+              title="45s Neuro-Adaptive Shield Protocol"
+            >
+              <Lock size={14} color={neuroState.isShieldActive ? '#f59e0b' : '#15803d'} />
+              <span>45s Shield</span>
+            </button>
+
             {/* Primary Wise Electric Lime CTA Button */}
             <button
               onClick={() => scrollToSection('simulator')}
@@ -273,108 +375,87 @@ export const Navbar: React.FC = () => {
                 padding: '8px',
                 borderRadius: '8px',
                 borderColor: '#d0d7cc',
+                backgroundColor: '#ffffff',
+                color: 'var(--wise-forest)',
               }}
-              aria-label="Toggle navigation menu"
+              aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X size={20} color="var(--wise-forest)" /> : <Menu size={20} color="var(--wise-forest)" />}
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
 
           </div>
 
         </div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Mobile Dropdown Menu Drawer */}
         {mobileMenuOpen && (
           <div
             style={{
-              padding: '16px 24px',
+              padding: '16px 20px',
               backgroundColor: '#ffffff',
-              borderBottom: '1px solid #e5e9e2',
+              borderTop: '1px solid #e5e9e2',
+              boxShadow: '0 10px 25px rgba(22, 51, 0, 0.08)',
               display: 'flex',
               flexDirection: 'column',
-              gap: '12px',
-              boxShadow: '0 12px 30px rgba(0,0,0,0.06)'
+              gap: '8px',
             }}
           >
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-              {NAV_LINKS.map((item) => {
-                const Icon = item.icon;
-                const isActive = activeSection === item.id;
-                return (
-                  <a
-                    key={item.id}
-                    href={`#${item.id}`}
-                    onClick={(e) => handleAnchorClick(e, item.id)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      padding: '10px 14px',
-                      borderRadius: '8px',
-                      fontSize: '0.85rem',
-                      fontWeight: isActive ? 700 : 500,
-                      backgroundColor: isActive ? 'var(--wise-lime)' : '#f4f5f1',
-                      border: '1px solid #e5e9e2',
-                      color: 'var(--wise-forest)',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    <Icon size={16} color="var(--wise-forest)" />
-                    <span>{item.label}</span>
-                  </a>
-                );
-              })}
-            </div>
-
-            <button
-              onClick={() => scrollToSection('simulator')}
-              className="btn btn-primary"
-              style={{
-                marginTop: '8px',
-                width: '100%',
-                padding: '14px',
-                fontSize: '0.95rem',
-                fontWeight: 800,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-              }}
-            >
-              <Zap size={16} />
-              <span>Simulate Emergency Rescue Free</span>
-            </button>
+            {NAV_LINKS.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeSection === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    padding: '12px 14px',
+                    borderRadius: '10px',
+                    fontSize: '0.95rem',
+                    fontWeight: isActive ? 800 : 600,
+                    backgroundColor: isActive ? '#edf2ea' : 'transparent',
+                    color: 'var(--wise-forest)',
+                    border: 'none',
+                    textAlign: 'left',
+                    width: '100%',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Icon size={18} color={isActive ? '#15803d' : '#64748b'} />
+                  <span>{item.label}</span>
+                </button>
+              );
+            })}
           </div>
         )}
       </header>
 
-      {/* Embedded Responsive Media Queries */}
       <style>{`
-        @media (max-width: 1200px) {
-          .status-ticker-hud {
-            display: none !important;
+        @keyframes ping {
+          75%, 100% {
+            transform: scale(2);
+            opacity: 0;
           }
         }
+
         @media (max-width: 900px) {
-          .desktop-nav-menu {
+          .navbar-desktop-links {
             display: none !important;
           }
           .mobile-menu-toggle {
-            display: inline-flex !important;
-          }
-          .hide-mobile-badge {
-            display: none !important;
+            display: flex !important;
           }
         }
-        @media (max-width: 640px) {
-          .emergency-cta-btn {
-            padding: 8px 12px !important;
-            font-size: 0.78rem !important;
-          }
-        }
-        @media (max-width: 400px) {
-          .emergency-cta-btn {
+
+        @media (max-width: 600px) {
+          .status-ticker-hud {
             display: none !important;
+          }
+          .emergency-cta-btn {
+            padding: 8px 14px !important;
+            font-size: 0.8rem !important;
           }
         }
       `}</style>

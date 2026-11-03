@@ -2,7 +2,7 @@
 // Reactive State Hub for VANTIQ
 // Allows specialized modular components to communicate in real-time.
 
-import React, { createContext, useContext, useState, useMemo } from 'react';
+import React, { createContext, useContext, useState, useMemo, useCallback } from 'react';
 import type { 
   FinancialProfile, 
   EmergencyShock, 
@@ -11,6 +11,14 @@ import type {
   CashflowRunwayPoint
 } from '../types';
 
+export interface NeuroShieldState {
+  isShieldActive: boolean;
+  panicScore: number;
+  timerSecondsRemaining: number;
+  isEmergencyBypassed: boolean;
+  lifeEnergyHourlyWage?: number;
+}
+
 interface FintechContextType {
   profile: FinancialProfile;
   setProfile: React.Dispatch<React.SetStateAction<FinancialProfile>>;
@@ -18,8 +26,19 @@ interface FintechContextType {
   setShock: React.Dispatch<React.SetStateAction<EmergencyShock>>;
   predatoryOffers: PredatoryOffer[];
   fundingPlan: FundingPlanResult;
+  quantumResult: FundingPlanResult;
   runwayData: CashflowRunwayPoint[];
   hourlyWage: number;
+  neuroState: NeuroShieldState;
+  setNeuroState: React.Dispatch<React.SetStateAction<NeuroShieldState>>;
+  triggerNeuroShield: () => void;
+  bypassNeuroShield: () => void;
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleSidebar: () => void;
+  activeFeature: string;
+  setActiveFeature: React.Dispatch<React.SetStateAction<string>>;
+  navigateToFeature: (featureId: string) => void;
 }
 
 const defaultProfile: FinancialProfile = {
@@ -92,6 +111,16 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [profile, setProfile] = useState<FinancialProfile>(defaultProfile);
   const [shock, setShock] = useState<EmergencyShock>(defaultShock);
   const [predatoryOffers] = useState<PredatoryOffer[]>(defaultOffers);
+  const [neuroState, setNeuroState] = useState<NeuroShieldState>({
+    isShieldActive: false,
+    panicScore: 78,
+    timerSecondsRemaining: 45,
+    isEmergencyBypassed: false,
+    lifeEnergyHourlyWage: 150,
+  });
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [activeFeature, setActiveFeature] = useState<string>('calculator');
 
   // Calculate Absorptive Surplus Dynamically
   const dynamicSurplus = useMemo(() => {
@@ -220,6 +249,52 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     });
   }, [profile.emergencySavings, shock.amount, dynamicSurplus, fundingPlan]);
 
+  const triggerNeuroShield = useCallback(() => {
+    setNeuroState((prev) => ({
+      ...prev,
+      isShieldActive: true,
+      timerSecondsRemaining: 45,
+      isEmergencyBypassed: false,
+    }));
+  }, []);
+
+  const bypassNeuroShield = useCallback(() => {
+    setNeuroState((prev) => ({
+      ...prev,
+      isShieldActive: false,
+      isEmergencyBypassed: true,
+    }));
+  }, []);
+
+  const toggleSidebar = useCallback(() => {
+    setIsSidebarOpen((prev) => !prev);
+  }, []);
+
+  const navigateToFeature = useCallback((featureId: string) => {
+    setActiveFeature(featureId);
+
+    const routeMap: Record<string, string> = {
+      'calculator': '/calculator',
+      'simulator': '/calculator',
+      'debt-traps': '/debt-traps',
+      'quantum-solver': '/quantum-solver',
+      'cash-runway': '/cash-runway',
+      'fee-comparison': '/fee-comparison',
+      'security-zk': '/security-zk',
+      '45s-shield': '/45s-shield',
+    };
+
+    const targetPath = routeMap[featureId] || `/${featureId}`;
+    if (typeof window !== 'undefined' && window.location.pathname !== targetPath) {
+      window.history.pushState(null, '', targetPath);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      setIsSidebarOpen(false);
+    }
+  }, []);
+
   return (
     <FintechContext.Provider
       value={{
@@ -229,8 +304,19 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
         setShock,
         predatoryOffers,
         fundingPlan,
+        quantumResult: fundingPlan,
         runwayData,
         hourlyWage,
+        neuroState,
+        setNeuroState,
+        triggerNeuroShield,
+        bypassNeuroShield,
+        isSidebarOpen,
+        setIsSidebarOpen,
+        toggleSidebar,
+        activeFeature,
+        setActiveFeature,
+        navigateToFeature,
       }}
     >
       {children}
