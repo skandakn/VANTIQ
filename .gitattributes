@@ -1,0 +1,12 @@
+# GitHub Linguist language overrides
+*.py linguist-detectable=true
+backend/* linguist-detectable=true
+
+# Mark static frontend mock datasets as vendored so Linguist focuses on active code
+src/modules/m15_health_navigator/healthPlansData.ts linguist-vendored
+
+# Documentation and generated artifacts
+*.pdf linguist-documentation
+docs/* linguist-documentation
+public/* linguist-vendored
+dist/* linguist-vendored
