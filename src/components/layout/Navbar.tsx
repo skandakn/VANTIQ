@@ -10,7 +10,6 @@ import {
   AlertTriangle, 
   Menu, 
   X,
-  Lock,
   HeartHandshake,
   LogIn
 } from 'lucide-react';
@@ -31,9 +30,7 @@ export const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const { 
     isSidebarOpen, 
-    toggleSidebar, 
-    neuroState, 
-    triggerNeuroShield 
+    toggleSidebar 
   } = useFintech();
 
   const [activeSection, setActiveSection] = useState<string>('simulator');
@@ -373,53 +370,6 @@ export const Navbar: React.FC = () => {
                 />
               </div>
             </SignedIn>
-
-            {/* 45s Shield button */}
-            <button
-              onClick={() => {
-                triggerNeuroShield();
-                navigate('/45s-shield');
-              }}
-              style={{
-                fontSize: '0.84rem',
-                fontWeight: 700,
-                padding: '8px 16px',
-                borderRadius: '9999px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                whiteSpace: 'nowrap',
-                border: neuroState.isShieldActive ? '1.5px solid #f59e0b' : '1px solid #d0d7cc',
-                backgroundColor: neuroState.isShieldActive ? '#fffbeb' : '#ffffff',
-                color: neuroState.isShieldActive ? '#b45309' : 'var(--wise-forest)',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-              }}
-              title="45s Neuro-Adaptive Shield Protocol"
-            >
-              <Lock size={14} color={neuroState.isShieldActive ? '#f59e0b' : '#15803d'} />
-              <span>45s Shield</span>
-            </button>
-
-            {/* Primary Wise Electric Lime CTA Button */}
-            <button
-              onClick={() => scrollToSection('simulator')}
-              className="btn btn-primary emergency-cta-btn"
-              style={{
-                fontSize: '0.88rem',
-                fontWeight: 800,
-                padding: '10px 22px',
-                borderRadius: '9999px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                whiteSpace: 'nowrap',
-              }}
-              aria-label="Launch Free Emergency Simulator"
-            >
-              <Zap size={15} />
-              <span>Simulate Free</span>
-            </button>
 
             {/* Mobile Hamburger Toggle */}
             <button
