@@ -146,12 +146,6 @@ export const Sidebar: React.FC = () => {
           </button>
         </div>
 
-        {/* Section Category Indicator */}
-        <div className="vantiq-sidebar-section-label">
-          <span>CORE FINANCIAL MODULES</span>
-          <span className="vantiq-sidebar-count-badge">{VANTIQ_FEATURES.length} AVAILABLE</span>
-        </div>
-
         {/* Navigation Feature Links List */}
         <div className="vantiq-sidebar-nav-list">
           {VANTIQ_FEATURES.map((feature) => {
@@ -474,29 +468,6 @@ export const Sidebar: React.FC = () => {
           color: var(--text-muted, #6b7f6e);
           font-family: monospace;
           margin-left: auto;
-        }
-
-        /* Category Label */
-        .vantiq-sidebar-section-label {
-          padding: 16px 20px 8px 20px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          font-size: 0.68rem;
-          font-weight: 800;
-          letter-spacing: 0.08em;
-          color: var(--text-muted, #6b7f6e);
-        }
-
-        .vantiq-sidebar-count-badge {
-          background: var(--bg-subtle, #edf0ea);
-          color: var(--wise-forest, #163300);
-          border: 1px solid var(--border-medium, #d0d7cc);
-          padding: 2px 7px;
-          border-radius: 4px;
-          font-size: 0.62rem;
-          font-weight: 800;
-          letter-spacing: 0.02em;
         }
 
         /* Nav List */

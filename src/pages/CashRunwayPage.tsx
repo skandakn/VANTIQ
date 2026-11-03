@@ -2,7 +2,7 @@
 // Dedicated Route Page: /cash-runway
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Wallet } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { CashflowRunwayChart } from '../modules/m05_cashflow_twin/CashflowRunwayChart';
 
 export const CashRunwayPage: React.FC = () => {
@@ -11,13 +11,27 @@ export const CashRunwayPage: React.FC = () => {
       <div className="container">
         
         {/* Navigation Breadcrumb Bar */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-            <span className="badge badge-cyan" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-              <Wallet size={13} />
-              <span>Dedicated Feature Page: /cash-runway</span>
-            </span>
-          </div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
+          <Link
+            to="/"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              color: '#94a3b8',
+              textDecoration: 'none',
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              padding: '6px 12px',
+              borderRadius: '8px',
+              backgroundColor: 'rgba(30, 41, 59, 0.4)',
+              border: '1px solid rgba(51, 65, 85, 0.5)',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <ArrowLeft size={16} color="#34d399" />
+            <span>Back to Dashboard</span>
+          </Link>
         </div>
 
         {/* Feature 4: 90-Day Cashflow Digital Twin Runway */}
