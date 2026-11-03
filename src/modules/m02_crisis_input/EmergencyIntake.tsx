@@ -42,14 +42,14 @@ export const EmergencyIntake: React.FC = () => {
             <span className="cashflow-eyebrow">MONTHLY BUDGET</span>
           </div>
           <h3 style={{ fontSize: '1.18rem', fontWeight: 850, color: 'var(--wise-forest)', marginBottom: '3px' }}>
-            Your monthly cashflow
+            Your monthly budget
           </h3>
           <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-            Add your income and regular costs to estimate a safe repayment buffer.
+            Enter take-home pay and regular costs. We estimate what may be left for repayments.
           </p>
         </div>
         <div style={{ padding: '6px 10px', borderRadius: '9px', backgroundColor: '#fff1f2', color: '#7f1d1d', fontSize: '0.76rem', fontWeight: 700 }}>
-          Bill gap after savings: ₹{unfundedGap.toLocaleString('en-IN')}
+          Still needed after savings: ₹{unfundedGap.toLocaleString('en-IN')}
         </div>
       </div>
 
@@ -70,7 +70,7 @@ export const EmergencyIntake: React.FC = () => {
           </label>
         ))}
         <label htmlFor={savingsInputId} style={{ display: 'block', minWidth: 0, color: '#34443a', fontSize: '0.76rem', fontWeight: 700 }}>
-          Liquid savings (₹)
+          Savings available now (₹)
           <input
             id={savingsInputId}
             className="cashflow-field"
@@ -108,15 +108,9 @@ export const EmergencyIntake: React.FC = () => {
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap', padding: '12px 14px', borderRadius: '12px', backgroundColor: '#f0fdf4', border: '1px solid #86efac' }}>
-        <div>
-          <div style={{ color: '#166534', fontSize: '0.72rem', textTransform: 'uppercase', fontWeight: 800 }}>Estimated safe monthly capacity</div>
-          <strong style={{ color: netSurplus >= 0 ? '#14532d' : '#b91c1c', fontSize: '1.2rem' }}>₹{netSurplus.toLocaleString('en-IN')} / month</strong>
-        </div>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '6px 9px', borderRadius: '999px', backgroundColor: netSurplus >= 0 ? '#dcfce7' : '#fee2e2', color: netSurplus >= 0 ? '#166534' : '#991b1b', fontSize: '0.72rem', fontWeight: 800 }}>
-          <Sparkles size={12} />
-          {netSurplus >= 0 ? 'Capacity estimate' : 'Monthly shortfall'}
-        </span>
+      <div className="cashflow-guidance">
+        <Sparkles size={16} aria-hidden="true" />
+        <span>This is an estimate from the amounts entered, not a lender approval. Your repayment plan is shown in the panel beside this one.</span>
       </div>
 
       <div style={{ marginTop: '10px', textAlign: 'center' }}>
@@ -132,7 +126,7 @@ export const EmergencyIntake: React.FC = () => {
             gap: '4px',
           }}
         >
-          <span>🏥 Match relief loans for this capacity with Reddit community reviews →</span>
+          <span>🏥 Explore health relief resources →</span>
         </a>
       </div>
     </div>

@@ -194,7 +194,7 @@ export const HeroSection: React.FC = () => {
           {/* Two adjacent planner boxes: emergency plan and monthly cashflow. */}
           <div className="hero-planner-grid" style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))',
+            gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
             gap: '20px',
             alignItems: 'stretch',
             gridAutoRows: '1fr'
@@ -222,10 +222,10 @@ export const HeroSection: React.FC = () => {
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', color: '#15803d', fontWeight: 800 }}>
                   <Lock size={15} />
-                  <span>Safe Absorptive Capacity: ₹{profile.absorptiveSurplus.toLocaleString()}/mo</span>
+                  <span>Available for repayments: ₹{profile.absorptiveSurplus.toLocaleString('en-IN')}/month</span>
                 </div>
                 <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                  <span>0% Predatory Churn</span>
+                  <span>No stacked high-cost loans in this plan</span>
                   <Check size={14} color="#15803d" />
                 </div>
               </div>
@@ -240,7 +240,7 @@ export const HeroSection: React.FC = () => {
                   fontWeight: 700,
                   color: 'var(--wise-forest)'
                 }}>
-                  <label htmlFor={emergencyAmountId} style={{ cursor: 'pointer' }}>You need immediately</label>
+                  <label htmlFor={emergencyAmountId} style={{ cursor: 'pointer' }}>How much do you need today?</label>
                   <div style={{ display: 'flex', gap: '6px' }}>
                     {[30000, 50000, 80000].map((amt) => (
                       <button
@@ -299,10 +299,10 @@ export const HeroSection: React.FC = () => {
                 <div style={{ marginTop: '14px', marginBottom: '4px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                     <label style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--wise-forest)' }}>
-                      Repayment Period (For how many periods?)
+                      Choose a repayment period
                     </label>
                     <span style={{ fontSize: '0.86rem', fontWeight: 900, color: '#15803d' }}>
-                      {tenureMonths} Months ({Math.round((tenureMonths / 12) * 10) / 10} yrs)
+                      {tenureMonths} {tenureMonths === 1 ? 'month' : 'months'}
                     </span>
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '6px' }}>
@@ -365,7 +365,7 @@ export const HeroSection: React.FC = () => {
                 {/* Node 1: Savings */}
                 <div className="wise-stepper-node">
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                    <span style={{ color: 'var(--text-secondary)' }}>Tranche A: Liquid Savings</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>Your savings used</span>
                     <strong style={{ color: '#15803d' }}>- ₹{savingsTranche.toLocaleString()} (0% APR)</strong>
                   </div>
                 </div>
@@ -373,7 +373,7 @@ export const HeroSection: React.FC = () => {
                 {/* Node 2: Subsidized Advance */}
                 <div className="wise-stepper-node">
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                    <span style={{ color: 'var(--text-secondary)' }}>Tranche B: Employer / Hospital Advance</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>0% hospital / employer advance</span>
                     <strong style={{ color: '#15803d' }}>- ₹{subsidizedTranche.toLocaleString()} (0% APR)</strong>
                   </div>
                 </div>
@@ -381,7 +381,7 @@ export const HeroSection: React.FC = () => {
                 {/* Node 3: Co-op Credit Union */}
                 <div className="wise-stepper-node">
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                    <span style={{ color: 'var(--text-secondary)' }}>Tranche C: Co-op Bridge Credit</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>Co-op loan estimate</span>
                     <strong style={{ color: 'var(--wise-forest)' }}>- ₹{coOpTranche.toLocaleString()} (6.5% APR)</strong>
                   </div>
                 </div>
@@ -390,7 +390,7 @@ export const HeroSection: React.FC = () => {
                 {deferredTranche > 0 && (
                   <div className="wise-stepper-node">
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                      <span style={{ color: 'var(--text-secondary)' }}>Tranche D: Deferred Staggered Credit</span>
+                      <span style={{ color: 'var(--text-secondary)' }}>Deferred loan estimate</span>
                       <strong style={{ color: 'var(--wise-forest)' }}>- ₹{deferredTranche.toLocaleString()} (8.0% APR)</strong>
                     </div>
                   </div>
@@ -409,7 +409,7 @@ export const HeroSection: React.FC = () => {
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.84rem', color: '#15803d', fontWeight: 600 }}>
                     <Info size={15} />
-                    <span>Total transparent interest & fees:</span>
+                    <span>Estimated interest cost for this term:</span>
                   </div>
                   <strong style={{ fontSize: '0.94rem', color: '#15803d', fontWeight: 900 }}>
                     ₹{vantiqTotalFee.toLocaleString()} ({vantiqFeePercent.toFixed(1)}%)
@@ -428,9 +428,9 @@ export const HeroSection: React.FC = () => {
                   fontWeight: 700,
                   color: 'var(--wise-forest)'
                 }}>
-                      <span>Safe monthly repayment (after grace period)</span>
+                      <span>Estimated monthly repayments</span>
                   <span style={{ color: paymentWithinBuffer ? '#15803d' : '#b91c1c', fontSize: '0.8rem' }}>
-                    {paymentWithinBuffer ? 'Within' : 'Over'} Buffer (₹{profile.absorptiveSurplus.toLocaleString()}/mo)
+                    {paymentWithinBuffer ? 'Fits' : 'Exceeds'} your ₹{profile.absorptiveSurplus.toLocaleString('en-IN')}/mo capacity
                   </span>
                 </div>
 
@@ -447,7 +447,7 @@ export const HeroSection: React.FC = () => {
                   </div>
 
                   <div className="wise-currency-pill" style={{ backgroundColor: paymentWithinBuffer ? '#dcfce7' : '#fef2f2', color: paymentWithinBuffer ? '#15803d' : '#b91c1c', border: `1px solid ${paymentWithinBuffer ? '#bbf7d0' : '#fecaca'}` }}>
-                    <span>{paymentWithinBuffer ? '🛡️ SAFE BUFFER' : '⚠️ OVER BUFFER'}</span>
+                    <span>{paymentWithinBuffer ? 'WITHIN BUDGET' : 'OVER BUDGET'}</span>
                   </div>
                 </div>
               </div>
@@ -461,19 +461,22 @@ export const HeroSection: React.FC = () => {
                 marginBottom: '24px'
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px', fontSize: '0.84rem' }}>
-                  <span style={{ color: '#991b1b' }}>Predatory loan apps repayment:</span>
-                  <strong style={{ color: '#dc2626' }}>₹{predatoryMonthlyEmi.toLocaleString()}/mo (Default in 45 days)</strong>
+                  <span style={{ color: '#991b1b' }}>Illustrative high-cost loan comparison:</span>
+                  <strong style={{ color: '#dc2626' }}>~₹{predatoryMonthlyEmi.toLocaleString('en-IN')}/month</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem' }}>
                   <span style={{ color: '#15803d', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
                     <TrendingDown size={15} />
-                    <span>You save with VANTIQ:</span>
+                    <span>Estimated cost difference:</span>
                   </span>
                   <strong style={{ color: '#15803d', fontSize: '1rem', fontWeight: 900 }}>
-                    ₹{totalSavings.toLocaleString()} in fees & interest
+                    ₹{totalSavings.toLocaleString('en-IN')} on ₹{neededAmount.toLocaleString('en-IN')} borrowed
                   </strong>
                 </div>
               </div>
+              <p style={{ margin: '-12px 0 20px', color: 'var(--text-muted)', fontSize: '0.72rem', lineHeight: 1.5 }}>
+                Example only: the comparison assumes 36.8% added cost over 3.5 months. Actual lender rates and fees vary; this is not a loan quote.
+              </p>
 
               {/* Big Wise-Style Action Button */}
               <button
@@ -492,11 +495,11 @@ export const HeroSection: React.FC = () => {
                 }}
               >
                 <Sparkles size={18} />
-                <span>Find & Rank Best Loans (With Scraped Reddit Reviews) →</span>
+                <span>Explore health relief options →</span>
               </button>
 
               <div style={{ textAlign: 'center', marginTop: '12px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                Suggests verified loans ranked #1 to lowest · Scrapes live patient reviews from r/personalfinance, r/IndiaInvestments
+                Review available assistance resources before choosing any loan.
               </div>
 
             </div>
