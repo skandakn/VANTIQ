@@ -156,7 +156,7 @@ export const Sidebar: React.FC = () => {
             <div className="vantiq-sidebar-brand-icon">
               <Activity size={18} color="var(--wise-lime, #9fe870)" />
             </div>
-            <div>
+            <div style={{ minWidth: 0, overflow: 'hidden' }}>
               <div className="vantiq-sidebar-brand-title">FEATURE NAVIGATION</div>
               <div className="vantiq-sidebar-brand-sub">VANTIQ Quantum Suite</div>
             </div>
@@ -166,9 +166,9 @@ export const Sidebar: React.FC = () => {
             onClick={() => setIsSidebarOpen(false)}
             className="vantiq-sidebar-close-btn"
             aria-label="Close navigation sidebar"
-            title="Collapse sidebar (Esc)"
+            title="Close sidebar (Esc)"
           >
-            <X size={18} />
+            <X size={18} strokeWidth={2.5} />
           </button>
         </div>
 
@@ -328,6 +328,18 @@ export const Sidebar: React.FC = () => {
               <Zap size={14} color="var(--wise-lime, #9fe870)" />
               <span>Simulate Emergency Shock</span>
             </button>
+
+            {/* Direct Close Sidebar Action */}
+            <button
+              onClick={() => setIsSidebarOpen(false)}
+              className="vantiq-sidebar-collapse-btn"
+              aria-label="Close navigation sidebar"
+              title="Close sidebar navigation (Esc)"
+            >
+              <X size={15} strokeWidth={2.5} />
+              <span>Close Sidebar</span>
+              <span className="vantiq-esc-pill">ESC</span>
+            </button>
           </div>
         </div>
       </aside>
@@ -389,20 +401,29 @@ export const Sidebar: React.FC = () => {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 18px 20px 14px 20px;
+          gap: 10px;
+          padding: 14px 16px;
           border-bottom: 1px solid var(--border-subtle, #e5e9e2);
           background: #ffffff;
+          flex-shrink: 0;
+          box-sizing: border-box;
+          width: 100%;
         }
 
         .vantiq-sidebar-brand {
           display: flex;
           align-items: center;
           gap: 10px;
+          min-width: 0;
+          flex: 1;
+          overflow: hidden;
         }
 
         .vantiq-sidebar-brand-icon {
           width: 32px;
           height: 32px;
+          min-width: 32px;
+          flex-shrink: 0;
           border-radius: 8px;
           background: var(--wise-forest, #163300);
           border: 1px solid var(--wise-forest, #163300);
@@ -413,24 +434,32 @@ export const Sidebar: React.FC = () => {
         }
 
         .vantiq-sidebar-brand-title {
-          font-size: 0.78rem;
+          font-size: 0.74rem;
           font-weight: 850;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.04em;
           color: var(--wise-forest, #163300);
           text-transform: uppercase;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .vantiq-sidebar-brand-sub {
-          font-size: 0.68rem;
+          font-size: 0.65rem;
           color: var(--text-muted, #6b7f6e);
           font-weight: 600;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .vantiq-sidebar-close-btn {
-          width: 32px;
-          height: 32px;
+          width: 34px;
+          height: 34px;
+          min-width: 34px;
+          flex-shrink: 0;
           border-radius: 8px;
-          border: 1px solid var(--border-medium, #d0d7cc);
+          border: 1.5px solid var(--border-medium, #d0d7cc);
           background: var(--bg-deep, #f4f5f1);
           color: var(--wise-forest, #163300);
           display: flex;
@@ -438,13 +467,51 @@ export const Sidebar: React.FC = () => {
           justify-content: center;
           cursor: pointer;
           transition: all 0.2s ease;
+          box-sizing: border-box;
         }
 
         .vantiq-sidebar-close-btn:hover {
-          background: #edf0ea;
+          background: #e2e8df;
           border-color: var(--wise-forest, #163300);
           color: var(--wise-forest, #163300);
-          transform: rotate(90deg);
+          transform: scale(1.06);
+        }
+
+        .vantiq-sidebar-collapse-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          width: 100%;
+          padding: 8px 12px;
+          margin-top: 8px;
+          border-radius: 8px;
+          border: 1px solid var(--border-medium, #d0d7cc);
+          background: var(--bg-deep, #f4f5f1);
+          color: var(--wise-forest, #163300);
+          font-size: 0.75rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          box-sizing: border-box;
+        }
+
+        .vantiq-sidebar-collapse-btn:hover {
+          background: #e2e8df;
+          border-color: var(--wise-forest, #163300);
+          transform: translateY(-1px);
+        }
+
+        .vantiq-esc-pill {
+          font-size: 0.60rem;
+          font-weight: 800;
+          padding: 2px 6px;
+          border-radius: 4px;
+          background: #ffffff;
+          border: 1px solid var(--border-medium, #d0d7cc);
+          color: var(--text-muted, #6b7f6e);
+          font-family: monospace;
+          margin-left: auto;
         }
 
         /* Category Label */
