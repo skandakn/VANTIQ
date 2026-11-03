@@ -39,7 +39,7 @@ export const DualCapacityGauge: React.FC = () => {
     <section id="absorptive-capacity" style={{ padding: '60px 0', borderTop: '1px solid #e5e9e2', backgroundColor: 'var(--bg-deep)' }}>
       <div className="container">
         <div style={{ marginBottom: '28px' }}>
-          <span className="badge badge-forest"><Gauge size={13} /> Step 3: Absorptive Capacity Meter</span>
+          <span className="badge badge-forest"><Gauge size={13} /> Absorptive Capacity Meter</span>
           <h2 style={{ marginTop: '10px', fontSize: '2.2rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em' }}>
             Credit Limit Is Not Repayment Capacity
           </h2>

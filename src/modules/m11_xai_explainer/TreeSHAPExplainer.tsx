@@ -300,7 +300,7 @@ export const TreeSHAPExplainer: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span className="badge badge-purple" style={{ padding: '6px 14px', fontSize: '0.8rem' }}>
                 <BrainCircuit size={14} />
-                <span>Step 9: Explainable AI • TreeSHAP Causal Attribution</span>
+                <span>Explainable AI • TreeSHAP Causal Attribution</span>
               </span>
               <span className="badge badge-cyan" style={{ fontSize: '0.75rem' }}>
                 <ShieldCheck size={12} />

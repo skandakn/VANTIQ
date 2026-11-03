@@ -41,7 +41,7 @@ export const RoadmapAndTeam: React.FC = () => {
       <div className="container">
         <div style={{ marginBottom: 24 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-            <span className="badge badge-purple"><Milestone size={13} /><span>Step 12: Roadmap &amp; Team INNOVATEX</span></span>
+            <span className="badge badge-purple"><Milestone size={13} /><span>Roadmap &amp; Team INNOVATEX</span></span>
           </div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc', margin: '0 0 8px' }}>
             Four-Quarter Engineering Roadmap

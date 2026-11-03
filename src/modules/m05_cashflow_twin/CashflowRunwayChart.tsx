@@ -304,7 +304,7 @@ export const CashflowRunwayChart: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', flexWrap: 'wrap' }}>
             <span className="badge badge-forest" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <TrendingUp size={13} />
-              <span>Step 4: Stochastic Cashflow Twin</span>
+              <span>Stochastic Cashflow Twin</span>
             </span>
             <span className="badge badge-emerald" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <Activity size={13} />

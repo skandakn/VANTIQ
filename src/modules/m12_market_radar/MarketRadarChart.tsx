@@ -49,7 +49,7 @@ export const MarketRadarChart: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
             <span className="badge badge-forest">
               <Target size={13} />
-              <span>Step 10: Market Opportunity &amp; Positioning</span>
+              <span>Market Opportunity &amp; Positioning</span>
             </span>
           </div>
           <h2 style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', margin: '0 0 8px' }}>
