@@ -25,10 +25,6 @@ export const Navbar: React.FC = () => {
 
   const getPageTitle = () => {
     switch (location.pathname) {
-      case '/calculator':
-        return 'Emergency Liquidity Calculator';
-      case '/debt-traps':
-        return 'Debt Traps & Stacking Radar';
       case '/quantum-solver':
         return 'Quantum Rescue Solver';
       case '/cash-runway':

@@ -120,7 +120,7 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
   });
 
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-  const [activeFeature, setActiveFeature] = useState<string>('calculator');
+  const [activeFeature, setActiveFeature] = useState<string>('overview');
 
   // Calculate Absorptive Surplus Dynamically
   const dynamicSurplus = useMemo(() => {
@@ -306,9 +306,7 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setActiveFeature(featureId);
 
     const routeMap: Record<string, string> = {
-      'calculator': '/calculator',
-      'simulator': '/calculator',
-      'debt-traps': '/debt-traps',
+      'overview': '/',
       'quantum-solver': '/quantum-solver',
       'cash-runway': '/cash-runway',
     };

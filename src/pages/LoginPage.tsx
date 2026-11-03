@@ -486,7 +486,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ initialMode }) => {
                   </button>
 
                   <button
-                    onClick={() => navigate('/calculator')}
+                    onClick={() => navigate('/quantum-solver')}
                     style={{
                       width: '100%',
                       padding: '12px',
@@ -507,7 +507,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ initialMode }) => {
                     onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#f4f5f1')}
                   >
                     <Zap size={16} color="var(--wise-forest, #163300)" />
-                    <span>Run Quantum Debt Calculator</span>
+                    <span>Run Quantum Solver</span>
                   </button>
 
                   <button
@@ -642,7 +642,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ initialMode }) => {
                     Need urgent emergency calculations right now?
                   </span>
                   <button
-                    onClick={() => navigate('/calculator')}
+                    onClick={() => navigate('/quantum-solver')}
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
@@ -658,7 +658,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ initialMode }) => {
                     }}
                   >
                     <Zap size={14} color="#15803d" />
-                    <span>Run Emergency Simulator as Guest →</span>
+                    <span>Run Quantum Solver as Guest →</span>
                   </button>
                 </div>
 

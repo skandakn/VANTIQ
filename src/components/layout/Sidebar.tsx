@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard,
-  Calculator, 
   Banknote,
   Atom, 
   Wallet, 
@@ -32,13 +31,6 @@ export const VANTIQ_FEATURES: VantiqFeatureItem[] = [
     subtitle: 'Emergency Finance Hub',
     path: '/',
     icon: LayoutDashboard,
-  },
-  {
-    id: 'calculator',
-    name: 'Calculator',
-    subtitle: 'Crisis Shock & Capacity',
-    path: '/calculator',
-    icon: Calculator,
   },
   {
     id: 'health-navigator',

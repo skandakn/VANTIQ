@@ -93,11 +93,11 @@ export const Footer: React.FC = () => {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '9px' }}>
               <li>
                 <Link
-                  to="/calculator"
+                  to="/quantum-solver"
                   style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.84rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                 >
                   <Zap size={13} color="var(--wise-lime, #9fe870)" />
-                  <span>Emergency Shock Calculator</span>
+                  <span>Quantum QAOA Solver</span>
                 </Link>
               </li>
               <li>
@@ -129,7 +129,7 @@ export const Footer: React.FC = () => {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '9px' }}>
               <li>
                 <Link
-                  to="/calculator"
+                  to="/profile"
                   style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.84rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                 >
                   <Lock size={13} color="var(--wise-lime, #9fe870)" />

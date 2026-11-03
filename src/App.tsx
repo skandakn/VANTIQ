@@ -12,7 +12,6 @@ import { PwaMobileNav } from './components/layout/PwaMobileNav';
 
 // Dedicated Independent Feature Route Pages
 import { DashboardPage } from './pages/DashboardPage';
-import { CalculatorPage } from './pages/CalculatorPage';
 import { QuantumSolverPage } from './pages/QuantumSolverPage';
 import { CashRunwayPage } from './pages/CashRunwayPage';
 import { LoginPage } from './pages/LoginPage';
@@ -43,10 +42,10 @@ const AppShell: React.FC = () => {
             <Route path="/" element={<DashboardPage />} />
 
             {/* Dedicated Independent Feature Pages */}
-            <Route path="/calculator" element={<CalculatorPage />} />
-            <Route path="/debt-traps" element={<Navigate to="/calculator" replace />} />
             <Route path="/quantum-solver" element={<QuantumSolverPage />} />
             <Route path="/cash-runway" element={<CashRunwayPage />} />
+            <Route path="/calculator" element={<Navigate to="/" replace />} />
+            <Route path="/debt-traps" element={<Navigate to="/" replace />} />
             <Route path="/fee-comparison" element={<Navigate to="/" replace />} />
             <Route path="/security-zk" element={<Navigate to="/" replace />} />
             <Route path="/45s-shield" element={<Navigate to="/" replace />} />
@@ -60,11 +59,11 @@ const AppShell: React.FC = () => {
             <Route path="/account" element={<UserProfilePage />} />
 
             {/* Legacy & Fallback Route Redirects */}
-            <Route path="/simulator" element={<Navigate to="/calculator" replace />} />
-            <Route path="/ghost-debt" element={<Navigate to="/debt-traps" replace />} />
+            <Route path="/simulator" element={<Navigate to="/" replace />} />
+            <Route path="/ghost-debt" element={<Navigate to="/" replace />} />
             <Route path="/digital-twin" element={<Navigate to="/cash-runway" replace />} />
             <Route path="/comparison" element={<Navigate to="/" replace />} />
-            <Route path="/compliance" element={<Navigate to="/security-zk" replace />} />
+            <Route path="/compliance" element={<Navigate to="/" replace />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

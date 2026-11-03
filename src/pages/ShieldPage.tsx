@@ -255,7 +255,7 @@ export const ShieldPage: React.FC = () => {
           </Link>
 
           <Link
-            to="/calculator"
+            to="/"
             className="btn btn-secondary"
             style={{
               display: 'inline-flex',
@@ -267,7 +267,7 @@ export const ShieldPage: React.FC = () => {
               color: '#34d399',
             }}
           >
-            <span>Return to Calculator</span>
+            <span>Return to Overview</span>
             <ArrowRight size={15} />
           </Link>
         </div>

@@ -3,7 +3,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Calculator, 
   Atom, 
   Wallet, 
   ArrowRight,
@@ -21,19 +20,9 @@ import { LifeEnergyCalculator } from '../modules/m09_life_energy/LifeEnergyCalcu
 
 const FEATURE_CARDS = [
   {
-    path: '/calculator',
-    name: 'Calculator',
-    step: 'Module 01',
-    subtitle: 'Crisis Shock & Capacity Intake',
-    description: 'Configure urgent liquidity shocks and compute real absorptive surplus vs misleading pre-approved credit lines.',
-    icon: Calculator,
-    color: '#10b981',
-    badge: 'Emergency Input',
-  },
-  {
     path: '/quantum-solver',
     name: 'Quantum Solver',
-    step: 'Module 02',
+    step: 'Module 01',
     subtitle: 'QAOA Combinatorial Knapsack Engine',
     description: 'Quadratic Unconstrained Binary Optimization (QUBO) simulated in <150ms to synthesize an optimal multi-source relief package.',
     icon: Atom,
@@ -43,7 +32,7 @@ const FEATURE_CARDS = [
   {
     path: '/cash-runway',
     name: 'Cash Runway',
-    step: 'Module 03',
+    step: 'Module 02',
     subtitle: '90-Day Temporal Digital Twin (TFT)',
     description: 'Forecast household cash reserves day-by-day under predatory borrowing vs quantum-assisted solvency.',
     icon: Wallet,
