@@ -312,8 +312,7 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
       'quantum-solver': '/quantum-solver',
       'cash-runway': '/cash-runway',
       'fee-comparison': '/fee-comparison',
-      'security-zk': '/security-zk',
-      '45s-shield': '/45s-shield',
+            '45s-shield': '/45s-shield',
     };
 
     const targetPath = routeMap[featureId] || `/${featureId}`;

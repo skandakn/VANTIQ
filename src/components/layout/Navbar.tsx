@@ -35,9 +35,7 @@ export const Navbar: React.FC = () => {
         return '90-Day Digital Twin Cash Runway';
       case '/fee-comparison':
         return 'Counterfactual Fee Comparison';
-      case '/security-zk':
-        return 'Zero-Knowledge Security & Privacy';
-      case '/45s-shield':
+            case '/45s-shield':
         return '45-Second Neuro-Adaptive Shield';
       case '/profile':
         return 'User Security Profile & Settings';

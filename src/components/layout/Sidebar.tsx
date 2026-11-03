@@ -7,7 +7,6 @@ import {
   Atom, 
   Wallet, 
   Scale, 
-  ShieldCheck, 
   Lock, 
   X, 
   ChevronRight, 
@@ -72,13 +71,6 @@ export const VANTIQ_FEATURES: VantiqFeatureItem[] = [
     subtitle: 'Counterfactual Matrix',
     path: '/fee-comparison',
     icon: Scale,
-  },
-  {
-    id: 'security-zk',
-    name: 'Security & ZK',
-    subtitle: 'Zero-Knowledge Proofs',
-    path: '/security-zk',
-    icon: ShieldCheck,
   },
   {
     id: '45s-shield',

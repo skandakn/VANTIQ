@@ -17,7 +17,6 @@ import { CalculatorPage } from './pages/CalculatorPage';
 import { QuantumSolverPage } from './pages/QuantumSolverPage';
 import { CashRunwayPage } from './pages/CashRunwayPage';
 import { FeeComparisonPage } from './pages/FeeComparisonPage';
-import { SecurityZkPage } from './pages/SecurityZkPage';
 import { ShieldPage } from './pages/ShieldPage';
 import { LoginPage } from './pages/LoginPage';
 import { UserProfilePage } from './pages/UserProfilePage';
@@ -52,7 +51,7 @@ const AppShell: React.FC = () => {
             <Route path="/quantum-solver" element={<QuantumSolverPage />} />
             <Route path="/cash-runway" element={<CashRunwayPage />} />
             <Route path="/fee-comparison" element={<FeeComparisonPage />} />
-            <Route path="/security-zk" element={<SecurityZkPage />} />
+            <Route path="/security-zk" element={<Navigate to="/" replace />} />
             <Route path="/45s-shield" element={<ShieldPage />} />
 
             {/* Clerk Authentication & User Security Profile Routes */}

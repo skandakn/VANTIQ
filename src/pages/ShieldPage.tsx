@@ -101,7 +101,7 @@ export const ShieldPage: React.FC = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '28px', alignItems: 'start' }}>
           
           {/* Main Interactive Shield Card */}
-          <div className="chronos-card glow-cyan" style={{ padding: '36px', textAlign: 'center', border: '1px solid rgba(16, 185, 129, 0.4)' }}>
+          <div className="vantiq-card glow-cyan" style={{ padding: '36px', textAlign: 'center', border: '1px solid rgba(16, 185, 129, 0.4)' }}>
             
             {/* Animated Breathing Circle */}
             <div style={{
@@ -204,7 +204,7 @@ export const ShieldPage: React.FC = () => {
           {/* Theoretical & Empirical Context Card */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             
-            <div className="chronos-card" style={{ padding: '24px', borderLeft: '4px solid #10b981' }}>
+            <div className="vantiq-card" style={{ padding: '24px', borderLeft: '4px solid #10b981' }}>
               <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f8fafc', marginBottom: '8px' }}>
                 Why 45 Seconds of Structural Friction?
               </h4>
@@ -213,7 +213,7 @@ export const ShieldPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="chronos-card" style={{ padding: '24px', borderLeft: '4px solid #06b6d4' }}>
+            <div className="vantiq-card" style={{ padding: '24px', borderLeft: '4px solid #06b6d4' }}>
               <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f8fafc', marginBottom: '8px' }}>
                 Harvard / Princeton Cognitive Scarcity Model
               </h4>
@@ -224,7 +224,7 @@ export const ShieldPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="chronos-card" style={{ padding: '24px' }}>
+            <div className="vantiq-card" style={{ padding: '24px' }}>
               <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f8fafc', marginBottom: '12px' }}>
                 Biometric Stabilization Indicators
               </h4>
@@ -247,7 +247,7 @@ export const ShieldPage: React.FC = () => {
         {/* Bottom Feature Navigation Footer */}
         <div style={{ marginTop: '48px', paddingTop: '24px', borderTop: '1px solid rgba(51, 65, 85, 0.4)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <Link
-            to="/security-zk"
+            to="/fee-comparison"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -258,7 +258,7 @@ export const ShieldPage: React.FC = () => {
             }}
           >
             <ArrowLeft size={14} />
-            <span>Previous: Security & ZK</span>
+            <span>Previous: Fee Comparison</span>
           </Link>
 
           <Link

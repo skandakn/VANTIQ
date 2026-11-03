@@ -40,7 +40,7 @@ export const NeuroAdaptiveShieldModal: React.FC = () => {
       justifyContent: 'center',
       padding: '20px'
     }}>
-      <div className="chronos-card glow-cyan" style={{
+      <div className="vantiq-card glow-cyan" style={{
         maxWidth: '560px',
         width: '100%',
         textAlign: 'center',

@@ -66,7 +66,7 @@ export const FeeComparisonPage: React.FC = () => {
           </Link>
 
           <Link
-            to="/security-zk"
+            to="/45s-shield"
             className="btn btn-secondary"
             style={{
               display: 'inline-flex',
@@ -78,7 +78,7 @@ export const FeeComparisonPage: React.FC = () => {
               color: '#34d399',
             }}
           >
-            <span>Next: Security & ZK</span>
+            <span>Next: 45s Neuro Shield</span>
             <ArrowRight size={15} />
           </Link>
         </div>

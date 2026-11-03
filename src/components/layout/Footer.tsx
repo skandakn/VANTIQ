@@ -139,7 +139,7 @@ export const Footer: React.FC = () => {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '9px' }}>
               <li>
                 <Link
-                  to="/security-zk"
+                  to="/calculator"
                   style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.84rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                 >
                   <Lock size={13} color="var(--wise-lime, #9fe870)" />

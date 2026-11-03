@@ -7,7 +7,6 @@ import {
   Atom, 
   Wallet, 
   Scale, 
-  ShieldCheck, 
   Lock, 
   ArrowRight,
   Layers,
@@ -21,7 +20,6 @@ import { HeroSection } from '../modules/m01_hero/HeroSection';
 import { HealthReliefNavigator } from '../modules/m15_health_navigator/HealthReliefNavigator';
 import { CashflowRunwayChart } from '../modules/m05_cashflow_twin/CashflowRunwayChart';
 import { LifeEnergyCalculator } from '../modules/m09_life_energy/LifeEnergyCalculator';
-import { ZeroKnowledgeCompliance } from '../modules/m13_privacy_compliance/ZeroKnowledgeCompliance';
 
 const FEATURE_CARDS = [
   {
@@ -63,16 +61,6 @@ const FEATURE_CARDS = [
     icon: Scale,
     color: '#f59e0b',
     badge: 'Comparative Matrix',
-  },
-  {
-    path: '/security-zk',
-    name: 'Security & ZK',
-    step: 'Module 05',
-    subtitle: 'Zero-Knowledge Compliance Engine',
-    description: 'Cryptographic zero-knowledge proof verification ensuring household solvency without revealing private banking data.',
-    icon: ShieldCheck,
-    color: '#10b981',
-    badge: 'Cryptographic ZK',
   },
   {
     path: '/45s-shield',
@@ -327,9 +315,6 @@ export const DashboardPage: React.FC = () => {
 
       {/* Life Energy Labor Cost Calculator */}
       <LifeEnergyCalculator />
-
-      {/* Zero-Knowledge Compliance Engine & RBI Master Directions */}
-      <ZeroKnowledgeCompliance />
 
 
     </div>
