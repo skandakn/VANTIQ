@@ -245,30 +245,30 @@ main section h3 {
   color: var(--text-primary) !important;
 }
 
-.chronos-card [style*="#f8fafc"],
-.chronos-card [style*="#F8FAFC"] {
+.vantiq-card [style*="#f8fafc"],
+.vantiq-card [style*="#F8FAFC"] {
   color: var(--text-primary) !important;
 }
 
-.chronos-card [style*="#fca5a5"],
-.chronos-card [style*="#FCA5A5"],
-.chronos-card [style*="#f87171"],
-.chronos-card [style*="#F87171"] {
+.vantiq-card [style*="#fca5a5"],
+.vantiq-card [style*="#FCA5A5"],
+.vantiq-card [style*="#f87171"],
+.vantiq-card [style*="#F87171"] {
   color: #b91c1c !important;
 }
 
-.chronos-card [style*="#94a3b8"],
-.chronos-card [style*="#94A3B8"] {
+.vantiq-card [style*="#94a3b8"],
+.vantiq-card [style*="#94A3B8"] {
   color: #475569 !important;
 }
 
-.chronos-card [style*="#cbd5e1"],
-.chronos-card [style*="#CBD5E1"] {
+.vantiq-card [style*="#cbd5e1"],
+.vantiq-card [style*="#CBD5E1"] {
   color: #334155 !important;
 }
 
-.chronos-card [style*="#34d399"],
-.chronos-card [style*="#34D399"] {
+.vantiq-card [style*="#34d399"],
+.vantiq-card [style*="#34D399"] {
   color: #15803d !important;
 }
 
