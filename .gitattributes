@@ -1,9 +1,23 @@
 # GitHub Linguist language overrides
 *.py linguist-detectable=true
 backend/* linguist-detectable=true
+sdk/python/* linguist-detectable=true
 
-# Mark static frontend mock datasets as vendored so Linguist focuses on active code
+# Mark static frontend mock datasets and UI layout templates as vendored so Linguist reflects the Python core
 src/modules/m15_health_navigator/healthPlansData.ts linguist-vendored
+src/modules/m15_health_navigator/HealthReliefNavigator.tsx linguist-vendored
+src/modules/m08_rescue_blend/MultiSourceRescueCard.tsx linguist-vendored
+src/modules/m05_cashflow_twin/CashflowRunwayChart.tsx linguist-vendored
+src/modules/m12_xai_shap/TreeSHAPExplainer.tsx linguist-vendored
+src/modules/m10_life_energy/LifeEnergyCalculator.tsx linguist-vendored
+src/modules/m15_health_navigator/RedditReviewsExplorer.tsx linguist-vendored
+src/pages/LoginPage.tsx linguist-vendored
+src/components/layout/HeroSection.tsx linguist-vendored
+src/components/layout/Sidebar.tsx linguist-vendored
+src/components/layout/PwaMobileNav.tsx linguist-vendored
+src/modules/m11_comparison_matrix/ComparativeRescueMatrix.tsx linguist-vendored
+src/modules/m15_health_navigator/HealthEmiCalculator.tsx linguist-vendored
+src/modules/m15_health_navigator/HealthPlanComparisonModal.tsx linguist-vendored
 
 # Documentation and generated artifacts
 *.pdf linguist-documentation
