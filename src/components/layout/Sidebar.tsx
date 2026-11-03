@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   Calculator, 
-  ShieldAlert, 
   Atom, 
   Wallet, 
   Scale, 
@@ -34,13 +33,6 @@ export const VANTIQ_FEATURES: VantiqFeatureItem[] = [
     subtitle: 'Crisis Shock & Capacity',
     path: '/calculator',
     icon: Calculator,
-  },
-  {
-    id: 'debt-traps',
-    name: 'Debt Traps',
-    subtitle: 'Ghost Debt Stacking',
-    path: '/debt-traps',
-    icon: ShieldAlert,
   },
   {
     id: 'quantum-solver',

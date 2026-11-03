@@ -31,8 +31,6 @@ const credentials = [
   { title: 'Full-Stack FinTech', detail: 'Integrated product engineering across data, APIs, and user experience.' },
 ];
 
-const teamMembers = ['Anusha N', 'Harshitha SB', 'Meghan S Gouda', 'Rashmi C', 'Architha P'];
-
 export const RoadmapAndTeam: React.FC = () => {
   const [openQuarter, setOpenQuarter] = useState<string | null>('Q1');
 
@@ -41,7 +39,7 @@ export const RoadmapAndTeam: React.FC = () => {
       <div className="container">
         <div style={{ marginBottom: 24 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-            <span className="badge badge-purple"><Milestone size={13} /><span>Roadmap &amp; Team INNOVATEX</span></span>
+            <span className="badge badge-purple"><Milestone size={13} /><span>Product Engineering Roadmap</span></span>
           </div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc', margin: '0 0 8px' }}>
             Four-Quarter Engineering Roadmap
@@ -80,8 +78,8 @@ export const RoadmapAndTeam: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
             <Users size={24} color="#38bdf8" />
             <div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>TEAM INNOVATEX</h3>
-              <p style={{ fontSize: '0.85rem', color: '#94a3b8', margin: '4px 0 0' }}>Nagarjuna College of Engineering and Technology · FinTech</p>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>VANTIQ Core Engineering Credentials</h3>
+              <p style={{ fontSize: '0.85rem', color: '#94a3b8', margin: '4px 0 0' }}>Distributed Systems, Quantitative Finance &amp; Optimization Engineering</p>
             </div>
           </div>
 
@@ -92,10 +90,6 @@ export const RoadmapAndTeam: React.FC = () => {
                 <p style={{ color: '#94a3b8', fontSize: '0.76rem', lineHeight: 1.5, margin: 0 }}>{item.detail}</p>
               </div>
             ))}
-          </div>
-
-          <div aria-label="Team members" style={{ display: 'flex', flexWrap: 'wrap', gap: 9, marginTop: 18 }}>
-            {teamMembers.map((name) => <span key={name} className="badge badge-cyan" style={{ fontSize: '0.8rem', padding: '7px 14px' }}>{name}</span>)}
           </div>
         </div>
       </div>

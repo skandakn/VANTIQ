@@ -7,7 +7,6 @@ import {
   Zap, 
   Activity, 
   Scale, 
-  AlertTriangle, 
   Menu, 
   X,
   HeartHandshake,
@@ -20,7 +19,6 @@ import { useFintech } from '../../context/FintechContext';
 const NAV_LINKS = [
   { id: 'simulator', label: 'Calculator', icon: Zap, fallbackId: 'crisis-intake' },
   { id: 'health-navigator', label: 'Loan Rankings & Reddit Reviews', icon: HeartHandshake, fallbackId: 'health-aid' },
-  { id: 'ghost-debt', label: 'Debt Traps', icon: AlertTriangle, fallbackId: 'debt-mesh' },
   { id: 'digital-twin', label: 'Cash Runway', icon: Activity, fallbackId: 'cashflow-twin' },
   { id: 'comparison', label: 'Fee Comparison', icon: Scale, fallbackId: 'rescue-matrix' },
   { id: 'compliance', label: 'Security & ZK', icon: Shield, fallbackId: 'privacy-compliance' },

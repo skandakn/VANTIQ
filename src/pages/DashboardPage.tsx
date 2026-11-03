@@ -4,7 +4,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Calculator, 
-  ShieldAlert, 
   Atom, 
   Wallet, 
   Scale, 
@@ -20,16 +19,13 @@ import { useUser } from '@clerk/react';
 import { SignedIn, SignedOut } from '../config/clerk';
 import { HeroSection } from '../modules/m01_hero/HeroSection';
 import { HealthReliefNavigator } from '../modules/m15_health_navigator/HealthReliefNavigator';
-import { GhostDebtMesh } from '../modules/m03_debt_mesh/GhostDebtMesh';
 import { DualCapacityGauge } from '../modules/m04_dual_dial/DualCapacityGauge';
 import { CashflowRunwayChart } from '../modules/m05_cashflow_twin/CashflowRunwayChart';
 import { MultiSourceRescueCard } from '../modules/m07_rescue_blend/MultiSourceRescueCard';
 import { LifeEnergyCalculator } from '../modules/m09_life_energy/LifeEnergyCalculator';
 import { ComparativeRescueMatrix } from '../modules/m10_comparison_matrix/ComparativeRescueMatrix';
 import { TreeSHAPExplainer } from '../modules/m11_xai_explainer/TreeSHAPExplainer';
-import { MarketRadarChart } from '../modules/m12_market_radar/MarketRadarChart';
 import { ZeroKnowledgeCompliance } from '../modules/m13_privacy_compliance/ZeroKnowledgeCompliance';
-import { RoadmapAndTeam } from '../modules/m14_roadmap_team/RoadmapAndTeam';
 
 const FEATURE_CARDS = [
   {
@@ -43,19 +39,9 @@ const FEATURE_CARDS = [
     badge: 'Emergency Input',
   },
   {
-    path: '/debt-traps',
-    name: 'Debt Traps / Ghost Debt',
-    step: 'Module 02',
-    subtitle: 'Compound Stacking Mesh Radar',
-    description: 'Simulate micro-lender debt stacking, cross-app repayment collision dates, and compound APR spikes.',
-    icon: ShieldAlert,
-    color: '#ef4444',
-    badge: 'Threat Modeling',
-  },
-  {
     path: '/quantum-solver',
     name: 'Quantum Solver',
-    step: 'Module 03',
+    step: 'Module 02',
     subtitle: 'QAOA Combinatorial Knapsack Engine',
     description: 'Quadratic Unconstrained Binary Optimization (QUBO) simulated in <150ms to synthesize an optimal multi-source relief package.',
     icon: Atom,
@@ -65,7 +51,7 @@ const FEATURE_CARDS = [
   {
     path: '/cash-runway',
     name: 'Cash Runway',
-    step: 'Module 04',
+    step: 'Module 03',
     subtitle: '90-Day Temporal Digital Twin (TFT)',
     description: 'Forecast household cash reserves day-by-day under predatory borrowing vs quantum-assisted solvency.',
     icon: Wallet,
@@ -75,7 +61,7 @@ const FEATURE_CARDS = [
   {
     path: '/fee-comparison',
     name: 'Fee Comparison',
-    step: 'Module 05',
+    step: 'Module 04',
     subtitle: 'Counterfactual Rescue Matrix',
     description: 'Direct head-to-head comparison of hidden fees, predatory APRs, and human life-energy labor hours saved.',
     icon: Scale,
@@ -85,7 +71,7 @@ const FEATURE_CARDS = [
   {
     path: '/security-zk',
     name: 'Security & ZK',
-    step: 'Module 06',
+    step: 'Module 05',
     subtitle: 'Zero-Knowledge Compliance Engine',
     description: 'Cryptographic zero-knowledge proof verification ensuring household solvency without revealing private banking data.',
     icon: ShieldCheck,
@@ -95,7 +81,7 @@ const FEATURE_CARDS = [
   {
     path: '/45s-shield',
     name: '45s Shield',
-    step: 'Module 07',
+    step: 'Module 06',
     subtitle: 'Neuro-Adaptive Grounding Protocol',
     description: 'Behavioral circuit breaker preventing impulsive panic borrowing through biometric stabilization and reflective pacing.',
     icon: Lock,
@@ -339,8 +325,6 @@ export const DashboardPage: React.FC = () => {
       {/* Main Flow: Health & Medical Relief Navigator */}
       <HealthReliefNavigator />
 
-      {/* Ghost Debt Mesh */}
-      <GhostDebtMesh />
 
       {/* Absorptive Capacity Gauge */}
       <DualCapacityGauge />
@@ -360,14 +344,10 @@ export const DashboardPage: React.FC = () => {
       {/* Explainable AI Model Explanations (TreeSHAP) */}
       <TreeSHAPExplainer />
 
-      {/* Competitive Market Radar */}
-      <MarketRadarChart />
 
       {/* Zero-Knowledge Compliance Engine & RBI Master Directions */}
       <ZeroKnowledgeCompliance />
 
-      {/* Engineering Roadmap & Team INNOVATEX */}
-      <RoadmapAndTeam />
 
     </div>
   );

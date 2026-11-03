@@ -13,7 +13,6 @@ import {
   Sparkles,
   CheckCircle2,
   Zap,
-  Info,
   RotateCcw,
   Coffee,
   Heart,
@@ -1035,31 +1034,6 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
           </div>
         )}
-
-        {/* Behavioral Psychology Insight Footer */}
-        <div style={{
-          backgroundColor: 'rgba(15, 23, 42, 0.7)',
-          border: '1px solid rgba(51, 65, 85, 0.5)',
-          borderRadius: '14px',
-          padding: '20px 24px',
-          display: 'flex',
-          alignItems: 'flex-start',
-          gap: '16px'
-        }}>
-          <div style={{ color: '#38bdf8', marginTop: '2px' }}>
-            <Info size={20} />
-          </div>
-          <div>
-            <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#f8fafc', marginBottom: '4px' }}>
-              Behavioral Finance Insight: Why APR Deceives, But Life-Energy Liberates
-            </h4>
-            <p style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.6 }}>
-              Fintech cognitive research demonstrates that crisis victims experience severe "percentage numbness"—a 36% APR appears abstract and harmless during a panic.
-              However, when confronted with the physical reality that <strong>they will spend 273.6 hours of their physical life</strong> working for loan sharks
-              versus <strong>205.6 hours</strong> under VANTIQ, the reflective prefrontal cortex re-engages, preventing impulsive debt traps.
-            </p>
-          </div>
-        </div>
 
       </div>
     </section>
