@@ -4,7 +4,6 @@ import React, { useState, useId, useEffect } from 'react';
 import {
   ShieldCheck,
   Star,
-  ArrowRight,
   TrendingDown,
   Lock,
   Sparkles,
@@ -160,19 +159,6 @@ export const HeroSection: React.FC = () => {
               When a ₹50,000 hospital shock strikes, 4 apps offer ₹75,000 instantly. But clustered auto-debits trigger insolvency in 45 days. 
               <strong style={{ color: 'var(--wise-forest)' }}> VANTIQ reveals your true absorptive capacity</strong> and synthesizes a safe multi-source rescue before you commit.
             </p>
-
-            {/* Low-Friction Exploratory CTAs */}
-            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '40px' }}>
-              <button
-                onClick={() => scrollToSection('comparison')}
-                className="btn btn-primary"
-                style={{ fontSize: '1.02rem', padding: '16px 32px' }}
-              >
-                <span>Compare Loan Options Now</span>
-                <ArrowRight size={18} />
-              </button>
-
-            </div>
 
             {/* Harvard / Princeton Micro-quote */}
             <div style={{
