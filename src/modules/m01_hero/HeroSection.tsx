@@ -1,11 +1,10 @@
 // src/modules/m01_hero/HeroSection.tsx
 // Wise-Inspired Hero: "Product as the Hero, Not Marketing Fluff" (Light Theme)
-import React, { useState, useId } from 'react';
+import React, { useState, useId, useEffect } from 'react';
 import {
   ShieldCheck,
   Star,
   Check,
-  ChevronDown,
   ArrowRight,
   TrendingDown,
   Lock,
@@ -20,23 +19,21 @@ export const HeroSection: React.FC = () => {
   const emergencyAmountId = useId();
 
   // Local state for interactive currency/emergency converter
-  const [showCategoryDropdown, setShowCategoryDropdown] = useState<boolean>(false);
   const tenureMonths = shock.tenureMonths ?? 12;
+  const [tenureDraft, setTenureDraft] = useState(String(tenureMonths));
+
+  useEffect(() => {
+    setTenureDraft(String(tenureMonths));
+  }, [tenureMonths]);
 
   const handleTenureChange = (months: number) => {
+    const safeMonths = Math.min(60, Math.max(1, Math.round(months)));
+    setTenureDraft(String(safeMonths));
     setShock((prev) => ({
       ...prev,
-      tenureMonths: months,
+      tenureMonths: safeMonths,
     }));
   };
-
-  const categories = [
-    { label: 'Medical Emergency', value: 'medical' },
-    { label: 'Urgent Vehicle Repair', value: 'vehicle' },
-    { label: 'Home Repair', value: 'home_repair' },
-    { label: 'Job Loss', value: 'job_loss' },
-  ] as const;
-  const selectedCategory = categories.find(({ value }) => value === shock.category)?.label ?? categories[0].label;
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = Number(e.target.value.replace(/[^0-9]/g, '')) || 0;
@@ -57,7 +54,7 @@ export const HeroSection: React.FC = () => {
   const neededAmount = Math.max(0, shock.amount);
   
   // Tranche dynamic split
-  const savingsTranche = Math.min(profile.emergencySavings, Math.round(neededAmount * 0.1));
+  const savingsTranche = Math.min(profile.emergencySavings, neededAmount);
   const subsidizedTranche = Math.max(0, fundingPlan.tranches[0].allocatedAmount - savingsTranche);
   const coOpTranche = fundingPlan.tranches[1].allocatedAmount;
   const deferredTranche = fundingPlan.tranches[2].allocatedAmount;
@@ -292,51 +289,9 @@ export const HeroSection: React.FC = () => {
                     />
                   </div>
 
-                  {/* Category Dropdown Pill */}
-                  <div style={{ position: 'relative' }}>
-                    <button
-                      onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
-                      className="wise-currency-pill"
-                    >
-                      <span style={{ fontSize: '1.1rem' }}>🏥</span>
-                      <span>INR · {selectedCategory.split(' ')[0]}</span>
-                      <ChevronDown size={14} />
-                    </button>
-
-                    {showCategoryDropdown && (
-                      <div style={{
-                        position: 'absolute',
-                        right: 0,
-                        top: '110%',
-                        zIndex: 50,
-                        backgroundColor: '#ffffff',
-                        border: '1px solid #d0d7cc',
-                        borderRadius: '12px',
-                        padding: '8px 0',
-                        width: '210px',
-                        boxShadow: '0 12px 30px rgba(0,0,0,0.12)'
-                      }}>
-                        {categories.map((cat) => (
-                          <div
-                            key={cat.value}
-                            onClick={() => {
-                              setShock((prev) => ({ ...prev, category: cat.value }));
-                              setShowCategoryDropdown(false);
-                            }}
-                            style={{
-                              padding: '10px 16px',
-                              fontSize: '0.86rem',
-                              color: shock.category === cat.value ? '#15803d' : 'var(--wise-forest)',
-                              fontWeight: shock.category === cat.value ? 800 : 500,
-                              cursor: 'pointer',
-                              backgroundColor: shock.category === cat.value ? '#f4f5f1' : 'transparent'
-                            }}
-                          >
-                            {cat.label}
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                  <div className="wise-currency-pill" aria-label="Currency INR, category Medical Emergency">
+                    <span style={{ fontSize: '1.1rem' }}>🏥</span>
+                    <span>INR · Medical</span>
                   </div>
                 </div>
 
@@ -372,6 +327,35 @@ export const HeroSection: React.FC = () => {
                       </button>
                     ))}
                   </div>
+                  <label htmlFor="custom-repayment-months" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px', color: 'var(--text-secondary)', fontSize: '0.78rem', fontWeight: 650 }}>
+                    Custom period
+                    <input
+                      id="custom-repayment-months"
+                      type="number"
+                      inputMode="numeric"
+                      min={1}
+                      max={60}
+                      step={1}
+                      value={tenureDraft}
+                      onChange={(event) => {
+                        const rawValue = event.target.value;
+                        setTenureDraft(rawValue);
+                        const months = Number(rawValue);
+                        if (rawValue && Number.isInteger(months) && months >= 1 && months <= 60) {
+                          setShock((prev) => ({ ...prev, tenureMonths: months }));
+                        }
+                      }}
+                      onBlur={() => {
+                        const months = Number(tenureDraft);
+                        if (!Number.isInteger(months) || months < 1 || months > 60) {
+                          setTenureDraft(String(tenureMonths));
+                        }
+                      }}
+                      aria-label="Custom repayment period in months"
+                      style={{ width: '92px', padding: '7px 9px', border: '1px solid #d0d7cc', borderRadius: '8px', color: 'var(--wise-forest)', fontWeight: 750 }}
+                    />
+                    months (1–60)
+                  </label>
                 </div>
               </div>
 
