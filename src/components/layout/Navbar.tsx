@@ -1,16 +1,18 @@
 // src/components/layout/Navbar.tsx
-// Modern Top Dashboard Header Bar (BeatAhead Style)
-// All feature links moved to the persistent Left Sidebar
+// Modern Top Dashboard Header Bar (BeatAhead Style) with PWA Install Controller
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   Menu, 
   X,
-  Settings
+  Settings,
+  Download,
+  CheckCircle2
 } from 'lucide-react';
 import { UserButton, useUser, useClerk } from '@clerk/react';
 import { SignedIn, SignedOut } from '../../config/clerk';
 import { useFintech } from '../../context/FintechContext';
+import { usePwa } from '../../context/PwaContext';
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
@@ -20,6 +22,7 @@ export const Navbar: React.FC = () => {
     setIsSidebarOpen
   } = useFintech();
 
+  const { isInstalled, promptInstall } = usePwa();
   const { user } = useUser();
   const { signOut } = useClerk();
 
@@ -95,8 +98,54 @@ export const Navbar: React.FC = () => {
         )}
       </div>
 
-      {/* Right Area: Settings & User Profile Auth */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      {/* Right Area: Install Option, Settings & User Profile Auth */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        
+        {/* PWA Install Option Button */}
+        {!isInstalled ? (
+          <button
+            onClick={() => promptInstall()}
+            className="pwa-install-header-btn"
+            title="Install VANTIQ Desktop / Mobile Progressive Web App"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '7px 15px',
+              borderRadius: '9999px',
+              backgroundColor: 'var(--wise-forest, #163300)',
+              color: 'var(--wise-lime, #9fe870)',
+              border: 'none',
+              fontSize: '0.80rem',
+              fontWeight: 800,
+              cursor: 'pointer',
+              transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+              boxShadow: '0 2px 6px rgba(22, 51, 0, 0.12)',
+            }}
+          >
+            <Download size={14} strokeWidth={2.5} />
+            <span>Install App</span>
+          </button>
+        ) : (
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              padding: '5px 12px',
+              borderRadius: '9999px',
+              backgroundColor: '#eef5ea',
+              border: '1px solid #c9dec2',
+              color: '#15803d',
+              fontSize: '0.74rem',
+              fontWeight: 700,
+            }}
+            title="VANTIQ Running in Installed App Mode"
+          >
+            <CheckCircle2 size={13} />
+            <span>Installed</span>
+          </span>
+        )}
 
         {/* Settings Gear Button */}
         <button
@@ -117,7 +166,7 @@ export const Navbar: React.FC = () => {
           <Settings size={18} />
         </button>
 
-        {/* User Profile Info & Sign Out (Matching BeatAhead reference screenshot) */}
+        {/* User Profile Info & Sign Out */}
         <SignedIn>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <UserButton userProfileMode="navigation" userProfileUrl="/profile" />
@@ -183,6 +232,11 @@ export const Navbar: React.FC = () => {
       </div>
 
       <style>{`
+        .pwa-install-header-btn:hover {
+          background-color: #244b05 !important;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(22, 51, 0, 0.20) !important;
+        }
         @media (max-width: 1023px) {
           .dashboard-menu-toggle {
             display: flex !important;

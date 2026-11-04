@@ -1,14 +1,16 @@
 // src/App.tsx
 // VANTIQ Master Application Shell
-// Modern Layout with Permanent Left Navigation Sidebar & Dashboard Header (BeatAhead style)
+// Modern Layout with Permanent Left Navigation Sidebar, Dashboard Header, and PWA Controller
 
 import React, { useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { FintechProvider } from './context/FintechContext';
+import { PwaProvider } from './context/PwaContext';
 import { Navbar } from './components/layout/Navbar';
 import { Sidebar } from './components/layout/Sidebar';
 import { Footer } from './components/layout/Footer';
 import { PwaMobileNav } from './components/layout/PwaMobileNav';
+import { PwaInstallModal } from './components/layout/PwaInstallModal';
 
 // Dedicated Independent Feature Route Pages
 import { DashboardPage } from './pages/DashboardPage';
@@ -33,6 +35,7 @@ const AppShell: React.FC = () => {
     <div className="vantiq-app-container">
       <ScrollToTop />
       <Sidebar />
+      <PwaInstallModal />
       
       <div className="vantiq-main-layout">
         <Navbar />
@@ -78,7 +81,9 @@ const AppShell: React.FC = () => {
 export const App: React.FC = () => {
   return (
     <FintechProvider>
-      <AppShell />
+      <PwaProvider>
+        <AppShell />
+      </PwaProvider>
     </FintechProvider>
   );
 };

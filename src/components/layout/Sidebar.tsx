@@ -8,11 +8,13 @@ import {
   X, 
   ChevronRight, 
   Activity,
-  LogIn
+  LogIn,
+  Download
 } from 'lucide-react';
 import { UserButton, useUser } from '@clerk/react';
 import { SignedIn, SignedOut } from '../../config/clerk';
 import { useFintech } from '../../context/FintechContext';
+import { usePwa } from '../../context/PwaContext';
 
 export interface VantiqFeatureItem {
   id: string;
@@ -66,6 +68,7 @@ export const Sidebar: React.FC = () => {
   const location = useLocation();
   const sidebarRef = useRef<HTMLDivElement>(null);
   const { user } = useUser();
+  const { isInstalled, promptInstall } = usePwa();
 
   // Close sidebar on Escape key press
   useEffect(() => {
@@ -262,6 +265,37 @@ export const Sidebar: React.FC = () => {
               </div>
             </SignedIn>
           </div>
+
+          {!isInstalled && (
+            <button
+              onClick={() => {
+                promptInstall();
+                setIsSidebarOpen(false);
+              }}
+              className="vantiq-sidebar-install-action"
+              style={{
+                width: '100%',
+                padding: '10px 14px',
+                borderRadius: '10px',
+                backgroundColor: '#ffffff',
+                border: '1.5px solid var(--border-medium, #d0d7cc)',
+                color: 'var(--wise-forest, #163300)',
+                fontSize: '0.82rem',
+                fontWeight: 800,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                cursor: 'pointer',
+                marginBottom: '12px',
+                transition: 'all 0.15s ease',
+                boxShadow: '0 2px 6px rgba(22, 51, 0, 0.04)',
+              }}
+            >
+              <Download size={15} color="#15803d" />
+              <span>Install VANTIQ App</span>
+            </button>
+          )}
 
           <div className="vantiq-sidebar-telemetry-card">
             <div className="vantiq-telemetry-header">
