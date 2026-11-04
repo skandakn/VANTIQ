@@ -1,99 +1,35 @@
 // src/components/layout/PwaMobileNav.tsx
 // PWA Installation Controller & Mobile-First Bottom Navigation Bar
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { 
-  Calculator,
+  LayoutDashboard,
   Banknote,
   Activity, 
   Hourglass,
   Download, 
   X, 
-  Smartphone,
+  Smartphone, 
   User,
   WifiOff
 } from 'lucide-react';
 import { SignedIn, SignedOut } from '../../config/clerk';
-
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
-}
+import { usePwa } from '../../context/PwaContext';
 
 export const PwaMobileNav: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  const [isStandalone, setIsStandalone] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return (
-      window.matchMedia('(display-mode: standalone)').matches ||
-      (window.navigator as unknown as { standalone?: boolean }).standalone === true
-    );
-  });
-
-  const [isIos] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
-  });
-
-  const [showInstallBanner, setShowInstallBanner] = useState<boolean>(false);
+  const { isInstalled, isIos, promptInstall, isOffline } = usePwa();
+  const [showInstallBanner, setShowInstallBanner] = useState<boolean>(true);
   const [showIosGuide, setShowIosGuide] = useState<boolean>(false);
-  const [isOffline, setIsOffline] = useState<boolean>(() => typeof navigator !== 'undefined' ? !navigator.onLine : false);
-
-  useEffect(() => {
-    // Monitor online/offline state
-    const handleOnline = () => setIsOffline(false);
-    const handleOffline = () => setIsOffline(true);
-
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    // Capture Chrome/Android/Edge/Desktop beforeinstallprompt event
-    const handleBeforeInstallPrompt = (e: Event) => {
-      e.preventDefault();
-      setDeferredPrompt(e as BeforeInstallPromptEvent);
-      // Auto-display installation prompt banner
-      setShowInstallBanner(true);
-    };
-
-    // Monitor display-mode changes
-    const matchMediaDisplay = window.matchMedia('(display-mode: standalone)');
-    const handleDisplayChange = (e: MediaQueryListEvent) => {
-      setIsStandalone(e.matches);
-    };
-    matchMediaDisplay.addEventListener('change', handleDisplayChange);
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-      matchMediaDisplay.removeEventListener('change', handleDisplayChange);
-    };
-  }, []);
-
-  const handleInstallClick = async () => {
-    if (deferredPrompt) {
-      await deferredPrompt.prompt();
-      const choice = await deferredPrompt.userChoice;
-      if (choice.outcome === 'accepted') {
-        setShowInstallBanner(false);
-      }
-      setDeferredPrompt(null);
-    } else if (isIos) {
-      setShowIosGuide(true);
-    }
-  };
 
   const navItems = [
     {
-      id: 'calculator',
-      name: 'Simulator',
-      path: '/calculator',
-      icon: Calculator,
+      id: 'overview',
+      name: 'Overview',
+      path: '/',
+      icon: LayoutDashboard,
       color: '#15803d',
     },
     {
@@ -118,6 +54,35 @@ export const PwaMobileNav: React.FC = () => {
       color: '#15803d',
     },
   ];
+
+  const handleNavClick = (item: typeof navItems[0]) => {
+    if (item.id === 'fund-finder') {
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          const el = document.getElementById('health-navigator');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 120);
+      } else {
+        const el = document.getElementById('health-navigator');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else if (item.id === 'life-energy') {
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          const el = document.getElementById('life-energy');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 120);
+      } else {
+        const el = document.getElementById('life-energy');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate(item.path);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
@@ -155,7 +120,7 @@ export const PwaMobileNav: React.FC = () => {
       {/* =========================================================
           2. PWA Floating Install Banner (Mobile & Desktop)
           ========================================================= */}
-      {!isStandalone && showInstallBanner && (deferredPrompt || isIos) && (
+      {!isInstalled && showInstallBanner && (
         <aside
           aria-label="PWA Install Prompt"
           style={{
@@ -206,7 +171,13 @@ export const PwaMobileNav: React.FC = () => {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
             <button
-              onClick={handleInstallClick}
+              onClick={() => {
+                if (isIos) {
+                  setShowIosGuide(true);
+                } else {
+                  promptInstall();
+                }
+              }}
               className="btn btn-primary"
               style={{
                 padding: '8px 16px',
@@ -337,15 +308,16 @@ export const PwaMobileNav: React.FC = () => {
         >
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = location.pathname === item.path;
+            const isActive = item.id === 'overview'
+              ? location.pathname === '/' && !location.hash.includes('health-navigator')
+              : item.id === 'fund-finder'
+                ? location.hash.includes('health-navigator') || location.pathname === '/fund-finder'
+                : location.pathname === item.path;
 
             return (
               <button
                 key={item.id}
-                onClick={() => {
-                  navigate(item.path);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
+                onClick={() => handleNavClick(item)}
                 style={{
                   background: 'none',
                   border: 'none',

@@ -47,6 +47,8 @@ const AppShell: React.FC = () => {
             {/* Dedicated Independent Feature Pages */}
             <Route path="/quantum-solver" element={<QuantumSolverPage />} />
             <Route path="/cash-runway" element={<CashRunwayPage />} />
+            <Route path="/fund-finder" element={<Navigate to="/#health-navigator" replace />} />
+            <Route path="/life-energy" element={<Navigate to="/" replace />} />
             <Route path="/calculator" element={<Navigate to="/" replace />} />
             <Route path="/debt-traps" element={<Navigate to="/" replace />} />
             <Route path="/fee-comparison" element={<Navigate to="/" replace />} />
