@@ -1,63 +1,98 @@
-// public/sw.js – VANTIQ Service Worker
-// Provides offline caching, install prompt support, and background sync
+// public/sw.js – VANTIQ Production Progressive Web App Service Worker
+// Enables offline resilience, shell caching, and standalone PWA capabilities
 
-const CACHE_NAME = 'vantiq-v1';
+const CACHE_NAME = 'vantiq-pwa-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
+  '/favicon.svg',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/screenshots/desktop.png',
+  '/screenshots/mobile.png',
 ];
 
-// Install: cache shell assets
+// Install Event: Precaches core PWA shell assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS))
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(STATIC_ASSETS);
+    })
   );
   self.skipWaiting();
 });
 
-// Activate: clear old caches
+// Activate Event: Cleans up obsolete cache storage versions
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-    )
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+      );
+    })
   );
   self.clients.claim();
 });
 
-// Fetch: network-first for HTML/API, cache-first for static assets
+// Fetch Event: Network-first for navigation with offline fallback; Stale-While-Revalidate for assets
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Skip non-GET and cross-origin requests
-  if (request.method !== 'GET' || url.origin !== self.location.origin) return;
+  // Ignore non-GET requests and browser extensions
+  if (request.method !== 'GET' || !url.protocol.startsWith('http')) return;
 
-  // Network-first for HTML navigation
+  // Navigation requests: HTML pages
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
-        .then((res) => {
-          const clone = res.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
-          return res;
+        .then((response) => {
+          if (response.status === 200) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
+          return response;
         })
-        .catch(() => caches.match('/index.html'))
+        .catch(() => {
+          return caches.match('/index.html') || caches.match('/');
+        })
     );
     return;
   }
 
-  // Cache-first for JS/CSS/images
+  // Static Assets (JS, CSS, Images, Fonts): Cache-first with network background revalidation
   event.respondWith(
-    caches.match(request).then((cached) => {
-      if (cached) return cached;
-      return fetch(request).then((res) => {
-        if (!res || res.status !== 200 || res.type === 'opaque') return res;
-        const clone = res.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
-        return res;
-      });
+    caches.match(request).then((cachedResponse) => {
+      if (cachedResponse) {
+        // Asynchronously update cache in the background
+        fetch(request)
+          .then((networkResponse) => {
+            if (networkResponse && networkResponse.status === 200) {
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, networkResponse));
+            }
+          })
+          .catch(() => {
+            // Network failed; cached response already returned safely
+          });
+        return cachedResponse;
+      }
+
+      return fetch(request)
+        .then((networkResponse) => {
+          if (!networkResponse || networkResponse.status !== 200 || networkResponse.type === 'opaque') {
+            return networkResponse;
+          }
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, responseToCache));
+          return networkResponse;
+        })
+        .catch(() => {
+          // Offline fallback
+          if (request.destination === 'image') {
+            return caches.match('/favicon.svg');
+          }
+        });
     })
   );
 });

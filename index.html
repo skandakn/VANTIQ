@@ -2,22 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Instant Cache & Service Worker Purge -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(function(registrations) {
-          for (var reg of registrations) { reg.unregister(); }
-        });
-      }
-      if ('caches' in window) {
-        caches.keys().then(function(names) {
-          for (var name of names) { caches.delete(name); }
-        });
-      }
-    </script>
-
-
-    <!-- Viewport & Mobile -->
+    
+    <!-- Viewport & Mobile PWA Configuration -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -26,25 +12,26 @@
     <meta name="format-detection" content="telephone=no" />
 
     <!-- Theme Colors -->
-    <meta name="theme-color" content="#9fe870" />
-    <meta name="msapplication-navbutton-color" content="#f4f5f1" />
+    <meta name="theme-color" content="#163300" />
+    <meta name="msapplication-navbutton-color" content="#163300" />
     <meta name="msapplication-TileColor" content="#f4f5f1" />
 
     <!-- SEO & Open Graph -->
-    <title>VANTIQ – Emergency Finance Optimizer</title>
-    <meta name="description" content="Emergency finance planning, repayment estimates, and borrowing risk comparisons for salaried households facing urgent expenses." />
-    <meta name="keywords" content="emergency finance, repayment planning, borrowing costs, VANTIQ, fintech" />
+    <title>VANTIQ – Anti-Predatory Financial Intelligence</title>
+    <meta name="description" content="Counterfactual 90-Day Cashflow Digital Twin, Fund Finder, and Anti-Predatory Financial Shielding for salaried households facing urgent emergency expenses." />
+    <meta name="keywords" content="emergency finance, fund finder, cashflow digital twin, repayment planning, borrowing costs, VANTIQ, fintech" />
     <meta name="author" content="VANTIQ" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="VANTIQ – Emergency Finance Optimizer" />
-    <meta property="og:description" content="Compare emergency borrowing costs and review repayment estimates." />
+    <meta property="og:title" content="VANTIQ – Anti-Predatory Financial Intelligence" />
+    <meta property="og:description" content="Simulate emergency cashflow trajectories, find sovereign relief programs, and shield against predatory debt spirals." />
     <meta property="og:image" content="/icons/icon-512.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="VANTIQ" />
     <meta name="twitter:description" content="Emergency Credit Without The Debt Trap." />
 
-    <!-- PWA Icons -->
+    <!-- PWA Web App Manifest & Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.png" />
     <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png" />
     <link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144.png" />
