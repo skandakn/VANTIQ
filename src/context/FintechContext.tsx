@@ -137,9 +137,9 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const shockAmt = Math.max(0, shock.amount);
     const repaymentMonths = Math.max(1, shock.tenureMonths ?? 12);
     const savingsAlloc = Math.min(profile.emergencySavings, shockAmt);
-    const trancheAAlloc = Math.round(shockAmt * 0.4);
+    const trackAAlloc = Math.round(shockAmt * 0.4);
     const hospitalAdvanceAlloc = Math.min(
-      Math.max(0, trancheAAlloc - savingsAlloc),
+      Math.max(0, trackAAlloc - savingsAlloc),
       Math.max(0, shockAmt - savingsAlloc),
     );
     const zeroCostAlloc = savingsAlloc + hospitalAdvanceAlloc;
@@ -156,6 +156,38 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const lifeHoursSaved = Math.round(directCashSaved / hourlyWage);
 
     return {
+      tracks: [
+        {
+          sourceName: 'Zero-Cost Liquidity (Savings + Hospital Advance)',
+          sourceType: 'emergency_nbfc',
+          allocatedAmount: zeroCostAlloc,
+          interestApr: 0,
+          tenureMonths: repaymentMonths,
+          monthlyObligation: Math.ceil(hospitalAdvanceAlloc / repaymentMonths),
+          interestCost: 0,
+          notes: `₹${savingsAlloc.toLocaleString()} savings + ₹${hospitalAdvanceAlloc.toLocaleString()} hospital advance`,
+        },
+        {
+          sourceName: 'Co-op Bridge',
+          sourceType: 'micro_loan',
+          allocatedAmount: coopAlloc,
+          interestApr: 6.5,
+          tenureMonths: repaymentMonths,
+          monthlyObligation: Math.ceil((coopAlloc + coopInterest) / repaymentMonths),
+          interestCost: coopInterest,
+          notes: 'Fixed-rate cooperative bridge estimate',
+        },
+        {
+          sourceName: 'Deferred Micro-Repayment',
+          sourceType: 'emergency_nbfc',
+          allocatedAmount: deferredAlloc,
+          interestApr: 8,
+          tenureMonths: repaymentMonths,
+          monthlyObligation: Math.ceil((deferredAlloc + deferredInterest) / repaymentMonths),
+          interestCost: deferredInterest,
+          notes: 'Estimated repayment begins after the 60-day grace period',
+        },
+      ],
       tranches: [
         {
           sourceName: 'Zero-Cost Liquidity (Savings + Hospital Advance)',
@@ -206,7 +238,7 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const startingCash = Math.max(0, profile.emergencySavings - savingsUsed);
     const dailyLivingBurn = Math.round(profile.livingExpenses / 30);
     const amountScale = shockAmt > 0 ? shockAmt / 50000 : 1;
-    const plan = fundingPlan.tranches.map((tranche) => tranche.monthlyObligation);
+    const plan = (fundingPlan.tracks || fundingPlan.tranches).map((track) => track.monthlyObligation);
     const scenarioBalances = new Map<number, { withoutVantiq: number; withVantiq: number }>();
 
     let balanceWithoutVantiq = startingCash;
@@ -251,11 +283,11 @@ export const FintechProvider: React.FC<{ children: React.ReactNode }> = ({ child
       }
 
       // VANTIQ coordinated relief schedule:
-      // Tranche A (0% Advance) & Tranche B (Co-op bridge) aligned with payday
+      // Track A (0% Advance) & Track B (Co-op bridge) aligned with payday
       if (shockAmt > 0 && (day === 30 || day === 60)) {
         balanceWithVantiq -= plan[0] + plan[1];
       }
-      // Tranche C (Deferred micro-loan) begins only after Day 60 grace period
+      // Track C (Deferred micro-loan) begins only after Day 60 grace period
       if (shockAmt > 0 && day >= 61 && (day - 61) % 30 === 0) {
         balanceWithVantiq -= plan[2];
       }

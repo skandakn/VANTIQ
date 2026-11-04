@@ -1026,7 +1026,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
                 </div>
               </div>
 
-              {/* Tranches */}
+              {/* Tracks */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
                 {smartStrategy.allocations.map((alloc, idx) => (
                   <div
@@ -1040,7 +1040,7 @@ Generated securely via VANTIQ (https://vantiq-khaki.vercel.app)`;
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                       <span className="badge badge-forest" style={{ fontSize: '0.7rem' }}>
-                        Tranche {String.fromCharCode(65 + idx)}: {alloc.category}
+                        Track {String.fromCharCode(65 + idx)}: {alloc.category}
                       </span>
                       <span style={{ fontSize: '0.78rem', fontWeight: 800, color: alloc.interestRate === 0 ? '#15803d' : 'var(--wise-forest)' }}>
                         {alloc.interestRate === 0 ? '✨ 0% Interest' : `${alloc.interestRate}% APR`}

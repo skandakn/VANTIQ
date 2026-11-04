@@ -26,9 +26,9 @@ import {
 } from 'lucide-react';
 import { useFintech } from '../../context/FintechContext';
 
-interface TrancheDetail {
-  id: 'tranche-a' | 'tranche-b' | 'tranche-c';
-  trancheCode: 'Tranche A' | 'Tranche B' | 'Tranche C';
+interface TrackDetail {
+  id: 'track-a' | 'track-b' | 'track-c';
+  trackCode: 'Track A' | 'Track B' | 'Track C';
   title: string;
   subtitle: string;
   allocatedAmount: number;
@@ -56,7 +56,7 @@ export const MultiSourceRescueCard: React.FC = () => {
   const { shock, fundingPlan, profile } = useFintech();
 
   // Local interactive UI states
-  const [selectedTrancheId, setSelectedTrancheId] = useState<string | null>(null);
+  const [selectedTrackId, setSelectedTrackId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'overview' | 'comparison' | 'timeline'>('overview');
   const [disburseStep, setDisburseStep] = useState<number>(0);
   const [isDisbursing, setIsDisbursing] = useState<boolean>(false);
@@ -68,24 +68,24 @@ export const MultiSourceRescueCard: React.FC = () => {
   const scale = totalRequired / 50000;
   const tenureMonths = Math.max(1, shock?.tenureMonths ?? 12);
   const savingsUsed = Math.min(profile.emergencySavings, totalRequired);
-  const hospitalAdvance = Math.max(0, fundingPlan.tranches[0].allocatedAmount - savingsUsed);
+  const hospitalAdvance = Math.max(0, fundingPlan.tracks[0].allocatedAmount - savingsUsed);
   const allocationPercent = (amount: number) => totalRequired > 0
     ? Math.round((amount / totalRequired) * 100)
     : 0;
 
-  // Tri-Tranche Data Model adhering strictly to Member 08 specifications
-  const tranches: TrancheDetail[] = [
+  // Tri-Track Data Model adhering strictly to Member 08 specifications
+  const tracks: TrackDetail[] = [
     {
-      id: 'tranche-a',
-      trancheCode: 'Tranche A',
+      id: 'track-a',
+      trackCode: 'Track A',
       title: 'Zero-Cost Liquidity',
       subtitle: 'Emergency Savings + Subsidized Hospital Direct Advance',
-      allocatedAmount: fundingPlan.tranches[0].allocatedAmount,
-      percentage: allocationPercent(fundingPlan.tranches[0].allocatedAmount),
+      allocatedAmount: fundingPlan.tracks[0].allocatedAmount,
+      percentage: allocationPercent(fundingPlan.tracks[0].allocatedAmount),
       apr: 0.0,
       interestCost: 0,
       tenureDisplay: `${tenureMonths}-Month Interest-Free Buffer`,
-      monthlyObligation: fundingPlan.tranches[0].monthlyObligation,
+      monthlyObligation: fundingPlan.tracks[0].monthlyObligation,
       gracePeriodDays: 0,
       colorHex: '#10b981',
       glowClass: 'glow-emerald',
@@ -110,19 +110,19 @@ export const MultiSourceRescueCard: React.FC = () => {
         'Direct settlement with hospital billing counter',
         'No bureau inquiry or negative credit score footprint'
       ],
-      amortizationSummary: `₹${savingsUsed.toLocaleString('en-IN')} self-funded immediately; ₹${hospitalAdvance.toLocaleString('en-IN')} hospital advance amortized at ₹${fundingPlan.tranches[0].monthlyObligation.toLocaleString('en-IN')}/mo over ${tenureMonths} months with 0% APR.`
+      amortizationSummary: `₹${savingsUsed.toLocaleString('en-IN')} self-funded immediately; ₹${hospitalAdvance.toLocaleString('en-IN')} hospital advance amortized at ₹${fundingPlan.tracks[0].monthlyObligation.toLocaleString('en-IN')}/mo over ${tenureMonths} months with 0% APR.`
     },
     {
-      id: 'tranche-b',
-      trancheCode: 'Tranche B',
+      id: 'track-b',
+      trackCode: 'Track B',
       title: 'Low-Interest Co-op / Credit Union Bridge',
       subtitle: 'Employer Credit Co-op Subsidized Emergency Window',
-      allocatedAmount: fundingPlan.tranches[1].allocatedAmount,
-      percentage: allocationPercent(fundingPlan.tranches[1].allocatedAmount),
+      allocatedAmount: fundingPlan.tracks[1].allocatedAmount,
+      percentage: allocationPercent(fundingPlan.tracks[1].allocatedAmount),
       apr: 6.5,
-      interestCost: fundingPlan.tranches[1].interestCost,
+      interestCost: fundingPlan.tracks[1].interestCost,
       tenureDisplay: `${tenureMonths} Months Amortized`,
-      monthlyObligation: fundingPlan.tranches[1].monthlyObligation,
+      monthlyObligation: fundingPlan.tracks[1].monthlyObligation,
       gracePeriodDays: 0,
       colorHex: '#06b6d4',
       glowClass: 'glow-cyan',
@@ -133,19 +133,19 @@ export const MultiSourceRescueCard: React.FC = () => {
         'No compounding late payment penalty ratchet',
         'Subsidized through pre-vetted corporate welfare treasury'
       ],
-      amortizationSummary: `Smooth monthly obligation of ₹${fundingPlan.tranches[1].monthlyObligation.toLocaleString('en-IN')}/mo across ${tenureMonths} months, avoiding the toxic Day 32 payday collision.`
+      amortizationSummary: `Smooth monthly obligation of ₹${fundingPlan.tracks[1].monthlyObligation.toLocaleString('en-IN')}/mo across ${tenureMonths} months, avoiding the toxic Day 32 payday collision.`
     },
     {
-      id: 'tranche-c',
-      trancheCode: 'Tranche C',
+      id: 'track-c',
+      trackCode: 'Track C',
       title: 'Deferred Staggered Micro-Repayment',
       subtitle: 'Post-Crisis Recovery Tier with Built-in Breathing Room',
-      allocatedAmount: fundingPlan.tranches[2].allocatedAmount,
-      percentage: allocationPercent(fundingPlan.tranches[2].allocatedAmount),
+      allocatedAmount: fundingPlan.tracks[2].allocatedAmount,
+      percentage: allocationPercent(fundingPlan.tracks[2].allocatedAmount),
       apr: 8.0,
-      interestCost: fundingPlan.tranches[2].interestCost,
+      interestCost: fundingPlan.tracks[2].interestCost,
       tenureDisplay: `${tenureMonths} Months (Starts Day 61)`,
-      monthlyObligation: fundingPlan.tranches[2].monthlyObligation,
+      monthlyObligation: fundingPlan.tracks[2].monthlyObligation,
       gracePeriodDays: 60,
       colorHex: '#8b5cf6',
       glowClass: 'glow-purple',
@@ -156,7 +156,7 @@ export const MultiSourceRescueCard: React.FC = () => {
         'EMI activates strictly on Day 61 after emergency stabilizes',
         'Autonomous rollover protection if health recovery is delayed'
       ],
-      amortizationSummary: `₹0 repayment for the first 60 days. Repayments commence on Day 61 at ₹${fundingPlan.tranches[2].monthlyObligation.toLocaleString('en-IN')}/mo over ${tenureMonths} months.`
+      amortizationSummary: `₹0 repayment for the first 60 days. Repayments commence on Day 61 at ₹${fundingPlan.tracks[2].monthlyObligation.toLocaleString('en-IN')}/mo over ${tenureMonths} months.`
     }
   ];
 
@@ -175,7 +175,7 @@ export const MultiSourceRescueCard: React.FC = () => {
     : 0;
 
   // Monthly obligation during critical Month 1 (where predatory loans demand ₹26,200)
-  const vantiqMonth1Obligation = fundingPlan.tranches[0].monthlyObligation + fundingPlan.tranches[1].monthlyObligation;
+  const vantiqMonth1Obligation = fundingPlan.tracks[0].monthlyObligation + fundingPlan.tracks[1].monthlyObligation;
   const predatoryMonth1Obligation = Math.round(26200 * scale);
 
   // Multi-step disbursement simulation handler
@@ -217,7 +217,7 @@ export const MultiSourceRescueCard: React.FC = () => {
             </span>
             <span className="badge badge-cyan" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <Layers size={13} />
-              <span>Tri-Tranche Decomposition</span>
+              <span>Tri-Track Decomposition</span>
             </span>
             <span className="badge badge-purple" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <ShieldCheck size={13} />
@@ -228,10 +228,10 @@ export const MultiSourceRescueCard: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
             <div>
               <h2 style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--wise-forest)', letterSpacing: '-0.02em', marginBottom: '8px' }}>
-                Tri-Tranche Multi-Source Solvency Architecture
+                Tri-Track Multi-Source Solvency Architecture
               </h2>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '850px', lineHeight: 1.6, fontWeight: 500 }}>
-                Predatory instant loan apps push borrowers into a single toxic 36%–48% APR debt trap. VANTIQ breaks the emergency requirement into three scientifically calibrated tranches—maximizing zero-cost liquidity and shielding monthly cashflow.
+                Predatory instant loan apps push borrowers into a single toxic 36%–48% APR debt trap. VANTIQ breaks the emergency requirement into three scientifically calibrated tracks—maximizing zero-cost liquidity and shielding monthly cashflow.
               </p>
             </div>
 
@@ -291,7 +291,7 @@ export const MultiSourceRescueCard: React.FC = () => {
               }}
             >
               <PieChart size={15} />
-              <span>Tri-Tranche Architecture</span>
+              <span>Tri-Track Architecture</span>
             </button>
 
             <button
@@ -339,7 +339,7 @@ export const MultiSourceRescueCard: React.FC = () => {
 
         </div>
 
-        {/* REQUIREMENT 3: VISUAL TRANCHE PROGRESS BAR */}
+        {/* REQUIREMENT 3: VISUAL TRACK PROGRESS BAR */}
         <div className="vantiq-card" style={{ marginBottom: '32px', padding: '24px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
             <div>
@@ -352,9 +352,9 @@ export const MultiSourceRescueCard: React.FC = () => {
               </div>
             </div>
             <div style={{ display: 'flex', gap: '8px' }}>
-              <span className="badge badge-emerald">Tranche A: 40%</span>
-              <span className="badge badge-cyan">Tranche B: 40%</span>
-              <span className="badge badge-purple">Tranche C: 20%</span>
+              <span className="badge badge-emerald">Track A: 40%</span>
+              <span className="badge badge-cyan">Track B: 40%</span>
+              <span className="badge badge-purple">Track C: 20%</span>
             </div>
           </div>
 
@@ -372,7 +372,7 @@ export const MultiSourceRescueCard: React.FC = () => {
           }}>
             {/* Segment A: 40% */}
             <div
-              onClick={() => setSelectedTrancheId(selectedTrancheId === 'tranche-a' ? null : 'tranche-a')}
+              onClick={() => setSelectedTrackId(selectedTrackId === 'track-a' ? null : 'track-a')}
               style={{
                 width: '40%',
                 backgroundColor: '#10b981',
@@ -385,21 +385,21 @@ export const MultiSourceRescueCard: React.FC = () => {
                 fontWeight: 800,
                 fontSize: '0.85rem',
                 cursor: 'pointer',
-                boxShadow: selectedTrancheId === 'tranche-a' ? '0 0 16px rgba(16, 185, 129, 0.9)' : 'none',
-                opacity: selectedTrancheId && selectedTrancheId !== 'tranche-a' ? 0.45 : 1,
+                boxShadow: selectedTrackId === 'track-a' ? '0 0 16px rgba(16, 185, 129, 0.9)' : 'none',
+                opacity: selectedTrackId && selectedTrackId !== 'track-a' ? 0.45 : 1,
                 transition: 'all 0.25s ease',
                 position: 'relative'
               }}
-              title="Tranche A: Zero-Cost Liquidity (40% - ₹20,000 @ 0% APR)"
+              title="Track A: Zero-Cost Liquidity (40% - ₹20,000 @ 0% APR)"
             >
               <span style={{ textShadow: '0 1px 3px rgba(0,0,0,0.7)', whiteSpace: 'nowrap', padding: '0 8px' }}>
-                Tranche A • ₹{(20000 * scale).toLocaleString()} (40%) • 0% APR
+                Track A • ₹{(20000 * scale).toLocaleString()} (40%) • 0% APR
               </span>
             </div>
 
             {/* Segment B: 40% */}
             <div
-              onClick={() => setSelectedTrancheId(selectedTrancheId === 'tranche-b' ? null : 'tranche-b')}
+              onClick={() => setSelectedTrackId(selectedTrackId === 'track-b' ? null : 'track-b')}
               style={{
                 width: '40%',
                 backgroundColor: '#06b6d4',
@@ -414,20 +414,20 @@ export const MultiSourceRescueCard: React.FC = () => {
                 cursor: 'pointer',
                 borderLeft: '2px solid rgba(15, 23, 42, 0.8)',
                 borderRight: '2px solid rgba(15, 23, 42, 0.8)',
-                boxShadow: selectedTrancheId === 'tranche-b' ? '0 0 16px rgba(6, 182, 212, 0.9)' : 'none',
-                opacity: selectedTrancheId && selectedTrancheId !== 'tranche-b' ? 0.45 : 1,
+                boxShadow: selectedTrackId === 'track-b' ? '0 0 16px rgba(6, 182, 212, 0.9)' : 'none',
+                opacity: selectedTrackId && selectedTrackId !== 'track-b' ? 0.45 : 1,
                 transition: 'all 0.25s ease'
               }}
-              title="Tranche B: Co-op Bridge (40% - ₹20,000 @ 6.5% APR)"
+              title="Track B: Co-op Bridge (40% - ₹20,000 @ 6.5% APR)"
             >
               <span style={{ textShadow: '0 1px 3px rgba(0,0,0,0.7)', whiteSpace: 'nowrap', padding: '0 8px' }}>
-                Tranche B • ₹{(20000 * scale).toLocaleString()} (40%) • 6.5% APR
+                Track B • ₹{(20000 * scale).toLocaleString()} (40%) • 6.5% APR
               </span>
             </div>
 
             {/* Segment C: 20% */}
             <div
-              onClick={() => setSelectedTrancheId(selectedTrancheId === 'tranche-c' ? null : 'tranche-c')}
+              onClick={() => setSelectedTrackId(selectedTrackId === 'track-c' ? null : 'track-c')}
               style={{
                 width: '20%',
                 backgroundColor: '#8b5cf6',
@@ -440,14 +440,14 @@ export const MultiSourceRescueCard: React.FC = () => {
                 fontWeight: 800,
                 fontSize: '0.82rem',
                 cursor: 'pointer',
-                boxShadow: selectedTrancheId === 'tranche-c' ? '0 0 16px rgba(139, 92, 246, 0.9)' : 'none',
-                opacity: selectedTrancheId && selectedTrancheId !== 'tranche-c' ? 0.45 : 1,
+                boxShadow: selectedTrackId === 'track-c' ? '0 0 16px rgba(139, 92, 246, 0.9)' : 'none',
+                opacity: selectedTrackId && selectedTrackId !== 'track-c' ? 0.45 : 1,
                 transition: 'all 0.25s ease'
               }}
-              title="Tranche C: Deferred Micro-Repay (20% - ₹10,000 @ 8% APR, 60-Day Grace)"
+              title="Track C: Deferred Micro-Repay (20% - ₹10,000 @ 8% APR, 60-Day Grace)"
             >
               <span style={{ textShadow: '0 1px 3px rgba(0,0,0,0.7)', whiteSpace: 'nowrap', padding: '0 6px' }}>
-                Tranche C • ₹{(10000 * scale).toLocaleString()} (20%) • 8% APR (60d Grace)
+                Track C • ₹{(10000 * scale).toLocaleString()} (20%) • 8% APR (60d Grace)
               </span>
             </div>
           </div>
@@ -461,80 +461,80 @@ export const MultiSourceRescueCard: React.FC = () => {
             color: 'var(--text-secondary)'
           }}>
             <div
-              onClick={() => setSelectedTrancheId(selectedTrancheId === 'tranche-a' ? null : 'tranche-a')}
+              onClick={() => setSelectedTrackId(selectedTrackId === 'track-a' ? null : 'track-a')}
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '10px',
                 padding: '10px 14px',
                 borderRadius: '8px',
-                backgroundColor: selectedTrancheId === 'tranche-a' ? '#dcfce7' : '#ffffff',
-                border: selectedTrancheId === 'tranche-a' ? '2px solid #15803d' : '1.5px solid #d0d7cc',
+                backgroundColor: selectedTrackId === 'track-a' ? '#dcfce7' : '#ffffff',
+                border: selectedTrackId === 'track-a' ? '2px solid #15803d' : '1.5px solid #d0d7cc',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
             >
               <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#10b981', flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 800, color: '#15803d', fontSize: '0.88rem' }}>Tranche A: Zero-Cost Liquidity (40%)</div>
+                <div style={{ fontWeight: 800, color: '#15803d', fontSize: '0.88rem' }}>Track A: Zero-Cost Liquidity (40%)</div>
                 <div style={{ fontSize: '0.78rem', color: '#1e293b', fontWeight: 600 }}>₹5,000 Savings + ₹15,000 Hospital Advance @ 0% APR</div>
               </div>
             </div>
 
             <div
-              onClick={() => setSelectedTrancheId(selectedTrancheId === 'tranche-b' ? null : 'tranche-b')}
+              onClick={() => setSelectedTrackId(selectedTrackId === 'track-b' ? null : 'track-b')}
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '10px',
                 padding: '10px 14px',
                 borderRadius: '8px',
-                backgroundColor: selectedTrancheId === 'tranche-b' ? '#e0f2fe' : '#ffffff',
-                border: selectedTrancheId === 'tranche-b' ? '2px solid #0284c7' : '1.5px solid #d0d7cc',
+                backgroundColor: selectedTrackId === 'track-b' ? '#e0f2fe' : '#ffffff',
+                border: selectedTrackId === 'track-b' ? '2px solid #0284c7' : '1.5px solid #d0d7cc',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
             >
               <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#06b6d4', flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 800, color: '#0284c7', fontSize: '0.88rem' }}>Tranche B: Co-op Bridge (40%)</div>
+                <div style={{ fontWeight: 800, color: '#0284c7', fontSize: '0.88rem' }}>Track B: Co-op Bridge (40%)</div>
                 <div style={{ fontSize: '0.78rem', color: '#1e293b', fontWeight: 600 }}>₹20,000 Low-Interest Bridge @ 6.5% APR</div>
               </div>
             </div>
 
             <div
-              onClick={() => setSelectedTrancheId(selectedTrancheId === 'tranche-c' ? null : 'tranche-c')}
+              onClick={() => setSelectedTrackId(selectedTrackId === 'track-c' ? null : 'track-c')}
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '10px',
                 padding: '10px 14px',
                 borderRadius: '8px',
-                backgroundColor: selectedTrancheId === 'tranche-c' ? '#f3e8ff' : '#ffffff',
-                border: selectedTrancheId === 'tranche-c' ? '2px solid #7c3aed' : '1.5px solid #d0d7cc',
+                backgroundColor: selectedTrackId === 'track-c' ? '#f3e8ff' : '#ffffff',
+                border: selectedTrackId === 'track-c' ? '2px solid #7c3aed' : '1.5px solid #d0d7cc',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
             >
               <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#8b5cf6', flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 800, color: '#7c3aed', fontSize: '0.88rem' }}>Tranche C: Deferred Micro-Repay (20%)</div>
+                <div style={{ fontWeight: 800, color: '#7c3aed', fontSize: '0.88rem' }}>Track C: Deferred Micro-Repay (20%)</div>
                 <div style={{ fontSize: '0.78rem', color: '#1e293b', fontWeight: 600 }}>₹10,000 @ 8% APR • 60-day recovery grace period</div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* REQUIREMENT 2: TRI-TRANCHE DECOMPOSITION UI */}
+        {/* REQUIREMENT 2: TRI-TRACK DECOMPOSITION UI */}
         <div style={{ marginBottom: '36px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', flexWrap: 'wrap', gap: '8px' }}>
             <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--wise-forest)', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Layers size={20} color="#15803d" />
-              <span>Tri-Tranche Decomposition Breakdown</span>
+              <span>Tri-Track Decomposition Breakdown</span>
             </h3>
-            {selectedTrancheId && (
+            {selectedTrackId && (
               <button
-                onClick={() => setSelectedTrancheId(null)}
+                onClick={() => setSelectedTrackId(null)}
                 style={{
                   fontSize: '0.75rem',
                   color: 'var(--text-secondary)',
@@ -557,18 +557,18 @@ export const MultiSourceRescueCard: React.FC = () => {
             gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
             gap: '24px'
           }}>
-            {tranches
-              .filter((t) => !selectedTrancheId || t.id === selectedTrancheId)
-              .map((tranche) => {
-                const isSelected = selectedTrancheId === tranche.id;
+            {tracks
+              .filter((t) => !selectedTrackId || t.id === selectedTrackId)
+              .map((track) => {
+                const isSelected = selectedTrackId === track.id;
                 return (
                   <div
-                    key={tranche.id}
+                    key={track.id}
                     className="vantiq-card"
                     style={{
                       backgroundColor: '#ffffff',
-                      borderTop: `4px solid ${tranche.colorHex}`,
-                      border: isSelected ? `2px solid ${tranche.colorHex}` : '1.5px solid #d0d7cc',
+                      borderTop: `4px solid ${track.colorHex}`,
+                      border: isSelected ? `2px solid ${track.colorHex}` : '1.5px solid #d0d7cc',
                       padding: '24px',
                       display: 'flex',
                       flexDirection: 'column',
@@ -579,30 +579,30 @@ export const MultiSourceRescueCard: React.FC = () => {
                     <div>
                       {/* Card Header */}
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                        <span className={`badge ${tranche.badgeClass}`} style={{ fontSize: '0.78rem', fontWeight: 800 }}>
-                          {tranche.trancheCode} • {tranche.percentage}% of Need
+                        <span className={`badge ${track.badgeClass}`} style={{ fontSize: '0.78rem', fontWeight: 800 }}>
+                          {track.trackCode} • {track.percentage}% of Need
                         </span>
                         <span style={{
                           fontSize: '0.95rem',
                           fontWeight: 800,
-                          color: tranche.colorHex,
+                          color: track.colorHex,
                           backgroundColor: '#f4f5f1',
                           padding: '4px 10px',
                           borderRadius: '6px',
                           border: '1.5px solid #d0d7cc'
                         }}>
-                          {tranche.apr === 0 ? '0% APR (Free)' : `${tranche.apr}% APR`}
+                          {track.apr === 0 ? '0% APR (Free)' : `${track.apr}% APR`}
                         </span>
                       </div>
 
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                        {tranche.icon}
+                        {track.icon}
                         <h4 style={{ fontSize: '1.3rem', fontWeight: 900, color: '#0f172a' }}>
-                          {tranche.title}
+                          {track.title}
                         </h4>
                       </div>
                       <p style={{ fontSize: '0.88rem', color: '#1e293b', marginBottom: '16px', lineHeight: 1.5, fontWeight: 600 }}>
-                        {tranche.subtitle}
+                        {track.subtitle}
                       </p>
 
                       {/* Principal Amount Display */}
@@ -617,23 +617,23 @@ export const MultiSourceRescueCard: React.FC = () => {
                           Allocated Principal
                         </div>
                         <div style={{ fontSize: '2.2rem', fontWeight: 900, color: '#0f172a', letterSpacing: '-0.02em', margin: '4px 0' }}>
-                          ₹{tranche.allocatedAmount.toLocaleString()}
+                          ₹{track.allocatedAmount.toLocaleString()}
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.84rem', color: '#1e293b', fontWeight: 700 }}>
-                          <span>Tenure: <strong style={{ color: '#0f172a', fontWeight: 800 }}>{tranche.tenureDisplay}</strong></span>
-                          <span>Interest Cost: <strong style={{ color: tranche.apr === 0 ? '#15803d' : 'var(--wise-forest)', fontWeight: 800 }}>₹{tranche.interestCost.toLocaleString()}</strong></span>
+                          <span>Tenure: <strong style={{ color: '#0f172a', fontWeight: 800 }}>{track.tenureDisplay}</strong></span>
+                          <span>Interest Cost: <strong style={{ color: track.apr === 0 ? '#15803d' : 'var(--wise-forest)', fontWeight: 800 }}>₹{track.interestCost.toLocaleString()}</strong></span>
                         </div>
                       </div>
 
-                      {/* Sub-Components (For Tranche A: Savings ₹5k + Hospital Advance ₹15k) */}
-                      {tranche.subComponents && (
+                      {/* Sub-Components (For Track A: Savings ₹5k + Hospital Advance ₹15k) */}
+                      {track.subComponents && (
                         <div style={{ marginBottom: '18px' }}>
                           <div style={{ fontSize: '0.82rem', fontWeight: 900, color: '#0284c7', textTransform: 'uppercase', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <Info size={14} />
-                            <span>Tranche A Dual Liquidity Split</span>
+                            <span>Track A Dual Liquidity Split</span>
                           </div>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            {tranche.subComponents.map((sub, sIdx) => (
+                            {track.subComponents.map((sub, sIdx) => (
                               <div
                                 key={sIdx}
                                 style={{
@@ -659,8 +659,8 @@ export const MultiSourceRescueCard: React.FC = () => {
                         </div>
                       )}
 
-                      {/* Tranche C 60-Day Grace Period Special Highlight */}
-                      {tranche.gracePeriodDays > 0 && (
+                      {/* Track C 60-Day Grace Period Special Highlight */}
+                      {track.gracePeriodDays > 0 && (
                         <div style={{
                           padding: '12px 14px',
                           borderRadius: '8px',
@@ -689,9 +689,9 @@ export const MultiSourceRescueCard: React.FC = () => {
                           Institutional Safeguards
                         </div>
                         <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                          {tranche.safeguards.map((item, idx) => (
+                          {track.safeguards.map((item, idx) => (
                             <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.84rem', color: '#0f172a', fontWeight: 600, lineHeight: 1.4 }}>
-                              <CheckCircle2 size={16} color={tranche.colorHex} style={{ flexShrink: 0, marginTop: '2px' }} />
+                              <CheckCircle2 size={16} color={track.colorHex} style={{ flexShrink: 0, marginTop: '2px' }} />
                               <span>{item}</span>
                             </li>
                           ))}
@@ -715,11 +715,11 @@ export const MultiSourceRescueCard: React.FC = () => {
                       <div>
                         <span style={{ color: '#cbd5e1', fontWeight: 700 }}>Monthly Impact: </span>
                         <strong style={{ color: '#4ade80', fontSize: '1.1rem', fontWeight: 900 }}>
-                          {tranche.gracePeriodDays > 0 ? '₹0 for 60d, then ₹' + tranche.monthlyObligation.toLocaleString() : '₹' + tranche.monthlyObligation.toLocaleString()}
+                          {track.gracePeriodDays > 0 ? '₹0 for 60d, then ₹' + track.monthlyObligation.toLocaleString() : '₹' + track.monthlyObligation.toLocaleString()}
                         </strong>
                       </div>
-                      <span className={`badge ${tranche.badgeClass}`} style={{ fontSize: '0.72rem', fontWeight: 800 }}>
-                        {tranche.apr === 0 ? 'Zero APR' : `${tranche.apr}% APR`}
+                      <span className={`badge ${track.badgeClass}`} style={{ fontSize: '0.72rem', fontWeight: 800 }}>
+                        {track.apr === 0 ? 'Zero APR' : `${track.apr}% APR`}
                       </span>
                     </div>
 
@@ -885,7 +885,7 @@ export const MultiSourceRescueCard: React.FC = () => {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <ShieldCheck size={20} color="#10b981" />
                     <span style={{ fontSize: '0.88rem', fontWeight: 900, color: '#166534', textTransform: 'uppercase' }}>
-                      VANTIQ Tri-Tranche Rescue
+                      VANTIQ Tri-Track Rescue
                     </span>
                   </div>
                   <span className="badge badge-emerald" style={{ fontSize: '0.68rem', fontWeight: 800 }}>
@@ -899,7 +899,7 @@ export const MultiSourceRescueCard: React.FC = () => {
                     ₹{vantiqTotalInterest.toLocaleString()}
                   </div>
                   <div style={{ fontSize: '0.82rem', color: '#14532d', fontWeight: 600 }}>
-                    Blended Effective APR: <strong>{vantiqEffectiveApr}%</strong> (Tranche A @ 0%, B @ 6.5%, C @ 8%)
+                    Blended Effective APR: <strong>{vantiqEffectiveApr}%</strong> (Track A @ 0%, B @ 6.5%, C @ 8%)
                   </div>
                 </div>
 
@@ -909,15 +909,15 @@ export const MultiSourceRescueCard: React.FC = () => {
                     <strong style={{ color: '#0f172a' }}>₹{totalRequired.toLocaleString()}</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(16, 185, 129, 0.15)', paddingBottom: '6px' }}>
-                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Tranche A Zero-Cost Interest:</span>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Track A Zero-Cost Interest:</span>
                     <strong style={{ color: '#15803d', fontWeight: 800 }}>₹0 (0% APR)</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(16, 185, 129, 0.15)', paddingBottom: '6px' }}>
-                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Tranche B Co-op Bridge Interest:</span>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Track B Co-op Bridge Interest:</span>
                     <strong style={{ color: '#0284c7', fontWeight: 800 }}>₹{Math.round(650 * scale).toLocaleString()} (6.5% APR)</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(16, 185, 129, 0.15)', paddingBottom: '6px' }}>
-                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Tranche C Micro-Repayment Interest:</span>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>Track C Micro-Repayment Interest:</span>
                     <strong style={{ color: '#7c3aed', fontWeight: 800 }}>₹{Math.round(770 * scale).toLocaleString()} (8.0% APR)</strong>
                   </li>
                   <li style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(16, 185, 129, 0.15)', paddingBottom: '6px' }}>
@@ -1048,12 +1048,12 @@ export const MultiSourceRescueCard: React.FC = () => {
                     <span style={{ fontWeight: 500 }}>Predatory apps deduct 4.5%–6% upfront as "processing & insurance" fees. On ₹50,000, you pay ₹2,800 before receiving a single rupee. VANTIQ eliminates synthetic churn by coordinating zero-cost institutional buffers.</span>
                   </div>
                   <div>
-                    <strong style={{ color: '#0284c7', display: 'block', marginBottom: '4px', fontWeight: 800 }}>2. 0% APR Liquidity Absorption (Tranche A)</strong>
+                    <strong style={{ color: '#0284c7', display: 'block', marginBottom: '4px', fontWeight: 800 }}>2. 0% APR Liquidity Absorption (Track A)</strong>
                     <span style={{ fontWeight: 500 }}>By tapping ₹5,000 in liquid savings and unlocking ₹15,000 hospital advance at 0% APR, 40% of the entire emergency requirement carries ₹0 interest penalty.</span>
                   </div>
                   <div>
-                    <strong style={{ color: '#7c3aed', display: 'block', marginBottom: '4px', fontWeight: 800 }}>3. 60-Day Grace Period Staggering (Tranche C)</strong>
-                    <span style={{ fontWeight: 500 }}>Instead of front-loading debt service on Day 30 (causing a catastrophic collision with house rent), Tranche C delays payment until Day 61 at an institutional 8% APR rate.</span>
+                    <strong style={{ color: '#7c3aed', display: 'block', marginBottom: '4px', fontWeight: 800 }}>3. 60-Day Grace Period Staggering (Track C)</strong>
+                    <span style={{ fontWeight: 500 }}>Instead of front-loading debt service on Day 30 (causing a catastrophic collision with house rent), Track C delays payment until Day 61 at an institutional 8% APR rate.</span>
                   </div>
                 </div>
               </div>
@@ -1080,9 +1080,9 @@ export const MultiSourceRescueCard: React.FC = () => {
                 <thead>
                   <tr style={{ borderBottom: '2px solid #cbd5e1', color: '#0f172a', fontWeight: 800 }}>
                     <th style={{ padding: '10px' }}>Month</th>
-                    <th style={{ padding: '10px' }}>Tranche A (Hospital @ 0%)</th>
-                    <th style={{ padding: '10px' }}>Tranche B (Co-op @ 6.5%)</th>
-                    <th style={{ padding: '10px' }}>Tranche C (Micro @ 8%)</th>
+                    <th style={{ padding: '10px' }}>Track A (Hospital @ 0%)</th>
+                    <th style={{ padding: '10px' }}>Track B (Co-op @ 6.5%)</th>
+                    <th style={{ padding: '10px' }}>Track C (Micro @ 8%)</th>
                     <th style={{ padding: '10px' }}>Total Monthly Outflow</th>
                     <th style={{ padding: '10px' }}>Predatory Stack Outflow</th>
                     <th style={{ padding: '10px' }}>Surplus Preserved</th>
@@ -1090,10 +1090,10 @@ export const MultiSourceRescueCard: React.FC = () => {
                 </thead>
                 <tbody>
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => {
-                    const trancheA = m <= 6 ? Math.round(2500 * scale) : 0;
-                    const trancheB = Math.round(1720 * scale);
-                    const trancheC = m <= 2 ? 0 : m <= 8 ? Math.round(1795 * scale) : 0;
-                    const totalMonth = trancheA + trancheB + trancheC;
+                    const trackA = m <= 6 ? Math.round(2500 * scale) : 0;
+                    const trackB = Math.round(1720 * scale);
+                    const trackC = m <= 2 ? 0 : m <= 8 ? Math.round(1795 * scale) : 0;
+                    const totalMonth = trackA + trackB + trackC;
                     const predatory = m <= 3 ? Math.round(26200 * scale) : m <= 6 ? Math.round(5640 * scale) : 0;
                     const surplusRemaining = Math.round(15000 - totalMonth);
 
@@ -1102,10 +1102,10 @@ export const MultiSourceRescueCard: React.FC = () => {
                         <td style={{ padding: '10px', fontWeight: 800, color: m <= 2 ? '#6b21a8' : '#0f172a' }}>
                           Month {m} {m <= 2 && '(Grace Active)'}
                         </td>
-                        <td style={{ padding: '10px', color: '#15803d', fontWeight: 600 }}>₹{trancheA.toLocaleString()}</td>
-                        <td style={{ padding: '10px', color: '#0284c7', fontWeight: 600 }}>₹{trancheB.toLocaleString()}</td>
+                        <td style={{ padding: '10px', color: '#15803d', fontWeight: 600 }}>₹{trackA.toLocaleString()}</td>
+                        <td style={{ padding: '10px', color: '#0284c7', fontWeight: 600 }}>₹{trackB.toLocaleString()}</td>
                         <td style={{ padding: '10px', color: m <= 2 ? '#64748b' : '#7c3aed', fontWeight: 600 }}>
-                          {m <= 2 ? '₹0 (Deferred)' : `₹${trancheC.toLocaleString()}`}
+                          {m <= 2 ? '₹0 (Deferred)' : `₹${trackC.toLocaleString()}`}
                         </td>
                         <td style={{ padding: '10px', fontWeight: 800, color: '#15803d' }}>₹{totalMonth.toLocaleString()}</td>
                         <td style={{ padding: '10px', fontWeight: 700, color: predatory > 15000 ? '#dc2626' : '#334155' }}>
@@ -1140,10 +1140,10 @@ export const MultiSourceRescueCard: React.FC = () => {
               {isDisbursed && <span className="badge badge-cyan">Disbursed Successfully</span>}
             </div>
             <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--wise-forest)' }}>
-              Execute Tri-Tranche Coordinated Allocation
+              Execute Tri-Track Coordinated Allocation
             </div>
             <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px', fontWeight: 500 }}>
-              Routes ₹{(20000 * scale).toLocaleString()} to hospital counter (Tranche A), locks ₹{(20000 * scale).toLocaleString()} credit union bridge (Tranche B), and schedules ₹{(10000 * scale).toLocaleString()} for Day 61 repayment (Tranche C).
+              Routes ₹{(20000 * scale).toLocaleString()} to hospital counter (Track A), locks ₹{(20000 * scale).toLocaleString()} credit union bridge (Track B), and schedules ₹{(10000 * scale).toLocaleString()} for Day 61 repayment (Track C).
             </div>
 
             {/* Stepper text if disbursing */}
@@ -1153,7 +1153,7 @@ export const MultiSourceRescueCard: React.FC = () => {
                 <span>
                   {disburseStep === 1 && 'Step 1/3: Validating zero-cost hospital emergency desk credit line...'}
                   {disburseStep === 2 && 'Step 2/3: Securing 6.5% subsidized Credit Union liquidity window...'}
-                  {disburseStep === 3 && 'Step 3/3: Locking 60-day deferred grace period for Tranche C micro-repayment...'}
+                  {disburseStep === 3 && 'Step 3/3: Locking 60-day deferred grace period for Track C micro-repayment...'}
                 </span>
               </div>
             )}
@@ -1162,7 +1162,7 @@ export const MultiSourceRescueCard: React.FC = () => {
               <div style={{ marginTop: '10px', fontSize: '0.85rem', color: '#15803d', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <CheckCircle2 size={16} />
                 <span>
-                  All 3 tranches successfully funded! ₹{totalRequired.toLocaleString()} disbursed with ₹16,980 preserved.
+                  All 3 tracks successfully funded! ₹{totalRequired.toLocaleString()} disbursed with ₹16,980 preserved.
                 </span>
               </div>
             )}
@@ -1196,17 +1196,17 @@ export const MultiSourceRescueCard: React.FC = () => {
               {isDisbursed ? (
                 <>
                   <CheckCircle2 size={18} />
-                  <span>Multi-Tranche Disbursed (₹{totalRequired.toLocaleString()})</span>
+                  <span>Multi-Track Disbursed (₹{totalRequired.toLocaleString()})</span>
                 </>
               ) : isDisbursing ? (
                 <>
                   <Zap size={18} className="animate-spin" />
-                  <span>Routing Tri-Tranche Liquidity...</span>
+                  <span>Routing Tri-Track Liquidity...</span>
                 </>
               ) : (
                 <>
                   <ShieldCheck size={18} />
-                  <span>Disburse Tri-Tranche Rescue Plan</span>
+                  <span>Disburse Tri-Track Rescue Plan</span>
                   <ArrowRight size={16} />
                 </>
               )}

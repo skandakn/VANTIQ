@@ -51,11 +51,11 @@ export const HeroSection: React.FC = () => {
   // Dynamic calculations based on current shock amount
   const neededAmount = Math.max(0, shock.amount);
   
-  // Tranche dynamic split
-  const savingsTranche = Math.min(profile.emergencySavings, neededAmount);
-  const subsidizedTranche = Math.max(0, fundingPlan.tranches[0].allocatedAmount - savingsTranche);
-  const coOpTranche = fundingPlan.tranches[1].allocatedAmount;
-  const deferredTranche = fundingPlan.tranches[2].allocatedAmount;
+  // Track dynamic split
+  const savingsTrack = Math.min(profile.emergencySavings, neededAmount);
+  const subsidizedTrack = Math.max(0, fundingPlan.tracks[0].allocatedAmount - savingsTrack);
+  const coOpTrack = fundingPlan.tracks[1].allocatedAmount;
+  const deferredTrack = fundingPlan.tracks[2].allocatedAmount;
 
   // Dynamic fee calculation
   const vantiqTotalFee = fundingPlan.totalInterestAndFees;
@@ -64,7 +64,7 @@ export const HeroSection: React.FC = () => {
   const totalSavings = Math.max(0, predatoryTotalFee - vantiqTotalFee);
   
   // Dynamic monthly safe repayment
-  const safeMonthlyEmi = fundingPlan.tranches.reduce((total, tranche) => total + tranche.monthlyObligation, 0);
+  const safeMonthlyEmi = fundingPlan.tracks.reduce((total, track) => total + track.monthlyObligation, 0);
   const paymentWithinBuffer = safeMonthlyEmi <= profile.absorptiveSurplus;
   const predatoryMonthlyEmi = Math.round((neededAmount + predatoryTotalFee) / 3.5); // 3.5 mo average tenure
 
@@ -357,7 +357,7 @@ export const HeroSection: React.FC = () => {
                 <div className="wise-stepper-node">
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
                     <span style={{ color: 'var(--text-secondary)' }}>From your available savings</span>
-                    <strong style={{ color: '#15803d' }}>- ₹{savingsTranche.toLocaleString()} (0% APR)</strong>
+                    <strong style={{ color: '#15803d' }}>- ₹{savingsTrack.toLocaleString()} (0% APR)</strong>
                   </div>
                 </div>
 
@@ -365,7 +365,7 @@ export const HeroSection: React.FC = () => {
                 <div className="wise-stepper-node">
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
                     <span style={{ color: 'var(--text-secondary)' }}>Potential hospital / employer advance</span>
-                    <strong style={{ color: '#15803d' }}>- ₹{subsidizedTranche.toLocaleString()} (0% APR)</strong>
+                    <strong style={{ color: '#15803d' }}>- ₹{subsidizedTrack.toLocaleString()} (0% APR)</strong>
                   </div>
                 </div>
 
@@ -373,16 +373,16 @@ export const HeroSection: React.FC = () => {
                 <div className="wise-stepper-node">
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
                     <span style={{ color: 'var(--text-secondary)' }}>Estimated co-op loan</span>
-                    <strong style={{ color: 'var(--wise-forest)' }}>- ₹{coOpTranche.toLocaleString()} (6.5% APR)</strong>
+                    <strong style={{ color: 'var(--wise-forest)' }}>- ₹{coOpTrack.toLocaleString()} (6.5% APR)</strong>
                   </div>
                 </div>
 
                 {/* Node 4: Deferred Micro-credit */}
-                {deferredTranche > 0 && (
+                {deferredTrack > 0 && (
                   <div className="wise-stepper-node">
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
                       <span style={{ color: 'var(--text-secondary)' }}>Estimated deferred loan</span>
-                      <strong style={{ color: 'var(--wise-forest)' }}>- ₹{deferredTranche.toLocaleString()} (8.0% APR)</strong>
+                      <strong style={{ color: 'var(--wise-forest)' }}>- ₹{deferredTrack.toLocaleString()} (8.0% APR)</strong>
                     </div>
                   </div>
                 )}

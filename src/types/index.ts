@@ -32,7 +32,20 @@ export interface PredatoryOffer {
   appType: 'Instant Micro-Loan' | 'BNPL Split' | 'Credit Card Advance' | 'Payday App';
 }
 
-export interface FundingTranche {
+export interface FundingTrack {
+  sourceName: string;
+  sourceType: 'liquid_savings' | 'zero_apr_card' | 'micro_loan' | 'emergency_nbfc';
+  allocatedAmount: number;
+  interestApr: number;
+  tenureMonths: number;
+  monthlyObligation: number;
+  interestCost: number;
+  notes: string;
+}
+
+export type FundingTranche = FundingTrack;
+
+export interface _OldFundingTranche {
   sourceName: string;
   sourceType: 'liquid_savings' | 'zero_apr_card' | 'micro_loan' | 'emergency_nbfc';
   allocatedAmount: number;
@@ -44,7 +57,8 @@ export interface FundingTranche {
 }
 
 export interface FundingPlanResult {
-  tranches: FundingTranche[];
+  tracks: FundingTrack[];
+  tranches: FundingTrack[];
   totalAllocated: number;
   totalRepayment: number;
   totalInterestAndFees: number;

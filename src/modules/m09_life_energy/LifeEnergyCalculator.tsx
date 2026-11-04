@@ -311,7 +311,7 @@ export const LifeEnergyCalculator: React.FC = () => {
             </div>
 
             <p className="life-energy-card-description" style={{ color: '#1e293b', fontSize: '0.85rem', lineHeight: 1.55, marginBottom: '16px', fontWeight: 500 }}>
-              By blending zero-APR medical buffers and fair co-op tranches (totaling <strong style={{ color: '#15803d', fontWeight: 800 }}>₹{vantiqRepayment.toLocaleString()}</strong>),
+              By blending zero-APR medical buffers and fair co-op tracks (totaling <strong style={{ color: '#15803d', fontWeight: 800 }}>₹{vantiqRepayment.toLocaleString()}</strong>),
               your required labor time drops cleanly to <strong style={{ color: '#15803d', fontWeight: 800 }}>{vantiqHours} hours</strong>.
             </p>
 

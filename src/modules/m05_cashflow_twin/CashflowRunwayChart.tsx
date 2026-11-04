@@ -142,7 +142,7 @@ export const CashflowRunwayChart: React.FC = () => {
   const milestoneData = useMemo<Record<number, Omit<MilestoneDetail, 'withoutVantiqBalance' | 'withVantiqBalance'>>>(() => {
     const shockAmt = Math.max(0, shock.amount);
     const amountScale = shockAmt > 0 ? shockAmt / 50000 : 1;
-    const plan = fundingPlan.tranches.map((t) => t.monthlyObligation);
+    const plan = fundingPlan.tracks.map((t) => t.monthlyObligation);
 
     return {
       0: {
@@ -163,7 +163,7 @@ export const CashflowRunwayChart: React.FC = () => {
         type: 'hazard',
         title: 'Payday App Clustered Deduction',
         upcomingEmiWithout: `${formatRupee(Math.round(5400 * amountScale))} FastSalary 24x7 1st Payday EMI`,
-        upcomingEmiWith: '₹0 (Co-op & hospital tranches deferred to synchronized month-end)',
+        upcomingEmiWith: '₹0 (Co-op & hospital tracks deferred to synchronized month-end)',
         cashflowEvent: `First fragmented micro-lender auto-debit triggers ${formatRupee(Math.round(5400 * amountScale))}.`,
         description: 'Uncoordinated payday lenders deduct mid-month before salary arrives, whereas VANTIQ synchronizes obligations with your payroll cycle.'
       },
@@ -174,7 +174,7 @@ export const CashflowRunwayChart: React.FC = () => {
         type: 'deposit',
         title: 'Payroll Arrival & Scheduled Housing Deductions',
         upcomingEmiWithout: `${formatRupee(Math.round(7120 * amountScale))} QuickRupee EMI + ${formatRupee(profile.houseRent)} rent`,
-        upcomingEmiWith: `${formatRupee(plan[0] + plan[1])} coordinated Tranche A & B installment`,
+        upcomingEmiWith: `${formatRupee(plan[0] + plan[1])} coordinated Track A & B installment`,
         cashflowEvent: `+${formatRupee(profile.monthlyIncome)} payroll credit balanced against rent (${formatRupee(profile.houseRent)}).`,
         description: 'Monthly salary arrives. In the uncoordinated path, instant loan deductions immediately cannibalize the inflow. VANTIQ keeps essential liquidity protected.'
       },

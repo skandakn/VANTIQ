@@ -308,7 +308,7 @@ export const Sidebar: React.FC = () => {
             <div className="vantiq-telemetry-body">
               <span>Latency: <strong>38ms</strong></span>
               <span className="vantiq-telemetry-sep">|</span>
-              <span>Multi-Tranche Verified</span>
+              <span>Multi-Track Verified</span>
             </div>
 
             {/* Direct Close Sidebar Action */}

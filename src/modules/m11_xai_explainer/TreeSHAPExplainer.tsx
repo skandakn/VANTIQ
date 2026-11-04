@@ -144,13 +144,13 @@ export const TreeSHAPExplainer: React.FC = () => {
     },
     {
       id: 'subsidized_tranche',
-      name: 'Subsidized Tranche Integration',
-      shortName: 'VANTIQ Rescue Tranches',
+      name: 'Subsidized Track Integration',
+      shortName: 'VANTIQ Rescue Tracks',
       attribution: -46.0,
       type: 'mitigation' as const,
       category: 'Algorithmic Optimization',
       laymanExplanation:
-        'Instead of one toxic high-interest loan, VANTIQ blends your emergency funding across three safe channels: your own liquid buffer, a 0% APR employer/card tranche, and a low-interest NBFC micro-loan. This slashes your risk by -46% and saves ₹14,000+ in fees.',
+        'Instead of one toxic high-interest loan, VANTIQ blends your emergency funding across three safe channels: your own liquid buffer, a 0% APR employer/card track, and a low-interest NBFC micro-loan. This slashes your risk by -46% and saves ₹14,000+ in fees.',
       vulnerabilityDriver:
         'Transforms high-interest predatory compounding into an affordable, staggered repayment schedule aligned with your actual payday.',
       underwriterFormula: 'phi_4 = -46.0% | Weighted Blended APR reduced from 38.5% to 4.8% with 0% promo buffer',
@@ -415,7 +415,7 @@ export const TreeSHAPExplainer: React.FC = () => {
               <span style={{ fontSize: '0.8rem', color: '#6ee7b7' }}>Subsidized Blend</span>
             </div>
             <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '4px' }}>
-              Tri-tranche low-cost restructuring
+              Tri-track low-cost restructuring
             </div>
           </div>
 
@@ -488,7 +488,7 @@ export const TreeSHAPExplainer: React.FC = () => {
                 { key: 'shock', label: 'Shock (+28%)', color: '#ef4444' },
                 { key: 'predatory', label: 'Predatory APR (+34%)', color: '#f87171' },
                 { key: 'fixed_obligations', label: 'Fixed Costs (+14%)', color: '#fb923c' },
-                { key: 'subsidized_tranche', label: 'Subsidized Tranche (-46%)', color: '#10b981' },
+                { key: 'subsidized_tranche', label: 'Subsidized Track (-46%)', color: '#10b981' },
               ].map((t) => (
                 <label
                   key={t.key}
