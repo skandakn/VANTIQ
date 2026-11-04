@@ -2,8 +2,6 @@
 // Wise-Inspired Hero: "Product as the Hero, Not Marketing Fluff" (Light Theme)
 import React, { useState, useId, useEffect } from 'react';
 import {
-  ShieldCheck,
-  Star,
   TrendingDown,
   Lock,
   Sparkles,
@@ -89,50 +87,6 @@ export const HeroSection: React.FC = () => {
           {/* Left Column: Bold Value Proposition & Social Proof */}
           <div>
             
-            {/* Trust Reviews Badge (Exact Wise social proof style) */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              flexWrap: 'wrap',
-              marginBottom: '24px'
-            }}>
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '6px 14px',
-                borderRadius: '9999px',
-                backgroundColor: '#ffffff',
-                border: '1px solid #d8e2d4',
-                fontSize: '0.84rem',
-                color: 'var(--wise-forest)',
-                fontWeight: 700,
-                boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
-              }}>
-                <div style={{ display: 'flex', color: '#15803d' }}>
-                  <Star size={13} fill="currentColor" />
-                  <Star size={13} fill="currentColor" />
-                  <Star size={13} fill="currentColor" />
-                  <Star size={13} fill="currentColor" />
-                  <Star size={13} fill="currentColor" />
-                </div>
-                <span>99.2% Default Prevention Rate</span>
-              </div>
-
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                fontSize: '0.84rem',
-                color: 'var(--text-secondary)',
-                fontWeight: 600
-              }}>
-                <ShieldCheck size={16} color="#15803d" />
-                <span>Zero-Knowledge Edge Verified</span>
-              </div>
-            </div>
-
             {/* Massive Bold High-Impact Headline (Wise Typography) */}
             <h1 style={{
               fontSize: 'clamp(2.6rem, 5vw, 4.2rem)',
